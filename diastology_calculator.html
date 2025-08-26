@@ -2,11 +2,22 @@
 <html>
 
 <head>
+
+  <!-- Google Analytics -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KL884CV30N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KL884CV30N');
+  </script>
+
   <title>Diastology:</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="./style3.css">
-  <link rel="icon" type="image/png" href="BSW_Thumbnail.png"/>
+  <link rel="icon" type="image/svg+xml" href="echocardio-heart.svg">
 </head>
 
 <body>
@@ -266,7 +277,7 @@
           display:grid;grid-template-columns:repeat(2,var(--field-w));gap:8px;justify-content:center;justify-items:stretch;margin-top:18px;
           align-items:center;
         }
-        #mr-reset{justify-self:end}
+        #mr-reset{justify-self=end}
         #mr-calc{justify-self:start}
         .mr-btn{
           display:inline-flex; align-items:center; justify-content:center;
@@ -405,49 +416,38 @@
           const has = (v) => typeof v === 'number' && !Number.isNaN(v);
           const any = (...xs) => xs.some(has);
 
-          function joinNice(items){
-            if (!items.length) return "";
-            if (items.length === 1) return items[0];
-            if (items.length === 2) return items[0] + " and " + items[1];
-            return items.slice(0,-1).join(", ") + ", and " + items[items.length-1];
-          }
-
-          // Field behaviors
-          Object.values(fields).forEach((inp) => {
-            if (!inp) return;
-            inp.addEventListener('input', () => {
-              if ((inp.value || '').trim() !== '') inp.classList.add('filled'); else inp.classList.remove('filled');
-            });
-            inp.addEventListener('blur', () => {
-              const raw = (inp.value || '').trim();
-              if (raw === '') return;
-              const v = Number(raw);
-              if (Number.isNaN(v)) return;
-              const d = Number(inp.dataset.decimals || '1');
-              inp.value = fmtTrim(v, d);
-            });
-            inp.addEventListener('keydown', (e) => {
-              if (e.key === 'Enter') { e.preventDefault(); btnCalc && btnCalc.click(); }
-            });
-          });
-
-          // ===== Grading logic with path-specific suggestions =====
+          // ===== Grading logic (unchanged) with condensed, dynamic reason strings =====
           function gradeDiastolic({
             sepEprime, latEprime, EoverA, avgEe, sepEe, latEe, TRv, PASP, LAVI, LAStrain, PVSD, IVRT
           } = {}) {
-            // Count provided inputs
+            // Supportive options line (kept concise)
+            const SUPPORT = "Supportive options: LAVI, LA strain, pulmonary vein S/D, and IVRT.";
+
+            // Priority primaries present?
+            const haveAnyEe = has(avgEe) || has(sepEe) || has(latEe);
+            const haveAnyTRPASP = has(TRv) || has(PASP);
+
+            // Helper: list missing priority primaries only
+            function missingPriorityList(){
+              const list = [];
+              if (!haveAnyEe) list.push("E/e′");
+              if (!haveAnyTRPASP) list.push("TR Vmax/PASP");
+              if (list.length === 0) return "";
+              if (list.length === 1) return list[0];
+              return list[0] + " and " + list[1];
+            }
+            // Helper: generate short call-to-action using only missing priority primaries
+            function priorityCTA(prefix = "To increase certainty or reveal LAP↑:"){
+              const miss = missingPriorityList();
+              return miss ? `${prefix} obtain ${miss}.` : "";
+            }
+
+            // Count provided inputs (for sparse-data guard)
             const providedCount = [
               sepEprime, latEprime, EoverA, avgEe, sepEe, latEe, TRv, PASP, LAVI, LAStrain, PVSD, IVRT
             ].filter(has).length;
 
-            if (providedCount < 2) {
-              return {
-                grade: "Indeterminate",
-                reason: "Too few inputs to analyze. Add at least two of: e′ (septal/lateral), E/A, E/e′ (avg or site), TR Vmax or PASP, or a supportive marker (LAVI, LA strain, PV S/D, IVRT)."
-              };
-            }
-
-            // Abnormal cutoffs
+            // Abnormal cutoffs (no changes)
             const avgEprime = (has(sepEprime) && has(latEprime)) ? (sepEprime + latEprime) / 2 : null;
             const redE_abn =
               (has(sepEprime) && sepEprime <= 6) ||
@@ -469,7 +469,7 @@
               (has(LAVI) && LAVI > 34) ||
               (has(IVRT) && IVRT <= 70);
 
-            // Figure 2 (presence) markers
+            // Figure 2 (presence)
             const step2_EA_extreme = (has(EoverA) && (EoverA <= 0.8 || EoverA >= 2));
             const step2_LARS = (has(LAStrain) && LAStrain <= 18);
             const step2_LAVI = (has(LAVI) && LAVI > 34);
@@ -477,81 +477,13 @@
             const step2Count = [step2_EA_extreme, step2_incEe, step2_LARS, step2_LAVI].filter(Boolean).length;
 
             const haveAnyEprime = any(sepEprime, latEprime);
-            const haveAnyEe = has(avgEe) || has(sepEe) || has(latEe);
-            const haveAnyTRPASP = has(TRv) || has(PASP);
-
-            // Dysfunction presence by Figure 2
             const dysfunctionPresent =
               (redE_abn && step2Count >= 1) ||
               (haveAnyEprime && !redE_abn && step2Count >= 2) ||
               (!haveAnyEprime && step2Count >= 2);
 
-            // Primaries for LAP (Figure 3)
+            // Primaries count for LAP (Figure 3)
             const primaryCount = [redE_abn, incEe_abn, incTRorPASP_abn].filter(Boolean).length;
-
-            // Suggestion helpers
-            function missingSupportiveList() {
-              const list = [];
-              if (!has(LAVI))     list.push("LAVI");
-              if (!has(LAStrain)) list.push("LA strain");
-              if (!has(PVSD))     list.push("pulmonary vein S/D");
-              if (!has(IVRT))     list.push("IVRT");
-              return list;
-            }
-            function prioritizedSupportiveFor(){ return missingSupportiveList(); }
-            function needEA(){ return !has(EoverA); }
-            function needAnyEe(){ return !haveAnyEe; }
-            function needTRPASP(){ return !haveAnyTRPASP; }
-
-            function suggestionStringForNormal(path){
-              const msgs = [];
-              if (path === "only_redE"){
-                if (needEA()) msgs.push("E/A (to check for impaired relaxation ≤ 0.8)");
-                if (needTRPASP()) msgs.push("TR Vmax or PASP");
-                if (needAnyEe()) msgs.push("E/e′ (average or site-specific)");
-                const sup = prioritizedSupportiveFor();
-                if (sup.length) msgs.push("supportive markers (" + joinNice(sup) + ")");
-                return msgs.length ? " Consider adding " + joinNice(msgs) + "." : "";
-              }
-              if (path === "only_elevEe" || path === "only_TRPASP"){
-                const sup = prioritizedSupportiveFor();
-                if (sup.length) msgs.push("supportive markers (" + joinNice(sup) + ")");
-                if (path === "only_elevEe"){
-                  if (needTRPASP()) msgs.push("TR Vmax or PASP");
-                  if (needEA()) msgs.push("E/A");
-                } else {
-                  if (needAnyEe()) msgs.push("E/e′ (average or site-specific)");
-                  if (needEA()) msgs.push("E/A");
-                }
-                return msgs.length ? " Consider adding " + joinNice(msgs) + "." : "";
-              }
-              const sup = prioritizedSupportiveFor();
-              if (sup.length) msgs.push("supportive markers (" + joinNice(sup) + ")");
-              if (needAnyEe()) msgs.push("E/e′ (average or site-specific)");
-              if (needTRPASP()) msgs.push("TR Vmax or PASP");
-              if (needEA()) msgs.push("E/A");
-              return msgs.length ? " Consider adding " + joinNice(msgs) + "." : "";
-            }
-
-            function suggestionStringForAbnormalUngraded(context){
-              const msgs = [];
-              if (context === "two_prim_no_sup" || context === "one_prim_dysfx"){
-                if (needEA()) msgs.push("E/A (to separate Grade II vs III)");
-                const sup = prioritizedSupportiveFor();
-                if (sup.length) msgs.push("supportive markers (" + joinNice(sup) + ")");
-                return msgs.length ? " Add " + joinNice(msgs) + " to classify." : "";
-              }
-              if (context === "no_primary_dysfx"){
-                if (needAnyEe()) msgs.push("E/e′");
-                if (needTRPASP()) msgs.push("TR Vmax or PASP");
-                if (needEA()) msgs.push("E/A");
-                return msgs.length ? " Add " + joinNice(msgs) + " to assess LAP and grade." : "";
-              }
-              if (needEA()) msgs.push("E/A");
-              const sup = prioritizedSupportiveFor();
-              if (sup.length) msgs.push("supportive markers (" + joinNice(sup) + ")");
-              return msgs.length ? " Add " + joinNice(msgs) + " to classify." : "";
-            }
 
             // Helper: final grading once LAP is increased
             function gradeFromEA() {
@@ -565,56 +497,74 @@
               };
             }
 
-            // ===== Direct LAP path: all primaries abnormal =====
-            if (primaryCount === 3) return gradeFromEA();
+            // ===== Outputs (only reason text condensed/dynamic) =====
 
-            // ===== Grade I path: reduced e′ + E/A ≤ 0.8 + no evidence of LAP↑ =====
-            const noEvidenceElevatedLAP = !incEe_abn && !incTRorPASP_abn;
-            if (redE_abn && has(EoverA) && EoverA <= 0.8 && noEvidenceElevatedLAP) {
-              return { grade: "Grade I", reason: "Reduced e′ with E/A ≤ 0.8 and no evidence of elevated LAP." };
+            if (providedCount < 2) {
+              const cta = priorityCTA("Start with priority primaries:");
+              return {
+                grade: "Indeterminate",
+                reason: (cta ? `${cta} ${SUPPORT}` : `Too few inputs to analyze. ${SUPPORT}`)
+              };
             }
 
-            // ===== One or two primaries abnormal =====
+            // All primaries abnormal -> grade by E/A
+            if (primaryCount === 3) return gradeFromEA();
+
+            // Grade I path
+            const noEvidenceElevatedLAP = !incEe_abn && !incTRorPASP_abn;
+            if (redE_abn && has(EoverA) && EoverA <= 0.8 && noEvidenceElevatedLAP) {
+              const cta = priorityCTA("To confirm normal LAP:");
+              return {
+                grade: "Grade I",
+                reason: cta ? `Reduced e′ with E/A ≤ 0.8 and no evidence of elevated LAP. ${cta} ${SUPPORT}`
+                            : "Reduced e′ with E/A ≤ 0.8 and no evidence of elevated LAP."
+              };
+            }
+
+            // One or two primaries abnormal
             if (primaryCount === 1 || primaryCount === 2) {
               if (supportivePositive) return gradeFromEA();
 
               if (dysfunctionPresent) {
-                const ctx = (primaryCount === 2) ? "two_prim_no_sup" : "one_prim_dysfx";
+                const cta = priorityCTA("To classify and assess LAP:");
                 return {
                   grade: "Abnormal (Ungraded)",
-                  reason: "Diastolic dysfunction present by Figure 2, but LAP not increased without supportive markers." +
-                          suggestionStringForAbnormalUngraded(ctx)
+                  reason: (cta ? `Diastolic dysfunction present by Figure 2; LAP not confirmed. ${cta} If LAP increases, use E/A to grade. ${SUPPORT}`
+                              : `Diastolic dysfunction present by Figure 2; LAP not confirmed. If LAP increases, use E/A to grade. ${SUPPORT}`)
                 };
               }
 
-              let path = "mixed";
-              if (redE_abn && !incEe_abn && !incTRorPASP_abn) path = "only_redE";
-              else if (incEe_abn && !redE_abn && !incTRorPASP_abn) path = "only_elevEe";
-              else if (incTRorPASP_abn && !redE_abn && !incEe_abn) path = "only_TRPASP";
-
+              const cta = priorityCTA();
               return {
                 grade: "Normal",
-                reason: "Insufficient evidence for elevated LAP with current inputs." +
-                        suggestionStringForNormal(path)
+                reason: (cta ? `Insufficient evidence for elevated LAP with current inputs. ${cta} ${SUPPORT}`
+                            : `Insufficient evidence for elevated LAP with current inputs. ${SUPPORT}`)
               };
             }
 
-            // ===== No primaries abnormal =====
+            // No primaries abnormal
             if (primaryCount === 0) {
               if (dysfunctionPresent) {
+                const cta = priorityCTA("To assess LAP and grade:");
                 return {
                   grade: "Abnormal (Ungraded)",
-                  reason: "Diastolic dysfunction present by Figure 2; primary LAP markers not increased." +
-                          suggestionStringForAbnormalUngraded("no_primary_dysfx")
+                  reason: (cta ? `Diastolic dysfunction present by Figure 2; primary LAP markers not increased. ${cta} ${SUPPORT}`
+                              : `Diastolic dysfunction present by Figure 2; primary LAP markers not increased. ${SUPPORT}`)
                 };
               }
-              return { grade: "Normal", reason: "Primary markers not abnormal and Figure 2 criteria not met." };
+              const cta = priorityCTA("If concern persists:");
+              return {
+                grade: "Normal",
+                reason: (cta ? `Criteria for diastolic dysfunction not met. ${cta} ${SUPPORT}`
+                            : "Criteria for diastolic dysfunction not met.")
+              };
             }
 
             // Fallback
+            const cta = priorityCTA("Add priority primaries:");
             return {
               grade: "Indeterminate",
-              reason: "Not enough aligned information to classify; add E′, E/A, E/e′, TR/PASP, or supportive markers (LAVI, LA strain, PV S/D, IVRT)."
+              reason: (cta ? `${cta} ${SUPPORT}` : `Unable to classify with current inputs. ${SUPPORT}`)
             };
           }
 
