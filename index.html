@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <!-- Google Analytics -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KL884CV30N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KL884CV30N');
+  </script>
+
   <!-- Open Graph SEO -->
   <meta property="og:title" content="Guidelines Made Easy" />
   <meta property="og:site_name" content="Universal Echo Tool" />
@@ -72,51 +83,30 @@
       display: inline-block;          /* keep it tidy */
     }
 
-
-
-    /*Glow behind logo*/
+    /* Glow behind logo */
     :root{
-  /* #39FF14 as RGB for reuse in rgba() */
-  --glow-green: 57, 255, 20;
-}
-
-/* INTENSE default */
-#logoMain{
-  /* stack bigger, brighter shadows for a dramatic neon halo */
-  filter:
-
-    drop-shadow(0 0 10px  rgba(var(--glow-green), .85))
-    drop-shadow(0 0 24px  rgba(var(--glow-green), .70))
-    drop-shadow(0 0 48px  rgba(var(--glow-green), .55))
-    drop-shadow(0 0 90px  rgba(var(--glow-green), .40))
-    drop-shadow(0 0 140px rgba(var(--glow-green), .32)) !important;
-  will-change: filter;
-}
-
-/* OPTIONAL: “nuclear” level — add class="glow-extreme" to <body> to enable */
-body.glow-extreme #logoMain{
-  filter:
-    drop-shadow(0 0 14px   rgba(var(--glow-green), .95))
-    drop-shadow(0 0 32px   rgba(var(--glow-green), .85))
-    drop-shadow(0 0 72px   rgba(var(--glow-green), .70))
-    drop-shadow(0 0 120px  rgba(var(--glow-green), .55))
-    drop-shadow(0 0 200px  rgba(var(--glow-green), .45)) !important;
-}
-
-/* dial back a bit on small screens so it doesn’t bloom too hard */
-@media (max-width: 700px){
-  #logoMain{
-    filter:
-      drop-shadow(0 0 10px rgba(var(--glow-green), .75))
-      drop-shadow(0 0 24px rgba(var(--glow-green), .60))
-      drop-shadow(0 0 48px rgba(var(--glow-green), .48))
-      drop-shadow(0 0 84px rgba(var(--glow-green), .36))
-      drop-shadow(0 0 120px rgba(var(--glow-green), .28)) !important;
-  }
-}
-
-
-
+      /* #39FF14 as RGB for reuse in rgba() */
+      --glow-green: 57, 255, 20;
+    }
+    #logoMain{
+      filter:
+        drop-shadow(0 0 10px  rgba(var(--glow-green), .85))
+        drop-shadow(0 0 24px  rgba(var(--glow-green), .70))
+        drop-shadow(0 0 48px  rgba(var(--glow-green), .55))
+        drop-shadow(0 0 90px  rgba(var(--glow-green), .40))
+        drop-shadow(0 0 140px rgba(var(--glow-green), .32)) !important;
+      will-change: filter;
+    }
+    @media (max-width: 700px){
+      #logoMain{
+        filter:
+          drop-shadow(0 0 10px rgba(var(--glow-green), .75))
+          drop-shadow(0 0 24px rgba(var(--glow-green), .60))
+          drop-shadow(0 0 48px rgba(var(--glow-green), .48))
+          drop-shadow(0 0 84px rgba(var(--glow-green), .36))
+          drop-shadow(0 0 120px rgba(var(--glow-green), .28)) !important;
+      }
+    }
   </style>
 </head>
 
@@ -144,11 +134,12 @@ body.glow-extreme #logoMain{
 
   <!-- Slide-in menu + backdrop -->
   <aside id="side-menu" class="side-menu" aria-hidden="true">
+    <a href="about.html"   class="menu-link">About</a>
     <a href="contact.html" class="menu-link">Contact</a>
+    <a href="donate.html"  class="menu-link">Donate</a>
+    <a href="terms.html"   class="menu-link">Terms of Use</a>
   </aside>
   <div id="menu-backdrop" class="menu-backdrop" hidden></div>
-
-
 
   <!-- HERO -->
   <div class="container hero">
@@ -184,6 +175,11 @@ body.glow-extreme #logoMain{
       btn.addEventListener('click', () => setOpen(!document.body.classList.contains('menu-open')));
       backdrop.addEventListener('click', () => setOpen(false));
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+
+      // Close the drawer when a menu link is clicked
+      menu.querySelectorAll('.menu-link').forEach(link => {
+        link.addEventListener('click', () => setOpen(false));
+      });
 
       function applyDrawerWidth() {
         const root = getComputedStyle(document.documentElement);

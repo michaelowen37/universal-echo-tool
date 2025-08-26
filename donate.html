@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Donate</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+  <link rel="icon" type="image/svg+xml" href="echocardio-heart.svg">
+</head>
+
+<body>
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+    </ul>
+
+    <!-- Title (no border, extra-tight spacing) -->
+    <div class="title-stack contact-tight">
+      <div class="container zone body dg-title">Donate:</div>
+    </div>
+  </nav>
+
+  <div class="zone navigation">
+    <div class="final" style="padding:0 10%">
+
+      <!-- ============================ MESSAGE (no blue header) ============================ -->
+      <div id="contact-message" aria-label="Message">
+        <div class="dg-tablewrap">
+          <table class="dg-table msg-narrow" role="table" aria-label="Short description">
+            <tbody>
+              <tr>
+                <td class="dg-c2" colspan="2">
+                  <div class="dg-wrap msg-lines">
+                    Thank you so much for making it to this page!  Echocardiography is a passion of mine and I'm assuming it's one of yours too.  Coupled with a desire to make a positive difference in the lives of patients and professionals alike, this free echo-specific tool was born. <br><br> It is my goal to keep this tool free, up-to-date, ad-free and never require or collect any personal information ever. That said, as a free tool designed to improve workflows through the simplification of dense algorithms and complex calculations, it costs money.  <br> Built upon thousands of lines of code and countless hours of time, this tool costs money.  Maintaining, refining, hosting etc all comes out of my own pocket but to me, it's a cost worth accruing if that's what it takes to improve our industry.  However, if you find benefit from this, please consider donating. <br><br>Anything you can contribute matters, whether it's a one-time or recurring financial contribution or, if you cannot contribute financially, a share with a fellow sonographer, physician, fellow or professor.  Regardless of your level of commitment, I appreciate you reading this far.  Together we can make a difference.
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- ========================== END MESSAGE ========================== -->
+
+      <br>
+
+      <!-- ========================== DONATION ROWS ========================== -->
+      <div id="contact-email" aria-label="Donation methods" class="email-up">
+        <div class="dg-tablewrap">
+          <table class="dg-table" role="table" aria-label="Donation methods">
+            <!-- Force 50/50 so the seam is dead center -->
+            <colgroup>
+              <col style="width:50%">
+              <col style="width:50%">
+            </colgroup>
+            <tbody>
+              <!-- Row 1: Venmo -->
+              <tr class="pay-row" id="venmo-row">
+                <th scope="row" class="dg-col1">
+                  <div class="dg-wrap email-left">Venmo</div>
+                </th>
+                <td class="dg-c2 email-right">
+                  <div class="email-card">
+                    <a class="email-link" href="https://www.venmo.com/u/Michaelowen37" target="_blank" rel="noopener noreferrer">Donate</a>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 2: Zelle -->
+              <tr class="pay-row" id="zelle-row">
+                <th scope="row" class="dg-col1">
+                  <div class="dg-wrap email-left">Zelle</div>
+                </th>
+                <td class="dg-c2 email-right">
+                  <div class="email-card">
+                    <span class="email-text">michaelowen37@gmail.com</span>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- ======================== END DONATION ROWS ======================== -->
+
+    </div>
+  </div>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav"></ul>
+  </footer>
+
+  <!-- Page-scoped tweaks -->
+  <style>
+    /* Tighten space under the Contact title */
+    .contact-tight { margin-bottom: 2px !important; }
+    .contact-tight .dg-title { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+
+    /* Keep hyphenation/overflow consistent with your tables */
+    #contact-message .dg-table .dg-wrap,
+    #contact-email .dg-table .dg-wrap{
+      -webkit-hyphens: manual !important;
+      hyphens: manual !important;
+      word-break: normal !important;
+      overflow-wrap: normal !important;
+      scrollbar-width:none; -ms-overflow-style:none;
+    }
+    #contact-message .dg-table .dg-wrap::-webkit-scrollbar,
+    #contact-email .dg-table .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+
+    /* === Anti-ellipsis fix just for the message area === */
+    #contact-message .dg-table td .dg-wrap,
+    #contact-message .dg-table th .dg-wrap{
+      display: block !important;
+      -webkit-line-clamp: unset !important;
+      line-clamp: unset !important;
+      -webkit-box-orient: initial !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      white-space: normal !important;
+      max-height: none !important;
+      height: auto !important;
+    }
+
+    /* Right cell: remove padding so border meets center; also make it a positioning context */
+    #contact-email td.email-right,
+    #contact-email td.email-right .dg-wrap { padding: 0 !important; }
+    #contact-email td.email-right{
+      position: relative;  /* <-- key: lets the inner card fill the entire cell */
+      overflow: visible;
+    }
+
+    /* Blue-bordered rectangle fills the entire right cell height */
+    :root{ --contact-blue: var(--dg-blue, #3a7bf0); }
+    #contact-email .email-card{
+      position: absolute;
+      inset: 0;                        /* fill the td */
+      border: 2px solid var(--contact-blue);
+      border-radius: var(--mr-radius, 12px);
+      padding: 12px;                   /* inner breathing room */
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      box-sizing: border-box;
+      overflow: hidden;                /* prevent scrollbars if fonts/zoom vary */
+    }
+
+    /* Link styling (Venmo) */
+    #contact-email .email-link{
+      color: #c8c8c8;
+      text-decoration: underline;
+      white-space: nowrap;
+    }
+
+    /* Non-clickable text styling (Zelle) */
+    #contact-email .email-text{
+      color: #c8c8c8;
+      white-space: nowrap;
+    }
+
+    /* Space between message and donation rows */
+    #contact-email.email-up { margin-top: 18px !important; }
+
+    /* Constrain the message width to 60% and center it */
+    .msg-narrow{
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Tighter line spacing inside the message */
+    .msg-lines{ line-height: 1.15; }
+
+    /* On small screens, relax to 90% so it doesn't feel too narrow */
+    @media (max-width: 700px){
+      .msg-narrow{ width: 90%; }
+      #contact-email .email-card{ padding: 10px; }
+      .pay-row .email-left{ padding: 10px 12px; }
+      .msg-lines{ line-height: 1.2; }
+    }
+  </style>
+
+  <!-- No JS needed for height syncing anymore -->
+</body>
+</html>
