@@ -114,6 +114,33 @@
           drop-shadow(0 0 120px rgba(var(--glow-green), .28)) !important;
       }
     }
+
+    /* Keep the CTA sized to its text — not full width */
+.container2 .cta{
+  width: auto !important;      /* undo any width:100% from style.css */
+  min-width: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+
+  /* Tweak these to “narrow” the button */
+  padding: 0.65rem 4rem !important;   /* ↓ horizontal padding narrows it */
+}
+
+/* Ensure the inner link isn’t adding extra width */
+.container2 .cta .button-text{
+  display: inline-block;
+  padding: 0 !important;       /* remove link padding, let the button’s padding rule */
+  text-decoration: none;       /* keep it looking like a button */
+}
+
+/* Optional: only narrow on mobile */
+@media (max-width: 700px){
+  .container2 .cta{
+    padding: 1rem 4rem !important; /* slightly smaller on phones */
+  }
+}
+
   </style>
 </head>
 
@@ -151,12 +178,12 @@
   <!-- HERO -->
   <div class="container hero">
     <!-- Your new logo -->
-    <img id="logoMain" src="echocardiography.svg" class="responsiveimg" alt="Echocardiography Logo">
+    <img id="logoMain" src="echocardiography2.svg" class="responsiveimg" alt="Echocardiography Logo">
   </div>
 
   <div class="container2">
     <button class="cta">
-      <a href="lwh_echo.html" class="button-text">Workflows</a>
+      <a href="lwh_echo.html" class="button-text">Begin</a>
     </button>
   </div>
 
