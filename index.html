@@ -36,7 +36,7 @@
     /* === Tweak these to adjust spacing === */
     :root{
       --hero-offset-top-desktop: 30vh;   /* how far down to push the logo on desktop */
-      --hero-offset-top-mobile:  30vh;   /* how far down on mobile */
+      --hero-offset-top-mobile:  20vh;   /* how far down on mobile */
       --hero-gap-below:          clamp(30px, 6vw, 80px); /* space between logo and button */
       --logo-max-desktop:        1100px; /* keep your current logo sizing */
       --logo-max-mobile:         680px;
@@ -70,11 +70,11 @@
     }
     @media (max-width: 700px){
       #logoMain{
-        width: min(60vw, var(--logo-max-mobile)) !important;
+        width: min(80vw, var(--logo-max-mobile)) !important;
       }
     }
 
-    /* Pull the Workflows button closer to the hero */
+    /* Default (desktop/tablet) gap under logo */
     .hero + .container2{
       margin-top: 4px !important;     /* tighten the gap below the logo */
     }
@@ -83,10 +83,17 @@
       display: inline-block;          /* keep it tidy */
     }
 
-    /* Glow behind logo */
+    /* Mobile-only: push the Workflows button further down from the logo */
+    @media (max-width: 700px){
+      .hero + .container2{
+        /* adjust these numbers to taste */
+        margin-top: clamp(44px, 3vh, 200px) !important;
+      }
+    }
+
+    /* Glow behind logo (green version you had) */
     :root{
-      /* #39FF14 as RGB for reuse in rgba() */
-      --glow-green: 57, 255, 20;
+      --glow-green: 57, 255, 20; /* #39FF14 */
     }
     #logoMain{
       filter:
