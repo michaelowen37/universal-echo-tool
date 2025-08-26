@@ -98,7 +98,10 @@
 
   <!-- Slide-in menu + backdrop -->
   <aside id="side-menu" class="side-menu" aria-hidden="true">
+    <a href="about.html"   class="menu-link">About</a>
     <a href="contact.html" class="menu-link">Contact</a>
+    <a href="donate.html"  class="menu-link">Donate</a>
+    <a href="terms.html"   class="menu-link">Terms of Use</a>
   </aside>
   <div id="menu-backdrop" class="menu-backdrop" hidden></div>
 
@@ -133,10 +136,17 @@
         menu.setAttribute('aria-hidden', String(!open));
         backdrop.hidden = !open;
       }
+
       btn.addEventListener('click', () => setOpen(!document.body.classList.contains('menu-open')));
       backdrop.addEventListener('click', () => setOpen(false));
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
 
+      // Close the drawer when a menu link is clicked (nice UX)
+      menu.querySelectorAll('.menu-link').forEach(link => {
+        link.addEventListener('click', () => setOpen(false));
+      });
+
+      // Ensure drawer width snaps at breakpoint even if external CSS fights
       function applyDrawerWidth() {
         const root = getComputedStyle(document.documentElement);
         const wMobile  = root.getPropertyValue('--drawer-w-mobile').trim()  || '190px';
