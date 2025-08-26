@@ -26,7 +26,7 @@
     :root{
       --hero-offset-top-desktop: 30vh;   /* how far down to push the logo on desktop */
       --hero-offset-top-mobile:  30vh;   /* how far down on mobile */
-      --hero-gap-below:          clamp(15px, 3vw, 40px); /* space between logo and button */
+      --hero-gap-below:          clamp(30px, 6vw, 80px); /* space between logo and button */
       --logo-max-desktop:        1100px; /* keep your current logo sizing */
       --logo-max-mobile:         680px;
     }
@@ -71,6 +71,52 @@
       margin-top: 0 !important;       /* ensure the button itself adds no extra gap */
       display: inline-block;          /* keep it tidy */
     }
+
+
+
+    /*Glow behind logo*/
+    :root{
+  /* #39FF14 as RGB for reuse in rgba() */
+  --glow-green: 57, 255, 20;
+}
+
+/* INTENSE default */
+#logoMain{
+  /* stack bigger, brighter shadows for a dramatic neon halo */
+  filter:
+
+    drop-shadow(0 0 10px  rgba(var(--glow-green), .85))
+    drop-shadow(0 0 24px  rgba(var(--glow-green), .70))
+    drop-shadow(0 0 48px  rgba(var(--glow-green), .55))
+    drop-shadow(0 0 90px  rgba(var(--glow-green), .40))
+    drop-shadow(0 0 140px rgba(var(--glow-green), .32)) !important;
+  will-change: filter;
+}
+
+/* OPTIONAL: “nuclear” level — add class="glow-extreme" to <body> to enable */
+body.glow-extreme #logoMain{
+  filter:
+    drop-shadow(0 0 14px   rgba(var(--glow-green), .95))
+    drop-shadow(0 0 32px   rgba(var(--glow-green), .85))
+    drop-shadow(0 0 72px   rgba(var(--glow-green), .70))
+    drop-shadow(0 0 120px  rgba(var(--glow-green), .55))
+    drop-shadow(0 0 200px  rgba(var(--glow-green), .45)) !important;
+}
+
+/* dial back a bit on small screens so it doesn’t bloom too hard */
+@media (max-width: 700px){
+  #logoMain{
+    filter:
+      drop-shadow(0 0 10px rgba(var(--glow-green), .75))
+      drop-shadow(0 0 24px rgba(var(--glow-green), .60))
+      drop-shadow(0 0 48px rgba(var(--glow-green), .48))
+      drop-shadow(0 0 84px rgba(var(--glow-green), .36))
+      drop-shadow(0 0 120px rgba(var(--glow-green), .28)) !important;
+  }
+}
+
+
+
   </style>
 </head>
 
@@ -98,12 +144,11 @@
 
   <!-- Slide-in menu + backdrop -->
   <aside id="side-menu" class="side-menu" aria-hidden="true">
-    <a href="about.html"   class="menu-link">About</a>
     <a href="contact.html" class="menu-link">Contact</a>
-    <a href="donate.html"  class="menu-link">Donate</a>
-    <a href="terms.html"   class="menu-link">Terms of Use</a>
   </aside>
   <div id="menu-backdrop" class="menu-backdrop" hidden></div>
+
+
 
   <!-- HERO -->
   <div class="container hero">
@@ -136,17 +181,10 @@
         menu.setAttribute('aria-hidden', String(!open));
         backdrop.hidden = !open;
       }
-
       btn.addEventListener('click', () => setOpen(!document.body.classList.contains('menu-open')));
       backdrop.addEventListener('click', () => setOpen(false));
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
 
-      // Close the drawer when a menu link is clicked (nice UX)
-      menu.querySelectorAll('.menu-link').forEach(link => {
-        link.addEventListener('click', () => setOpen(false));
-      });
-
-      // Ensure drawer width snaps at breakpoint even if external CSS fights
       function applyDrawerWidth() {
         const root = getComputedStyle(document.documentElement);
         const wMobile  = root.getPropertyValue('--drawer-w-mobile').trim()  || '190px';
