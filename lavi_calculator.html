@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--   ****************************************************************************
+    The Title You Pick Here Shows When You Hover Over Browser Thumbnail
+  **************************************************************************** -->
+  <title>Indexed LA Volume Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+
+  <!-- Browser tab thumbnail image -->
+  <link rel="icon" type="image/png" href="BSW_Thumbnail.png"/>
+</head>
+
+<body>
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+      <!-- <li class="push"><a class="top-nav" href="about.html">About Us</a></li> -->
+      <li class="push"><a class="top-nav" href="calculations.html">Back</a></li>
+    </ul>
+  </nav>
+
+  <!-- ****************************************************************************
+    This is the main title on the top of page
+  **************************************************************************** -->
+  <div class="container zone body">Indexed LA Volume:</div>
+  <!-- Optional subtle formula note under title (per your style guide) -->
+  <!-- <div class="container" style="padding:0"><em style="color:#c9c9c9">Formula: LAVI = ((AP4C + AP2C) ÷ 2) ÷ BSA</em></div> -->
+
+  <div class="zone navigation">
+    <div class="final" style="padding: 0px 10% 0px 10%">
+
+      <br>
+
+      <!-- LAVI Calculator (MR template preserved; minimal, responsive mobile fixes) -->
+      <div id="mr-embed">
+        <div class="mr-wrap">
+          <!-- LEFT: Inputs + Buttons -->
+          <div class="mr-panel" id="mr-inputs">
+            <form id="mr-form" novalidate>
+              <div class="mr-grid">
+                <label class="mr-field">
+                  <span class="mr-label">AP4C Volume</span>
+                  <input id="ap4cVol" type="number" step="0.1" min="0" inputmode="decimal" placeholder="ml" />
+                </label>
+
+                <label class="mr-field">
+                  <span class="mr-label">AP2C Volume</span>
+                  <input id="ap2cVol" type="number" step="0.1" min="0" inputmode="decimal" placeholder="ml" />
+                </label>
+
+                <!-- Third input centered for symmetry -->
+                <label class="mr-field mr-center-span">
+                  <span class="mr-label">BSA</span>
+                  <input id="bsa" type="number" step="0.01" min="0" inputmode="decimal" placeholder="m²" />
+                </label>
+
+                <!-- Buttons row -->
+                <div class="mr-actions-row mr-center-span">
+                  <button type="button" id="mr-reset" class="mr-btn mr-btn-reset">Reset</button>
+                  <button type="button" id="mr-calc" class="mr-btn mr-btn-calc">Calculate</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- RIGHT: Output -->
+          <div class="mr-panel" id="mr-outputs">
+            <div class="mr-out-row">
+              <div class="mr-out-label">LAVI</div>
+              <div class="mr-out-box">
+                <span id="lavi">--</span> <span class="mr-unit">ml/m²</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        /* Base */
+        #mr-embed{
+          --mr-green:#00ff66; --mr-bg:#000; --mr-text:#fff;
+          --mr-in-empty:rgb(178,212,163); --mr-in-filled:rgb(105,148,98);
+          --mr-red:#ff3333; --mr-box-border:4px; --mr-item-border:2px;
+          --mr-radius:18px; --mr-radius-sm:14px; --field-w:220px;
+          --grid-gap-x:16px; --grid-gap-y:12px;
+          background:var(--mr-bg); color:var(--mr-text);
+          font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+          padding:5px 15px 0 15px;
+        }
+        #mr-embed :where(*){box-sizing:border-box}
+
+        .mr-wrap{display:flex;gap:24px;align-items:flex-start;justify-content:center;flex-wrap:wrap}
+        .mr-panel{border:var(--mr-box-border) solid var(--mr-green);border-radius:var(--mr-radius);background:var(--mr-bg);padding:20px 22px}
+
+        .mr-grid{display:grid;grid-template-columns:repeat(2,var(--field-w));gap:var(--grid-gap-y) var(--grid-gap-x);justify-content:center}
+        .mr-field{display:flex;flex-direction:column;gap:6px;width:var(--field-w)}
+        .mr-center-span{grid-column:1 / -1;justify-self:center}
+        .mr-label{font-size:.85rem;opacity:.95;text-align:center}
+
+        input[type="number"]{
+          width:100%;padding:8px 10px;background:var(--mr-in-empty);
+          border:var(--mr-item-border) solid var(--mr-green);border-radius:var(--mr-radius-sm);
+          text-align:center;color:#111;outline:none;appearance:textfield;-moz-appearance:textfield;overflow:hidden;
+          transition:background-color .25s,color .25s,box-shadow .25s,border-color .2s,font-size .1s ease;
+        }
+        input[type="number"].filled{background:var(--mr-in-filled);color:var(--mr-text)}
+        input[type="number"]:focus{box-shadow:0 0 0 3px rgba(0,255,102,.18)}
+        input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+        .mr-missing{animation:mrPulseRed 1.4s ease-in-out infinite;border-color:var(--mr-red)!important;box-shadow:0 0 0 5px rgba(255,51,51,.35)}
+        @keyframes mrPulseRed{0%,100%{box-shadow:0 0 0 5px rgba(255,51,51,.35)}50%{box-shadow:0 0 0 8px rgba(255,51,51,.15)}}
+
+        /* Buttons */
+        .mr-actions-row{display:grid;grid-template-columns:repeat(2,var(--field-w));gap:8px;justify-content:center;justify-items:stretch;margin-top:18px}
+        #mr-reset{justify-self:end}
+        #mr-calc{justify-self:start}
+        .mr-btn{
+          width:75%;padding:12px 40px;white-space:nowrap;border-radius:999px;border:none;
+          color:var(--mr-text);font-weight:600;letter-spacing:.2px;font-size:.95rem;
+          cursor:pointer;transition:transform .12s ease,background-color .2s ease;
+        }
+        .mr-btn:active{transform:translateY(1px)}
+
+        /* Reset hover = darker */
+        .mr-btn-reset{ background:rgb(163,192,212); color:#06131b; }
+        .mr-btn-reset:hover{ background:rgb(100,125,140); filter:none; }
+
+        /* Calc hover = moderately darker */
+        .mr-btn-calc{ background:rgb(40,133,199); box-shadow:none; }
+        .mr-btn-calc:hover{ background:rgb(25,95,145); filter:none; }
+
+        /* Outputs */
+        #mr-outputs{min-width:320px;max-width:420px}
+        .mr-out-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;margin-bottom:12px}
+        .mr-out-label{font-weight:600;font-size:.9rem;opacity:.95;text-align:right}
+        .mr-out-box{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:var(--mr-item-border) solid var(--mr-green);
+          border-radius:var(--mr-radius-sm);background:transparent;font-weight:800;font-size:.95rem;color:var(--mr-text);justify-self:start}
+        .mr-unit{color:var(--mr-text)}
+
+        /* Mobile */
+        @media (max-width:720px){
+          .mr-panel{width:94%;max-width:560px;margin:0 auto}
+          .mr-wrap{flex-direction:column;align-items:center;gap:16px}
+          .mr-grid{grid-template-columns:1fr;justify-items:center;gap:var(--grid-gap-y) 10px}
+          .mr-field{width:70%;max-width:240px}
+          .mr-center-span{grid-column:1;justify-self:center}
+          .mr-actions-row{grid-template-columns:1fr !important;justify-items:center;gap:10px;margin-top:16px}
+          #mr-reset,#mr-calc{justify-self:center}
+          .mr-btn{width:33%;min-width:120px;padding:12px 28px;font-size:clamp(.85rem,3.6vw,.95rem);line-height:1.15}
+          #mr-outputs{width:100%;max-width:600px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
+          .mr-out-row{grid-template-columns:1fr;justify-items:center;gap:8px;margin-bottom:14px}
+          .mr-out-label{text-align:center;font-size:.85rem}
+          .mr-out-box{width:40%;min-width:160px;justify-content:center;margin:0 auto;white-space:nowrap}
+        }
+        @media (max-width:380px){
+          .mr-panel{width:98%;max-width:none}
+          .mr-field{width:85%;max-width:200px}
+          .mr-btn{width:40%;min-width:110px;padding:12px 24px;font-size:clamp(.82rem,4.2vw,.92rem)}
+          .mr-out-box{width:48%;min-width:150px}
+        }
+        @media (max-width: 444px){
+          #mr-embed{ padding: 4px 8px 0 8px; }
+          #mr-embed .mr-wrap{ gap: 12px; }
+          #mr-embed .mr-panel{ width: 100%; max-width: none; margin: 0 auto; padding: 16px 14px; }
+          #mr-embed #mr-outputs{ min-width: 0; }
+        }
+        @media (max-width: 417px){
+          #mr-embed .mr-panel{ padding: 14px 12px; }
+          #mr-embed .mr-field{ max-width: 200px; }
+          #mr-embed .mr-btn{ min-width: 110px; }
+          #mr-embed .mr-out-box{ min-width: 140px; }
+        }
+
+        /* Equal output box widths on desktop only */
+        @media (min-width: 721px) {
+          #mr-outputs .mr-out-box { width: 140px; justify-content: center; }
+        }
+
+        /* ===== Reference chart block at bottom (scaled to ~90% with bigger buffer) ===== */
+        .mr-ref{ margin-top: clamp(28px, 5.5vw, 72px); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .mr-ref-title{ font-size: clamp(.9rem, 2.2vw, 1.05rem); color: #c9c9c9; font-style: italic; text-align: center; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+      </style>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const $ = (id) => document.getElementById(id);
+
+          // Elements
+          const fields = {
+            ap4cVol: $('ap4cVol'),
+            ap2cVol: $('ap2cVol'),
+            bsa: $('bsa'),
+          };
+          const btnCalc = $('mr-calc');
+          const btnReset = $('mr-reset');
+          const laviEl = $('lavi');
+
+          // Helper: general formatter with trimming of trailing zeros.
+          // decimals=1 for most fields; decimals=2 for BSA.
+          function fmtNum(n, decimals = 1) {
+            if (!Number.isFinite(n)) return '';
+            // Round at the requested precision
+            const rounded = Number(n.toFixed(decimals));
+            // If it's an integer after rounding, show as integer
+            if (Number.isInteger(rounded)) return String(rounded);
+            // Else show fixed, but trim any trailing zeros (and a trailing dot if it appears)
+            return rounded.toFixed(decimals).replace(/\\.0+$/,'').replace(/\\.$/,'');
+          }
+
+          // Inputs: filled state, safe blur, Enter => Calculate
+          Object.values(fields).filter(Boolean).forEach((inp) => {
+            inp.addEventListener('input', () => {
+              if ((inp.value || '').trim() !== '') {
+                inp.classList.add('filled');
+                inp.classList.remove('mr-missing');
+              } else {
+                inp.classList.remove('filled');
+              }
+            });
+            inp.addEventListener('blur', () => {
+              const raw = (inp.value || '').trim();
+              if (raw === '') return;
+              const v = Number(raw);
+              if (Number.isNaN(v)) return;
+              const decimals = (inp.id === 'bsa') ? 2 : 1;
+              inp.value = fmtNum(v, decimals);
+            });
+            inp.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                btnCalc && btnCalc.click();
+              }
+            });
+          });
+
+          function validate() {
+            let ok = true;
+            for (const [k, inp] of Object.entries(fields)) {
+              if (!inp) continue;
+              const val = (inp.value || '').trim();
+              const zeroDiv = (k === 'bsa' && Number(val) === 0); // avoid divide by 0
+              if (!val || zeroDiv) {
+                inp.classList.add('mr-missing');
+                ok = false;
+              } else {
+                inp.classList.remove('mr-missing');
+              }
+            }
+            return ok;
+          }
+
+          function calculate() {
+            const ap4 = Number(fields.ap4cVol?.value);
+            const ap2 = Number(fields.ap2cVol?.value);
+            const bsa = Number(fields.bsa?.value);
+
+            const avgVol = (ap4 + ap2) / 2;        // ml
+            const lavi = avgVol / bsa;             // ml/m^2
+
+            if (laviEl) laviEl.textContent = fmtNum(lavi, 1);
+          }
+
+          function resetAll() {
+            Object.values(fields).filter(Boolean).forEach((inp) => {
+              inp.value = '';
+              inp.classList.remove('filled', 'mr-missing');
+            });
+            if (laviEl) laviEl.textContent = '--';
+          }
+
+          if (btnCalc) {
+            btnCalc.addEventListener('click', (e) => {
+              e.preventDefault();
+              if (validate()) calculate();
+            });
+          }
+          if (btnReset) {
+            btnReset.addEventListener('click', (e) => {
+              e.preventDefault();
+              resetAll();
+            });
+          }
+        });
+      </script>
+<br><br>
+      <!-- ===== Reference table (sourced from left_atrium_male.html; valid for all adults) ===== -->
+      <div class="mr-ref" aria-label="Left Atrial Volume Index reference table">
+        <div class="mr-ref-title">Left Atrial Volume Index — Reference</div>
+
+        <!-- ========================== DG TABLE (2 columns, no blue header row) ========================== -->
+        <div id="dg-embed" aria-label="LA volume index reference values (adults)">
+          <div class="dg-tablewrap">
+            <table class="dg-table" role="table" aria-label="Left atrial volume index (adults)">
+              <colgroup>
+                <col class="dg-col1-col">
+                <col class="dg-col2-col">
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th scope="row" class="dg-col1"><div class="dg-wrap">Normal</div></th>
+                  <td class="dg-c2"><div class="dg-wrap">16 – 34&nbsp;<span class="dg-nb">ml/m<sup>2</sup></span></div></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="dg-col1"><div class="dg-wrap">Mild</div></th>
+                  <td class="dg-c2"><div class="dg-wrap">35 – 41&nbsp;<span class="dg-nb">ml/m<sup>2</sup></span></div></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="dg-col1"><div class="dg-wrap">Moderate</div></th>
+                  <td class="dg-c2"><div class="dg-wrap">42 – 48&nbsp;<span class="dg-nb">ml/m<sup>2</sup></span></div></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="dg-col1"><div class="dg-wrap">Severe</div></th>
+                  <td class="dg-c2"><div class="dg-wrap">&gt; 48&nbsp;<span class="dg-nb">ml/m<sup>2</sup></span></div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- ======================== END DG TABLE ======================== -->
+      </div>
+
+      <br><br>
+    </div>
+  </div>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav">
+      <!-- <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li> -->
+      <!-- <li><a href="terms-of-use.html" target="_blank">Terms of Use</a></li> -->
+    </ul>
+  </footer>
+
+  <!-- Page-scoped safety for DG units + table theme (matching your LA page) -->
+  <style>
+    /* -------- page-scoped styles only (style3.css untouched) -------- */
+
+    /* ======================= TABLE THEME (no blue header row) ======================= */
+    #dg-embed{
+      --dg-accent:#00ff66;          /* green borders/lines */
+      --dg-head:rgb(40,133,199);    /* header blue (used for first col tint) */
+      --dg-bg:#000; --dg-text:#fff;
+      --dg-outer:4px; --dg-line:2px;
+      color:var(--dg-text); background:var(--dg-bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    #dg-embed *{ box-sizing:border-box; }
+
+    .dg-tablewrap{ border:var(--dg-outer) solid var(--dg-accent); border-radius:18px; overflow:hidden; background:var(--dg-bg); }
+    .dg-table{ width:100%; border-collapse:collapse; table-layout:fixed; text-align:center; }
+    .dg-table th, .dg-table td{
+      border:var(--dg-line) solid var(--dg-accent); padding:22px 10px; line-height:1.2; background:transparent; text-align:center;
+      white-space:normal; word-break:normal; overflow-wrap:normal; hyphens:manual; overflow:hidden; text-overflow:clip;
+      font-size: clamp(.86rem, 2.2vw, 1.0rem);
+    }
+
+    /* First column: bold + subtle blue tint */
+    .dg-table th.dg-col1{ font-weight:800; background: rgba(40, 133, 199, 0.22); font-size: clamp(.95rem, 2.5vw, 1.06rem); }
+
+    /* Slight width bias for values */
+    .dg-table col.dg-col1-col{ width:42%; }
+    .dg-table col.dg-col2-col{ width:58%; }
+    @media (max-width:420px){ .dg-table col.dg-col1-col{ width:46%; } .dg-table col.dg-col2-col{ width:54%; } }
+
+    /* Keep unit clusters like “ml/m²” on one line */
+    #dg-embed .dg-nb{ white-space:nowrap; display:inline; vertical-align:baseline; }
+
+    /* Gentle clamping just in case lines wrap */
+    .dg-wrap{ display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden; white-space:normal; scrollbar-width:none; -ms-overflow-style:none; }
+    .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+  </style>
+
+</body>
+</html>

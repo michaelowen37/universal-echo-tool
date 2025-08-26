@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Contact</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+  <link rel="icon" type="image/svg+xml" href="echocardio-heart.svg">
+</head>
+
+<body>
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+    </ul>
+
+    <!-- Title (no border, extra-tight spacing) -->
+    <div class="title-stack contact-tight">
+      <div class="container zone body dg-title">Contact:</div>
+    </div>
+  </nav>
+
+  <div class="zone navigation">
+    <div class="final" style="padding:0 10%">
+
+      <!-- ============================ MESSAGE (no blue header) ============================ -->
+      <div id="contact-message" aria-label="Message">
+        <div class="dg-tablewrap">
+          <table class="dg-table msg-narrow" role="table" aria-label="Short description">
+            <tbody>
+              <tr>
+                <td class="dg-c2" colspan="2">
+                  <div class="dg-wrap msg-lines">
+                    All questions, feedback and suggestions welcome!<br><br>
+                    As a free tool with thousands of lines of code and countless hours dedicated to building and maintaining, please consider donating. 
+
+                    <br><br>Everything so far is out of pocket and I aim to keep this free tool active and up-to-date as guidelines evolve.
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- ========================== END MESSAGE ========================== -->
+
+      <br>
+
+      <!-- ========================== EMAIL ROW ONLY ========================== -->
+      <div id="contact-email" aria-label="Email" class="email-up">
+        <div class="dg-tablewrap">
+          <table class="dg-table" role="table" aria-label="Email">
+            <!-- Force 50/50 so the seam is dead center -->
+            <colgroup>
+              <col style="width:50%">
+              <col style="width:50%">
+            </colgroup>
+            <tbody>
+              <tr id="email-row">
+                <!-- Left cell: 'Email' (keeps your first-column blue tint) -->
+                <th scope="row" class="dg-col1">
+                  <div class="dg-wrap email-left">Email</div>
+                </th>
+
+                <!-- Right cell: blue-bordered rectangle that matches left height -->
+                <td class="dg-c2 email-right">
+                  <div class="email-card">
+                    <a class="email-link" href="mailto:michaelowen37@gmail.com">michaelowen37@gmail.com</a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- ======================== END EMAIL ROW ======================== -->
+
+    </div>
+  </div>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav"></ul>
+  </footer>
+
+  <!-- Page-scoped tweaks -->
+  <style>
+    /* Tighten space under the Contact title */
+    .contact-tight { margin-bottom: 2px !important; }
+    .contact-tight .dg-title { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+
+    /* Keep hyphenation/overflow consistent with your tables */
+    #contact-message .dg-table .dg-wrap,
+    #contact-email .dg-table .dg-wrap{
+      -webkit-hyphens: manual !important;
+      hyphens: manual !important;
+      word-break: normal !important;
+      overflow-wrap: normal !important;
+      scrollbar-width:none; -ms-overflow-style:none;
+    }
+    #contact-message .dg-table .dg-wrap::-webkit-scrollbar,
+    #contact-email .dg-table .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+
+    /* === Anti-ellipsis fix just for the message area === */
+    #contact-message .dg-table td .dg-wrap,
+    #contact-message .dg-table th .dg-wrap{
+      display: block !important;
+      -webkit-line-clamp: unset !important;
+      line-clamp: unset !important;
+      -webkit-box-orient: initial !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      white-space: normal !important;
+      max-height: none !important;
+      height: auto !important;
+    }
+
+    /* Center seam exact: remove padding in right cell so the rectangle meets the middle */
+    #contact-email td.email-right,
+    #contact-email td.email-right .dg-wrap { padding: 0 !important; }
+
+    /* Blue-bordered rectangle on the right half */
+    :root{ --contact-blue: var(--dg-blue, #3a7bf0); }
+    #contact-email .email-card{
+      width: 100%;
+      border: 2px solid var(--contact-blue);
+      border-radius: var(--mr-radius, 12px);
+      padding: 12px;
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      box-sizing: border-box;
+      /* Let JS set min-height to match left cell; this keeps perfect visual parity */
+    }
+
+    /* Email link styling */
+    #contact-email .email-link{
+      color: #c8c8c8;
+      text-decoration: underline;
+      white-space: nowrap;
+    }
+
+    /* Space between message and email row */
+    #contact-email.email-up { margin-top: 18px !important; }
+
+    /* Constrain the message width to 60% and center it */
+    .msg-narrow{
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Tighter line spacing inside the message (so the second sentence is very close) */
+    .msg-lines{ line-height: 1.15; }
+
+    /* On small screens, relax to 90% so it doesn't feel too narrow */
+    @media (max-width: 700px){
+      .msg-narrow{ width: 90%; }
+      #contact-email .email-card{ padding: 10px; }
+      #email-row .email-left{ padding: 10px 12px; }
+      .msg-lines{ line-height: 1.2; } /* slight bump for readability on small screens */
+    }
+  </style>
+
+  <!-- Tiny script: match the right blue rectangle height to the left 'Email' box -->
+  <script>
+    (function(){
+      function syncEmailHeights(){
+        var left = document.querySelector('#email-row .email-left');
+        var card = document.querySelector('#contact-email .email-card');
+        if (!left || !card) return;
+        card.style.minHeight = '';
+        var h = left.offsetHeight;
+        if (h && h > 0) card.style.minHeight = h + 'px';
+      }
+      window.addEventListener('load', syncEmailHeights);
+      window.addEventListener('resize', syncEmailHeights);
+      setTimeout(syncEmailHeights, 300);
+    })();
+  </script>
+
+</body>
+</html>

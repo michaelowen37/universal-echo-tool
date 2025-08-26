@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- **************************************************************
+       Qp:Qs Calculator — built on the MR Calculator template styles
+       Same colors, fonts, layout, scale, animations, and responsive rules
+       ************************************************************** -->
+  <title>Qp:Qs Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+  <link rel="icon" type="image/png" href="BSW_Thumbnail.png"/>
+</head>
+
+<body>
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+      <li class="push"><a class="top-nav" href="calculations.html">Back</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page heading in your site style -->
+  <div class="container zone body">Qp:Qs Calculator:</div>
+  <div class="calc-note" style="margin: 2px 0 4px 0; font-style: italic; font-size: 1.4rem; text-align: center; color: #c9c9c9; text-shadow: 0 1px 2px rgba(0,0,0,.6); position: relative; z-index: 10; line-height: 1.15;">&gt;1.5 is clear left to right shunt</div>
+  <br>
+
+  <div class="zone navigation">
+    <div class="final" style="padding: 0px 10% 0px 10%">
+      <!-- ======================== QP:QS CALCULATOR ======================== -->
+      <!-- MR Calculator (desktop preserved; minimal, responsive mobile fixes) -->
+      <div id="mr-embed" style="margin-top: 2px;">
+        <div class="mr-wrap">
+          <!-- LEFT: Inputs + Buttons -->
+          <div class="mr-panel" id="mr-inputs">
+            <form id="mr-form" novalidate>
+              <div class="mr-grid">
+                <label class="mr-field">
+                  <span class="mr-label">Heart Rate</span>
+                  <input id="hr" type="number" step="0.1" min="0" inputmode="decimal" placeholder="bpm" />
+                </label>
+
+                <label class="mr-field">
+                  <span class="mr-label">LVOT Diameter</span>
+                  <input id="lvotDiameter" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <label class="mr-field">
+                  <span class="mr-label">LVOT VTI</span>
+                  <input id="lvotVti" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <label class="mr-field">
+                  <span class="mr-label">RVOT Diameter</span>
+                  <input id="rvotDiameter" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <label class="mr-field">
+                  <span class="mr-label">RVOT VTI</span>
+                  <input id="rvotVti" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <!-- Buttons row -->
+                <div class="mr-actions-row mr-center-span">
+                  <button type="button" id="mr-reset" class="mr-btn mr-btn-reset">Reset</button>
+                  <button type="button" id="mr-calc" class="mr-btn mr-btn-calc">Calculate</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- RIGHT: Output -->
+          <div class="mr-panel" id="mr-outputs">
+            <div class="mr-out-row">
+              <div class="mr-out-label">Qp:Qs</div>
+              <div class="mr-out-box">
+                <span id="qpqs">--</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ====================== END QP:QS CALCULATOR ====================== -->
+
+      <style>
+        /* Base */
+        #mr-embed{
+          --mr-green:#00ff66; --mr-bg:#000; --mr-text:#fff;
+          --mr-in-empty:rgb(178,212,163); --mr-in-filled:rgb(105,148,98);
+          --mr-red:#ff3333; --mr-box-border:4px; --mr-item-border:2px;
+          --mr-radius:18px; --mr-radius-sm:14px; --field-w:220px;
+          --grid-gap-x:16px; --grid-gap-y:12px;
+          background:var(--mr-bg); color:var(--mr-text);
+          font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+          padding:5px 15px 0 15px;
+        }
+        #mr-embed :where(*){box-sizing:border-box}
+
+        .mr-wrap{display:flex;gap:24px;align-items:flex-start;justify-content:center;flex-wrap:wrap}
+        .mr-panel{border:var(--mr-box-border) solid var(--mr-green);border-radius:var(--mr-radius);background:var(--mr-bg);padding:20px 22px}
+
+        .mr-grid{display:grid;grid-template-columns:repeat(2,var(--field-w));gap:var(--grid-gap-y) var(--grid-gap-x);justify-content:center}
+        .mr-field{display:flex;flex-direction:column;gap:6px;width:var(--field-w)}
+        .mr-center-span{grid-column:1 / -1;justify-self:center}
+        .mr-label{font-size:.85rem;opacity:.95;text-align:center}
+
+        input[type="number"]{
+          width:100%;padding:8px 10px;background:var(--mr-in-empty);
+          border:var(--mr-item-border) solid var(--mr-green);border-radius:var(--mr-radius-sm);
+          text-align:center;color:#111;outline:none;appearance:textfield;-moz-appearance:textfield;overflow:hidden;
+          transition:background-color .25s,color .25s,box-shadow .25s,border-color .2s,font-size .1s ease;
+        }
+        input[type="number"].filled{background:var(--mr-in-filled);color:var(--mr-text)}
+        input[type="number"]:focus{box-shadow:0 0 0 3px rgba(0,255,102,.18)}
+        input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+        .mr-missing{animation:mrPulseRed 1.4s ease-in-out infinite;border-color:var(--mr-red)!important;box-shadow:0 0 0 5px rgba(255,51,51,.35)}
+        @keyframes mrPulseRed{0%,100%{box-shadow:0 0 0 5px rgba(255,51,51,.35)}50%{box-shadow:0 0 0 8px rgba(255,51,51,.15)}}
+
+        /* Buttons */
+        .mr-actions-row{display:grid;grid-template-columns:repeat(2,var(--field-w));gap:8px;justify-content:center;justify-items:stretch;margin-top:18px}
+        #mr-reset{justify-self:end}
+        #mr-calc{justify-self:start}
+        .mr-btn{
+          width:75%;padding:12px 40px;white-space:nowrap;border-radius:999px;border:none;
+          color:var(--mr-text);font-weight:600;letter-spacing:.2px;font-size:.95rem;
+          cursor:pointer;transition:transform .12s ease,background-color .2s ease;
+        }
+        .mr-btn:active{transform:translateY(1px)}
+
+        /* Reset hover = darker */
+        .mr-btn-reset{ background:rgb(163,192,212); color:#06131b; }
+        .mr-btn-reset:hover{ background:rgb(100,125,140); filter:none; }
+
+        /* Calc hover = moderately darker */
+        .mr-btn-calc{ background:rgb(40,133,199); box-shadow:none; }
+        .mr-btn-calc:hover{ background:rgb(25,95,145); filter:none; }
+
+        /* Outputs */
+        #mr-outputs{min-width:320px;max-width:420px}
+        .mr-out-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;margin-bottom:12px}
+        .mr-out-label{font-weight:600;font-size:.9rem;opacity:.95;text-align:right}
+        .mr-out-box{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:var(--mr-item-border) solid var(--mr-green);
+          border-radius:var(--mr-radius-sm);background:transparent;font-weight:800;font-size:.95rem;color:var(--mr-text);justify-self:start}
+
+        /* Mobile */
+        @media (max-width:720px){
+          .mr-panel{width:94%;max-width:560px;margin:0 auto}
+          .mr-wrap{flex-direction:column;align-items:center;gap:16px}
+          .mr-grid{grid-template-columns:1fr;justify-items:center;gap:var(--grid-gap-y) 10px}
+          .mr-field{width:70%;max-width:240px}
+          .mr-center-span{grid-column:1;justify-self:center}
+          .mr-actions-row{grid-template-columns:1fr !important;justify-items:center;gap:10px;margin-top:16px}
+          #mr-reset,#mr-calc{justify-self:center}
+          .mr-btn{width:33%;min-width:120px;padding:12px 28px;font-size:clamp(.85rem,3.6vw,.95rem);line-height:1.15}
+          #mr-outputs{width:100%;max-width:600px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
+          .mr-out-row{grid-template-columns:1fr;justify-items:center;gap:8px;margin-bottom:14px}
+          .mr-out-label{text-align:center;font-size:.85rem}
+          .mr-out-box{width:40%;min-width:160px;justify-content:center;margin:0 auto;white-space:nowrap}
+        }
+        @media (max-width:380px){
+          .mr-panel{width:98%;max-width:none}
+          .mr-field{width:85%;max-width:200px}
+          .mr-btn{width:40%;min-width:110px;padding:12px 24px;font-size:clamp(.82rem,4.2vw,.92rem)}
+          .mr-out-box{width:48%;min-width:150px}
+        }
+        @media (max-width: 444px){
+          #mr-embed{ padding: 4px 8px 0 8px; }
+          #mr-embed .mr-wrap{ gap: 12px; }
+          #mr-embed .mr-panel{ width: 100%; max-width: none; margin: 0 auto; padding: 16px 14px; }
+          #mr-embed #mr-outputs{ min-width: 0; }
+        }
+        @media (max-width: 417px){
+          #mr-embed .mr-panel{ padding: 14px 12px; }
+          #mr-embed .mr-field{ max-width: 200px; }
+          #mr-embed .mr-btn{ min-width: 110px; }
+          #mr-embed .mr-out-box{ min-width: 140px; }
+        }
+
+        /* Equal output box widths on desktop only */
+        @media (min-width: 721px) {
+          #mr-outputs .mr-out-box { width: 140px; justify-content: center; }
+        }
+
+        /* Dramatically shrink subtitle on smaller screens (Qp:Qs page) */
+.calc-note{
+  /* desktop/tablet */
+  font-size: clamp(0.95rem, 2.2vw, 1.4rem) !important;
+}
+
+@media (max-width: 700px){
+  .calc-note{
+    /* noticeably smaller under 700px */
+    font-size: clamp(0.72rem, 2.8vw, 1.05rem) !important;
+  }
+}
+
+@media (max-width: 400px){
+  .calc-note{
+    /* dramatic on very small phones */
+    font-size: clamp(0.62rem, 4.2vw, 0.95rem) !important;
+  }
+}
+
+      </style>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const $ = (id) => document.getElementById(id);
+
+          // Grab elements
+          const fields = {
+            hr: $('hr'),
+            lvotDiameter: $('lvotDiameter'),
+            lvotVti: $('lvotVti'),
+            rvotDiameter: $('rvotDiameter'),
+            rvotVti: $('rvotVti'),
+          };
+          const btnCalc = $('mr-calc');
+          const btnReset = $('mr-reset');
+          const qpqsEl = $('qpqs');
+
+          // Helper: one fixed decimal place
+          function oneDecimal(n) {
+            if (!Number.isFinite(n)) return '--';
+            return (Math.round(n * 10) / 10).toFixed(1);
+          }
+
+          // Attach behaviors to existing inputs only
+          Object.values(fields).filter(Boolean).forEach((inp) => {
+            inp.addEventListener('input', () => {
+              if ((inp.value || '').trim() !== '') {
+                inp.classList.add('filled');
+                inp.classList.remove('mr-missing');
+              } else {
+                inp.classList.remove('filled');
+              }
+            });
+
+            // SAFE BLUR: keep string type; 1dp; drop trailing .0 (matches MR input UX)
+            inp.addEventListener('blur', () => {
+              const raw = (inp.value || '').trim();
+              if (raw === '') return;
+              const v = Number(raw.replace(/,/g, ''));
+              if (Number.isNaN(v) || v < 0) { inp.value = ''; return; }
+              const r = Math.round(v * 10) / 10;
+              inp.value = Number.isInteger(r) ? String(r) : r.toFixed(1);
+            });
+
+            // Enter triggers Calculate
+            inp.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter') { e.preventDefault(); btnCalc && btnCalc.click(); }
+            });
+          });
+
+          function validate() {
+            let ok = true;
+            for (const inp of Object.values(fields)) {
+              if (!inp) continue;
+              const val = (inp.value || '').trim();
+              if (!val || Number(val) <= 0) { // require > 0 to avoid divide-by-zero
+                inp.classList.add('mr-missing');
+                ok = false;
+              } else {
+                inp.classList.remove('mr-missing');
+              }
+            }
+            return ok;
+          }
+
+          function calculate() {
+            const hr    = Number(fields.hr?.value);
+            const lvotD = Number(fields.lvotDiameter?.value);
+            const lvotV = Number(fields.lvotVti?.value);
+            const rvotD = Number(fields.rvotDiameter?.value);
+            const rvotV = Number(fields.rvotVti?.value);
+
+            // Per your spec:
+            // Qp   = HR * 0.785 * (RVOT Diameter)^2 * RVOT VTI
+            // Qs   = HR * 0.785 * (LVOT Diameter)^2 * LVOT VTI
+            // Qp:Qs = Qp / Qs
+            const Qp = hr * 0.785 * rvotD * rvotD * rvotV;
+            const Qs = hr * 0.785 * lvotD * lvotD * lvotV;
+
+            if (!Number.isFinite(Qp) || !Number.isFinite(Qs) || Qs <= 0) {
+              qpqsEl.textContent = '--';
+              return;
+            }
+            const ratio = Qp / Qs;
+            qpqsEl.textContent = oneDecimal(ratio);
+          }
+
+          function resetAll() {
+            Object.values(fields).filter(Boolean).forEach((inp) => {
+              inp.value = '';
+              inp.classList.remove('filled', 'mr-missing');
+            });
+            if (qpqsEl) qpqsEl.textContent = '--';
+          }
+
+          // Button handlers
+          if (btnCalc) {
+            btnCalc.addEventListener('click', (e) => {
+              e.preventDefault();
+              if (validate()) calculate();
+            });
+          }
+          if (btnReset) {
+            btnReset.addEventListener('click', (e) => {
+              e.preventDefault();
+              resetAll();
+            });
+          }
+        });
+      </script>
+
+      <br><br>
+    </div>
+  </div>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav">
+      <!-- <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li> -->
+      <!-- <li><a href="terms-of-use.html" target="_blank">Terms of Use</a></li> -->
+    </ul>
+  </footer>
+
+</body>
+</html>

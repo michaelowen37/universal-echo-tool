@@ -1,0 +1,1673 @@
+* {
+    border: none;
+    overflow-x: hidden;
+    
+}
+
+body, html {
+    margin: 0 auto;
+    font-family: sans-serif, Palatino;
+    height: 100%;
+    /*overflow: hidden;*/
+}
+
+
+
+/************************************************
+The nav and all div sections have a zone class
+*************************************************/
+.zone {
+   /* cursor:pointer;*/
+    color:#ffffff;
+    font-size:3vw;
+    /*transition: all 0.3s linear;*/
+}
+
+.smaller {
+    font-size: 4vw;
+    flex-flow: wrap;
+    text-align: center;
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    .smaller {
+        font-size: 5vw;
+        padding: 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+    .smaller {
+        font-size: 6vw;
+        padding: 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    .smaller {
+        font-size: 8vw;
+        padding: 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 450px) {
+    .smaller {
+        font-size: 9vw;
+        padding: 0;
+    }
+}
+
+
+
+/***********************************************************************
+ *  Nav Bar
+NAV bar uses flexbox
+*****************************************/
+
+.main-nav, .foot-nav {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    font-size: 2vw;
+}
+
+
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    .main-nav, .foot-nav {
+        font-size: 1.8vw;
+        padding: 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+    .main-nav, .foot-nav {
+        font-size: 2.2vw;
+        padding: 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    .main-nav, .foot-nav {
+        font-size: 4vw;
+        padding: 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 330px - Mobile devices*/
+@media only screen and (max-width: 400px) {
+    .main-nav, .foot-nav {
+        font-size: 4vw;
+        padding: 0;
+    }
+}
+
+/*This pushes a selection to the far right within nav bar*/
+.push {
+    margin-left: auto;
+}
+
+
+
+/*Space between text in nav bar*/
+li {
+    padding: 1% 3%;
+
+}
+
+.top {
+    padding: 4%;
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    li {
+        padding: 4%;
+        
+    }
+}
+
+li.top {
+    padding-left: 0;
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    li.top {
+        padding: 4%;
+        
+    }
+}
+
+/*Nav bar text*/
+a {
+    color: #647e85;
+    text-decoration: none;
+    display: block;
+}
+
+
+/***********************************************************************
+ *  Main body with Echotoday text
+ vh = viewport height percentage
+ **********************************************************************/
+.responsiveimg {
+    height: 35vh;
+    width: auto;
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    .responsiveimg {
+        height:48vh;
+        width: ;
+
+    }
+}
+
+/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+     .responsiveimg {
+        height:46vh;
+        width:;
+
+    }
+}
+
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    .responsiveimg {
+        height:40vh;
+        width: ;
+
+    }
+}
+
+
+/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
+@media only screen and (max-width: 400px) {
+    .responsiveimg {
+        height:35vh;
+        width: ;
+
+    }
+}
+
+
+
+
+
+
+.container {
+    /*show heigh: auto*/
+    height: 50vh; 
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: center;
+    padding: 5% 0 0% 0;
+    font-size: 10vw;
+    flex-wrap: wrap;
+}
+
+
+
+/***********************************************************
+This is the final page with only text showing
+***********************************************************/
+
+
+.final  {
+    
+}
+
+
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    .container {
+        font-size: 10vw;
+        padding: 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+    .container {
+        font-size: 13vw;
+        padding: 0;
+        /*height: 50vh;*/
+    }
+}
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    .container {
+        font-size: 15vw;
+        padding: 0;
+        /*height: 50vh;*/
+    }
+}
+
+/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
+@media only screen and (max-width: 400px) {
+    .container {
+        font-size: 18vw;
+        padding: 0;
+        /*height: 40vh;*/
+    }
+}
+
+.foot-nav {
+    text-align: center;
+    width: 100%;
+}
+
+/***********************************************************************
+ *  Just below main body; contains button
+ vh = viewport height percentage
+ **********************************************************************/
+.container2 {
+    /*show heigh: auto*/
+    height: 55vh; 
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 5%;
+}
+
+/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+    .container2 {
+        
+    }
+}
+
+
+button {
+    background-color: #007a35;
+    border: none;
+    color: white;
+    padding: 10px 50px;
+    text-align: center;
+    font-size: 1.5vw;
+    cursor: pointer;
+    border-radius: 12px;
+    -webkit-transition: all 0.2s linear; /* Safari */
+    transition: all 0.2s linear;
+    width: 30%;
+    font-family: sans-serif, palatino;
+
+}
+
+a.button-text {
+    color: #bcbec5;
+}
+
+button:hover {
+    background-color: #099b48;
+}
+
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1200px) {
+    button {
+        font-size: 2vw;
+        padding: 8px 25px;
+        width: 40%;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    button {
+        font-size: 2.5vw;
+        padding: 10px 30px;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+    button {
+        font-size: 3vw;
+        padding: 6px 30px;
+        width: 40%;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    button {
+        font-size: 4vw;
+        padding: 8px 30px;
+        width:45%;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
+@media only screen and (max-width: 500px) {
+    button {
+        font-size: 4vw;
+        padding: 8px 25px;
+        width: 50%;
+    }
+}
+
+
+.cover {
+    width: 30rem;
+}
+
+.grow { 
+transition: all .5s ease-in-out; 
+}
+
+.grow:hover { 
+transform: scale(1.1); 
+}
+/***********************************************************************
+ *  Footer
+ **********************************************************************/
+.foot {
+    font-size: 1.5vw;
+    padding: 0;
+    position: relative;
+    bottom: 0;
+
+}
+
+footer {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: auto;
+    background-color: #444;
+    width: 100%;
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    .foot {
+        font-size: 2.1vw;
+        padding: 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    .foot {
+        font-size: 3vw;
+        padding: 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
+@media only screen and (max-width: 300px) {
+    .foot {
+        font-size: 4vw;
+        padding: 0;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .disappear {
+        display: none;
+    }
+}
+
+/*facebook icon in footer*/
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+}
+
+a.fa.fa-facebook {
+    padding-left: 50%;
+    padding-right: 4%;
+}
+
+
+
+/***********************************************************************
+ *  Navigation bar
+ **********************************************************************/
+.nav-bar {
+    background: #000000;
+}
+
+/***********************************************************************
+ *  First half of screen
+ **********************************************************************/
+.body {
+    background: #000000;
+}
+
+/***********************************************************************
+ *  Second half of screen - containing button
+ **********************************************************************/
+.button {
+    background: #000000;
+}
+
+
+/***********************************************************************
+ *  Footer
+ **********************************************************************/
+.bottom-section {
+    background: #000000;
+}
+
+
+
+/* ——— Center the logo block ——— */
+.container.zone.body {
+  display: flex;
+  justify-content: center;
+}
+
+/* ——— Logo sizing (more specific so it beats older rules) ——— */
+.container.zone.body > img.responsiveimg {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  width: 1100px; /* desktop default */
+}
+
+/* Scale the logo down from 1440px and below */
+@media (max-width: 1440px) {
+  .container.zone.body > img.responsiveimg {
+    width: clamp(520px, 64vw, 1100px);
+  }
+}
+
+/* Optional: small phones */
+@media (max-width: 480px) {
+  .container.zone.body > img.responsiveimg {
+    width: clamp(240px, 88vw, 420px);
+  }
+}
+
+/* ——— “Workflows” button ——— */
+/* Keep old width, just add a bit of height while staying horizontal-dominant. 
+   Use vertical padding only so width doesn’t grow. */
+.container2.button > button.grow {
+  padding-top: 0.95rem !important;
+  padding-bottom: 0.95rem !important;
+  line-height: 1.1;
+  white-space: nowrap; /* prevents wrapping that could make it tall */
+}
+
+/* Make the anchor behave nicely inside the button */
+.container2.button > button.grow > .button-text {
+  display: inline-block;
+  text-decoration: none;
+}
+
+
+/* ——— LOGO: sizing + no clipping ——— */
+.container.zone.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto !important;          /* ensure no fixed height traps the image */
+  overflow: visible !important;      /* prevent bottom from being cut off */
+}
+
+/* Base: allow big desktop but never overflow container */
+.container.zone.body > img.responsiveimg {
+  display: block;
+  height: auto !important;
+  max-width: 100%;
+  max-height: none !important;       /* just in case an older rule capped it */
+  width: min(1100px, 92vw);          /* wide desktop default */
+  margin: 0 auto;
+}
+
+/* Explicit wide-desktop guard: keep the full image visible at 1441px+ */
+@media (min-width: 1441px) {
+  .container.zone.body > img.responsiveimg {
+    width: 1100px;                   /* your preferred desktop width */
+  }
+}
+
+/* Tighten MUCH more on small devices (320–700px) */
+@media (max-width: 700px) {
+  .container.zone.body > img.responsiveimg {
+    /* Smaller than before: ~60–62vw on phones, with sensible floor/ceiling */
+    width: clamp(200px, 61vw, 520px);
+  }
+}
+
+/* Ultra-small safety (≤360px wide phones) */
+@media (max-width: 360px) {
+  .container.zone.body > img.responsiveimg {
+    width: clamp(180px, 58vw, 380px);
+  }
+}
+
+/* ——— “Workflows” button: same width, a bit taller ——— */
+/* Only increase vertical padding so it stays horizontally dominant */
+.container2.button > button.grow {
+  padding-top: 1.05rem !important;
+  padding-bottom: 1.05rem !important;
+  line-height: 1.1;
+  white-space: nowrap;               /* text never wraps taller */
+}
+
+/* Keep the anchor tidy inside the button */
+.container2.button > button.grow > .button-text {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* ===== Fix bottom whitespace on small screens ===== */
+html, body { 
+  margin: 0 !important; 
+  padding: 0 !important; 
+}
+footer.zone.foot.bottom-section { 
+  margin: 0 !important; 
+}
+.foot-nav { 
+  margin: 0 !important; 
+  padding: 0 !important; 
+  list-style: none; 
+}
+body > *:last-child { 
+  margin-bottom: 0 !important;   /* kill collapsed bottom margins */
+}
+
+/* ===== Logo container: centered, no clipping ===== */
+.container.zone.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible !important;
+}
+
+/* ===== Logo sizing ===== */
+/* Base (mobile-first): keep it modest on phones */
+.container.zone.body > img.responsiveimg {
+  display: block;
+  height: auto !important;
+  max-width: 100%;
+  width: clamp(220px, 62vw, 520px);
+  margin: 0 auto;
+}
+
+/* 700px and up: dramatically smaller than before */
+@media (min-width: 700px) {
+  .container.zone.body > img.responsiveimg {
+    /* ~30% of viewport, capped so it never gets huge */
+    width: clamp(420px, 32vw, 680px);
+  }
+}
+
+/* 1200px and up: tighten further */
+@media (min-width: 1200px) {
+  .container.zone.body > img.responsiveimg {
+    width: clamp(420px, 28vw, 640px);
+  }
+}
+
+/* 1600px and up: even tighter for very wide displays */
+@media (min-width: 1600px) {
+  .container.zone.body > img.responsiveimg {
+    width: clamp(420px, 24vw, 600px);
+  }
+}
+
+
+/* ===== Page background & no bottom gap ===== */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 100svh;          /* safe viewport unit for mobile */
+  background: #000;            /* kill the white strip below footer */
+}
+footer { margin: 0 !important; }
+
+/* ===== Logo: switch from height-based to width-based sizing ===== */
+/* This beats the earlier .responsiveimg { height:35–48vh } rules */
+.container.zone.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container.zone.body > img.responsiveimg {
+  height: auto !important;     /* override all vh heights */
+  max-width: 100%;
+  display: block;
+  /* Phones default */
+  width: clamp(220px, 62vw, 480px) !important;
+}
+
+/* 700px+: make it dramatically smaller than before */
+@media (min-width: 700px) {
+  .container.zone.body > img.responsiveimg {
+    width: clamp(300px, 16vw, 420px) !important;
+  }
+}
+@media (min-width: 1200px) {
+  .container.zone.body > img.responsiveimg {
+    width: clamp(320px, 14vw, 400px) !important;
+  }
+}
+@media (min-width: 1600px) {
+  .container.zone.body > img.responsiveimg {
+    width: clamp(340px, 12vw, 380px) !important;
+  }
+}
+
+/* ===== “Workflows” button: narrower, not % based ===== */
+/* Override the earlier button { width:30% } and media-query widths */
+.container2.button > button.grow {
+  width: auto !important;            /* hug the text instead of 30–50% */
+  max-width: max-content;
+  padding: 10px 28px !important;     /* keep it horizontal-dominant */
+  line-height: 1.15;
+  white-space: nowrap;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+}
+.container2.button > button.grow > .button-text {
+  display: inline-block;
+  text-decoration: none;
+}
+/* ===== Place logo + button lower and keep them close ===== */
+.container.zone.body {
+  height: auto !important;              /* stop 50vh pushing things apart */
+  padding: 0 !important;
+  margin-top: clamp(6vh, 14vh, 18vh);   /* lower the whole block */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container2 {
+  height: auto !important;              /* stop 55vh pushing things apart */
+  padding: 0 !important;
+  margin-top: 0.75rem;                  /* stay close to the logo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== Logo sizing ===== */
+/* Default (phones) – keep your smaller phone size */
+.container.zone.body > img.responsiveimg {
+  display: block;
+  height: auto !important;              /* defeat earlier vh rules */
+  max-width: 100%;
+  width: clamp(240px, 62vw, 520px) !important;
+}
+
+/* 700px and up – about 40% of the screen width */
+@media (min-width: 700px) {
+  .container.zone.body > img.responsiveimg {
+    width: clamp(360px, 40vw, 800px) !important;
+  }
+}
+
+/* ===== “Workflows” button – slightly wider, smaller text ===== */
+.container2.button > button.grow {
+  width: auto !important;               /* ignore 30–50% rules above */
+  padding: 10px 36px !important;        /* a tad wider than before */
+  font-size: clamp(0.95rem, 1.2vw, 1.08rem) !important; /* smaller text */
+  line-height: 1.15;
+  white-space: nowrap;
+  margin-top: 0.5rem;                   /* tiny gap under the logo only */
+}
+.container2.button > button.grow > .button-text {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* ===== Lower the hero + keep spacing consistent ===== */
+.container.zone.body {
+  /* neutralize earlier 50vh, flex-end, and padding */
+  height: auto !important;
+  padding: 0 !important;
+  align-items: center !important;
+
+  /* push the logo block lower on the page */
+  margin-top: clamp(10vh, 16vh, 20vh) !important;
+
+  display: flex;
+  justify-content: center;
+}
+
+/* Put the button a bit farther from the logo, but always close */
+.container2 {
+  height: auto !important;       /* neutralize 55vh */
+  padding: 0 !important;
+  margin-top: 1.25rem !important; /* slightly more gap than before */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== Logo sizing (≈40% width on wide screens) ===== */
+.container.zone.body > img.responsiveimg {
+  display: block;
+  height: auto !important;         /* beat old 35–48vh rules */
+  max-width: 100%;
+  width: clamp(240px, 62vw, 520px) !important;  /* phones */
+}
+
+@media (min-width: 700px) {
+  .container.zone.body > img.responsiveimg {
+    width: clamp(360px, 40vw, 860px) !important; /* ~40% of viewport */
+  }
+}
+
+/* ===== Button: a tad wider, smaller text, no hover-jump ===== */
+.container2.button > button.grow {
+  width: auto !important;                /* ignore the earlier 30–50% widths */
+  padding: 12px 44px !important;         /* slightly wider than before */
+  font-size: clamp(0.88rem, 1.05vw, 1rem) !important; /* slightly smaller text */
+  line-height: 1.15;
+  white-space: nowrap;
+  transform-origin: center;
+}
+
+/* Keep the anchor from adding width */
+.container2.button > button.grow > .button-text {
+  display: inline-block;
+  text-decoration: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Smooth hover without layout shift (no scrollbars popping in/out) */
+.grow { 
+  transition: transform .35s ease, box-shadow .35s ease; 
+}
+.grow:hover { 
+  transform: scale(1.06);                /* gentler than 1.1 to avoid overflow */
+  box-shadow: 0 10px 24px rgba(0,0,0,.28);
+}
+
+/* Prevent recentering when a vertical scrollbar would appear */
+html { overflow-y: scroll; }              /* keeps layout width stable across hover */
+
+/* Keep a stable vertical scrollbar so hover never recenters the page */
+html, body {
+  overflow-y: scroll !important;
+  scrollbar-gutter: stable both-edges; /* modern browsers */
+}
+
+/* Slightly more space between logo and button */
+.container2 {
+  margin-top: 1.75rem !important;  /* was 1.25rem */
+}
+
+/* Button: slightly wider and smaller text; never stretch to % widths */
+.container2.button > button.grow {
+  width: auto !important;                 /* ignore older 30–50% rules */
+  max-width: max-content;
+  padding: 12px 48px !important;          /* wider than before */
+  font-size: clamp(0.88rem, 1.05vw, 1rem) !important;
+  line-height: 1.15;
+  white-space: nowrap;
+  transform-origin: center;
+  /* Avoid animating “everything”, which can cause subtle jiggles */
+  transition: transform .3s ease, box-shadow .3s ease, background-color .2s linear !important;
+}
+
+/* On ≥700px, make it quite a bit wider */
+@media (min-width: 700px) {
+  .container2.button > button.grow {
+    /* ensures a wider footprint without using percentages */
+    min-width: clamp(260px, 26vw, 360px);
+    padding: 14px 56px !important;
+  }
+}
+
+/* Keep the anchor from changing size on hover */
+.container2.button > button.grow > .button-text {
+  display: inline-block;
+  text-decoration: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Smooth hover without layout shift (no scrollbars popping in/out) */
+.grow {
+  transition: transform .3s ease, box-shadow .3s ease, background-color .2s linear !important;
+}
+.grow:hover {
+  transform: scale(1.03);                 /* gentler to avoid overflow */
+  box-shadow: 0 10px 24px rgba(0,0,0,.28);
+}
+
+/* ——— 1) Kill hover shift & double scrollbars ——— */
+/* Reserve a stable vertical scrollbar on the page root only */
+html { 
+  overflow-y: scroll !important; 
+  scrollbar-gutter: stable;       /* one gutter, no layout nudge */
+}
+/* Let body be the normal scroll container */
+body { 
+  overflow-y: visible !important; 
+}
+
+/* Stop hover from changing element size */
+.grow {
+  transition: box-shadow .3s ease, background-color .2s linear !important;
+}
+.grow:hover {
+  transform: none !important;                    /* remove scale that triggered scroll */
+  box-shadow: 0 10px 24px rgba(0,0,0,.28);
+}
+
+/* ——— 2) Lower the hero, add more space between logo & button ——— */
+.container.zone.body {
+  height: auto !important;
+  padding: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* push the hero lower overall */
+  margin-top: clamp(12vh, 22vh, 26vh) !important;
+}
+.container2 {
+  height: auto !important;
+  padding: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* noticeably more gap under the logo */
+  margin-top: clamp(2rem, 4vh, 3rem) !important;
+}
+
+/* ——— 3) Button width = medium on ≥700px, a touch wider overall ——— */
+.container2.button > button.grow {
+  width: auto !important;                  /* ignore earlier 30–50% rules */
+  max-width: max-content;
+  padding: 12px 42px !important;           /* a little wider than before */
+  font-size: clamp(0.9rem, 1.05vw, 1.05rem) !important; /* slightly smaller text */
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+@media (min-width: 700px) {
+  .container2.button > button.grow {
+    /* medium width: between the old and the very wide version */
+    min-width: clamp(230px, 22vw, 300px);
+    padding: 14px 48px !important;         /* bump width a touch on larger screens */
+  }
+}
+
+/* Keep the anchor from altering width */
+.container2.button > button.grow > .button-text {
+  display: inline-block;
+  text-decoration: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* More space between logo and button (all sizes) */
+.container2 {
+  margin-top: clamp(3rem, 8vh, 5rem) !important; /* up from ~2rem */
+}
+
+/* Button: slightly narrower at all sizes */
+.container2.button > button.grow {
+  width: auto !important;
+  max-width: max-content;
+  padding: 10px 34px !important;       /* was wider */
+  font-size: clamp(0.9rem, 1vw, 1.02rem) !important;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+/* ≥700px: keep it medium-wide but a bit slimmer than before */
+@media (min-width: 700px) {
+  .container2.button > button.grow {
+    min-width: clamp(210px, 18vw, 270px) !important;  /* narrower than previous 230–300 */
+    padding: 12px 38px !important;
+  }
+}
+
+/* keep anchor tidy (no extra width) */
+.container2.button > button.grow > .button-text {
+  display: inline-block;
+  text-decoration: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Make the entire green button clickable, no absolute positioning */
+.container2.button > button.grow {
+  position: static !important;        /* reset */
+  display: inline-block;
+  padding: 0 !important;              /* move padding to the link */
+  border-radius: 12px;
+}
+
+.container2.button > button.grow > .button-text {
+  position: static !important;        /* reset */
+  display: block !important;          /* fills the button’s box */
+  width: 100% !important;
+  height: 100% !important;
+  padding: 12px 38px !important;      /* full hit area (edges included) */
+  line-height: 1.15;
+  text-decoration: none;
+  color: #bcbec5;
+  border-radius: inherit;
+}
+
+/* Center the button under the logo */
+.container2 {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Button box defines the size; keep it centered */
+.container2.button > button.grow {
+  display: inline-block !important;
+  margin: 0 auto !important;        /* exact centering */
+  position: relative !important;     /* for the link overlay */
+  box-sizing: border-box !important;
+  padding: 12px 38px !important;     /* adjust width here */
+  border-radius: 12px;
+}
+
+/* Make the entire green button clickable + center the label */
+.container2.button > button.grow > .button-text {
+  position: absolute !important;
+  inset: 0 !important;               /* fill the button */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;/* centers text horizontally & vertically */
+  padding: 0 !important;             /* padding lives on the button */
+  width: 100% !important;
+  height: 100% !important;
+  text-align: center !important;
+  border-radius: inherit;
+}
+
+
+/* Taller button everywhere (more vertical padding) */
+.container2.button > button.grow {
+  width: auto !important;              /* ignore earlier % widths */
+  padding: 16px 40px !important;       /* ↑ height via padding-block */
+  min-height: 52px !important;         /* consistent touch target */
+  box-sizing: border-box;
+}
+
+/* Keep the link filling the button and centered (from your working patch) */
+.container2.button > button.grow > .button-text {
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 0 !important;               /* padding lives on the button */
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: inherit;
+}
+
+/* Under 700px: make the button noticeably wider */
+@media (max-width: 699px) {
+  .container2.button > button.grow {
+    min-width: clamp(240px, 72vw, 420px) !important;  /* wider on phones */
+  }
+}
+
+/* Ultra-small phones: use most of the width but keep comfortable padding */
+@media (max-width: 360px) {
+  .container2.button > button.grow {
+    min-width: 88vw !important;
+    padding: 16px 24px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .container2.button > button.grow {
+    min-width: clamp(180px, 40vw, 360px) !important;
+  }
+}
+@media (max-width: 360px) {
+  .container2.button > button.grow {
+    min-width: 40vw !important;
+  }
+}
+/* slightly less horizontal padding = slightly slimmer */
+.container2.button > button.grow {
+  padding: 16px 32px !important;
+}
+
+/* ——— Position context for absolute hamburger ——— */
+.nav-bar { position: relative; }
+
+/* ——— Hamburger button (override your global button styles) ——— */
+.hamburger {
+  position: absolute; left: 12px; top: 10px;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 8px !important;
+  margin: 0 !important;
+  width: auto !important; height: auto !important;
+  border-radius: 8px !important;
+  cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  z-index: 1002; /* above nav list */
+}
+.hamburger .bar {
+  display: block;
+  width: 22px; height: 2px;
+  background: #bcbec5;                 /* gray lines */
+  margin: 3.5px 0;
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+/* Optional: little hover feedback */
+.hamburger:hover .bar { opacity: 0.85; }
+
+/* ——— Slide-in menu ——— */
+.side-menu {
+  position: fixed; inset: 0 auto 0 0;   /* left side */
+  width: 220px; height: 100dvh;
+  background: #000; color: #bcbec5;
+  border-right: 1px solid #333;
+  transform: translateX(-110%);
+  transition: transform .28s ease;
+  padding: 72px 16px 16px;              /* space for nav/top area */
+  z-index: 1001;
+}
+.side-menu .menu-link {
+  display: block;
+  color: #bcbec5;
+  text-decoration: none;
+  padding: 10px 8px;
+  border-radius: 8px;
+}
+.side-menu .menu-link:hover { background: #111; }
+
+/* ——— Backdrop ——— */
+.menu-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 1000;
+}
+
+/* ——— Open state ——— */
+body.menu-open .side-menu { transform: translateX(0); }
+body.menu-open #menu-backdrop { display: block; }
+
+/* Ensure the navbar reserves space and the hamburger is visible */
+.nav-bar{
+  position: relative !important;
+  min-height: 56px !important;     /* gives the bar a visible height */
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Force hamburger to sit top-left and be above the hero */
+.hamburger{
+  position: absolute !important;
+  left: 12px; 
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent !important;
+  border: 0 !important;
+  padding: 8px !important;
+  margin: 0 !important;
+  width: auto !important; 
+  height: auto !important;
+  border-radius: 8px !important;
+  z-index: 1005 !important;         /* above everything in the header */
+}
+
+/* Gray lines */
+.hamburger .bar{
+  display: block !important;
+  width: 24px; 
+  height: 2px;
+  background: #bcbec5 !important;
+  margin: 4px 0;
+}
+
+/* ——— Make the hamburger show 3 bold gray lines ——— */
+.nav-bar { 
+  position: relative !important; 
+  min-height: 56px !important;        /* ensure room for the icon */
+}
+
+/* Layout the 3 bars in a column with spacing */
+.hamburger{
+  position: absolute !important;
+  left: 12px; 
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;                 /* space between lines */
+  width: 44px !important;
+  height: 44px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  cursor: pointer;
+  z-index: 1005 !important;
+}
+
+/* Thicker, bolder gray bars */
+.hamburger .bar{
+  display: block !important;
+  width: 28px !important;
+  height: 4px !important;              /* thicker than before */
+  background: #bcbec5 !important;      /* gray */
+  border-radius: 3px !important;
+}
+
+/* Optional: tiny hover feedback */
+.hamburger:hover .bar { opacity: 0.9; }
+
+/* Make the hamburger bars twice as long */
+.hamburger{
+  width: 68px !important;       /* wider hit area to fit longer bars */
+}
+
+.hamburger .bar{
+  width: 56px !important;       /* ~2× the old 28px */
+  /* keep the same thickness and style */
+  height: 4px !important;
+  border-radius: 3px !important;
+}
+
+/* (Optional) tiny cap for very small phones */
+@media (max-width: 360px){
+  .hamburger{ width: 58px !important; }
+  .hamburger .bar{ width: 48px !important; }
+}
+
+/* Move the slide-in menu content farther down from the top edge */
+nav.nav-bar + .side-menu {
+  /* top | right/left | bottom */
+  padding: 104px 20px 20px !important;
+}
+
+/* If you need even more room, bump the first number (e.g., 128px) */
+
+
+/* Put the slide-in menu below the navbar */
+:root { --nav-h: 56px; }                /* tweak if your nav height changes */
+
+#side-menu {
+  top: var(--nav-h) !important;         /* was 0 via inset */
+  height: calc(100dvh - var(--nav-h)) !important;
+  padding-top: 16px !important;         /* small internal breathing room */
+  /* optional polish so you can “see” the top edge clearly */
+  border-top-right-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+}
+
+/* If you want it notch-safe on phones, swap top/height with: */
+/*
+#side-menu {
+  top: calc(env(safe-area-inset-top) + var(--nav-h)) !important;
+  height: calc(100dvh - (env(safe-area-inset-top) + var(--nav-h))) !important;
+}
+*/
+
+/* ---------- Theme vars ---------- */
+:root{
+  --bg: #000;
+  --text: #bcbec5;
+  --brand: #007a35;
+  --brand-hover: #099b48;
+
+  --nav-h: 56px;                 /* navbar height */
+  --drawer-w-desktop: 220px;     /* drawer width >700px */
+  --drawer-w-mobile: 190px;      /* drawer width ≤700px */
+
+  /* Button sizing */
+  --btn-pad-y: 16px;
+  --btn-pad-x: 32px;
+  --btn-min-h: 52px;
+
+  /* Mobile button sizing (≤700px) */
+  --btn-pad-y-sm: 10px;
+  --btn-pad-x-sm: 20px;
+  --btn-min-h-sm: 44px;
+  --btn-minw-sm: 180px;
+  --btn-vw-sm: 50vw;
+  --btn-maxw-sm: 280px;
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; min-height: 100svh; }
+
+/* ---------- Navbar + Heart Icon ---------- */
+.nav-bar{
+  position: relative;
+  min-height: var(--nav-h);
+  display: flex; align-items: center;
+}
+.hamburger{
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; padding: 0; border: 0; background: transparent;
+  border-radius: 10px; cursor: pointer; z-index: 1005;
+  color: var(--text); /* sets heart stripe color */
+}
+.hamburger .heart-burger{ width: 56px; height: 56px; display: block; }
+@media (max-width: 700px){
+  .hamburger{ width: 48px; height: 48px; }
+  .hamburger .heart-burger{ width: 48px; height: 48px; }
+}
+
+/* ---------- Drawer ---------- */
+.side-menu{
+  position: fixed; left: 0; top: var(--nav-h); bottom: 0;
+  width: var(--drawer-w-desktop); height: calc(100dvh - var(--nav-h));
+  background: #000; color: var(--text);
+  border-right: 1px solid #333;
+  transform: translateX(-110%); transition: transform .28s ease;
+  padding: 16px; box-sizing: border-box; z-index: 1001;
+  border-top-right-radius: 10px; box-shadow: 0 6px 18px rgba(0,0,0,.35);
+  overflow-x: visible !important;
+}
+.side-menu *{ overflow-x: visible !important; }
+.menu-link{
+  display: block; color: var(--text); text-decoration: none;
+  padding: 10px 8px; border-radius: 8px;
+  font-size: clamp(14px, 3.8vw, 16px); line-height: 1.2;
+}
+.menu-link:hover{ background: #111; }
+.menu-backdrop{
+  position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 1000; display: none;
+}
+body.menu-open .side-menu{ transform: translateX(0); }
+body.menu-open .menu-backdrop{ display: block; }
+
+@media (max-width: 700px){
+  .side-menu{ width: var(--drawer-w-mobile); }
+}
+
+/* ---------- Hero: logo + spacing ---------- */
+.container{ width: 100%; display: flex; justify-content: center; align-items: center; }
+.hero{ margin-top: clamp(10vh, 16vh, 22vh); }
+.responsiveimg{
+  display: block; height: auto; max-width: 100%;
+  width: clamp(240px, 62vw, 520px);
+}
+@media (min-width: 700px){
+  .responsiveimg{ width: clamp(360px, 40vw, 800px); }
+}
+
+/* ---------- CTA Button (full-button clickable) ---------- */
+.container2{ width: 100%; display: flex; justify-content: center; align-items: center; margin-top: clamp(2.5rem, 6vh, 4rem); }
+.cta{
+  position: relative; display: inline-block; border: 0; border-radius: 12px;
+  background: var(--brand); color: #fff; cursor: pointer;
+  padding: var(--btn-pad-y) var(--btn-pad-x); min-height: var(--btn-min-h);
+  transition: background-color .2s linear, box-shadow .3s ease;
+}
+.cta:hover{ background: var(--brand-hover); }
+.cta .button-text{
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  text-decoration: none; color: var(--text); /* your original link color */
+}
+/* Mobile: shorter & narrower */
+@media (max-width: 700px){
+  .cta{
+    min-width: clamp(var(--btn-minw-sm), var(--btn-vw-sm), var(--btn-maxw-sm));
+    padding: var(--btn-pad-y-sm) var(--btn-pad-x-sm);
+    min-height: var(--btn-min-h-sm);
+  }
+}
+
+/* ---------- Footer ---------- */
+.bottom-section{ background: #000; text-align: center; padding: 12px 0; }
+.foot-nav{ margin: 0; padding: 0; list-style: none; display: flex; justify-content: center; gap: 20px; }
+
+
+/* =========================
+   1) HEART HAMBURGER SIZE
+   ========================= */
+/* Bigger heart on wider screens (keeps your stripe pattern) */
+@media (min-width: 701px) {
+  .hamburger {
+    width: 72px !important;
+    height: 72px !important;
+  }
+  .hamburger .heart-burger {
+    width: 72px !important;
+    height: 72px !important;
+  }
+}
+
+/* Keep the smaller heart on ≤700px (matches your current look) */
+@media (max-width: 700px) {
+  .hamburger {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  .hamburger .heart-burger {
+    width: 48px !important;
+    height: 48px !important;
+  }
+}
+
+/* =========================
+   2) LOGO: NO CLIPPING + SANE SIZING
+   ========================= */
+/* Kill the old 50vh/align-end combo, center things, allow full image */
+.container,
+.container.zone.body,
+.container.hero {
+  height: auto !important;
+  padding: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  overflow: visible !important;
+}
+
+/* Place the hero comfortably lower (adjust if you like) */
+.container.hero { margin-top: clamp(10vh, 16vh, 22vh) !important; }
+
+/* Image sizing: width-based clamps only, never cropped */
+.container.hero > img.responsiveimg,
+.container.zone.body > img.responsiveimg {
+  display: block !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: none !important;
+  /* phones default */
+  width: clamp(240px, 62vw, 560px) !important;
+}
+
+/* ~40% viewport on wider screens, with a generous cap to avoid clipping */
+@media (min-width: 700px) {
+  .container.hero > img.responsiveimg,
+  .container.zone.body > img.responsiveimg {
+    width: clamp(420px, 40vw, 900px) !important;
+  }
+}
+
+/* =========================
+   3) WORKFLOW BUTTON: KEEP IT CLOSE + CENTERED
+   ========================= */
+.container2 {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: auto !important;
+  padding: 0 !important;
+}
+
+/* Keep the button close to the logo on small screens */
+@media (max-width: 700px) {
+  .container2 { margin-top: 0.75rem !important; }
+}
+
+/* Give it a touch more breathing room above 700px */
+@media (min-width: 701px) {
+  .container2 { margin-top: 1.25rem !important; }
+}
+
+/* If you’re using the new .cta button (from your current index.html) */
+.cta {
+  position: relative !important;
+  display: inline-block !important;
+  border-radius: 12px !important;
+  background: #007a35 !important;
+  transition: background-color .2s linear, box-shadow .3s ease !important;
+  /* desktop defaults you liked */
+  padding: 16px 32px !important;
+  min-height: 52px !important;
+  width: auto !important;
+}
+.cta:hover { background: #099b48 !important; }
+.cta .button-text {
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  color: #bcbec5 !important;
+}
+
+/* Button stays nicely sized on phones and doesn't “drift” away */
+@media (max-width: 700px) {
+  .cta {
+    min-width: clamp(180px, 50vw, 280px) !important;
+    padding: 10px 20px !important;
+    min-height: 44px !important;
+  }
+}
+
+/* Optional: medium footprint on larger screens */
+@media (min-width: 701px) {
+  .cta {
+    min-width: clamp(220px, 22vw, 300px) !important;
+  }
+}
+
+/* =========================
+   HEART (make bigger >700)
+   ========================= */
+@media (min-width: 701px){
+  .hamburger{ width:72px !important; height:72px !important; }
+  .hamburger .heart-burger{ width:72px !important; height:72px !important; }
+}
+
+/* Add a little top gap so the heart isn’t touching the top */
+:root { --nav-h: 64px; }                               /* was 56px */
+.nav-bar{ min-height: var(--nav-h) !important; }       /* reserve the space */
+.hamburger{ top: 50% !important; transform: translateY(-50%) !important; }
+
+/* =========================
+   LOGO (no clipping + sane size)
+   ========================= */
+.container,
+.container.zone.body,
+.container.hero{
+  height:auto !important; padding:0 !important;
+  display:flex !important; justify-content:center !important; align-items:center !important;
+  overflow:visible !important;
+}
+.container.hero{ margin-top: clamp(10vh,16vh,22vh) !important; }
+
+.container.hero > img.responsiveimg,
+.container.zone.body > img.responsiveimg{
+  display:block !important; height:auto !important; max-width:100% !important; max-height:none !important;
+  /* phones */
+  width: clamp(240px, 62vw, 560px) !important;
+}
+@media (min-width: 700px){
+  .container.hero > img.responsiveimg,
+  .container.zone.body > img.responsiveimg{
+    /* ~40% of viewport, generous cap */
+    width: clamp(420px, 40vw, 900px) !important;
+  }
+}
+
+/* =========================
+   BUTTON: gap + sizing
+   ========================= */
+.container2{
+  width:100% !important; display:flex !important; justify-content:center !important; align-items:center !important;
+  height:auto !important; padding:0 !important;
+}
+/* Wider gap than before */
+@media (max-width:700px){ .container2{ margin-top: clamp(1.25rem, 5vh, 2rem) !important; } }
+@media (min-width:701px){ .container2{ margin-top: clamp(1.5rem, 4vh, 2.5rem) !important; } }
+
+/* Use your .cta button (override any old generic `button` widths) */
+.cta{
+  width:auto !important; min-height:52px !important;
+  padding:16px 32px !important;                /* desktop padding */
+  border-radius:12px !important; background:#007a35 !important; transition:background-color .2s linear, box-shadow .3s ease !important;
+}
+.cta:hover{ background:#099b48 !important; }
+.cta .button-text{
+  position:absolute !important; inset:0 !important; display:flex !important; align-items:center !important; justify-content:center !important;
+  text-decoration:none !important; color:#bcbec5 !important;
+}
+
+/* ≤700px: much narrower but still padded */
+@media (max-width:700px){
+  .cta{
+    min-width: clamp(170px, 36vw, 240px) !important;  /* narrower than before */
+    padding: 10px 18px !important;                    /* keep comfy side padding */
+    min-height: 42px !important;
+  }
+}
+
+/* >700px: medium footprint */
+@media (min-width:701px){
+  .cta{ min-width: clamp(220px, 22vw, 300px) !important; }
+}
+
+
+/* =========================
+   A) Kill the always-on right gutter/scrollbar
+   ========================= */
+html{
+  overflow-y: auto !important;          /* only show scrollbar if needed */
+  scrollbar-gutter: auto !important;     /* don't reserve gutter space */
+}
+body{ overflow-y: visible !important; }
+
+/* =========================
+   B) Heart “hamburger”: more gap above (bigger nav bar)
+   ========================= */
+/* Make the navbar taller so the heart sits lower with a clear top gap */
+:root{ --nav-h: 104px !important; }        /* noticeable gap globally */
+@media (max-width: 700px){
+  :root{ --nav-h: 92px !important; }       /* still roomy on phones */
+}
+/* Ensure the bar reserves the space and keeps the heart centered */
+.nav-bar{
+  min-height: var(--nav-h) !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+}
+/* If you want even MORE space, just bump the numbers above. */
+
+/* =========================
+   C) Logo: no clipping, sane sizing (keeps your existing look)
+   ========================= */
+.container,
+.container.zone.body,
+.container.hero{
+  height: auto !important;
+  padding: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  overflow: visible !important;
+}
+.container.hero{ margin-top: clamp(10vh, 16vh, 22vh) !important; }
+
+.container.hero > img.responsiveimg,
+.container.zone.body > img.responsiveimg{
+  display: block !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: none !important;
+  width: clamp(240px, 62vw, 560px) !important;   /* phones */
+}
+@media (min-width: 700px){
+  .container.hero > img.responsiveimg,
+  .container.zone.body > img.responsiveimg{
+    width: clamp(420px, 40vw, 900px) !important; /* wide, but never clipped */
+  }
+}
+
+/* =========================
+   D) Workflow button: bigger gap below logo + narrower on ≤700px
+   ========================= */
+.container2{
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: auto !important;
+  padding: 0 !important;
+}
+
+/* Much more space between the logo and the button */
+@media (max-width: 700px){
+  .container2{ margin-top: clamp(2rem, 7vh, 3rem) !important; } /* ↑ phones */
+}
+@media (min-width: 701px){
+  .container2{ margin-top: clamp(2.25rem, 8vh, 4rem) !important; } /* ↑ desktop */
+}
+
+/* Your .cta button: keep padding, but make it much narrower on small screens */
+.cta{
+  position: relative !important;
+  display: inline-block !important;
+  border-radius: 12px !important;
+  background: #007a35 !important;
+  transition: background-color .2s linear, box-shadow .3s ease !important;
+  padding: 16px 32px !important;    /* desktop default */
+  min-height: 52px !important;
+  width: auto !important;
+}
+.cta:hover{ background: #099b48 !important; }
+.cta .button-text{
+  position: absolute !important; inset: 0 !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  text-decoration: none !important; color: #bcbec5 !important;
+}
+
+/* ≤700px: narrow the button a LOT, but keep comfy side padding */
+@media (max-width: 700px){
+  .cta{
+    min-width: clamp(150px, 32vw, 220px) !important;  /* much narrower */
+    padding: 10px 18px !important;                    /* keep some edge padding */
+    min-height: 42px !important;
+  }
+}
+
+/* >700px: medium footprint (unchanged feel) */
+@media (min-width: 701px){
+  .cta{ min-width: clamp(220px, 22vw, 300px) !important; }
+}
+
+
+/* More black space below the Workflow button on Index page */
+@media (max-width: 700px){
+  .container2{
+    margin-bottom: clamp(2rem, 12vh, 5rem) !important; /* phones/tablets */
+  }
+}
+@media (min-width: 701px){
+  .container2{
+    margin-bottom: clamp(3rem, 30vh, 10rem) !important; /* desktop+ */
+  }
+}
+
+

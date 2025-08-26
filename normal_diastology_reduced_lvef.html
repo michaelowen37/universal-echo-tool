@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Diastology</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+  <link rel="icon" type="image/png" href="BSW_Thumbnail.png"/>
+</head>
+
+<body>
+
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+      <li class="push"><a class="top-nav" href="normal_diastology.html">Back</a></li>
+    </ul>
+
+    <div class="container zone body">Diastology:</div>
+    <div class="container" style="padding:0"><em>Reduced LVEF</em></div>
+  </nav>
+
+  <div class="zone navigation">
+    <div class="final" style="padding:0 10%">
+
+      <br>
+
+      <!-- ========================== RESPONSIVE FIXED TABLE (3 columns) ========================== -->
+      <div id="dg-embed">
+        <!-- Blue header band (3 equal columns) -->
+        <div class="dg-headerwrap">
+          <div class="dg-header dg-3fixed" role="row">
+            <div class="dg-hcell" role="columnheader">
+              <div class="dg-wrap">E/e' &gt; 14</div>
+            </div>
+            <div class="dg-hcell" role="columnheader">
+              <div class="dg-wrap">TR Velocity &gt; <span class="dg-nb">2.8&nbsp;m/s</span></div>
+            </div>
+            <div class="dg-hcell" role="columnheader">
+              <div class="dg-wrap dg-free">LA Volume &gt; 34&nbsp;<span class="dg-nb">ml/m<sup>2</sup></span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Green table (3 columns, 3 rows) -->
+        <div class="dg-tablewrap">
+          <table class="dg-table" role="table" aria-label="Diastology table — 3 columns">
+            <colgroup>
+              <col class="dg-col1-col">
+              <col class="dg-col2-col">
+              <col class="dg-col3-col">
+            </colgroup>
+            <tbody>
+              <tr>
+                <th scope="row" class="dg-col1">Grade I</th>
+                <td class="dg-c2">0 or 1 Positive</td>
+                <td class="dg-c3">E/A &lt; 2</td>
+              </tr>
+              <tr>
+                <th scope="row" class="dg-col1">Grade II</th>
+                <td class="dg-c2">2 or 3 Positive</td>
+                <td class="dg-c3">E/A &lt; 2</td>
+              </tr>
+              <tr>
+                <th scope="row" class="dg-col1">Grade III</th>
+                <td class="dg-c2">3 Positive</td>
+                <td class="dg-c3">E/A &gt; 2</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <style>
+        /* -------- page-scoped overrides (style3.css untouched) -------- */
+
+        /* Keep the existing theme */
+        #dg-embed{
+          --dg-accent:#00ff66; --dg-head:rgb(40,133,199);
+          --dg-bg:#000; --dg-text:#fff;
+          --dg-outer:4px; --dg-line:2px; --dg-hsep:2px; --dg-hrim:4px;
+          color:var(--dg-text); background:var(--dg-bg);
+          font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        }
+        #dg-embed *{ box-sizing:border-box; }
+
+        /* Header chrome */
+        .dg-headerwrap{
+          border:var(--dg-hrim) solid var(--dg-head);
+          border-radius:18px; overflow:hidden; background:var(--dg-bg); margin-bottom:8px;
+        }
+
+        /* === FORCE 3 equal header boxes (don’t rely on any grid rules) === */
+        .dg-header.dg-3fixed{
+          display:flex !important; width:100%; gap:0;
+          /* neutralize any inherited grid */
+          grid-template-columns:none !important;
+          grid-auto-columns:unset !important;
+          grid-auto-flow:unset !important;
+        }
+        .dg-header.dg-3fixed .dg-hcell{
+          flex:1 1 0 !important; min-width:0;
+          display:flex; align-items:center; justify-content:center; /* center text both ways */
+          padding:20px 12px; min-height:110px;
+          text-align:center; font-weight:600; line-height:1.14;
+          font-size: clamp(.80rem, 2.6vw, 1.08rem);
+          overflow:hidden; -ms-overflow-style:none; scrollbar-width:none;
+          border-right:var(--dg-hsep) solid var(--dg-head);
+        }
+        .dg-header.dg-3fixed .dg-hcell:last-child{ border-right:none; }
+        .dg-header.dg-3fixed .dg-hcell::-webkit-scrollbar{ display:none; }
+
+        /* Green table (unchanged) */
+        .dg-tablewrap{ border:var(--dg-outer) solid var(--dg-accent); border-radius:18px; overflow:hidden; background:var(--dg-bg); }
+        .dg-table{ width:100%; border-collapse:collapse; table-layout:fixed; text-align:center; }
+        .dg-table th, .dg-table td{
+          border:var(--dg-line) solid var(--dg-accent);
+          padding:22px 10px; line-height:1.2; background:transparent; text-align:center;
+          white-space:normal; word-break:normal; overflow-wrap:normal; hyphens:none; overflow:hidden; text-overflow:clip;
+        }
+        .dg-table col{ width:33.3333%; }
+        .dg-table th.dg-col1{
+          font-weight:800; font-size:clamp(.95rem, 2.5vw, 1.1rem);
+          background: rgba(40, 133, 199, 0.22);
+        }
+        .dg-table td{ font-weight:600; font-size:clamp(.84rem, 2.1vw, .96rem); }
+
+        /* Wrapping / unit safety */
+        .dg-wrap{
+          display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:4;
+          overflow:hidden; white-space:normal; scrollbar-width:none; -ms-overflow-style:none;
+        }
+        .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+        .dg-free{ display:block !important; -webkit-line-clamp:unset !important; -webkit-box-orient:initial !important; overflow:visible !important; }
+        .dg-nb{ white-space:nowrap; display:inline; vertical-align:baseline; }
+      </style>
+      <!-- ======================== END RESPONSIVE FIXED TABLE ======================== -->
+
+      <br><br>
+    </div>
+  </div>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav"></ul>
+  </footer>
+
+</body>
+</html>

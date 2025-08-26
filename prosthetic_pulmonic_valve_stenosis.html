@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Pulmonic Prosthesis</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+  <link rel="icon" type="image/png" href="BSW_Thumbnail.png"/>
+</head>
+
+<body>
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+      <li class="push"><a class="top-nav" href="prosthetic_valves.html">Back</a></li>
+    </ul>
+
+    <!-- Title only (no subtitle) -->
+    <div class="title-stack">
+      <div class="container zone body dg-title">Pulmonic Prosthesis:</div>
+    </div>
+
+    <br>
+
+    <!-- Navbar chips (single line, centered seam) -->
+    <div class="navbar">
+      <a class="nospace" href="#"></a>
+      <a class="active border" href="prosthetic_pulmonic_valve_stenosis.html">Stenosis</a>
+      <a class="border" href="prosthetic_pulmonic_valve_regurgitation.html">Regurgitation</a>
+      <a class="nospace" href="#"></a>
+    </div>
+  </nav>
+
+  <div class="zone navigation">
+    <div class="final" style="padding:0 10%">
+
+      <br>
+
+      <!-- ========================== DG SINGLE-COLUMN TABLE (replaces .svg) ========================== -->
+      <div id="dg-embed" aria-label="Pulmonic Prosthesis — Stenosis (single-column criteria)">
+
+        <!-- Blue header band (1 column) -->
+        <div class="dg-headerwrap">
+          <div class="dg-header dg-1col" role="row">
+            <div class="dg-hcell" role="columnheader">
+              <div class="dg-wrap">Findings Suggestive of Stenosis:</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Green table (1 column) -->
+        <div class="dg-tablewrap">
+          <table class="dg-table" role="table" aria-label="Prosthetic pulmonic stenosis criteria">
+            <colgroup>
+              <col class="dg-col1-col dg-col1-single">
+            </colgroup>
+            <tbody>
+              <tr>
+                <td class="dg-c1"><div class="dg-wrap">Color Flow Narrowing</div></td>
+              </tr>
+              <tr>
+                <td class="dg-c1"><div class="dg-wrap">Prosthesis Peak Velocity &gt; 2&nbsp;<span class="dg-nb">m/s</span></div></td>
+              </tr>
+              <tr>
+                <td class="dg-c1"><div class="dg-wrap">Homograft Peak Velocity &gt; 2&nbsp;<span class="dg-nb">m/s</span></div></td>
+              </tr>
+              <tr>
+                <td class="dg-c1"><div class="dg-wrap">Increased Peak Velocities on Serial Studies</div></td>
+              </tr>
+              <tr>
+                <td class="dg-c1"><div class="dg-wrap">Elevated RVSP &gt; 36&nbsp;<span class="dg-nb">mmHg</span></div></td>
+              </tr>
+              <tr>
+                <td class="dg-c1"><div class="dg-wrap">Impaired RV Function</div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- ======================== END DG TABLE ======================== -->
+
+      <br>
+
+          <!-- Link to another page: -->
+      <p style="text-align:center; margin:8px 0 0;">
+  <a href="native_pulmonic_valve_stenosis.html" style="color:#c8c8c8; text-decoration:underline;">
+    Native Values
+  </a>
+</p>
+
+
+
+      <br>
+    </div>
+  </div>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav"></ul>
+  </footer>
+
+  <!-- Page-scoped rules (style3.css untouched) -->
+  <style>
+    /* Chips: keep single-line like your “good” pages */
+    .navbar a.border, .navbar a.active.border{
+      white-space: nowrap !important;
+      overflow-wrap: normal !important;
+      word-break: normal !important;
+    }
+
+    /* ===== SINGLE-COLUMN TABLE THEME ===== */
+    #dg-embed{
+      --dg-accent:#00ff66; --dg-head:rgb(40,133,199);
+      --dg-bg:#000; --dg-text:#fff; --dg-outer:4px; --dg-line:2px; --dg-hsep:2px; --dg-hrim:4px;
+      color:var(--dg-text); background:var(--dg-bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    #dg-embed *{ box-sizing:border-box; }
+
+    /* BLUE HEADER (aligns with single table column) */
+    .dg-headerwrap{
+      border:var(--dg-hrim) solid var(--dg-head);
+      border-radius:18px; overflow:hidden; background:var(--dg-bg); margin-bottom:8px;
+    }
+    .dg-header{ display:grid; width:100%; }
+    .dg-header.dg-1col{ grid-template-columns: 100%; }
+    .dg-hcell{
+      display:flex; align-items:center; justify-content:center;
+      padding:20px 12px; min-height:88px;
+      text-align:center; font-weight:700; line-height:1.12;
+      font-size: clamp(.82rem, 2.6vw, 1.08rem);
+      overflow:hidden; -ms-overflow-style:none; scrollbar-width:none;
+      border-right:var(--dg-hsep) solid var(--dg-head);
+    }
+    .dg-hcell:last-child{ border-right:none; }
+
+    /* GREEN TABLE (single column) */
+    .dg-tablewrap{
+      border:var(--dg-outer) solid var(--dg-accent);
+      border-radius:18px; overflow:hidden; background:var(--dg-bg);
+    }
+    .dg-table{
+      width:100%; border-collapse:collapse; table-layout:fixed; text-align:center;
+    }
+    .dg-table td{
+      border:var(--dg-line) solid var(--dg-accent);
+      padding:22px 10px; line-height:1.2; background:transparent; text-align:center;
+      font-weight:400; font-size:clamp(.84rem, 2.1vw, .96rem);
+      white-space:normal; word-break:normal; overflow-wrap:normal; hyphens:none;
+      overflow:hidden; text-overflow:clip;
+    }
+
+    /* Single column = full width */
+    .dg-table col.dg-col1-single{ width:100%; }
+
+    /* Allow up to 4 lines in any cell; hide micro scrollbars */
+    .dg-wrap{
+      display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:4;
+      overflow:hidden; white-space:normal;
+      scrollbar-width:none; -ms-overflow-style:none;
+    }
+    .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+
+    /* Keep unit clusters unbroken + baseline-correct */
+    .dg-nb{ white-space:nowrap; display:inline; vertical-align:baseline; line-height:inherit; }
+
+    /* Widen the table zone a touch on small phones (consistent with other pages) */
+    @media (max-width:600px){ .final{ padding-left:6% !important; padding-right:6% !important; } }
+    @media (max-width:400px){ .final{ padding-left:4% !important; padding-right:4% !important; } }
+    @media (max-width:340px){ .final{ padding-left:3% !important; padding-right:3% !important; } }
+  </style>
+
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--   ****************************************************************************
+    Restrictive Cardiomyopathy — two single-column charts (second = blue outline, no header)
+  **************************************************************************** -->
+  <title>Diastology</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+  <link rel="icon" type="image/png" href="BSW_Thumbnail.png"/>
+</head>
+
+<body>
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+      <!-- <li class="push"><a class="top-nav" href="about.html">About Us</a></li> -->
+      <li class="push"><a class="top-nav" href="special_population_diastology.html">Back</a></li>
+    </ul>
+
+    <!-- Title + subtitle formatted exactly like the AFib page -->
+    <div class="container zone body">Diastology:</div>
+    <div class="container" style="padding: 0px"><em>Restrictive Cardiomyopathy</em></div>
+  </nav>
+
+  <div class="zone navigation">
+    <div class="final" style="padding: 0 10%">
+
+      <br>
+
+      <!-- ========================== CHART 1: STANDARD SINGLE-COLUMN (green outline) ========================== -->
+      <div id="dg-embed">
+        <!-- Header with subtle blue fill (like your AFib single-column charts) -->
+        <div class="dg-headerwrap">
+          <div class="dg-header dg-singlecol" role="row">
+            <div class="dg-hcell" role="columnheader">
+              Multiple Positives Indicate Elevated Filling Pressures:
+            </div>
+          </div>
+        </div>
+
+        <!-- Body (light-weight text; no cell shading) -->
+        <div class="dg-tablewrap">
+          <table class="dg-table" role="table" aria-label="Restrictive Cardiomyopathy — criteria (single column)">
+            <colgroup><col class="dg-col1-col"></colgroup>
+            <tbody>
+              <tr><td class="dg-c1">Mitral Inflow DcT &lt; 140 msec</td></tr>
+              <tr><td class="dg-c1">Mitral E/A Ratio &gt; 2.5</td></tr>
+              <tr><td class="dg-c1">IVRT &lt; 50 msec</td></tr>
+              <tr><td class="dg-c1">Average E/e' &gt; 14</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- ======================== END CHART 1 ======================== -->
+
+      <!-- Pleasant spacing between charts -->
+      <div class="chart-gap" aria-hidden="true"></div>
+
+      <!-- =========================== CHART 2: SPECIAL BLUE OUTLINE (90% WIDTH, NO HEADER) =========================== -->
+      <div id="dg-embed-cp" class="dg-narrow" aria-label="Constrictive Pericarditis vs RCM — clues (single column)">
+        <!-- No header block here by request -->
+
+        <div class="dg-tablewrap alt-blue">
+          <table class="dg-table small" role="table">
+            <colgroup><col class="dg-col1-col"></colgroup>
+            <tbody>
+              <tr>
+                <td class="dg-c1">
+                  If Septal e' &gt; 8 cm/s: <em>Consider Constrictive Pericarditis</em>
+                </td>
+              </tr>
+              <tr>
+                <td class="dg-c1">
+                  If Lateral e' &lt; Septal e': <em>Consider Constrictive Pericarditis</em>
+                </td>
+              </tr>
+              <tr>
+                <td class="dg-c1">
+                  If
+                  <span class="cp-line">
+                    <span class="frac" aria-label="Hepatic Vein End-diastolic Reversal Velocity divided by Forward-flow Velocity">
+                      <span class="num">Hepatic Vein End-diastolic Reversal Velocity</span>
+                      <span class="bar" aria-hidden="true"></span>
+                      <span class="den">Forward-flow Velocity</span>
+                    </span>
+                    <span class="cp-comp">is &ge; 8</span>
+                  </span>
+                  <span class="cp-outcome"> = <em>Definite Constrictive Pericarditis</em></span>
+                </td>
+              </tr>
+              <tr>
+                <td class="dg-c1">
+                  Restrictive Cardiomyopathy will have Septal e' &lt; 6 cm/s
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- ========================= END CHART 2 ========================= -->
+
+      <style>
+        /* -------- page-scoped styles only (style3.css untouched) -------- */
+
+        /* Shared theme */
+        #dg-embed, #dg-embed-cp{
+          --dg-accent:#00ff66;             /* default green for Chart 1 */
+          --dg-head:rgb(40,133,199);       /* header/blue accent */
+          --dg-bg:#000; --dg-text:#fff;
+          --dg-outer:4px; --dg-line:2px; --dg-hsep:2px; --dg-hrim:4px;
+          color:var(--dg-text); background:var(--dg-bg);
+          font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        }
+        #dg-embed *, #dg-embed-cp *{ box-sizing:border-box; }
+
+        .chart-gap{ height: clamp(22px, 5vw, 44px); }
+
+        /* Header shell (Chart 1) */
+        .dg-headerwrap{
+          border:var(--dg-hrim) solid var(--dg-head);
+          border-radius:18px;
+          overflow:hidden;
+          background:var(--dg-bg);
+          margin-bottom:8px;
+        }
+        .dg-header{
+          display:grid;
+          grid-template-columns:1fr; /* single column */
+          width:100%;
+        }
+        .dg-hcell{
+          display:flex; align-items:center; justify-content:center;
+          padding:20px 12px;
+          min-height:110px;
+          text-align:center;
+          font-weight:600;
+          line-height:1.14;
+          font-size: clamp(.80rem, 2.6vw, 1.08rem);
+
+          /* prevent scrollbars & odd wrapping */
+          white-space: normal;
+          word-break: normal;
+          overflow-wrap: normal;
+          hyphens: none;
+          overflow: hidden;
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+
+          border-right:var(--dg-hsep) solid var(--dg-head);
+        }
+        .dg-hcell:last-child{ border-right:none; }
+        .dg-hcell::-webkit-scrollbar{ display:none; }
+
+        /* Subtle blue fill for the standard single-column header ONLY (Chart 1) */
+        #dg-embed .dg-header.dg-singlecol .dg-hcell{
+          background: rgba(40, 133, 199, 0.18);
+        }
+
+        /* Table shell */
+        .dg-tablewrap{
+          border:var(--dg-outer) solid var(--dg-accent);
+          border-radius:18px;
+          overflow:hidden;
+          background:var(--dg-bg);
+        }
+        .dg-table{
+          width:100%;
+          border-collapse:collapse;
+          table-layout:fixed;
+          text-align:center;
+        }
+        /* Light (not bold) body text; no cell shading */
+        .dg-table td{
+          border:var(--dg-line) solid var(--dg-accent);
+          padding:22px 10px;
+          line-height:1.2;
+          background:transparent !important;
+          text-align:center;
+
+          font-weight:400;
+          font-size: clamp(.84rem, 2.1vw, .96rem);
+
+          white-space: normal;
+          word-break: normal;
+          overflow-wrap: anywhere;
+          hyphens: auto;
+          overflow: hidden;
+          text-overflow: clip;
+
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .dg-table col{ width:100%; }
+        .dg-table td::-webkit-scrollbar{ display:none; }
+
+        /* =================== Special styling for Chart 2 (blue outline, 90% width, no header) =================== */
+        #dg-embed-cp{
+          --dg-accent: rgb(40,133,199); /* blue outline */
+        }
+        .dg-narrow{ width:90%; margin:0 auto; }
+
+        /* Slightly smaller text for contrast in Chart 2 */
+        #dg-embed-cp .dg-table td{
+          font-size: clamp(.76rem, 1.8vw, .90rem);
+          padding:18px 10px;
+        }
+        /* Ensure <em> text in Chart 2 is NOT larger than surrounding text */
+        #dg-embed-cp .dg-table td em{
+          font-size: inherit;
+          font-weight: inherit;
+          font-style: italic;
+          line-height: inherit;
+        }
+
+        /* Fraction formatter — wraps well, no scrollbars, shrinks faster */
+        .frac{
+          display:inline-grid;
+          grid-template-rows:auto 1px auto;
+          align-items:center;
+          justify-items:center;
+          max-width:100%;
+          overflow:hidden;
+          vertical-align:middle;
+          margin:0 .18em;
+          line-height:1.05;
+        }
+        .frac .num,
+        .frac .den{
+          width:100%;
+          text-align:center;
+          overflow-wrap:anywhere;
+          word-break:break-word;
+          white-space:normal;
+          font-size: clamp(.62rem, 1.6vw, .88rem);
+          -ms-overflow-style:none; scrollbar-width:none;
+        }
+        .frac .num::-webkit-scrollbar,
+        .frac .den::-webkit-scrollbar{ display:none; }
+        .frac .bar{
+          width:100%;
+          height:1px;
+          background: currentColor;
+          opacity:.9;
+          margin:2px 0 1px;
+        }
+
+        /* Comparator and outcome layout */
+        .cp-line{ white-space:normal; }
+        .cp-comp{ white-space:nowrap; }
+        .cp-outcome{
+          white-space:normal;
+          margin-left:.25em;          /* inline spacing on larger screens */
+        }
+        /* Move outcome below the formula on screens <= 650px */
+        @media (max-width:650px){
+          #dg-embed-cp .cp-outcome{
+            display:block;
+            margin-left:0;
+            margin-top:6px;
+            text-align:center;
+          }
+        }
+
+        /* Blue-bordered wrappers for Chart 2 table */
+        .dg-tablewrap.alt-blue{ border-color: var(--dg-head); }
+        .dg-tablewrap.alt-blue .dg-table td{ border-color: var(--dg-head); }
+
+        /* Extra-small screens: tighten sizes a bit more */
+        @media (max-width:420px){
+          #dg-embed-cp .dg-table td{ font-size: clamp(.64rem, 3.6vw, .86rem); }
+          .frac .num, .frac .den{ font-size: clamp(.56rem, 3.2vw, .82rem); }
+        }
+      </style>
+
+      <br><br>
+    </div>
+  </div>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav">
+      <!-- <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li> -->
+      <!-- <li><a href="terms-of-use.html" target="_blank">Terms of Use</a></li> -->
+    </ul>
+  </footer>
+
+</body>
+</html>

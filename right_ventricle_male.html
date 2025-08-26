@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Right Ventricle</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+  <link rel="icon" type="image/png" href="BSW_Thumbnail.png"/>
+</head>
+
+<body>
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+      <!-- <li class="push"><a class="top-nav" href="about.html">About Us</a></li> -->
+      <li class="push"><a class="top-nav" href="echo_chambers.html">Back</a></li>
+    </ul>
+
+    <!-- Title only (no subtitle) -->
+    <div class="title-stack">
+      <div class="container zone body dg-title">Right Ventricle:</div>
+    </div>
+
+    <br>
+
+    <!-- Navbar chips -->
+    <div class="navbar">
+      <a class="nospace" href="#"></a>
+      <a class="active border" href="right_ventricle_male.html">Male</a>
+      <a class="border" href="right_ventricle_female.html">Female</a>
+      <a class="nospace" href="#"></a>
+    </div>
+  </nav>
+
+  <div class="zone navigation">
+    <div class="final" style="padding:0 10%">
+
+      <br>
+
+      <!-- ========================== DG TABLE (3 columns) ========================== -->
+      <div id="dg-embed" aria-label="Right Ventricle (Male) — Normal vs Abnormal">
+
+        <!-- Blue header band (now a real table to match column widths) -->
+        <div class="dg-headerwrap">
+          <table class="dg-headertable" role="presentation" aria-hidden="true">
+            <colgroup>
+              <col class="dg-col1-col">
+              <col class="dg-col2-col">
+              <col class="dg-col3-col">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="dg-hcell"><div class="dg-wrap"></div></th>
+                <th class="dg-hcell"><div class="dg-wrap">NORMAL</div></th>
+                <th class="dg-hcell"><div class="dg-wrap">ABNORMAL</div></th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+        <!-- Green table (3 columns) -->
+        <div class="dg-tablewrap">
+          <table class="dg-table" role="table" aria-label="Right ventricle (male) measurements">
+            <colgroup>
+              <col class="dg-col1-col">
+              <col class="dg-col2-col">
+              <col class="dg-col3-col">
+            </colgroup>
+            <tbody>
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">TAPSE</div></th>
+                <td class="dg-c2"><div class="dg-wrap">&ge; 1.6&nbsp;<span class="dg-nb">cm</span></div></td>
+                <td class="dg-c3"><div class="dg-wrap">&lt; 1.6&nbsp;<span class="dg-nb">cm</span></div></td>
+              </tr>
+
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Fractional Area Change</div></th>
+                <td class="dg-c2"><div class="dg-wrap">&ge; 35%</div></td>
+                <td class="dg-c3"><div class="dg-wrap">&lt; 35%</div></td>
+              </tr>
+
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">S'</div></th>
+                <!-- (keeping your requested unit as given) -->
+                <td class="dg-c2"><div class="dg-wrap dg-free">&ge; 9.5&nbsp;<span class="dg-nb">cm<sup>2</sup></span></div></td>
+                <td class="dg-c3"><div class="dg-wrap dg-free">< 9.5&nbsp;<span class="dg-nb">cm<sup>2</sup></span></div></td>
+              </tr>
+
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Basal Diameter</div></th>
+                <td class="dg-c2"><div class="dg-wrap">&le; 4.1&nbsp;<span class="dg-nb">cm</span></div></td>
+                <td class="dg-c3"><div class="dg-wrap">&gt; 4.1&nbsp;<span class="dg-nb">cm</span></div></td>
+              </tr>
+
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Free Wall Thickness</div></th>
+                <td class="dg-c2"><div class="dg-wrap">0.1 – 0.5&nbsp;<span class="dg-nb">cm</span></div></td>
+                <td class="dg-c3"><div class="dg-wrap">&gt; 0.5&nbsp;<span class="dg-nb">cm</span></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- ======================== END DG TABLE ======================== -->
+
+      <br><br>
+    </div>
+  </div>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav">
+      <!-- <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li> -->
+      <!-- <li><a href="terms-of-use.html" target="_blank">Terms of Use</a></li> -->
+    </ul>
+  </footer>
+
+  <!-- Page-scoped header/table lock + unit safety -->
+  <style>
+    /* Chips: keep single-line like the aortic pages */
+    .navbar a.border, .navbar a.active.border{
+      white-space: nowrap !important;
+      overflow-wrap: normal !important;
+      word-break: normal !important;
+    }
+
+    /* ===== Theme + shared column widths ===== */
+    #dg-embed{
+      --dg-accent:#00ff66; --dg-head:rgb(40,133,199);
+      --dg-bg:#000; --dg-text:#fff;
+      --dg-outer:4px; --dg-line:2px; --dg-hsep:2px; --dg-hrim:4px;
+
+      /* EXACT same widths for header + body via colgroup */
+      --c1:33.3333%;
+      --c2:33.3333%;
+      --c3:33.3333%;
+
+      color:var(--dg-text); background:var(--dg-bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    #dg-embed *{ box-sizing:border-box; }
+
+    /* ===== BLUE HEADER (as a collapsed table) ===== */
+    .dg-headerwrap{
+      border:var(--dg-hrim) solid var(--dg-head);
+      border-radius:18px; overflow:hidden; background:var(--dg-bg); margin-bottom:8px;
+    }
+    .dg-headertable{
+      width:100%; table-layout:fixed; border-collapse:collapse; background:transparent;
+    }
+    .dg-headertable col.dg-col1-col{ width: var(--c1); }
+    .dg-headertable col.dg-col2-col{ width: var(--c2); }
+    .dg-headertable col.dg-col3-col{ width: var(--c3); }
+
+    .dg-hcell{
+      border-right:var(--dg-hsep) solid var(--dg-head);
+      padding:20px 12px; min-height:88px; text-align:center;
+      font-weight:700; line-height:1.12; font-size: clamp(.82rem, 2.6vw, 1.08rem);
+      color:var(--dg-text); background:transparent;
+      white-space:nowrap; overflow:hidden;
+    }
+    .dg-headertable th:last-child{ border-right:none; }
+
+    /* ===== GREEN TABLE ===== */
+    .dg-tablewrap{ border:var(--dg-outer) solid var(--dg-accent); border-radius:18px; overflow:hidden; background:var(--dg-bg); }
+    .dg-table{ width:100%; border-collapse:collapse; table-layout:fixed; text-align:center; background:transparent; }
+    .dg-table col.dg-col1-col{ width: var(--c1); }
+    .dg-table col.dg-col2-col{ width: var(--c2); }
+    .dg-table col.dg-col3-col{ width: var(--c3); }
+
+    .dg-table th, .dg-table td{
+      border:var(--dg-line) solid var(--dg-accent);
+      padding:22px 10px; line-height:1.2; background:transparent; text-align:center;
+      white-space: normal; word-break: normal; overflow-wrap: normal; hyphens: manual; overflow:hidden; text-overflow:clip;
+      color:var(--dg-text);
+    }
+
+    /* First column: bold + soft blue tint */
+    .dg-table th.dg-col1{
+      font-weight:800; font-size:clamp(.95rem, 2.5vw, 1.08rem);
+      background: rgba(40,133,199,0.22);
+    }
+
+    /* Wrapping helpers + hide scrollbars */
+    .dg-wrap{
+      display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:4;
+      overflow:hidden; white-space:normal;
+      scrollbar-width:none; -ms-overflow-style:none;
+    }
+    .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+
+    /* “Units” that must not break */
+    #dg-embed .dg-nb{ white-space:nowrap; display:inline; vertical-align:baseline; }
+
+    /* Turn OFF clamp where superscripts could trigger tiny scrollbars */
+    #dg-embed .dg-free{
+      display:block !important;
+      -webkit-line-clamp: unset !important;
+      -webkit-box-orient: initial !important;
+      overflow:visible !important;
+    }
+
+    /* Narrow header squeezes (like your aortic fit rules) */
+    @media (max-width:520px){
+      .dg-hcell{ font-size: clamp(.60rem, 2.2vw, .88rem); padding-left:8px; padding-right:8px; }
+    }
+    @media (max-width:440px){
+      .dg-hcell{ font-size: clamp(.56rem, 2.4vw, .84rem); padding-left:6px; padding-right:6px; }
+    }
+    @media (max-width:360px){
+      .dg-hcell{ font-size: clamp(.52rem, 2.6vw, .80rem); padding-left:4px; padding-right:4px; }
+    }
+
+    /* Defensive: hide any residual scrollbars on clamped wrappers in body cells */
+    #dg-embed .dg-table th .dg-wrap,
+    #dg-embed .dg-table td .dg-wrap{
+      scrollbar-width:none; -ms-overflow-style:none;
+    }
+    #dg-embed .dg-table th .dg-wrap::-webkit-scrollbar,
+    #dg-embed .dg-table td .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+
+    /* ==== RV header band: force single row + exact column lock ==== */
+#dg-embed .dg-headertable{
+  width:100%;
+  table-layout:fixed;
+  border-collapse:collapse;
+}
+
+/* Make sure the header is a real table row, not blocks */
+#dg-embed .dg-headertable thead{ display:table-header-group !important; }
+#dg-embed .dg-headertable tr{ display:table-row !important; }
+
+/* Crucial: header cells must be table-cells (not block/flex) */
+#dg-embed .dg-headertable th{
+  display:table-cell !important;
+  float:none !important;
+  vertical-align:middle;
+}
+
+/* Keep labels on one line (they’re short: NORMAL / ABNORMAL) */
+#dg-embed .dg-headertable .dg-wrap{
+  white-space:nowrap;
+}
+
+/* Preserve your spacing/weight; you can tweak if you want it thinner */
+#dg-embed .dg-headertable th.dg-hcell{
+  padding:20px 12px;
+  font-weight:700;
+  line-height:1.12;
+}
+
+/* First column text shrink on narrow screens */
+@media (max-width:500px){
+  #dg-embed .dg-table th.dg-col1{
+    font-size: clamp(.58rem, 3.2vw, .78rem);
+    padding: 14px 6px;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+  #dg-embed .dg-table th.dg-col1 .dg-wrap{
+    -webkit-line-clamp: 4;   /* allow extra wrap without overflow */
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+  }
+}
+
+  </style>
+
+</body>
+</html>

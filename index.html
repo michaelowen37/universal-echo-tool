@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Open Graph SEO -->
+  <meta property="og:title" content="Guidelines Made Easy" />
+  <meta property="og:site_name" content="Universal Echo Tool" />
+  <meta property="og:description" content="Practical Cardiology Tool Designed for Clinical Environments ensuring Efficiency and Standardization." />
+  <meta property="og:image" content="www.echoworkflows.com/echocardio-heart.svg" />
+  <meta property="og:image:width" content="630">
+  <meta property="og:image:height" content="463">
+  <meta property="og:image:alt" content="Echo Logo">
+  <meta property="og:url" content="www.echoworkflows.com" />
+  <meta property="og:type" content="website" />
+
+  <title>Echocardiography</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Base stylesheet -->
+  <link rel="stylesheet" href="./style.css">
+  <link rel="icon" type="image/svg+xml" href="echocardio-heart.svg">
+
+  <!-- Page-scoped overrides (ensure this stays AFTER style.css) -->
+  <style>
+    /* === Tweak these to adjust spacing === */
+    :root{
+      --hero-offset-top-desktop: 30vh;   /* how far down to push the logo on desktop */
+      --hero-offset-top-mobile:  30vh;   /* how far down on mobile */
+      --hero-gap-below:          clamp(15px, 3vw, 40px); /* space between logo and button */
+      --logo-max-desktop:        1100px; /* keep your current logo sizing */
+      --logo-max-mobile:         680px;
+    }
+
+    /* Let hero use full width */
+    .container.hero{
+      max-width: 100% !important;
+      width: 100% !important;
+      margin: 0 auto !important;
+      text-align: center;
+      /* Push DOWN from the top, but keep a small gap below for the button */
+      padding-top: var(--hero-offset-top-desktop) !important;
+      padding-right: 0 !important;
+      padding-bottom: var(--hero-gap-below) !important;
+      padding-left: 0 !important;
+    }
+    @media (max-width: 700px){
+      .container.hero{
+        padding-top: var(--hero-offset-top-mobile) !important;
+      }
+    }
+
+    /* Keep your chosen logo size exactly */
+    #logoMain{
+      display: block !important;
+      margin: 0 auto !important;
+      width: min(60vw, var(--logo-max-desktop)) !important;
+      height: auto !important;
+      max-width: none !important;
+    }
+    @media (max-width: 700px){
+      #logoMain{
+        width: min(60vw, var(--logo-max-mobile)) !important;
+      }
+    }
+
+    /* Pull the Workflows button closer to the hero */
+    .hero + .container2{
+      margin-top: 4px !important;     /* tighten the gap below the logo */
+    }
+    .container2 .cta{
+      margin-top: 0 !important;       /* ensure the button itself adds no extra gap */
+      display: inline-block;          /* keep it tidy */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <nav class="nav-bar">
+    <!-- Heart “hamburger” made of horizontal lines -->
+    <button id="hamburger" class="hamburger" aria-label="Open menu" aria-controls="side-menu" aria-expanded="false">
+      <svg class="heart-burger" viewBox="0 0 64 64" width="56" height="56" aria-hidden="true">
+        <defs>
+          <clipPath id="heartClip">
+            <path d="M32 54 C32 54 8 39 8 26 C8 18 14 12 21 12 C26 12 29 15 32 18
+                     C35 15 38 12 43 12 C50 12 56 18 56 26 C56 39 32 54 32 54Z"/>
+          </clipPath>
+          <pattern id="hStripe" patternUnits="userSpaceOnUse" width="64" height="10">
+            <rect x="0" y="0" width="64" height="4" fill="currentColor"/>
+          </pattern>
+        </defs>
+        <rect x="0" y="0" width="64" height="64" fill="url(#hStripe)" clip-path="url(#heartClip)"/>
+      </svg>
+    </button>
+
+    <ul class="main-nav"><!-- reserved for future --></ul>
+  </nav>
+
+  <!-- Slide-in menu + backdrop -->
+  <aside id="side-menu" class="side-menu" aria-hidden="true">
+    <a href="contact.html" class="menu-link">Contact</a>
+  </aside>
+  <div id="menu-backdrop" class="menu-backdrop" hidden></div>
+
+  <!-- HERO -->
+  <div class="container hero">
+    <!-- Your new logo -->
+    <img id="logoMain" src="echocardiography.svg" class="responsiveimg" alt="Echocardiography Logo">
+  </div>
+
+  <div class="container2">
+    <button class="cta">
+      <a href="lwh_echo.html" class="button-text">Workflows</a>
+    </button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bottom-section">
+    <ul class="foot-nav"></ul>
+  </footer>
+
+  <!-- JS: menu open/close + mobile drawer width guard -->
+  <script>
+    (function () {
+      const btn = document.getElementById('hamburger');
+      const menu = document.getElementById('side-menu');
+      const backdrop = document.getElementById('menu-backdrop');
+      const MOBILE_BP = 700;
+
+      function setOpen(open) {
+        document.body.classList.toggle('menu-open', open);
+        btn.setAttribute('aria-expanded', String(open));
+        menu.setAttribute('aria-hidden', String(!open));
+        backdrop.hidden = !open;
+      }
+      btn.addEventListener('click', () => setOpen(!document.body.classList.contains('menu-open')));
+      backdrop.addEventListener('click', () => setOpen(false));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+
+      function applyDrawerWidth() {
+        const root = getComputedStyle(document.documentElement);
+        const wMobile  = root.getPropertyValue('--drawer-w-mobile').trim()  || '190px';
+        const wDesktop = root.getPropertyValue('--drawer-w-desktop').trim() || '220px';
+        const target = (window.innerWidth <= MOBILE_BP) ? wMobile : wDesktop;
+        menu.style.setProperty('width', target, 'important');
+      }
+      applyDrawerWidth();
+      window.addEventListener('resize', applyDrawerWidth);
+    })();
+  </script>
+</body>
+</html>

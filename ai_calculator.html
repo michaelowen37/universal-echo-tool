@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--   ****************************************************************************
+    The Title You Pick Here Shows When You Hover Over Browser Thumbnail
+  **************************************************************************** -->
+  <title>AI Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+
+  <!-- Browser tab thumbnail image -->
+  <link rel="icon" type="image/png" href="BSW_Thumbnail.png"/>
+</head>
+
+<body>
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+      <!-- <li class="push"><a class="top-nav" href="about.html">About Us</a></li> -->
+      <li class="push"><a class="top-nav" href="calculations.html">Back</a></li>
+    </ul>
+  </nav>
+
+  <!-- ****************************************************************************
+    This is the main title on the top of page
+  **************************************************************************** -->
+  <div class="container zone body">AI Calculator:</div>
+  <!-- <div class="container" style="padding: 0px"><em>EROA</em></div>  -->
+
+  <div class="zone navigation">
+    <div class="final" style="padding: 0px 10% 0px 10%">
+
+      <br>
+
+      <!-- AI EROA Calculator (MR template preserved; minimal, responsive mobile fixes) -->
+      <div id="mr-embed">
+        <div class="mr-wrap">
+          <!-- LEFT: Inputs + Buttons -->
+          <div class="mr-panel" id="mr-inputs">
+            <form id="mr-form" novalidate>
+              <div class="mr-grid">
+                <label class="mr-field">
+                  <span class="mr-label">LVOT Diameter</span>
+                  <input id="lvotDiameter" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <label class="mr-field">
+                  <span class="mr-label">LVOT VTI</span>
+                  <input id="lvotVti" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <label class="mr-field">
+                  <span class="mr-label">Mitral Annular Diameter</span>
+                  <input id="mitralDiameter" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <label class="mr-field">
+                  <span class="mr-label">MV VTI (PW annular)</span>
+                  <input id="mvVti" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <!-- Fifth input centered -->
+                <label class="mr-field mr-center-span">
+                  <span class="mr-label">Largest AI Jet VTI</span>
+                  <input id="aiJetVti" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <!-- Buttons row -->
+                <div class="mr-actions-row mr-center-span">
+                  <button type="button" id="mr-reset" class="mr-btn mr-btn-reset">Reset</button>
+                  <button type="button" id="mr-calc" class="mr-btn mr-btn-calc">Calculate</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- RIGHT: Outputs -->
+          <div class="mr-panel" id="mr-outputs">
+            <div class="mr-out-row">
+              <div class="mr-out-label">Regurgitant Volume</div>
+              <div class="mr-out-box">
+                <span id="rv">--</span> <span class="mr-unit">ml/beat</span>
+              </div>
+            </div>
+
+            <div class="mr-out-row">
+              <div class="mr-out-label">Regurgitant Fraction</div>
+              <div class="mr-out-box">
+                <span id="rf">--</span> <span class="mr-unit">%</span>
+              </div>
+            </div>
+
+            <div class="mr-out-row">
+              <div class="mr-out-label">EROA</div>
+              <div class="mr-out-box">
+                <span id="eroa">--</span> <span class="mr-unit">cm²</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        /* Base */
+        #mr-embed{
+          --mr-green:#00ff66; --mr-bg:#000; --mr-text:#fff;
+          --mr-in-empty:rgb(178,212,163); --mr-in-filled:rgb(105,148,98);
+          --mr-red:#ff3333; --mr-box-border:4px; --mr-item-border:2px;
+          --mr-radius:18px; --mr-radius-sm:14px; --field-w:220px;
+          --grid-gap-x:16px; --grid-gap-y:12px;
+          background:var(--mr-bg); color:var(--mr-text);
+          font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+          padding:5px 15px 0 15px;
+        }
+        #mr-embed :where(*){box-sizing:border-box}
+
+        .mr-wrap{display:flex;gap:24px;align-items:flex-start;justify-content:center;flex-wrap:wrap}
+        .mr-panel{border:var(--mr-box-border) solid var(--mr-green);border-radius:var(--mr-radius);background:var(--mr-bg);padding:20px 22px}
+
+        .mr-grid{display:grid;grid-template-columns:repeat(2,var(--field-w));gap:var(--grid-gap-y) var(--grid-gap-x);justify-content:center}
+        .mr-field{display:flex;flex-direction:column;gap:6px;width:var(--field-w)}
+        .mr-center-span{grid-column:1 / -1;justify-self:center}
+        .mr-label{font-size:.85rem;opacity:.95;text-align:center}
+
+        input[type="number"]{
+          width:100%;padding:8px 10px;background:var(--mr-in-empty);
+          border:var(--mr-item-border) solid var(--mr-green);border-radius:var(--mr-radius-sm);
+          text-align:center;color:#111;outline:none;appearance:textfield;-moz-appearance:textfield;overflow:hidden;
+          transition:background-color .25s,color .25s,box-shadow .25s,border-color .2s,font-size .1s ease;
+        }
+        input[type="number"].filled{background:var(--mr-in-filled);color:var(--mr-text)}
+        input[type="number"]:focus{box-shadow:0 0 0 3px rgba(0,255,102,.18)}
+        input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+        .mr-missing{animation:mrPulseRed 1.4s ease-in-out infinite;border-color:var(--mr-red)!important;box-shadow:0 0 0 5px rgba(255,51,51,.35)}
+        @keyframes mrPulseRed{0%,100%{box-shadow:0 0 0 5px rgba(255,51,51,.35)}50%{box-shadow:0 0 0 8px rgba(255,51,51,.15)}}
+
+        /* Buttons */
+        .mr-actions-row{display:grid;grid-template-columns:repeat(2,var(--field-w));gap:8px;justify-content:center;justify-items:stretch;margin-top:18px}
+        #mr-reset{justify-self:end}
+        #mr-calc{justify-self:start}
+        .mr-btn{
+          width:75%;padding:12px 40px;white-space:nowrap;border-radius:999px;border:none;
+          color:var(--mr-text);font-weight:600;letter-spacing:.2px;font-size:.95rem;
+          cursor:pointer;transition:transform .12s ease,background-color .2s ease;
+        }
+        .mr-btn:active{transform:translateY(1px)}
+
+        /* Reset hover = darker */
+        .mr-btn-reset{ background:rgb(163,192,212); color:#06131b; }
+        .mr-btn-reset:hover{ background:rgb(100,125,140); filter:none; }
+
+        /* Calc hover = moderately darker */
+        .mr-btn-calc{ background:rgb(40,133,199); box-shadow:none; }
+        .mr-btn-calc:hover{ background:rgb(25,95,145); filter:none; }
+
+        /* Outputs */
+        #mr-outputs{min-width:320px;max-width:420px}
+        .mr-out-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;margin-bottom:12px}
+        .mr-out-label{font-weight:600;font-size:.9rem;opacity:.95;text-align:right}
+        .mr-out-box{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:var(--mr-item-border) solid var(--mr-green);
+          border-radius:var(--mr-radius-sm);background:transparent;font-weight:800;font-size:.95rem;color:var(--mr-text);justify-self:start}
+        .mr-unit{color:var(--mr-text)}
+
+        /* Mobile */
+        @media (max-width:720px){
+          .mr-panel{width:94%;max-width:560px;margin:0 auto}
+          .mr-wrap{flex-direction:column;align-items:center;gap:16px}
+          .mr-grid{grid-template-columns:1fr;justify-items:center;gap:var(--grid-gap-y) 10px}
+          .mr-field{width:70%;max-width:240px}
+          .mr-center-span{grid-column:1;justify-self:center}
+          .mr-actions-row{grid-template-columns:1fr !important;justify-items:center;gap:10px;margin-top:16px}
+          #mr-reset,#mr-calc{justify-self:center}
+          .mr-btn{width:33%;min-width:120px;padding:12px 28px;font-size:clamp(.85rem,3.6vw,.95rem);line-height:1.15}
+          #mr-outputs{width:100%;max-width:600px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
+          .mr-out-row{grid-template-columns:1fr;justify-items:center;gap:8px;margin-bottom:14px}
+          .mr-out-label{text-align:center;font-size:.85rem}
+          .mr-out-box{width:40%;min-width:160px;justify-content:center;margin:0 auto;white-space:nowrap}
+        }
+        @media (max-width:380px){
+          .mr-panel{width:98%;max-width:none}
+          .mr-field{width:85%;max-width:200px}
+          .mr-btn{width:40%;min-width:110px;padding:12px 24px;font-size:clamp(.82rem,4.2vw,.92rem)}
+          .mr-out-box{width:48%;min-width:150px}
+        }
+        @media (max-width: 444px){
+          #mr-embed{ padding: 4px 8px 0 8px; }
+          #mr-embed .mr-wrap{ gap: 12px; }
+          #mr-embed .mr-panel{ width: 100%; max-width: none; margin: 0 auto; padding: 16px 14px; }
+          #mr-embed #mr-outputs{ min-width: 0; }
+        }
+        @media (max-width: 417px){
+          #mr-embed .mr-panel{ padding: 14px 12px; }
+          #mr-embed .mr-field{ max-width: 200px; }
+          #mr-embed .mr-btn{ min-width: 110px; }
+          #mr-embed .mr-out-box{ min-width: 140px; }
+        }
+
+        /* Equal output box widths on desktop only */
+        @media (min-width: 721px) {
+          #mr-outputs .mr-out-box { width: 140px; justify-content: center; }
+        }
+
+        /* ===== Reference chart block at bottom (kept for potential future AR chart) ===== */
+        .mr-ref{ margin-top: clamp(28px, 5.5vw, 72px); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .mr-ref-title{ font-size: clamp(.9rem, 2.2vw, 1.05rem); color: #c9c9c9; font-style: italic; text-align: center; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+      </style>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const $ = (id) => document.getElementById(id);
+
+          // Grab elements (guarded)
+          const fields = {
+            lvotDiameter: $('lvotDiameter'),
+            lvotVti: $('lvotVti'),
+            mitralDiameter: $('mitralDiameter'),
+            mvVti: $('mvVti'),
+            aiJetVti: $('aiJetVti'),
+          };
+          const btnCalc = $('mr-calc');
+          const btnReset = $('mr-reset');
+          const rvEl = $('rv'), rfEl = $('rf'), eroaEl = $('eroa');
+
+          // Helper: round to 1dp, but show integer if .0
+          function fmt1DecTrimZero(n) {
+            const r = Math.round(n * 10) / 10; // number rounded to 0.1
+            return Number.isInteger(r) ? String(r) : r.toFixed(1); // always return string
+          }
+
+          // Attach behaviors to existing inputs only
+          Object.values(fields).filter(Boolean).forEach((inp) => {
+            inp.addEventListener('input', () => {
+              if ((inp.value || '').trim() !== '') {
+                inp.classList.add('filled');
+                inp.classList.remove('mr-missing');
+              } else {
+                inp.classList.remove('filled');
+              }
+            });
+
+            // SAFE BLUR: keep string type; 1dp; drop ".0"
+            inp.addEventListener('blur', () => {
+              const raw = (inp.value || '').trim();
+              if (raw === '') return;
+              const v = Number(raw);
+              if (Number.isNaN(v)) return;
+              inp.value = fmt1DecTrimZero(v); // write back as STRING
+            });
+
+            // Enter triggers Calculate
+            inp.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                btnCalc && btnCalc.click();
+              }
+            });
+          });
+
+          function validate() {
+            let ok = true;
+            for (const [k, inp] of Object.entries(fields)) {
+              if (!inp) continue; // skip missing
+              const val = (inp.value || '').trim();
+              const zeroDiv = (k === 'aiJetVti' && Number(val) === 0); // avoid divide by 0 in EROA
+              if (!val || zeroDiv) {
+                inp.classList.add('mr-missing');
+                ok = false;
+              } else {
+                inp.classList.remove('mr-missing');
+              }
+            }
+            return ok;
+          }
+
+          function calculate() {
+            // parse safely (Number('') -> 0? we rely on validate() to avoid empties)
+            const lvotD = Number(fields.lvotDiameter?.value);
+            const lvotV = Number(fields.lvotVti?.value);
+            const mitralD = Number(fields.mitralDiameter?.value);
+            const mvV = Number(fields.mvVti?.value);
+            const aiJet = Number(fields.aiJetVti?.value);
+
+            // Flows (cm-based, 0.785 ~ pi/4)
+            const lvotFlow = 0.785 * lvotD * lvotD * lvotV;
+            const mvFlow   = 0.785 * mitralD * mitralD * mvV;
+
+            // === AI formulas (as provided) ===
+            // Regurgitant Volume = (LVOT flow) - (MV flow)
+            const regV = lvotFlow - mvFlow;
+            // Regurgitant Fraction = (RegV / LVOT flow) * 100
+            const regF = (regV / lvotFlow) * 100;
+            // EROA = RegV / AI jet VTI   (correcting typo: division, not subtraction)
+            const eroa = regV / aiJet;
+
+            if (rvEl)   rvEl.textContent   = Math.round(regV).toString();
+            if (rfEl)   rfEl.textContent   = Math.round(regF).toString();
+            if (eroaEl) eroaEl.textContent = (Math.round(eroa * 100) / 100).toFixed(2);
+          }
+
+          function resetAll() {
+            Object.values(fields).filter(Boolean).forEach((inp) => {
+              inp.value = '';
+              inp.classList.remove('filled', 'mr-missing');
+            });
+            if (rvEl)   rvEl.textContent = '--';
+            if (rfEl)   rfEl.textContent = '--';
+            if (eroaEl) eroaEl.textContent = '--';
+          }
+
+          // Button handlers (guarded)
+          if (btnCalc) {
+            btnCalc.addEventListener('click', (e) => {
+              e.preventDefault();
+              if (validate()) calculate();
+            });
+          }
+          if (btnReset) {
+            btnReset.addEventListener('click', (e) => {
+              e.preventDefault();
+              resetAll();
+            });
+          }
+        });
+      </script>
+<br><br>
+      <!-- ===== Reference charts (Native + Prosthetic Aortic Regurgitation) ===== -->
+<div class="mr-ref" aria-label="Aortic Regurgitation reference tables">
+  <div class="mr-ref-title">Native Aortic Valve — Regurgitation (Reference)</div>
+</div>
+
+<br>
+
+<!-- Single container to keep ID unique; includes both native and prosthetic tables -->
+<div id="dg-embed" aria-label="Aortic Regurgitation reference block">
+  
+  <!-- ========================== DG TABLE — Native Aortic Valve ========================== -->
+  <div aria-label="Native Aortic Valve — Aortic Regurgitation severity table">
+    <!-- Blue header band (4 columns) -->
+    <div class="dg-headerwrap">
+      <div class="dg-header" role="row">
+        <div class="dg-hcell" role="columnheader"><div class="dg-wrap"></div></div>
+        <div class="dg-hcell" role="columnheader"><div class="dg-wrap">MILD</div></div>
+        <div class="dg-hcell" role="columnheader"><div class="dg-wrap">MODERATE</div></div>
+        <div class="dg-hcell" role="columnheader"><div class="dg-wrap">SEVERE</div></div>
+      </div>
+    </div>
+
+    <!-- Green table (4 columns) -->
+    <div class="dg-tablewrap">
+      <table class="dg-table" role="table" aria-label="Aortic regurgitation severity criteria (native)">
+        <colgroup>
+          <col class="dg-col1-col">
+          <col class="dg-col2-col">
+          <col class="dg-col3-col">
+          <col class="dg-col4-col">
+        </colgroup>
+        <tbody>
+          <tr>
+            <th scope="row" class="dg-col1"><div class="dg-wrap">Regurgitant Volume</div></th>
+            <td class="dg-c2"><div class="dg-wrap">&lt; 30&nbsp;<span class="dg-nb">ml/beat</span></div></td>
+            <td class="dg-c3"><div class="dg-wrap">30 – 59&nbsp;<span class="dg-nb">ml/beat</span></div></td>
+            <td class="dg-c4"><div class="dg-wrap">&ge; 60&nbsp;<span class="dg-nb">ml/beat</span></div></td>
+          </tr>
+          <tr>
+            <th scope="row" class="dg-col1"><div class="dg-wrap">Regurgitant Fraction</div></th>
+            <td class="dg-c2"><div class="dg-wrap">&lt; 30%</div></td>
+            <td class="dg-c3"><div class="dg-wrap">30 – 49%</div></td>
+            <td class="dg-c4"><div class="dg-wrap">&ge; 50%</div></td>
+          </tr>
+          <tr>
+            <th scope="row" class="dg-col1"><div class="dg-wrap">EROA</div></th>
+            <td class="dg-c2"><div class="dg-wrap dg-free">&lt; 0.10&nbsp;cm<sup>2</sup></div></td>
+            <td class="dg-c3"><div class="dg-wrap dg-free">0.10 – 0.29&nbsp;cm<sup>2</sup></div></td>
+            <td class="dg-c4"><div class="dg-wrap dg-free">&ge; 0.30&nbsp;cm<sup>2</sup></div></td>
+          </tr>
+          <tr>
+            <th scope="row" class="dg-col1"><div class="dg-wrap">Jet Deceleration Rate (PHT)</div></th>
+            <td class="dg-c2"><div class="dg-wrap">&gt; 500&nbsp;msec</div></td>
+            <td class="dg-c3"><div class="dg-wrap">200 – 500&nbsp;msec</div></td>
+            <td class="dg-c4"><div class="dg-wrap">&lt; 200&nbsp;msec</div></td>
+          </tr>
+          <tr>
+            <th scope="row" class="dg-col1"><div class="dg-wrap">Diastolic Flow Reversal (DAO)</div></th>
+            <td class="dg-c2"><div class="dg-wrap">Brief early-diastolic reversal</div></td>
+            <td class="dg-c3"><div class="dg-wrap">Inter&shy;mediate</div></td>
+            <td class="dg-c4"><div class="dg-wrap">Holo&shy;diastolic reversal</div></td>
+          </tr>
+          <tr>
+            <th scope="row" class="dg-col1"><div class="dg-wrap">Vena Contracta Width</div></th>
+            <td class="dg-c2"><div class="dg-wrap">&lt; 0.3&nbsp;cm</div></td>
+            <td class="dg-c3"><div class="dg-wrap">0.3 – 0.6&nbsp;cm</div></td>
+            <td class="dg-c4"><div class="dg-wrap">&gt; 0.60&nbsp;cm</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- ======================== END Native AR table ======================== -->
+
+  <div style="height: 20px"></div>
+
+  <!-- Section title for prosthetic table -->
+  <div class="mr-ref" aria-label="Aortic Prosthesis — Regurgitation reference">
+    <div class="mr-ref-title">Prosthetic Aortic Valve — Regurgitation (Reference)</div>
+  </div>
+
+  <br>
+
+  <!-- ========================== DG TABLE — Aortic Prosthesis ========================== -->
+  <div aria-label="Aortic Prosthesis — Regurgitation severity table">
+    <!-- Blue header band (4 columns) -->
+    <div class="dg-headerwrap">
+      <div class="dg-header" role="row">
+        <div class="dg-hcell" role="columnheader"><div class="dg-wrap"></div></div>
+        <div class="dg-hcell" role="columnheader"><div class="dg-wrap">MILD</div></div>
+        <div class="dg-hcell" role="columnheader"><div class="dg-wrap">MODERATE</div></div>
+        <div class="dg-hcell" role="columnheader"><div class="dg-wrap">SEVERE</div></div>
+      </div>
+    </div>
+
+    <!-- Green table (4 columns) -->
+    <div class="dg-tablewrap">
+      <table class="dg-table" role="table" aria-label="Prosthetic aortic regurgitation severity criteria">
+        <colgroup>
+          <col class="dg-col1-col">
+          <col class="dg-col2-col">
+          <col class="dg-col3-col">
+          <col class="dg-col4-col">
+        </colgroup>
+        <tbody>
+          <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Regurgitant Volume</div></th>
+                <td class="dg-c2"><div class="dg-wrap">&lt; 30&nbsp;<span class="dg-nb">ml/beat</span></div></td>
+                <td class="dg-c3"><div class="dg-wrap">30 – 59&nbsp;<span class="dg-nb">ml/beat</span></div></td>
+                <td class="dg-c4"><div class="dg-wrap">&ge; 60&nbsp;<span class="dg-nb">ml/beat</span></div></td>
+              </tr>
+
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Regurgitant Fraction</div></th>
+                <td class="dg-c2"><div class="dg-wrap">&lt; 30%</div></td>
+                <td class="dg-c3"><div class="dg-wrap">30 – 49%</div></td>
+                <td class="dg-c4"><div class="dg-wrap">&ge; 50%</div></td>
+              </tr>
+
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">EROA</div></th>
+                <td class="dg-c2"><div class="dg-wrap">&lt; 0.10 cm&#178;</div></td>
+                <td class="dg-c3"><div class="dg-wrap">0.10 – 0.29 cm&#178;</div></td>
+                <td class="dg-c4"><div class="dg-wrap">&ge; 0.30 cm&#178;</div></td>
+              </tr>
+              
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Jet Width / LVOT Width</div></th>
+                <td class="dg-c2"><div class="dg-wrap">&le; 25%</div></td>
+                <td class="dg-c3"><div class="dg-wrap">26 – 64%</div></td>
+                <td class="dg-c4"><div class="dg-wrap">&ge; 65%</div></td>
+              </tr>
+
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Jet Deceleration Rate (PHT)</div></th>
+                <td class="dg-c2"><div class="dg-wrap">&gt; 500&nbsp;<span class="dg-nb">msec</span></div></td>
+                <td class="dg-c3"><div class="dg-wrap">200 – 500&nbsp;<span class="dg-nb">msec</span></div></td>
+                <td class="dg-c4"><div class="dg-wrap">&lt; 200&nbsp;<span class="dg-nb">msec</span></div></td>
+              </tr>
+
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Diastolic Flow Reversal (DAO)</div></th>
+                <td class="dg-c2"><div class="dg-wrap">Absent or Brief</div></td>
+                <td class="dg-c3"><div class="dg-wrap">Inter&shy;mediate</div></td>
+                <td class="dg-c4"><div class="dg-wrap">Holo&shy;diastolic</div></td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- ======================== END Prosthetic AR table ======================== -->
+</div>
+<!-- ===== End reference charts ===== -->
+
+      <br><br>
+    </div>
+  </div>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav">
+      <!-- <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li> -->
+      <!-- <li><a href="terms-of-use.html" target="_blank">Terms of Use</a></li> -->
+    </ul>
+  </footer>
+
+  <!-- Page-scoped safety for DG units + soft hyphens (kept for parity) -->
+  <style>
+    #dg-embed .dg-nb{ white-space:nowrap; display:inline; vertical-align:baseline; }
+    #dg-embed .dg-free{ display:block !important; -webkit-line-clamp: unset !important; -webkit-box-orient: initial !important; overflow:visible !important; }
+    #dg-embed .dg-table th .dg-wrap,
+    #dg-embed .dg-table td .dg-wrap{ -webkit-hyphens: manual !important; hyphens: manual !important; word-break: normal !important; overflow-wrap: normal !important; scrollbar-width:none; -ms-overflow-style:none; }
+    #dg-embed .dg-table th .dg-wrap::-webkit-scrollbar,
+    #dg-embed .dg-table td .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+  </style>
+
+</body>
+</html>

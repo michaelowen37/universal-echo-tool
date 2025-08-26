@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<!--   ****************************************************************************
+  The Title You Pick Here Shows When You Hover Over Browser Thumbnail
+  **************************************************************************** -->
+  <title>Diastology</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+
+  <!-- Browser tab thumbnail image -->
+  <link rel="icon" type="image/png" href="BSW_Thumbnail.png"/>
+</head>
+
+<body>
+ 
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+      <!-- <li class="push"><a class="top-nav" href="about.html">About Us</a></li> -->
+      <li class="push"><a class="top-nav" href="special_population_diastology.html">Back</a></li>
+    </ul>
+
+    <!-- ****************************************************************************
+      This is the main title on the top of page (AFib-style placement)
+    **************************************************************************** -->
+    <div class="container zone body">Diastology:</div> 
+    <div class="container" style="padding: 0px"><em>Tachycardia</em></div> 
+  </nav>
+
+  <div class="zone navigation">
+    <div class="final" style="padding: 0px 10% 0px 10%;">
+
+      <br>
+
+      <!-- ========================== RESPONSIVE FIXED TABLE (1 column) ========================== -->
+      <div id="dg-embed">
+        <!-- HOW-TO (single column):
+             - Add class "dg-singlecol" to the .dg-header to enable a subtle blue fill on the top row.
+             - Green rows have NO shading in single-column charts (see CSS override below). -->
+
+        <!-- Blue header band (1 column, with subtle blue fill) -->
+        <div class="dg-headerwrap">
+          <div class="dg-header dg-singlecol" role="row">
+            <div class="dg-hcell" role="columnheader">
+              Multiple Positives Indicate Elevated Filling Pressures:
+            </div>
+          </div>
+        </div>
+
+        <!-- Green table (1 column; light/normal-weight text) -->
+        <div class="dg-tablewrap">
+          <table class="dg-table" role="table" aria-label="Tachycardia — Diastology (single column)">
+            <colgroup>
+              <col class="dg-col1-col">
+            </colgroup>
+            <tbody>
+              <tr>
+                <td class="dg-c1">MV Inflow Pattern shows Predominant Early-filling (only valid with depressed LVEF)</td>
+              </tr>
+              <tr>
+                <td class="dg-c1">IVRT &le; 70 msec</td>
+              </tr>
+              <tr>
+                <td class="dg-c1">Average E/e' &gt; 14</td>
+              </tr>
+              <tr>
+                <td class="dg-c1">Pulmonary Venous Systolic Filling Fraction &le; 40%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <style>
+        /* -------- page-scoped styles only (style3.css untouched) -------- */
+
+        /* Theme variables / base typography for the chart */
+        #dg-embed{
+          --dg-accent:#00ff66;             /* green borders/lines */
+          --dg-head:rgb(40,133,199);       /* header blue */
+          --dg-bg:#000; --dg-text:#fff;
+          --dg-outer:4px; --dg-line:2px; --dg-hsep:2px; --dg-hrim:4px;
+          color:var(--dg-text); background:var(--dg-bg);
+          font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        }
+        #dg-embed *{ box-sizing:border-box; }
+
+        /* BLUE HEADER (1 column) */
+        .dg-headerwrap{
+          border:var(--dg-hrim) solid var(--dg-head);
+          border-radius:18px;
+          overflow:hidden;
+          background:var(--dg-bg);
+          margin-bottom:8px;
+        }
+        .dg-header{
+          display:grid;
+          grid-template-columns:repeat(1, minmax(0, 1fr)); /* one column */
+          width:100%;
+        }
+        .dg-hcell{
+          display:flex; align-items:center; justify-content:center;
+          padding:20px 12px;
+          min-height:110px;
+          text-align:center;
+          font-weight:600;
+          line-height:1.14;
+          font-size: clamp(.80rem, 2.6vw, 1.08rem);
+
+          /* prevent inner scrollbars & odd wrapping */
+          white-space: normal;
+          word-break: normal;
+          overflow-wrap: normal;
+          hyphens: none;
+          overflow: hidden;
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+
+          border-right:var(--dg-hsep) solid var(--dg-head);
+        }
+        .dg-hcell:last-child{ border-right:none; }
+        .dg-hcell::-webkit-scrollbar{ display:none; }
+
+        /* Single-column header fill (applies when .dg-header has .dg-singlecol) */
+        .dg-header.dg-singlecol .dg-hcell{
+          background: rgba(40, 133, 199, 0.18); /* subtle blue shading for the top row */
+        }
+
+        /* GREEN TABLE (1 column) */
+        .dg-tablewrap{
+          border:var(--dg-outer) solid var(--dg-accent);
+          border-radius:18px;
+          overflow:hidden;
+          background:var(--dg-bg);
+        }
+        .dg-table{
+          width:100%;
+          border-collapse:collapse;        /* solid grid lines */
+          table-layout:fixed;              /* stable columns */
+          text-align:center;
+        }
+        /* Light/normal-weight body text for green rows (no shading) */
+        .dg-table td{
+          border:var(--dg-line) solid var(--dg-accent);
+          padding:22px 10px;
+          line-height:1.2;
+          background:transparent !important;  /* no shading in green section (single column) */
+          text-align:center;
+
+          font-weight: 400;  /* lighter (normal) */
+          font-size: clamp(.84rem, 2.1vw, .96rem);
+
+          white-space: normal;
+          word-break: normal;
+          overflow-wrap: normal;
+          hyphens: none;
+          overflow: hidden;
+          text-overflow: clip;
+        }
+
+        /* Single column = full width */
+        .dg-table col{ width:100%; }
+      </style>
+      <!-- ======================== END RESPONSIVE FIXED TABLE ======================== -->
+
+      <br><br>
+
+    </div>
+  </div>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav">
+      <!-- <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li> -->
+      <!-- <li><a href="terms-of-use.html" target="_blank">Terms of Use</a></li> -->
+    </ul>
+  </footer>
+   
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Diastology</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+  <link rel="icon" type="image/png" href="BSW_Thumbnail.png"/>
+</head>
+
+<body>
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+      <li class="push"><a class="top-nav" href="lwh_echo.html">Back</a></li>
+    </ul>
+
+    <!-- Title only (no subtitle on this page) -->
+    <div class="title-stack">
+      <div class="container zone body dg-title">Diastology:</div>
+    </div>
+
+    <br>
+
+    <!-- Navbar chips -->
+    <div class="navbar">
+      <a class="nospace" href="#"></a>
+      <a class="active border" href="normal_diastology.html">Normal</a>
+      <a class="border" href="special_population_diastology.html">Special Populations</a>
+      <a class="nospace" href="#"></a>
+    </div>
+  </nav>
+
+  <div class="zone navigation grid-wrapper2">
+    <div class="box zone grow"><a href="diastology_normal_lvef.html" class="words">Normal LVEF</a></div>
+    <div class="box zone grow"><a href="normal_diastology_reduced_lvef.html" class="words">Reduced LVEF</a></div>
+  </div>
+
+  <style>
+    /* -------- page-scoped styles only (style3.css untouched) -------- */
+
+    /* NAV container & title stack safety */
+    .zone.nav-bar{ overflow: visible !important; height: auto !important; }
+
+    .title-stack{
+      display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+      gap:0; margin:0; padding:0; max-width:100%; overflow:visible !important;
+    }
+    .dg-title, .title-stack .container, .title-stack .zone{
+      display:block !important; position:static !important; float:none !important; clear:both !important;
+      margin:0 !important; padding:0 !important; height:auto !important; max-height:none !important; min-height:0 !important;
+      overflow:visible !important; white-space:normal; word-break:normal; overflow-wrap:normal; text-align:center;
+      line-height:1.08;
+    }
+    @media (min-width:700px){
+      .dg-title{ line-height:1.04 !important; }
+    }
+
+    /* ======================= CHIPS: centered, touching, responsive ======================= */
+    .navbar{
+      display:flex; justify-content:center; align-items:stretch; gap:0 !important;
+      height:auto !important; min-height:40px; padding:0; margin:0 auto; width:100%;
+      overflow:visible !important;
+    }
+    .navbar a.nospace{ display:none !important; }  /* hide spacers so chips can touch */
+
+    .navbar a.border,
+    .navbar a.active.border{
+      position: static !important;
+      float: none !important;
+      display: inline-flex !important;
+      box-sizing: border-box !important;
+
+      /* default sizing (tablet/desktop): one-line, size to content */
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      white-space: nowrap !important;
+
+      height: auto !important;
+      margin: 0 !important;
+      overflow: visible !important;
+      word-break: normal !important;
+      text-overflow: clip !important;
+      align-items: center !important;
+      justify-content: center !important;
+
+      /* Visuals */
+      border: 2px solid green !important;
+      border-radius: 0 !important;                /* sharp corners */
+      background: transparent !important;
+      color: #fff !important;
+
+      /* Readability */
+      font-size: clamp(.66rem, 2.4vw, 1rem) !important;
+      line-height: 1.05 !important;
+      padding: clamp(6px, 1.1vw, 12px) clamp(12px, 2.2vw, 20px) !important;
+
+      /* Keep them from stretching weirdly; seam handled below */
+      flex: 0 0 auto !important;
+      text-align:center !important;
+    }
+    .navbar a.active.border{ background-color:#4CAF50 !important; border-color:green !important; }
+
+    /* Touching seam (shared border) */
+    .navbar a.border + .navbar a.border{ margin-left:-2px !important; }
+
+    /* ▼ Narrower below 700px (meet-in-the-middle), allow wrapping for long label */
+    @media (max-width:700px){
+      .navbar a.border,
+      .navbar a.active.border{
+        white-space: normal !important;           /* allow two lines for “Special Populations” */
+        overflow-wrap: anywhere !important;
+        line-height: 1.12 !important;
+
+        /* narrower base width for two-chip layout */
+        flex-basis: clamp(150px, 30vw, 230px) !important;
+
+        /* Slightly tighter padding so two chips stay tidy */
+        padding: 6px 10px !important;
+      }
+    }
+
+    /* ▼ Further shorten under 500px so borders don't look too long */
+    @media (max-width:500px){
+      .navbar a.border,
+      .navbar a.active.border{
+        flex-basis: clamp(120px, 26vw, 180px) !important;  /* shorter width */
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+      }
+    }
+
+    /* Extra-small phones: slightly smaller text/padding */
+    @media (max-width:420px){
+      .navbar a.border,
+      .navbar a.active.border{
+        font-size: clamp(.58rem, 2vw, .88rem) !important;
+        padding: 5px 8px !important; /* keep narrow look consistent */
+      }
+    }
+    @media (max-width:340px){
+      .navbar a.border,
+      .navbar a.active.border{
+        font-size: clamp(.54rem, 2vw, .84rem) !important;
+        padding: 4px 8px !important;
+      }
+    }
+
+    /* Mid-band widening: 700–999 px (roomier chips) */
+    @media (min-width:700px) and (max-width:999px){
+      .navbar a.border,
+      .navbar a.active.border{
+        flex-basis: clamp(220px, 30vw, 320px) !important;
+        padding-left: clamp(16px, 1.8vw, 28px) !important;
+        padding-right: clamp(16px, 1.8vw, 28px) !important;
+        font-size: clamp(.85rem, 1.2vw, 1.02rem) !important;
+      }
+    }
+
+    /* Desktop widening: ≥1000px */
+    @media (min-width:1000px){
+      .navbar a.border,
+      .navbar a.active.border{
+        flex-basis: clamp(320px, 22vw, 420px) !important;
+        padding-left: clamp(22px, 1.4vw, 34px) !important;
+        padding-right: clamp(22px, 1.4vw, 34px) !important;
+        font-size: clamp(.9rem, 1.05vw, 1.08rem) !important;
+      }
+    }
+  </style>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav">
+      <!-- <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li> -->
+      <!-- <li><a href="terms-of-use.html" target="_blank">Terms of Use</a></li> -->
+    </ul>
+  </footer>
+
+</body>
+</html>

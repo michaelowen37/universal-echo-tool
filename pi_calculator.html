@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--   ****************************************************************************
+    The Title You Pick Here Shows When You Hover Over Browser Thumbnail
+  **************************************************************************** -->
+  <title>PI Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+
+  <!-- Browser tab thumbnail image -->
+  <link rel="icon" type="image/png" href="BSW_Thumbnail.png"/>
+</head>
+
+<body>
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+      <!-- <li class="push"><a class="top-nav" href="about.html">About Us</a></li> -->
+      <li class="push"><a class="top-nav" href="calculations.html">Back</a></li>
+    </ul>
+  </nav>
+
+  <!-- ****************************************************************************
+    This is the main title on the top of page
+  **************************************************************************** -->
+  <div class="container zone body">PI Calculator:</div>
+  <!-- <div class="container" style="padding: 0px"><em>Regurgitant Fraction</em></div>  -->
+
+  <div class="zone navigation">
+    <div class="final" style="padding: 0px 10% 0px 10%;">
+
+      <br>
+
+      <!-- PI Calculator (MR style, single output: Regurgitant Fraction) -->
+      <div id="pi-embed">
+        <div class="mr-wrap">
+          <!-- LEFT: Inputs + Buttons -->
+          <div class="mr-panel" id="pi-inputs">
+            <form id="pi-form" novalidate>
+              <div class="mr-grid">
+                <label class="mr-field">
+                  <span class="mr-label">RVOT Diameter <span style="opacity:.85">(prox to valve)</span></span>
+                  <input id="rvotDiameter" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <label class="mr-field">
+                  <span class="mr-label">RVOT VTI <span style="opacity:.85">(prox to valve)</span></span>
+                  <input id="rvotVti" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <label class="mr-field">
+                  <span class="mr-label">PV Annular Diam</span>
+                  <input id="pvAnnDiameter" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <label class="mr-field">
+                  <span class="mr-label">PV VTI <span style="opacity:.85">(PW at valve, not prox)</span></span>
+                  <input id="pvVti" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <!-- Fifth-row spacer (keeps same rhythm as other calcs) -->
+                <div class="mr-center-span" aria-hidden="true"></div>
+
+                <!-- Buttons row -->
+                <div class="mr-actions-row mr-center-span">
+                  <button type="button" id="pi-reset" class="mr-btn mr-btn-reset">Reset</button>
+                  <button type="button" id="pi-calc" class="mr-btn mr-btn-calc">Calculate</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- RIGHT: Outputs (only Regurgitant Fraction) -->
+          <div class="mr-panel" id="pi-outputs">
+            <div class="mr-out-row">
+              <div class="mr-out-label">Regurgitant Fraction</div>
+              <div class="mr-out-box">
+                <span id="piRf">--</span> <span class="mr-unit">%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        /* Base (mirrors MR Calculator styling) */
+        #pi-embed{
+          --mr-green:#00ff66; --mr-bg:#000; --mr-text:#fff;
+          --mr-in-empty:rgb(178,212,163); --mr-in-filled:rgb(105,148,98);
+          --mr-red:#ff3333; --mr-box-border:4px; --mr-item-border:2px;
+          --mr-radius:18px; --mr-radius-sm:14px; --field-w:220px;
+          --grid-gap-x:16px; --grid-gap-y:12px;
+          background:var(--mr-bg); color:var(--mr-text);
+          font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+          padding:5px 15px 0 15px;
+        }
+        #pi-embed :where(*){box-sizing:border-box}
+
+        .mr-wrap{display:flex;gap:24px;align-items:flex-start;justify-content:center;flex-wrap:wrap}
+        .mr-panel{border:var(--mr-box-border) solid var(--mr-green);border-radius:var(--mr-radius);background:var(--mr-bg);padding:20px 22px}
+
+        .mr-grid{display:grid;grid-template-columns:repeat(2,var(--field-w));gap:var(--grid-gap-y) var(--grid-gap-x);justify-content:center}
+        .mr-field{display:flex;flex-direction:column;gap:6px;width:var(--field-w)}
+        .mr-center-span{grid-column:1 / -1;justify-self:center}
+        .mr-label{font-size:.85rem;opacity:.95;text-align:center}
+
+        input[type="number"]{
+          width:100%;padding:8px 10px;background:var(--mr-in-empty);
+          border:var(--mr-item-border) solid var(--mr-green);border-radius:var(--mr-radius-sm);
+          text-align:center;color:#111;outline:none;appearance:textfield;-moz-appearance:textfield;overflow:hidden;
+          transition:background-color .25s,color .25s,box-shadow .25s,border-color .2s,font-size .1s ease;
+        }
+        input[type="number"].filled{background:var(--mr-in-filled);color:var(--mr-text)}
+        input[type="number"]:focus{box-shadow:0 0 0 3px rgba(0,255,102,.18)}
+        input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+        .mr-missing{animation:mrPulseRed 1.4s ease-in-out infinite;border-color:var(--mr-red)!important;box-shadow:0 0 0 5px rgba(255,51,51,.35)}
+        @keyframes mrPulseRed{0%,100%{box-shadow:0 0 0 5px rgba(255,51,51,.35)}50%{box-shadow:0 0 0 8px rgba(255,51,51,.15)}}
+
+        /* Buttons row — align under inputs, keep narrower width, no shifting */
+        .mr-actions-row{
+          display:grid;
+          grid-template-columns:repeat(2,var(--field-w)); /* same columns as inputs */
+          gap:12px;
+          justify-content:center;   /* center the two columns as a group */
+          justify-items:center;     /* center buttons inside their columns */
+          align-items:center;
+          margin-top:18px;
+        }
+        /* Center both buttons (remove edge hugging) */
+        #pi-reset, #pi-calc{ justify-self:center; }
+
+        .mr-btn{
+          width:66%;                /* narrower than inputs */
+          min-width:140px;          /* sensible floor */
+          padding:12px 24px;        /* narrower padding helps the look */
+          white-space:nowrap;border-radius:999px;border:none;
+          color:var(--mr-text);font-weight:600;letter-spacing:.2px;font-size:.95rem;
+          cursor:pointer;transition:filter .12s ease,background-color .2s ease;
+        }
+        /* Keep focus visual without layout nudge */
+        .mr-btn:focus{ outline: none; }
+        .mr-btn:focus-visible{ outline:2px solid rgba(255,255,255,.28); outline-offset:2px; }
+        /* Remove vertical translate that could appear like a sideways jump on some setups */
+        .mr-btn:active{ filter:brightness(.96); }
+
+        /* Reset hover = darker */
+        .mr-btn-reset{ background:rgb(163,192,212); color:#06131b; }
+        .mr-btn-reset:hover{ background:rgb(100,125,140); filter:none; }
+
+        /* Calc hover = moderately darker */
+        .mr-btn-calc{ background:rgb(40,133,199); box-shadow:none; }
+        .mr-btn-calc:hover{ background:rgb(25,95,145); filter:none; }
+
+        /* Outputs */
+        #pi-outputs{min-width:320px;max-width:420px}
+        .mr-out-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;margin-bottom:12px}
+        .mr-out-label{font-weight:600;font-size:.9rem;opacity:.95;text-align:right}
+        .mr-out-box{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:var(--mr-item-border) solid var(--mr-green);
+          border-radius:var(--mr-radius-sm);background:transparent;font-weight:800;font-size:.95rem;color:var(--mr-text);justify-self:start}
+        .mr-unit{color:var(--mr-text)}
+
+        /* Mobile */
+        @media (max-width:720px){
+          .mr-panel{width:94%;max-width:560px;margin:0 auto}
+          .mr-wrap{flex-direction:column;align-items:center;gap:16px}
+          .mr-grid{grid-template-columns:1fr;justify-items:center;gap:var(--grid-gap-y) 10px}
+          .mr-field{width:70%;max-width:240px}
+          .mr-center-span{grid-column:1;justify-self:center}
+          .mr-actions-row{grid-template-columns:1fr !important;justify-items:center;gap:10px;margin-top:16px}
+          #pi-reset,#pi-calc{justify-self:center}
+          .mr-btn{width:33%;min-width:120px;padding:12px 28px;font-size:clamp(.85rem,3.6vw,.95rem);line-height:1.15}
+          #pi-outputs{width:100%;max-width:600px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
+          .mr-out-row{grid-template-columns:1fr;justify-items:center;gap:8px;margin-bottom:14px}
+          .mr-out-label{text-align:center;font-size:.85rem}
+          .mr-out-box{width:40%;min-width:160px;justify-content:center;margin:0 auto;white-space:nowrap}
+        }
+        @media (max-width:380px){
+          .mr-panel{width:98%;max-width:none}
+          .mr-field{width:85%;max-width:200px}
+          .mr-btn{width:40%;min-width:110px;padding:12px 24px;font-size:clamp(.82rem,4.2vw,.92rem)}
+          .mr-out-box{width:48%;min-width:150px}
+        }
+        @media (max-width: 444px){
+          #pi-embed{ padding: 4px 8px 0 8px; }
+          #pi-embed .mr-wrap{ gap: 12px; }
+          #pi-embed .mr-panel{ width: 100%; max-width: none; margin: 0 auto; padding: 16px 14px; }
+          #pi-embed #pi-outputs{ min-width: 0; }
+        }
+        @media (max-width: 417px){
+          #pi-embed .mr-panel{ padding: 14px 12px; }
+          #pi-embed .mr-field{ max-width: 200px; }
+          #pi-embed .mr-btn{ min-width: 110px; }
+          #pi-embed .mr-out-box{ min-width: 140px; }
+        }
+
+        /* Equal output box widths on desktop only */
+        @media (min-width: 721px) {
+          #pi-outputs .mr-out-box { width: 140px; justify-content: center; }
+        }
+
+        /* Notes block — keep your <br> spacing, just shrink-wrap the border */
+        .calc-notes{
+          display: block;
+          width: fit-content;          /* shrink to content so border hugs text */
+          max-width: 100%;
+          margin: 14px auto 8px auto;  /* centered */
+          font-size: .9rem;
+          color: #c9c9c9;              /* matches border via currentColor */
+          line-height: 1.35;
+          text-align: center;
+          border: 2px solid currentColor;
+          border-radius: 12px;
+          padding: 8px 10px;           /* tighter left/right padding */
+        }
+
+        /* ===== Reference chart block title ===== */
+        .mr-ref{ margin-top: clamp(22px, 4.8vw, 56px); display:flex; flex-direction:column; align-items:center; gap:8px; }
+        .mr-ref-title{ font-size: clamp(.9rem, 2.2vw, 1.05rem); color: #c9c9c9; font-style: italic; text-align:center; text-shadow:0 1px 2px rgba(0,0,0,.6); }
+      </style>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const $ = (id) => document.getElementById(id);
+
+          // Elements (updated to PV forward flow)
+          const fields = {
+            rvotDiameter: $('rvotDiameter'),
+            rvotVti: $('rvotVti'),
+            pvAnnDiameter: $('pvAnnDiameter'),
+            pvVti: $('pvVti'),
+          };
+          const btnCalc = $('pi-calc');
+          const btnReset = $('pi-reset');
+          const rfEl = $('piRf');
+
+          // Helper: round to 1dp, but show integer if .0
+          function fmt1DecTrimZero(n) {
+            const r = Math.round(n * 10) / 10;
+            return Number.isInteger(r) ? String(r) : r.toFixed(1);
+          }
+
+          // Input behaviors
+          Object.values(fields).filter(Boolean).forEach((inp) => {
+            inp.addEventListener('input', () => {
+              if ((inp.value || '').trim() !== '') {
+                inp.classList.add('filled');
+                inp.classList.remove('mr-missing');
+              } else {
+                inp.classList.remove('filled');
+              }
+            });
+            inp.addEventListener('blur', () => {
+              const raw = (inp.value || '').trim();
+              if (raw === '') return;
+              const v = Number(raw);
+              if (Number.isNaN(v)) return;
+              inp.value = fmt1DecTrimZero(v);
+            });
+            inp.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter') { e.preventDefault(); btnCalc && btnCalc.click(); }
+            });
+          });
+
+          function validate() {
+            let ok = true;
+            for (const [, inp] of Object.entries(fields)) {
+              if (!inp) continue;
+              const val = (inp.value || '').trim();
+              if (!val) { inp.classList.add('mr-missing'); ok = false; }
+              else { inp.classList.remove('mr-missing'); }
+            }
+            // Prevent divide-by-zero for RVOT flow (denominator)
+            const rvotD = Number(fields.rvotDiameter?.value || 0);
+            const rvotV = Number(fields.rvotVti?.value || 0);
+            const rvotFlow = 0.785 * rvotD * rvotD * rvotV;
+            if (!(rvotFlow > 0)) {
+              ok = false;
+              fields.rvotVti?.classList.add('mr-missing');
+              fields.rvotDiameter?.classList.add('mr-missing');
+            }
+            return ok;
+          }
+
+          function calculate() {
+            const rvotD = Number(fields.rvotDiameter?.value);
+            const rvotV = Number(fields.rvotVti?.value);
+            const pvAnnD = Number(fields.pvAnnDiameter?.value);
+            const pvV = Number(fields.pvVti?.value);
+
+            const rvotFlow = 0.785 * rvotD * rvotD * rvotV; // forward stroke volume (proximal to valve; includes RVOT regurg)
+            const pvFlow   = 0.785 * pvAnnD * pvAnnD * pvV;  // forward stroke volume at PV annulus (true forward flow)
+            const regF = ((rvotFlow - pvFlow) / rvotFlow) * 100; // Regurgitant Fraction (%)
+
+            if (rfEl) rfEl.textContent = Math.round(regF).toString();
+          }
+
+          function resetAll() {
+            Object.values(fields).filter(Boolean).forEach((inp) => {
+              inp.value = '';
+              inp.classList.remove('filled', 'mr-missing');
+            });
+            if (rfEl) rfEl.textContent = '--';
+          }
+
+          if (btnCalc) {
+            btnCalc.addEventListener('click', (e) => {
+              e.preventDefault();
+              if (validate()) calculate();
+            });
+          }
+          if (btnReset) {
+            btnReset.addEventListener('click', (e) => {
+              e.preventDefault();
+              resetAll();
+            });
+          }
+        });
+      </script>
+
+<br>
+      <!-- ===== Notes (appear above reference chart) ===== -->
+      <div class="calc-notes">
+        <br>
+        <div><strong><em>Important Notes:</em></strong></div><br>
+        <div>RVOT Diameter can be larger than PV Diameter</div><br>
+        <div>RVOT VTI &gt; PV VTI due to regurgitative volume inclusion (prox to valve).</div>
+        <br><br>
+      </div>
+
+<br><br>
+      <!-- ===== Reference chart (Native Pulmonic Regurgitation only) ===== -->
+      <div class="mr-ref" aria-label="Pulmonic Regurgitation reference table">
+        <div class="mr-ref-title">Native Pulmonic Valve — Regurgitation (Reference)</div>
+      </div>
+
+      <br>
+
+      <div id="dg-embed" class="dg-flexrows" aria-label="Native Pulmonic Valve — Pulmonic Regurgitation severity table">
+        <!-- Blue header band (4 columns) -->
+        <div class="dg-headerwrap">
+          <div class="dg-header" role="row">
+            <div class="dg-hcell" role="columnheader"><div class="dg-wrap"></div></div>
+            <div class="dg-hcell" role="columnheader"><div class="dg-wrap">MILD</div></div>
+            <div class="dg-hcell" role="columnheader"><div class="dg-wrap">MODERATE</div></div>
+            <div class="dg-hcell" role="columnheader"><div class="dg-wrap">SEVERE</div></div>
+          </div>
+        </div>
+        <!-- Green table (4 columns) -->
+        <div class="dg-tablewrap">
+          <table class="dg-table" role="table" aria-label="Pulmonic regurgitation severity criteria">
+            <colgroup>
+              <col class="dg-col1-col">
+              <col class="dg-col2-col">
+              <col class="dg-col3-col">
+              <col class="dg-col4-col">
+            </colgroup>
+            <tbody>
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Regurgitant Fraction</div></th>
+                <td class="dg-c2"><div class="dg-wrap">&lt; 20%</div></td>
+                <td class="dg-c3"><div class="dg-wrap">20 – 40%</div></td>
+                <td class="dg-c4"><div class="dg-wrap">&gt; 40%</div></td>
+              </tr>
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">RV Size</div></th>
+                <td class="dg-c2"><div class="dg-wrap">Normal</div></td>
+                <td class="dg-c3"><div class="dg-wrap">Normal or Dilated</div></td>
+                <td class="dg-c4"><div class="dg-wrap">Dilated</div></td>
+              </tr>
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Jet Density &amp; Contour</div></th>
+                <td class="dg-c2"><div class="dg-wrap">Soft</div></td>
+                <td class="dg-c3"><div class="dg-wrap">Dense</div></td>
+                <td class="dg-c4"><div class="dg-wrap">Dense; Early Termination of Diastolic Flow</div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- ===== End reference chart ===== -->
+
+      <br><br>
+    </div>
+  </div>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav">
+      <!-- <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li> -->
+      <!-- <li><a href="terms-of-use.html" target="_blank">Terms of Use</a></li> -->
+    </ul>
+  </footer>
+
+  <!-- Page-scoped tweaks / safety for DG units + soft hyphens (match your valve pages) -->
+  <style>
+    /* Keep vertical scrollbar space stable to prevent left-shift on click */
+    @supports (scrollbar-gutter: stable) {
+      html, body { scrollbar-gutter: stable both-edges; }
+    }
+    @supports not (scrollbar-gutter: stable) {
+      html { overflow-y: scroll; } /* fallback to always reserve space */
+    }
+
+    /* Chips: single-line, size-to-content */
+    .navbar a.border, .navbar a.active.border{
+      white-space: nowrap !important;
+      overflow-wrap: normal !important;
+      word-break: normal !important;
+    }
+
+    /* ===== DG TABLE THEME ===== */
+    #dg-embed{
+      --dg-accent:#00ff66; --dg-head:rgb(40,133,199);
+      --dg-bg:#000; --dg-text:#fff; --dg-outer:4px; --dg-line:2px; --dg-hsep:2px; --dg-hrim:4px;
+      color:var(--dg-text); background:var(--dg-bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    #dg-embed *{ box-sizing:border-box; }
+
+    /* BLUE HEADER */
+    .dg-headerwrap{ border:var(--dg-hrim) solid var(--dg-head); border-radius:18px; overflow:hidden; background:var(--dg-bg); margin-bottom:8px; }
+    .dg-header{ display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); width:100%; }
+    .dg-hcell{
+      display:flex; align-items:center; justify-content:center; padding:20px 12px; min-height:88px;
+      text-align:center; font-weight:700; line-height:1.12; font-size: clamp(.82rem, 2.6vw, 1.08rem);
+      overflow:hidden; -ms-overflow-style:none; scrollbar-width:none; border-right:var(--dg-hsep) solid var(--dg-head);
+    }
+    .dg-hcell:last-child{ border-right:none; }
+    .dg-header .dg-wrap{ white-space: nowrap; }
+
+    /* GREEN TABLE */
+    .dg-tablewrap{ border:var(--dg-outer) solid var(--dg-accent); border-radius:18px; overflow:hidden; background:var(--dg-bg); }
+    .dg-table{ width:100%; border-collapse:collapse; table-layout:fixed; text-align:center; }
+    .dg-table th, .dg-table td{
+      border:var(--dg-line) solid var(--dg-accent); padding:22px 10px; line-height:1.2; background:transparent; text-align:center;
+      white-space: normal; word-break: normal; overflow-wrap: normal; hyphens: manual; overflow:hidden; text-overflow:clip;
+    }
+
+    /* First-column blue tint */
+    .dg-table th.dg-col1{ font-weight:800; font-size:clamp(.95rem, 2.5vw, 1.08rem); background: rgba(40, 133, 199, 0.22); }
+
+    /* Shrink first-column under 745px */
+    @media (max-width:745px){
+      .dg-table th.dg-col1{ font-size: clamp(.58rem, 1.9vw, .86rem); padding: 16px 8px; line-height: 1.12; }
+    }
+
+    /* Wrap up to 4 lines; avoid scrollbars in wrappers */
+    .dg-wrap{ display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:4; overflow:hidden; white-space:normal; scrollbar-width:none; -ms-overflow-style:none; }
+    .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+
+    /* Small-screen column width bias */
+    .dg-table col{ width:25%; }
+    @media (max-width:400px){ .dg-table col.dg-col1-col{ width:31%; } .dg-table col.dg-col2-col, .dg-table col.dg-col3-col, .dg-table col.dg-col4-col{ width:23%; } }
+    @media (max-width:340px){ .dg-table col.dg-col1-col{ width:33.5%; } .dg-table col.dg-col2-col, .dg-table col.dg-col3-col, .dg-table col.dg-col4-col{ width:22.17%; } }
+    @media (max-width:320px){ .dg-table col.dg-col1-col{ width:36.5%; } .dg-table col.dg-col2-col, .dg-table col.dg-col3-col, .dg-table col.dg-col4-col{ width:21.17%; } }
+
+    /* Header fit under 440px */
+    @media (max-width:440px){ .dg-header .dg-hcell{ font-size: clamp(.72rem, 2.6vw, .96rem); padding: 18px 8px; } }
+
+    /* Phone-friendly page padding */
+    @media (max-width:600px){ .final{ padding-left:6% !important; padding-right:6% !important; } }
+    @media (max-width:400px){ .final{ padding-left:4% !important; padding-right:4% !important; } }
+    @media (max-width:340px){ .final{ padding-left:3% !important; padding-right:3% !important; } }
+
+    /* Soft hyphen & sup safety (if used later) */
+    #dg-embed .dg-nb{ white-space:nowrap; display:inline; vertical-align:baseline; }
+    #dg-embed .dg-free{ display:block !important; -webkit-line-clamp: unset !important; -webkit-box-orient: initial !important; overflow:visible !important; }
+
+
+  </style>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Left Atrium</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+  <link rel="icon" type="image/png" href="BSW_Thumbnail.png"/>
+</head>
+
+<body>
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+      <!-- <li class="push"><a class="top-nav" href="about.html">About Us</a></li> -->
+      <li class="push"><a class="top-nav" href="echo_chambers.html">Back</a></li>
+    </ul>
+
+    <!-- Title only (no subtitle) -->
+    <div class="title-stack">
+      <div class="container zone body dg-title">Left Atrium:</div>
+    </div>
+
+    <br>
+
+    <!-- Navbar chips -->
+    <div class="navbar">
+      <a class="nospace" href="#"></a>
+      <a class="border" href="left_atrium_male.html">Male</a>
+      <a class="active border" href="left_atrium_female.html">Female</a>
+      <a class="nospace" href="#"></a>
+    </div>
+  </nav>
+
+  <div class="zone navigation">
+    <div class="final" style="padding:0 10%">
+      <br>
+
+      <!-- ========================== DG TABLE ========================== -->
+      <div id="dg-embed" aria-label="Left Atrium — Male reference values">
+
+        <!-- Blue header band (single, centered, no divider) -->
+        <div class="dg-headerwrap">
+          <div class="dg-header dg-single" role="row">
+            <div class="dg-hcell" role="columnheader">
+              <div class="dg-wrap">Indexed LA Volume</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Green table (2 columns) -->
+        <div class="dg-tablewrap">
+          <table class="dg-table" role="table" aria-label="Left atrial volume index (male)">
+            <colgroup>
+              <col class="dg-col1-col">
+              <col class="dg-col2-col">
+            </colgroup>
+            <tbody>
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Normal</div></th>
+                <td class="dg-c2"><div class="dg-wrap">16 – 34&nbsp;<span class="dg-nb">ml/m<sup>2</sup></span></div></td>
+              </tr>
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Mild</div></th>
+                <td class="dg-c2"><div class="dg-wrap">35 – 41&nbsp;<span class="dg-nb">ml/m<sup>2</sup></span></div></td>
+              </tr>
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Moderate</div></th>
+                <td class="dg-c2"><div class="dg-wrap">42 – 48&nbsp;<span class="dg-nb">ml/m<sup>2</sup></span></div></td>
+              </tr>
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Severe</div></th>
+                <td class="dg-c2"><div class="dg-wrap">&gt; 48&nbsp;<span class="dg-nb">ml/m<sup>2</sup></span></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- ======================== END DG TABLE ======================== -->
+
+      <br>
+
+      <!-- Link to calculator -->
+      <p style="text-align:center; margin:8px 0 0;">
+        <a href="lavi_calculator.html" style="color:#c8c8c8; text-decoration:underline;">
+          Calculate LAVI
+        </a>
+      </p>
+
+      <br>
+    </div>
+  </div>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav">
+      <!-- <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li> -->
+      <!-- <li><a href="terms-of-use.html" target="_blank">Terms of Use</a></li> -->
+    </ul>
+  </footer>
+
+  <!-- Page-scoped safety & header tweaks -->
+  <style>
+    #dg-embed .dg-nb{ white-space:nowrap; display:inline; vertical-align:baseline; }
+
+    /* Free only the sup-bearing cells from clamp to avoid WebKit scrollbars */
+    #dg-embed .dg-free{
+      display:block !important;
+      -webkit-line-clamp: unset !important;
+      -webkit-box-orient: initial !important;
+      overflow:visible !important;
+    }
+
+    /* Let &shy; work when needed, and hide any residual scrollbars in clamped wrappers */
+    #dg-embed .dg-table th .dg-wrap,
+    #dg-embed .dg-table td .dg-wrap{
+      -webkit-hyphens: manual !important;
+      hyphens: manual !important;
+      word-break: normal !important;
+      overflow-wrap: normal !important;
+      scrollbar-width:none; -ms-overflow-style:none;
+    }
+    #dg-embed .dg-table th .dg-wrap::-webkit-scrollbar,
+    #dg-embed .dg-table td .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+
+    /* ===== Blue header band override: single centered cell, no vertical divider ===== */
+    #dg-embed .dg-header.dg-single{
+      display:flex; align-items:center; justify-content:center;
+    }
+    #dg-embed .dg-header.dg-single .dg-hcell{
+      flex:1; border:none !important;
+    }
+    #dg-embed .dg-header.dg-single .dg-wrap{
+      padding:18px 10px;
+      color:#fff;
+      font-weight:800;
+      text-align:center;
+      font-size: clamp(.95rem, 2.4vw, 1.06rem);
+    }
+  </style>
+
+</body>
+</html>

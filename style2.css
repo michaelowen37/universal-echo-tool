@@ -1,0 +1,969 @@
+* {
+    border: none;
+    overflow-x: hidden;
+
+}
+
+html, body {
+    margin: 0 auto;
+    font-family: sans-serif, Palatino;
+    height: 100%;
+    min-height: 100%;
+    background-color: black;
+    /*overflow: hidden;*/
+}
+
+/*****************************************
+******Text in main body of about page
+*****************************************/
+
+p {
+    margin: 0 auto;
+    font-family: sans-serif, Palatino;
+    padding: 3% 18% 30% 18%;
+    font-size: 2vw;
+    height: 100%;
+    color: #647e85;
+    overflow-y: hidden;
+
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    p {
+        font-size: 2.5vw;
+        
+    }
+}
+
+/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+    p {
+        font-size: 3vw;
+        
+    }
+}
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    p {
+        font-size: 3.4vw;
+       
+    }
+}
+
+/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
+@media only screen and (max-width: 400px) {
+    p {
+        font-size: 5vw;
+        
+    }
+}
+
+
+
+/************************************************
+The nav and all div sections have a zone class
+*************************************************/
+.zone {
+    /*cursor:pointer;*/
+    color:#ffffff;
+    font-size:3vw;
+    /*transition: all 0.3s linear;*/
+
+}
+
+
+/***********************************************************************
+ *  Nav Bar
+NAV bar uses flexbox
+*****************************************/
+
+.main-nav, .foot-nav {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    font-size: 1.5vw;
+}
+
+.foot-nav {
+    text-align: center;
+    width: 100%;
+}
+
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    .main-nav, .foot-nav {
+        font-size: 1.8vw;
+        padding: 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+    .main-nav, .foot-nav {
+        font-size: 2.2vw;
+        padding: 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    .main-nav, .foot-nav {
+        font-size: 3vw;
+        padding: 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 330px - Mobile devices*/
+@media only screen and (max-width: 400px) {
+    .main-nav, .foot-nav {
+        font-size: 4vw;
+        padding: 0;
+    }
+}
+
+/*This pushes a selection to the far right within nav bar*/
+.push {
+    margin-left: auto;
+}
+
+/*Space between text in nav bar*/
+li {
+    padding: 2.5%;
+
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    li {
+        padding: 4%;
+        
+    }
+}
+
+
+/*Nav bar text*/
+a {
+    color: #647e85;
+    text-decoration: none;
+    display: block;
+}
+
+a {
+    /*margin: 0 auto;*/
+    font-family: sans-serif, Palatino;
+    padding: 0;
+    font-size: 2vw;
+}
+
+a.words {
+    color: #bcbec5;
+    font-size: 2.3vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 3%;
+}
+
+/*This is how the CSS changes when screen width is below 500px - Mobile devices*/
+@media only screen and (max-width: 500px) {
+    a.words {
+        font-size: 5vw;
+        
+    }
+}
+
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+
+/*Navbar with brick and mortar vs online*/
+/* Style the navigation menu */
+.navbar {
+  width: 100%;
+  background-color: #000000;
+  overflow: hidden;
+}
+
+
+/* Navigation links */
+.navbar a {
+  float: left;
+  padding: 10px 0;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  width: 25%; /* Four equal-width links. If you have two links, use 50%, and 33.33% for three links, etc.. */
+  text-align: center; /* If you want the text to be centered */
+}
+
+/* Add a background color on mouse-over */
+/*.navbar a:hover {
+  background-color: #696969;
+}*/
+
+/* Style the current/active link */
+.navbar a.active {
+  background-color: #4CAF50;
+}
+
+/* Add responsiveness - on screens less than 500px, make the navigation links appear on top of each other, instead of next to each other */
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: left;
+    /*display: block;*/
+    /*width: 100%;*/
+    font-size: 1em;
+    text-align: center;
+    padding-left: 0;
+    margin: auto;
+  }
+}
+
+a.nospace {
+    padding: 0.1px;
+}
+
+/*@media screen and (max-width: 500px) {
+    a.nospace {
+
+    }*/
+
+
+a.border {
+    border: 2px solid green;
+}
+
+
+
+/***********************************************************************
+ *  Main body with text
+ **********************************************************************/
+.container {
+    /*show heigh: auto*/
+    height: 6vh; 
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 5% 0 0 0;
+    font-size: 5vw;
+}
+
+.text {
+    height: 100vh;
+}
+
+
+/********************************************
+******The selectable circles on main-nav page
+********************************************/
+.box {
+    background-color: #007a35;
+    border: none;
+    color: white;
+    /*padding: 10%;*/
+    text-align: center;
+    font-size: 1.5vw;
+    cursor: pointer;
+    border-radius: 12px;
+    -webkit-transition: all 0.2s linear; /* Safari */
+    transition: all 0.2s linear;
+    width: 100%;
+    font-family: palatino;
+    height: 100%;
+}
+
+
+
+
+
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+/*@media only screen and (max-width: 1000px) {
+    .box {
+        font-size: 1.8vw;
+        padding: 8px 25px;
+    }
+}*/
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+/*@media only screen and (max-width: 800px) {
+    .box {
+        font-size: 3vw;
+        padding: 6px 25px;
+        width: 30%;
+       
+    }
+}*/
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+/*@media only screen and (max-width: 600px) {
+    .box {
+        font-size: 3vw;
+        padding: 6px 25px;
+        width: 30%;
+       
+    }
+}*/
+
+/*This is how the CSS changes when screen width is below 350px - Mobile devices*/
+/*@media only screen and (max-width: 400px) {
+    .box {
+        font-size: 4vw;
+        padding: 8px 25px;
+        width: 50%;
+        
+    }
+}
+*/
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    .container {
+        font-size: 6vw;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    .container {
+        font-size: 7vw;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 350px - Mobile devices*/
+@media only screen and (max-width: 400px) {
+    .container {
+        font-size: 8vw;
+    }
+}
+
+.cover {
+    width: 30rem;
+}
+
+#signature {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-right: 15%;
+    padding-top: 1%;
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    #signature {
+        font-size: 2.2vw;
+        
+    }
+}
+
+/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+    #signature {
+        font-size: 2.7vw;
+        
+    }
+}
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    #signature {
+        font-size: 3.1vw;
+       
+    }
+}
+
+/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
+@media only screen and (max-width: 400px) {
+    #signature {
+        font-size: 4.7vw;
+        padding-top: 2%;
+    }
+}
+
+.links {
+    padding:0 10%;
+    text-decoration: underline;
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    .links {
+        padding: 0.5% 10%;
+        
+    }
+}
+
+/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+    .links {
+        padding: 1% 10%;
+        
+    }
+}
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    .links {
+        padding: 1.5% 10%;  
+    }
+}
+
+/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
+@media only screen and (max-width: 400px) {
+    .links {
+        padding: 2% 10%;
+    }
+}
+
+
+.link-title {
+    text-decoration: none;
+    padding: 3% 10%;
+    list-style-type: none;
+}
+
+/**************************************************
+*****Container that contains button on donate page
+***************************************************/
+
+.container2 {
+    /*show heigh: auto*/
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2%;
+}
+
+button {
+    background-color: #007a35;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    font-size: 1.5vw;
+    cursor: pointer;
+    border-radius: 12px;
+    -webkit-transition: all 0.2s linear; /* Safari */
+    transition: all 0.2s linear;
+    width: 20%;
+    font-family: palatino;
+    height: 100% !important;
+}
+
+button:hover {
+    background-color: #099b48;
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    button {
+        font-size: 1.8vw;
+        padding: 8px 25px;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    button {
+        font-size: 3vw;
+        padding: 6px 25px;
+        width: 30%;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    button {
+        font-size: 3vw;
+        padding: 6px 25px;
+        width: 30%;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
+@media only screen and (max-width: 400px) {
+    button {
+        font-size: 4vw;
+        padding: 8px 25px;
+        width: 50%;
+    }
+}
+
+/***********************************************************************
+ *  Grid Panel
+ min-max: 350px is min (img changes when screen < 350px, 1fr is max 
+ main-nav page
+ **********************************************************************/
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    grid-gap: 1%;
+    padding: 3% 0 10% 0;
+    min-height: 100%;
+
+}
+
+This is how the CSS changes when screen width is below 800px - Mobile devices
+@media only screen and (max-width: 1000px) {
+    .grid-wrapper {
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        grid-auto-rows: minmax(15vh, 18vh);
+        grid-row-gap: 5%;
+        padding: 3% 0 30% 0;
+    }
+}
+
+This is how the CSS changes when screen width is below 800px - Mobile devices
+@media only screen and (max-width: 800px) {
+    .grid-wrapper {
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        grid-auto-rows: minmax(20vh, 30vh);
+        grid-row-gap: 5%;
+        padding: 3% 0 30% 0;
+    }
+}
+
+This is how the CSS changes when screen width is below 600px - Mobile devices
+@media only screen and (max-width: 600px) {
+    .grid-wrapper {
+        grid-template-columns: 2fr;
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        grid-auto-rows: minmax(11vh, 11vh);
+        padding: 3% 0 60% 0;
+    }
+}
+
+This is how the CSS changes when screen width is below 400px - Mobile devices
+@media only screen and (max-width: 400px) {
+    .grid-wrapper {
+        grid-template-columns: 1fr;
+        grid-auto-rows: minmax(8vh, 15vh);
+        padding: 3% 0 80% 0;
+
+    }
+}
+
+
+.grid-wrapper1 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    grid-gap: 0.1%;
+    padding: 3% 0 10% 0;
+    min-height: 100%;
+
+    grid-auto-rows: minmax(30vh, 10vh);
+
+}
+
+/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    .grid-wrapper1 {
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        grid-auto-rows: minmax(15vh, 18vh);
+        grid-row-gap: 5%;
+        padding: 3% 0 30% 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+    .grid-wrapper1 {
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        grid-auto-rows: minmax(15vh, 10vh);
+        grid-row-gap: 5%;
+        padding: 3% 0 30% 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    .grid-wrapper1 {
+        grid-template-columns: 2fr;
+        grid-auto-rows: minmax(10vh, 9vh);
+        padding: 3% 0 60% 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
+@media only screen and (max-width: 400px) {
+    .grid-wrapper1 {
+        grid-template-columns: 1fr;
+        grid-auto-rows: minmax(7vh, 8vh);
+        padding: 3% 0 80% 0;
+
+    }
+}
+
+.grid-wrapper2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    grid-gap: 1% 1%;
+    padding: 3% 2% 10% 2%;
+    min-height: 100%;
+    grid-auto-rows: minmax(20vh, 10vh);
+
+}
+
+/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+@media only screen and (max-width: 1025px) {
+    .grid-wrapper2 {
+
+    }
+}
+
+/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+    .grid-wrapper2 {
+       
+    }
+}
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    .grid-wrapper2 {
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        grid-auto-rows: minmax(10vh, 10vh);
+    }
+}
+
+/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
+@media only screen and (max-width: 400px) {
+    .grid-wrapper2 {
+        
+        grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+        grid-auto-rows: minmax(10vh, 10vh);
+
+    }
+}
+
+.toobig {
+    font-size: 5vw;
+}
+
+
+/*****************************************************
+***************Text inside of nav boxes****************
+*****************************************************/
+em {
+    font-size: 1.5vw;
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    em {
+        font-size: 2.5vw;
+    }
+}
+
+
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 2000px) {
+    a.words {
+        font-size: 2.1vw;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+    a.words {
+        font-size: 2.4vw;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+@media only screen and (max-width: 450px) {
+    a.words {
+        font-size: 2.8vw;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
+/*@media only screen and (max-width: 400px) {
+    a.words {
+        font-size: 4vw;
+    }
+}*/
+
+/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
+@media only screen and (max-width: 1400px) {
+    a.top-nav {
+        font-size: 2vw;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+    a.top-nav {
+        font-size: 3vw;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    a.top-nav, a {
+        font-size: 4vw;
+    }
+}
+
+
+/*These boxes contain the images*/
+/*.box {
+    background-color: #007a35;
+    padding: 5% 0 0 0;
+    margin: 5%;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 3vw;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box:hover {
+    background-color: #099b48;
+}*/
+
+
+/*children of the box class (the images)*/
+/*.box > a {
+    width: 100%;
+}*/
+
+.grow { 
+transition: all .4s ease-in-out; 
+}
+
+.grow:hover { 
+transform: scale(1.1);
+}
+
+
+
+
+
+/*Perfusion and segment images*/
+.img {
+    display: flex;
+    flex-wrap: wrap;
+   /* height: 100%;
+    width: 100vw;*/
+    margin: 0 auto;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.box:hover {
+    background-color: #099b48; 
+}
+
+
+/****************************************************************
+**************Echo segment/perfusion images**********************
+*****************************************************************/
+/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
+@media only screen and (max-width: 1400px) {
+    .height-limit {
+        max-height: 80vh;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    .height-limit {
+        max-height: 65vh;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+    .height-limit {
+        max-height: 60vh;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    .height-limit {
+        max-height: 60vh;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
+@media only screen and (max-width: 450px) {
+    .height-limit {
+        max-height: 30vh;
+    }
+}
+
+/****************************************************************
+***************************Table images**************************
+*****************************************************************/
+img.height-limit2 {
+    padding-top: 5vh;
+    height: 100%;
+    
+
+   /* max-height: 100vh;*/
+}
+
+/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
+@media only screen and (max-width: 1400px) {
+    img.height-limit2 {
+        max-height: 100vh;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    img.height-limit2 {
+        max-height: 100vh;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
+@media only screen and (max-width: 800px) {
+    img.height-limit2 {
+        max-height: 100vh;
+        padding: 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    img.height-limit2 {
+        max-height: 70vh;
+       
+    }
+}
+
+/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
+@media only screen and (max-width: 450px) {
+    img.height-limit2 {
+        max-height: 50vh;
+        
+    }
+}
+
+/***********************************************************************
+ *  Footer
+ **********************************************************************/
+.foot {
+    font-size: 1.5vw;
+    padding: 0;
+    position: relative;
+    bottom: 0;
+}
+
+footer {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    background-color: #444;
+    width: 100%;
+}
+
+/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+@media only screen and (max-width: 1000px) {
+    .foot {
+        font-size: 2.1vw;
+        padding: 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+@media only screen and (max-width: 600px) {
+    .foot {
+        font-size: 3vw;
+        padding: 0;
+    }
+}
+
+/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
+@media only screen and (max-width: 300px) {
+    .foot {
+        font-size: 4vw;
+        padding: 0;
+    }
+}
+
+.bottom-section {
+    padding: 0 2%;
+}
+
+/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
+@media only screen and (max-width: 400px) {
+    .foot {
+        font-size: 3vw;
+        padding: 0;
+        display: inline-block;
+        vertical-align: bottom;
+    }
+}
+
+
+
+
+/***********************************************************************
+ *  Navigation bar
+ **********************************************************************/
+.nav-bar, p {
+    background: #000000;
+}
+
+/***********************************************************************
+ *  First half of screen
+ **********************************************************************/
+.body {
+    background: #000000;
+}
+
+/***********************************************************************
+ *  Second half of screen
+ **********************************************************************/
+ .text {   
+    background: #203a43; /* Old browsers */
+    background: -moz-linear-gradient(top, #203a43 20%, #0f2027 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(20%,#203a43), color-stop(100%,#0f2027)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #203a43 20%,#0f2027 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #203a43 20%,#0f2027 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #203a43 20%,#0f2027 100%); /* IE10+ */
+    background: linear-gradient(top, #203a43 20%,#0f2027 100%); /* W3C */
+}
+
+/***********************************************************************
+ *  Footer
+ **********************************************************************/
+.bottom-section {
+    background: #000000;
+}
+
+
+/***********************************************************************
+ *  Main-Nav with multiple boxes
+ **********************************************************************/
+.navigation {
+    background: #000000;
+
+    
+}
+
+.image-screens {
+    background: #203a43; /* Old browsers */
+    height: 100vh;
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Prosthetic Heart Valves</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+  <link rel="icon" type="image/png" href="BSW_Thumbnail.png"/>
+</head>
+
+<body>
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+      <!-- <li class="push"><a class="top-nav" href="about.html">About Us</a></li> -->
+      <li class="push"><a class="top-nav" href="lwh_echo.html">Back</a></li>
+    </ul>
+
+    <!-- Title only (no subtitle) -->
+    <div class="title-stack">
+      <div class="container zone body dg-title">Prosthetic Valves:</div>
+    </div>
+
+    <br>
+
+    <!-- Navbar chips -->
+    <div class="navbar">
+      <a class="nospace" href="#"></a>
+      <a class="border" href="native_valves.html">Native</a>
+      <a class="active border" href="prosthetic_valves.html">Prosthetic</a>
+      <a class="nospace" href="#"></a>
+    </div>
+  </nav>
+
+  <div class="zone navigation grid-wrapper2">
+    <div class="box zone grow"><a href="prosthetic_aortic_valve_stenosis.html" class="words">Aortic</a></div>
+    <div class="box zone grow"><a href="prosthetic_mitral_valve_stenosis.html" class="words">Mitral</a></div>
+    <div class="box zone grow"><a href="prosthetic_tricuspid_valve_stenosis.html" class="words">Tricuspid</a></div>
+    <div class="box zone grow"><a href="prosthetic_pulmonic_valve_stenosis.html" class="words">Pulmonic</a></div>
+  </div>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav">
+      <!-- <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li> -->
+      <!-- <li><a href="terms-of-use.html" target="_blank">Terms of Use</a></li> -->
+    </ul>
+  </footer>
+
+  <style>
+    /* -------- page-scoped styles only (style3.css untouched) -------- */
+
+    /* NAV container & title stack safety */
+    .zone.nav-bar{ overflow: visible !important; height: auto !important; }
+
+    .title-stack{
+      display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+      gap:0; margin:0; padding:0; max-width:100%; overflow:visible !important;
+    }
+    .dg-title, .title-stack .container, .title-stack .zone{
+      display:block !important; position:static !important; float:none !important; clear:both !important;
+      margin:0 !important; padding:0 !important; height:auto !important; max-height:none !important; min-height:0 !important;
+      overflow:visible !important; white-space:normal; word-break:normal; overflow-wrap:normal; text-align:center;
+      line-height:1.08;
+    }
+    @media (min-width:700px){
+      .dg-title{ line-height:1.04 !important; }
+    }
+
+    /* ======================= CHIPS: centered, touching, responsive ======================= */
+    .navbar{
+      display:flex; justify-content:center; align-items:stretch; gap:0 !important;
+      height:auto !important; min-height:40px; padding:0; margin:0 auto; width:100%;
+      overflow:visible !important;
+    }
+    .navbar a.nospace{ display:none !important; }  /* hide spacers so chips can touch */
+
+    .navbar a.border,
+    .navbar a.active.border{
+      position: static !important;
+      float: none !important;
+      display: inline-flex !important;
+      box-sizing: border-box !important;
+
+      width: auto !important;       /* base: size-to-content */
+      min-width: 0 !important;
+      max-width: none !important;
+
+      height: auto !important;
+      margin: 0 !important;
+      overflow: visible !important;
+      white-space: nowrap !important;
+      word-break: normal !important;
+      text-overflow: clip !important;
+      align-items: center !important;
+      justify-content: center !important;
+
+      /* Visuals */
+      border: 2px solid green !important;
+      border-radius: 0 !important;                /* sharp corners */
+      background: transparent !important;
+      color: #fff !important;
+
+      /* Readability */
+      font-size: clamp(.66rem, 2.4vw, 1rem) !important;
+      line-height: 1.05 !important;
+      padding: clamp(6px, 1.1vw, 12px) clamp(12px, 2.2vw, 20px) !important;
+
+      flex: 0 0 auto !important; /* no stretching */
+      text-align:center !important;
+    }
+    .navbar a.active.border{ background-color:#4CAF50 !important; border-color:green !important; }
+
+    /* Touching seam (shared border) */
+    .navbar a.border + .navbar a.border{ margin-left:-2px !important; } /* 2px = border width */
+
+    /* ===== Under 700px: SIGNIFICANTLY shorter chips ===== */
+    @media (max-width:700px){
+      .navbar a.border,
+      .navbar a.active.border{
+        white-space: normal !important;           /* allow 2-line labels if needed */
+        overflow-wrap: anywhere !important;
+        line-height: 1.12 !important;
+
+        /* shorter lengths */
+        flex-basis: clamp(100px, 24vw, 160px) !important;
+
+        /* tighter padding + smaller type */
+        font-size: clamp(.58rem, 2.6vw, .9rem) !important;
+        padding: 6px 10px !important;
+      }
+    }
+
+    /* Extra tightening for small phones */
+    @media (max-width:500px){
+      .navbar a.border,
+      .navbar a.active.border{
+        flex-basis: clamp(92px, 22vw, 140px) !important;
+        padding: 5px 8px !important;
+        min-height: 30px !important;
+      }
+    }
+    @media (max-width:430px){
+      .navbar a.border,
+      .navbar a.active.border{
+        flex-basis: clamp(86px, 21vw, 126px) !important;
+        padding: 4px 8px !important;
+        font-size: clamp(.54rem, 3.2vw, .82rem) !important;
+        min-height: 28px !important;
+      }
+    }
+
+    /* ===== 700–999px: comfortable but not too wide ===== */
+    @media (min-width:700px) and (max-width:999px){
+      .navbar a.border,
+      .navbar a.active.border{
+        flex-basis: clamp(180px, 22vw, 260px) !important;
+        padding-left: clamp(14px, 1.6vw, 24px) !important;
+        padding-right: clamp(14px, 1.6vw, 24px) !important;
+        font-size: clamp(.82rem, 1.1vw, 1rem) !important;
+      }
+    }
+
+    /* ===== ≥1000px: narrowed desktop range ===== */
+    @media (min-width:1000px){
+      .navbar a.border,
+      .navbar a.active.border{
+        flex-basis: clamp(220px, 16vw, 300px) !important;
+        padding-left: clamp(18px, 1.2vw, 28px) !important;
+        padding-right: clamp(18px, 1.2vw, 28px) !important;
+        font-size: clamp(.86rem, 1.0vw, 1.06rem) !important;
+      }
+    }
+  </style>
+
+</body>
+</html>

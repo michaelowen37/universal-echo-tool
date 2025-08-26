@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- **************************************************************
+       Patient Prosthesis Mismatch — same MR template styling
+       ************************************************************** -->
+  <title>PPM</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+  <link rel="icon" type="image/png" href="BSW_Thumbnail.png"/>
+</head>
+
+<body>
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+      <li class="push"><a class="top-nav" href="calculations.html">Back</a></li>
+    </ul>
+  </nav>
+
+  <!-- Title + subtitles (stacked like the other page) -->
+  <div class="title-stack">
+    <div class="container zone body ppm-title">Patient Prosthesis Mismatch:</div>
+    <div class="calc-note ppm-subtitle">EOAI &lt; 0.85 Suggests Moderate PPM</div>
+    <div class="calc-note ppm-subtitle">EOAI &lt; 0.65 Suggests Severe PPM</div>
+  </div>
+
+  <br><br>
+
+  <div class="zone navigation">
+    <div class="final" style="padding: 0px 10% 0px 10%">
+      <!-- ====================== PATIENT PROSTHESIS MISMATCH ===================== -->
+      <div id="mr-embed" style="margin-top: 2px;">
+        <div class="mr-wrap">
+          <!-- LEFT: Inputs + Buttons -->
+          <div class="mr-panel" id="mr-inputs">
+            <form id="mr-form" novalidate>
+              <div class="mr-grid">
+                <label class="mr-field">
+                  <span class="mr-label">LVOT Diameter</span>
+                  <input id="lvotDiameter" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <label class="mr-field">
+                  <span class="mr-label">LVOT VTI</span>
+                  <input id="lvotVti" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <label class="mr-field">
+                  <span class="mr-label">AoV VTI</span>
+                  <input id="aovVti" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                </label>
+
+                <label class="mr-field">
+                  <span class="mr-label">BSA</span>
+                  <input id="bsa" type="number" step="0.1" min="0" inputmode="decimal" placeholder="m²" />
+                </label>
+
+
+                <!-- Buttons row -->
+                <div class="mr-actions-row mr-center-span">
+                  <button type="button" id="mr-reset" class="mr-btn mr-btn-reset">Reset</button>
+                  <button type="button" id="mr-calc" class="mr-btn mr-btn-calc">Calculate</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- RIGHT: Output -->
+          <div class="mr-panel" id="mr-outputs">
+            <div class="mr-out-row">
+              <div class="mr-out-label">EOAI</div>
+              <div class="mr-out-box">
+                <span id="eoai">--</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ==================== END PATIENT PROSTHESIS MISMATCH =================== -->
+
+
+
+    
+      
+
+      
+      <!-- Supportive Findings (bordered) -->
+<br>
+<div class="calc-notes">
+  <div class="calc-note"
+       title="Supportive findings: LVOT AcT < 100 msec & Peak AoV velocity > 3 m/s"
+       style="margin: 8px 0 4px 0; font-style: italic; font-size: 1.4rem; text-align: center; color: #c9c9c9; text-shadow: 0 1px 2px rgba(0,0,0,.6); position: relative; z-index: 10; line-height: 1.15;">
+    Supportive findings:
+    <br><br>
+    LVOT AcT &lt; 100 msec
+    <br>
+    &amp;
+    <br>
+    Peak AoV velocity &gt; 3 m/s
+  </div>
+</div>
+
+
+      <style>
+        /* ===== TITLE/SUBTITLE STACK (same behavior as your other page) ===== */
+        .title-stack{
+          display:flex;
+          flex-direction:column;
+          align-items:center;
+          justify-content:flex-start;
+          gap: clamp(1px, 0.25vw, 6px);   /* tight, but safe */
+          margin: 0;
+          padding: 0;
+          max-width: 100%;
+          overflow: visible !important;
+        }
+        .title-stack > *{
+          display:block !important;
+          position:static !important;
+          float:none !important;
+          clear:both !important;
+          margin:0 !important;
+          padding:0 !important;
+          height:auto !important;
+          max-height:none !important;
+          min-height:0 !important;
+          overflow:visible !important;
+
+          width:100%;
+          text-align:center !important;
+          white-space: normal !important;
+          word-break: normal !important;
+          overflow-wrap:anywhere !important;  /* long tokens wrap instead of pushing */
+          hyphens:auto;
+        }
+        .ppm-title{ line-height:1.12; }
+        .ppm-subtitle{
+          line-height:1.16;
+          font-style: italic;
+          font-size: 1.25rem;
+          color: #c9c9c9;
+          text-shadow: 0 1px 2px rgba(0,0,0,.6);
+        }
+        /* If you ever see crowding between ~700–1000px, tiny cushion: */
+        @media (min-width:700px) and (max-width:1000px){
+          .title-stack{ gap: 6px !important; }
+        }
+
+        /* ===== CALCULATOR STYLES (unchanged) ===== */
+        #mr-embed{
+          --mr-green:#00ff66; --mr-bg:#000; --mr-text:#fff;
+          --mr-in-empty:rgb(178,212,163); --mr-in-filled:rgb(105,148,98);
+          --mr-red:#ff3333; --mr-box-border:4px; --mr-item-border:2px;
+          --mr-radius:18px; --mr-radius-sm:14px; --field-w:220px;
+          --grid-gap-x:16px; --grid-gap-y:12px;
+          background:var(--mr-bg); color:var(--mr-text);
+          font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+          padding:5px 15px 0 15px;
+        }
+        #mr-embed :where(*){box-sizing:border-box}
+
+        .mr-wrap{display:flex;gap:24px;align-items:flex-start;justify-content:center;flex-wrap:wrap}
+        .mr-panel{border:var(--mr-box-border) solid var(--mr-green);border-radius:var(--mr-radius);background:var(--mr-bg);padding:20px 22px}
+
+        .mr-grid{display:grid;grid-template-columns:repeat(2,var(--field-w));gap:var(--grid-gap-y) var(--grid-gap-x);justify-content:center}
+        .mr-field{display:flex;flex-direction:column;gap:6px;width:var(--field-w)}
+        .mr-center-span{grid-column:1 / -1;justify-self:center}
+        .mr-label{font-size:.85rem;opacity:.95;text-align:center}
+
+        input[type="number"]{
+          width:100%;padding:8px 10px;background:var(--mr-in-empty);
+          border:var(--mr-item-border) solid var(--mr-green);border-radius:var(--mr-radius-sm);
+          text-align:center;color:#111;outline:none;appearance:textfield;-moz-appearance:textfield;overflow:hidden;
+          transition:background-color .25s,color .25s,box-shadow .25s,border-color .2s,font-size .1s ease;
+        }
+        input[type="number"].filled{background:var(--mr-in-filled);color:var(--mr-text)}
+        input[type="number"]:focus{box-shadow:0 0 0 3px rgba(0,255,102,.18)}
+        input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+        .mr-missing{animation:mrPulseRed 1.4s ease-in-out infinite;border-color:var(--mr-red)!important;box-shadow:0 0 0 5px rgba(255,51,51,.35)}
+        @keyframes mrPulseRed{0%,100%{box-shadow:0 0 0 5px rgba(255,51,51,.35)}50%{box-shadow:0 0 0 8px rgba(255,51,51,.15)}}
+
+        .mr-actions-row{display:grid;grid-template-columns:repeat(2,var(--field-w));gap:8px;justify-content:center;justify-items:stretch;margin-top:18px}
+        #mr-reset{justify-self:end}
+        #mr-calc{justify-self:start}
+        .mr-btn{
+          width:75%;padding:12px 40px;white-space:nowrap;border-radius:999px;border:none;
+          color:var(--mr-text);font-weight:600;letter-spacing:.2px;font-size:.95rem;
+          cursor:pointer;transition:transform .12s ease,background-color .2s ease;
+        }
+        .mr-btn:active{transform:translateY(1px)}
+
+        .mr-btn-reset{ background:rgb(163,192,212); color:#06131b; }
+        .mr-btn-reset:hover{ background:rgb(100,125,140); filter:none; }
+
+        .mr-btn-calc{ background:rgb(40,133,199); box-shadow:none; }
+        .mr-btn-calc:hover{ background:rgb(25,95,145); filter:none; }
+
+        #mr-outputs{min-width:320px;max-width:420px}
+        .mr-out-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;margin-bottom:12px}
+        .mr-out-label{font-weight:600;font-size:.9rem;opacity:.95;text-align:right}
+        .mr-out-box{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:var(--mr-item-border) solid var(--mr-green);
+          border-radius:var(--mr-radius-sm);background:transparent;font-weight:800;font-size:.95rem;color:var(--mr-text);justify-self:start}
+
+        /* Mobile */
+        @media (max-width:720px){
+          .mr-panel{width:94%;max-width:560px;margin:0 auto}
+          .mr-wrap{flex-direction:column;align-items:center;gap:16px}
+          .mr-grid{grid-template-columns:1fr;justify-items:center;gap:var(--grid-gap-y) 10px}
+          .mr-field{width:70%;max-width:240px}
+          .mr-center-span{grid-column:1;justify-self:center}
+          .mr-actions-row{grid-template-columns:1fr !important;justify-items:center;gap:10px;margin-top:16px}
+          #mr-reset,#mr-calc{justify-self:center}
+          .mr-btn{width:33%;min-width:120px;padding:12px 28px;font-size:clamp(.85rem,3.6vw,.95rem);line-height:1.15}
+          #mr-outputs{width:100%;max-width:600px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
+          .mr-out-row{grid-template-columns:1fr;justify-items:center;gap:8px;margin-bottom:14px}
+          .mr-out-label{text-align:center;font-size:.85rem}
+          .mr-out-box{width:40%;min-width:160px;justify-content:center;margin:0 auto;white-space:nowrap}
+        }
+        @media (max-width:380px){
+          .mr-panel{width:98%;max-width:none}
+          .mr-field{width:85%;max-width:200px}
+          .mr-btn{width:40%;min-width:110px;padding:12px 24px;font-size:clamp(.82rem,4.2vw,.92rem)}
+          .mr-out-box{width:48%;min-width:150px}
+        }
+        @media (max-width: 444px){
+          #mr-embed{ padding: 4px 8px 0 8px; }
+          #mr-embed .mr-wrap{ gap: 12px; }
+          #mr-embed .mr-panel{ width: 100%; max-width: none; margin: 0 auto; padding: 16px 14px; }
+          #mr-embed #mr-outputs{ min-width: 0; }
+        }
+        @media (max-width: 417px){
+          #mr-embed .mr-panel{ padding: 14px 12px; }
+          #mr-embed .mr-field{ max-width: 200px; }
+          #mr-embed .mr-btn{ min-width: 110px; }
+          #mr-embed .mr-out-box{ min-width: 140px; }
+        }
+
+        /* Equal output box widths on desktop only */
+        @media (min-width: 721px) {
+          #mr-outputs .mr-out-box { width: 140px; justify-content: center; }
+        }
+
+        /* Dramatically smaller subtitle on small screens */
+.ppm-subtitle{
+  /* desktop/tablet stays ~1.25rem, scales down smoothly */
+  font-size: clamp(0.78rem, 2.4vw, 1.25rem) !important;
+}
+
+/* tighten more below common breakpoints */
+@media (max-width:700px){
+  .ppm-subtitle{ font-size: clamp(0.70rem, 2.9vw, 1.12rem) !important; }
+}
+@media (max-width:480px){
+  .ppm-subtitle{ font-size: clamp(0.60rem, 3.8vw, 1.02rem) !important; }
+}
+@media (max-width:360px){
+  .ppm-subtitle{ font-size: clamp(0.56rem, 4.4vw, 0.96rem) !important; }
+}
+
+/* Bordered notes wrapper: centered, responsive width */
+.calc-notes{
+  box-sizing: border-box;
+  width: clamp(240px, 90%, 680px);  /* shrinks with page, never <240px, never >680px */
+  max-width: 100%;
+  margin: 12px auto 10px;           /* center horizontally */
+  padding: 12px 16px;
+  border: 2px solid currentColor;   /* border matches text color */
+  border-radius: 12px;
+  color: #c9c9c9;                   /* sets currentColor */
+  text-align: center;
+}
+
+/* Optional: gently scale text & padding on small screens */
+@media (max-width: 560px){
+  .calc-notes{ padding: 10px 12px; }
+  .calc-notes .calc-note{ font-size: 1.15rem; }
+}
+
+
+
+      </style>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const $ = (id) => document.getElementById(id);
+
+          // Grab elements
+          const fields = {
+            lvotDiameter: $('lvotDiameter'),
+            lvotVti: $('lvotVti'),
+            aovVti: $('aovVti'),
+            bsa: $('bsa'),
+          };
+          const btnCalc = $('mr-calc');
+          const btnReset = $('mr-reset');
+          const eoaiEl = $('eoai');
+
+          function fmt2Fixed(n) {
+            if (!Number.isFinite(n)) return '--';
+            return (Math.round(n * 100) / 100).toFixed(2);
+          }
+
+          Object.values(fields).filter(Boolean).forEach((inp) => {
+            inp.addEventListener('input', () => {
+              if ((inp.value || '').trim() !== '') {
+                inp.classList.add('filled');
+                inp.classList.remove('mr-missing');
+              } else {
+                inp.classList.remove('filled');
+              }
+            });
+
+            inp.addEventListener('blur', () => {
+              const raw = (inp.value || '').trim();
+              if (raw === '') return;
+              const v = Number(raw.replace(/,/g, ''));
+              if (Number.isNaN(v) || v < 0) { inp.value = ''; return; }
+              const r = Math.round(v * 10) / 10;
+              inp.value = Number.isInteger(r) ? String(r) : r.toFixed(1);
+            });
+
+            inp.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter') { e.preventDefault(); btnCalc && btnCalc.click(); }
+            });
+          });
+
+          function validate() {
+            let ok = true;
+            for (const [key, inp] of Object.entries(fields)) {
+              if (!inp) continue;
+              const val = (inp.value || '').trim();
+              if (!val || Number(val) <= 0) {
+                inp.classList.add('mr-missing');
+                ok = false;
+              } else {
+                inp.classList.remove('mr-missing');
+              }
+            }
+            return ok;
+          }
+
+          function calculate() {
+            const lvotD = Number(fields.lvotDiameter?.value);
+            const lvotV = Number(fields.lvotVti?.value);
+            const aovV  = Number(fields.aovVti?.value);
+            const bsa   = Number(fields.bsa?.value);
+
+            const lvotArea = 0.785 * lvotD * lvotD;
+            const EOA = (lvotArea * lvotV) / aovV;
+            const EOAI = EOA / bsa;
+
+            if (!Number.isFinite(EOAI) || EOAI <= 0) { eoaiEl.textContent = '--'; return; }
+            eoaiEl.textContent = fmt2Fixed(EOAI);
+          }
+
+          function resetAll() {
+            Object.values(fields).filter(Boolean).forEach((inp) => {
+              inp.value = '';
+              inp.classList.remove('filled', 'mr-missing');
+            });
+            if (eoaiEl) eoaiEl.textContent = '--';
+          }
+
+          if (btnCalc) btnCalc.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (validate()) calculate();
+          });
+          if (btnReset) btnReset.addEventListener('click', (e) => {
+            e.preventDefault();
+            resetAll();
+          });
+        });
+      </script>
+
+      
+
+      <!-- Link to other page -->
+      <p style="text-align:center; margin:14px 0 0;">
+  <a href="prosthetic_valves.html" style="color:#c8c8c8; text-decoration:underline;">
+    Prosthesis Reference Values
+  </a>
+</p>
+
+
+
+
+
+      <br>
+    </div>
+  </div>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav">
+      <!-- <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li> -->
+      <!-- <li><a href="terms-of-use.html" target="_blank">Terms of Use</a></li> -->
+    </ul>
+  </footer>
+
+</body>
+</html>
