@@ -67,7 +67,8 @@
                 <!-- Right cell: blue-bordered rectangle that matches left height -->
                 <td class="dg-c2 email-right">
                   <div class="email-card">
-                    <a class="email-link" href="mailto:michaelowen37@gmail.com">michaelowen37@gmail.com</a>
+                    <a class="email-link" href="mailto:michaelowen37@gmail.com"> michaelowen37<wbr>@gmail<wbr>.com</a>
+
                   </div>
                 </td>
               </tr>
@@ -133,12 +134,53 @@
       /* Let JS set min-height to match left cell; this keeps perfect visual parity */
     }
 
-    /* Email link styling */
-    #contact-email .email-link{
-      color: #c8c8c8;
-      text-decoration: underline;
-      white-space: nowrap;
-    }
+    /* Right cell: remove padding, allow absolute positioning */
+#contact-email td.email-right { 
+  position: relative; 
+  padding: 0 !important; 
+}
+
+/* Blue-bordered rectangle fills the whole cell height */
+#contact-email .email-card{
+  position: absolute;
+  inset: 0;                    /* top:0; right:0; bottom:0; left:0 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--contact-blue, #3a7bf0);
+  border-radius: var(--mr-radius, 12px);
+  padding: 12px;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+/* Email link: single line by default, wrap only on small screens */
+#contact-email .email-link{
+  color: #c8c8c8;
+  text-decoration: underline;
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;         /* default: keep one line on wider screens */
+}
+
+@media (max-width: 480px){
+  #contact-email .email-link{
+    white-space: normal;       /* allow wrapping at <wbr> and dots/@ */
+    overflow-wrap: anywhere;   /* fallback if <wbr> is removed later */
+    word-break: break-word;    /* legacy fallback */
+  }
+}
+
+/* Give the email a bit more room on narrower screens (optional but helpful) */
+@media (max-width: 700px){
+  #contact-email colgroup col:nth-child(1){ width: 38% !important; }
+  #contact-email colgroup col:nth-child(2){ width: 62% !important; }
+}
+@media (max-width: 480px){
+  #contact-email colgroup col:nth-child(1){ width: 32% !important; }
+  #contact-email colgroup col:nth-child(2){ width: 68% !important; }
+}
+
 
     /* Space between message and email row */
     #contact-email.email-up { margin-top: 18px !important; }
@@ -162,22 +204,7 @@
     }
   </style>
 
-  <!-- Tiny script: match the right blue rectangle height to the left 'Email' box -->
-  <script>
-    (function(){
-      function syncEmailHeights(){
-        var left = document.querySelector('#email-row .email-left');
-        var card = document.querySelector('#contact-email .email-card');
-        if (!left || !card) return;
-        card.style.minHeight = '';
-        var h = left.offsetHeight;
-        if (h && h > 0) card.style.minHeight = h + 'px';
-      }
-      window.addEventListener('load', syncEmailHeights);
-      window.addEventListener('resize', syncEmailHeights);
-      setTimeout(syncEmailHeights, 300);
-    })();
-  </script>
+ 
 
 </body>
 </html>

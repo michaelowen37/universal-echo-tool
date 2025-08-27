@@ -48,7 +48,7 @@
       <div id="contact-email" aria-label="Donation methods" class="email-up">
         <div class="dg-tablewrap">
           <table class="dg-table" role="table" aria-label="Donation methods">
-            <!-- Force 50/50 so the seam is dead center -->
+            <!-- Force 50/50 so the seam is dead center on desktop -->
             <colgroup>
               <col style="width:50%">
               <col style="width:50%">
@@ -93,7 +93,7 @@
 
   <!-- Page-scoped tweaks -->
   <style>
-    /* Tighten space under the Contact title */
+    /* Tighten space under the title */
     .contact-tight { margin-bottom: 2px !important; }
     .contact-tight .dg-title { margin-bottom: 0 !important; padding-bottom: 0 !important; }
 
@@ -109,7 +109,7 @@
     #contact-message .dg-table .dg-wrap::-webkit-scrollbar,
     #contact-email .dg-table .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
 
-    /* === Anti-ellipsis fix just for the message area === */
+    /* Anti-ellipsis fix just for the message area */
     #contact-message .dg-table td .dg-wrap,
     #contact-message .dg-table th .dg-wrap{
       display: block !important;
@@ -123,15 +123,15 @@
       height: auto !important;
     }
 
-    /* Right cell: remove padding so border meets center; also make it a positioning context */
+    /* Right cell: remove padding so border meets center; make it a positioning context */
     #contact-email td.email-right,
     #contact-email td.email-right .dg-wrap { padding: 0 !important; }
     #contact-email td.email-right{
-      position: relative;  /* <-- key: lets the inner card fill the entire cell */
+      position: relative;   /* lets the inner card fill the entire cell */
       overflow: visible;
     }
 
-    /* Blue-bordered rectangle fills the entire right cell height */
+    /* Blue-bordered rectangle fills the entire right cell height (kept as-is) */
     :root{ --contact-blue: var(--dg-blue, #3a7bf0); }
     #contact-email .email-card{
       position: absolute;
@@ -152,10 +152,13 @@
       white-space: nowrap;
     }
 
-    /* Non-clickable text styling (Zelle) */
+    /* Zelle email: keep to one line, but responsively shrink a touch on small screens */
     #contact-email .email-text{
       color: #c8c8c8;
-      white-space: nowrap;
+      display: inline-block;
+      max-width: 100%;
+      white-space: nowrap;                        /* stay on one line */
+      font-size: clamp(0.95rem, 2.8vw, 1rem);     /* gently scale down on small viewports */
     }
 
     /* Space between message and donation rows */
@@ -171,15 +174,31 @@
     /* Tighter line spacing inside the message */
     .msg-lines{ line-height: 1.15; }
 
-    /* On small screens, relax to 90% so it doesn't feel too narrow */
+    /* On smaller screens: widen the email column so it never spills */
     @media (max-width: 700px){
       .msg-narrow{ width: 90%; }
       #contact-email .email-card{ padding: 10px; }
       .pay-row .email-left{ padding: 10px 12px; }
       .msg-lines{ line-height: 1.2; }
+
+      /* Rebalance columns for more room on the right */
+      #contact-email colgroup col:nth-child(1){ width: 38% !important; } /* label */
+      #contact-email colgroup col:nth-child(2){ width: 62% !important; } /* value */
+    }
+
+    @media (max-width: 520px){
+      #contact-email colgroup col:nth-child(1){ width: 32% !important; }
+      #contact-email colgroup col:nth-child(2){ width: 68% !important; }
+    }
+
+    @media (max-width: 400px){
+      #contact-email colgroup col:nth-child(1){ width: 28% !important; }
+      #contact-email colgroup col:nth-child(2){ width: 72% !important; }
+      #contact-email .email-card{ padding: 8px; }
+      #contact-email .email-text{ font-size: clamp(0.9rem, 3.5vw, 0.95rem); }
     }
   </style>
 
-  <!-- No JS needed for height syncing anymore -->
+  <!-- No JS needed -->
 </body>
 </html>
