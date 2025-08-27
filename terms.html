@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Terms of Use</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style3.css">
+  <link rel="icon" type="image/svg+xml" href="echocardio-heart.svg">
+</head>
+
+<body>
+  <nav class="zone nav-bar">
+    <ul class="main-nav">
+      <li><a class="top-nav" href="index.html">Home</a></li>
+    </ul>
+
+    <!-- Title (no border, extra-tight spacing) -->
+    <div class="title-stack contact-tight">
+      <div class="container zone body dg-title">Terms of Use:</div>
+    </div>
+  </nav>
+
+  <div class="zone navigation">
+    <div class="final" style="padding:0 10%">
+
+      <!-- ============================ MESSAGE (no blue header) ============================ -->
+      <div id="contact-message" aria-label="Message">
+        <div class="dg-tablewrap">
+          <table class="dg-table msg-narrow" role="table" aria-label="Short description">
+            <tbody>
+              <tr>
+                <td class="dg-c2" colspan="2">
+                  <div class="dg-wrap msg-lines">
+                    Welcome!<br><br>
+
+                    This tool, although thought to be error free, could potentially make mistakes.  It is not intended to direct patient care but rather act as a guidance for reporting purposes.  If you find a mistake, please <a href="contact.html" class="inline-link">contact</a> me and I'll do my best to fix it. <br><br> By using this web app, you acknowledge the potential shortcomings within the algorithms and accept the risk.   
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- ========================== END MESSAGE ========================== -->
+
+      <br>
+
+      
+
+    </div>
+  </div>
+
+  <footer class="zone foot bottom-section">
+    <ul class="foot-nav"></ul>
+  </footer>
+
+  <!-- Page-scoped tweaks -->
+  <style>
+    /* Tighten space under the Contact title */
+    .contact-tight { margin-bottom: 2px !important; }
+    .contact-tight .dg-title { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+
+    /* Keep hyphenation/overflow consistent with your tables */
+    #contact-message .dg-table .dg-wrap,
+    #contact-email .dg-table .dg-wrap{
+      -webkit-hyphens: manual !important;
+      hyphens: manual !important;
+      word-break: normal !important;
+      overflow-wrap: normal !important;
+      scrollbar-width:none; -ms-overflow-style:none;
+    }
+    #contact-message .dg-table .dg-wrap::-webkit-scrollbar,
+    
+
+    /* === Anti-ellipsis fix just for the message area === */
+    #contact-message .dg-table td .dg-wrap,
+    #contact-message .dg-table th .dg-wrap{
+      display: block !important;
+      -webkit-line-clamp: unset !important;
+      line-clamp: unset !important;
+      -webkit-box-orient: initial !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      white-space: normal !important;
+      max-height: none !important;
+      height: auto !important;
+    }
+
+    /* Make sure inline “donate” link stays inline, same size/color, clearly underlined */
+    #contact-message .inline-link{
+      display: inline !important;
+      font: inherit !important;          /* inherits size & weight */
+      line-height: inherit !important;
+      color: inherit;                    /* keep same color as surrounding text */
+      text-decoration: underline !important;
+      text-underline-offset: 2px;
+    }
+
+    
+  </style>
+
+</body>
+</html>
