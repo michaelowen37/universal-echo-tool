@@ -557,19 +557,39 @@
             }
           }
 
-          // ===== Grading logic (UNCHANGED) =====
+          // Build supportive line that omits items already provided
+          function buildSupportiveText({LAVI, LAStrain, PVSD, IVRT}){
+            const items = [];
+            if (!has(LAVI)) items.push("LAVI");
+            if (!has(LAStrain)) items.push("LA strain");
+            if (!has(PVSD)) items.push("pulmonary vein S/D");
+            if (!has(IVRT)) items.push("IVRT");
+            if (!items.length) return "";
+            if (items.length === 1) return `Supportive options: ${items[0]}.`;
+            return `Supportive options: ${items.slice(0,-1).join(", ")}, and ${items.slice(-1)}.`;
+          }
+
+          // Short helper to craft the “add e′” precision phrase
+          function precisionEprimePhrase({needSep, needLat}){
+            if (needSep && needLat) return " For even greater precision, add individual septal/lateral e′ values.";
+            if (needSep) return " For even greater precision, add septal e′ value.";
+            if (needLat) return " For even greater precision, add lateral e′ value.";
+            return "";
+          }
+
+          // ===== Grading logic (unchanged thresholds; messaging enhanced) =====
           function gradeDiastolic({
             sepEprime, latEprime, EoverA, avgEe, sepEe, latEe, TRv, PASP, LAVI, LAStrain, PVSD, IVRT
           } = {}) {
-            const SUPPORT = "Supportive options: LAVI, LA strain, pulmonary vein S/D, and IVRT.";
-
             const hasNum = (v) => typeof v === 'number' && !Number.isNaN(v);
             const any = (...xs) => xs.some(hasNum);
 
-            const haveAnyEe = hasNum(avgEe) || hasNum(sepEe) || hasNum(latEe);
-            const haveAnyTRPASP = hasNum(TRv) || hasNum(PASP);
+            const haveAnyEe = hasNum(avgEe) || hasNum(sepEe) || hasNum(latEe);   // any E/e′ present
+            const haveAnyTRPASP = hasNum(TRv) || hasNum(PASP);                    // any TR/PASP present
+            const haveAnyEprime = any(sepEprime, latEprime);                      // any individual e′ present
 
-            function missingPriorityList(){
+            // LAP primaries helper
+            function missingPrimariesList(){
               const list = [];
               if (!haveAnyEe) list.push("E/e′");
               if (!haveAnyTRPASP) list.push("TR Vmax/PASP");
@@ -577,15 +597,17 @@
               if (list.length === 1) return list[0];
               return list[0] + " and " + list[1];
             }
-            function priorityCTA(prefix = "To increase certainty or reveal LAP↑:"){
-              const miss = missingPriorityList();
+            function primariesCTA(prefix){
+              const miss = missingPrimariesList();
               return miss ? `${prefix} obtain ${miss}.` : "";
             }
 
+            // Count of provided numeric fields (for early indeterminate)
             const providedCount = [
               sepEprime, latEprime, EoverA, avgEe, sepEe, latEe, TRv, PASP, LAVI, LAStrain, PVSD, IVRT
             ].filter(hasNum).length;
 
+            // Primary pieces
             const avgEprime = (hasNum(sepEprime) && hasNum(latEprime)) ? (sepEprime + latEprime) / 2 : null;
             const redE_abn =
               (hasNum(sepEprime) && sepEprime <= 6) ||
@@ -601,6 +623,7 @@
 
             const incTRorPASP_abn = (hasNum(TRv) && TRv >= 2.8) || (hasNum(PASP) && PASP >= 35);
 
+            // Supportive (non-primary LAP) findings
             const supportivePositive =
               (hasNum(PVSD) && PVSD <= 0.67) ||
               (hasNum(LAStrain) && LAStrain <= 18) ||
@@ -613,7 +636,6 @@
             const step2_incEe = incEe_abn;
             const step2Count = [step2_EA_extreme, step2_LARS, step2_LAVI, step2_incEe].filter(Boolean).length;
 
-            const haveAnyEprime = any(sepEprime, latEprime);
             const dysfunctionPresent =
               (redE_abn && step2Count >= 1) ||
               (haveAnyEprime && !redE_abn && step2Count >= 2) ||
@@ -629,42 +651,81 @@
               return { grade: "Abnormal (Ungraded)", reason: "Increased LAP likely; add E/A to distinguish Grade II vs III." };
             }
 
+            // Build supportive text (omit items user already entered)
+            const SUPPORT = buildSupportiveText({LAVI, LAStrain, PVSD, IVRT});
+            const addSupport = (s) => SUPPORT ? `${s} ${SUPPORT}` : s;
+
+            // -------- Few inputs → Indeterminate with LAP primaries copy --------
             if (providedCount < 2) {
-              const cta = priorityCTA("Start with priority primaries:");
-              return { grade: "Indeterminate", reason: (cta ? `${cta} ${SUPPORT}` : `Too few inputs to analyze. ${SUPPORT}`) };
+              const presentPrimaries = (haveAnyEe ? 1 : 0) + (haveAnyTRPASP ? 1 : 0);
+              const prefix = presentPrimaries === 1
+                ? "Add one more LAP primary:"
+                : "Start with LAP primaries:";
+              const cta = primariesCTA(prefix);
+              return { grade: "Indeterminate", reason: addSupport(cta || "Too few inputs to analyze.") };
             }
 
+            // All primaries abnormal -> grade by E/A
             if (primaryCount === 3) return gradeFromEA();
 
+            // Grade I path
             const noEvidenceElevatedLAP = !incEe_abn && !incTRorPASP_abn;
             if (redE_abn && hasNum(EoverA) && EoverA <= 0.8 && noEvidenceElevatedLAP) {
-              const cta = priorityCTA("To confirm normal LAP:");
-              return { grade: "Grade I", reason: cta ? `Reduced e′ with E/A ≤ 0.8 and no evidence of elevated LAP. ${cta} ${SUPPORT}` : "Reduced e′ with E/A ≤ 0.8 and no evidence of elevated LAP." };
+              const cta = primariesCTA("To confirm normal LAP:");
+              const base = "Reduced e′ with E/A ≤ 0.8 and no evidence of elevated LAP.";
+              return { grade: "Grade I", reason: addSupport(cta ? `${base} ${cta}` : base) };
             }
 
+            // One or two primaries abnormal
             if (primaryCount === 1 || primaryCount === 2) {
               if (supportivePositive) return gradeFromEA();
 
               if (dysfunctionPresent) {
-                const cta = priorityCTA("To classify and assess LAP:");
-                return { grade: "Abnormal (Ungraded)", reason: (cta ? `Diastolic dysfunction present by Figure 2; LAP not confirmed. ${cta} If LAP increases, use E/A to grade. ${SUPPORT}` : `Diastolic dysfunction present by Figure 2; LAP not confirmed. If LAP increases, use E/A to grade. ${SUPPORT}`) };
+                const cta = primariesCTA("To classify and assess LAP:");
+                // If E/A already present, omit the “If LAP increases…” sentence
+                const lapLine = hasNum(EoverA) ? "" : " If LAP increases, use E/A to grade.";
+
+                // NEW: If E/A is present and both LAP primaries are already abnormal (E/e′ and TR/PASP),
+                // but red e′ is not confirmed because an individual e′ is missing, suggest adding it,
+                // since that can tip to Grade II/III via E/A.
+                let eprimeNudge = "";
+                if (hasNum(EoverA) && incEe_abn && incTRorPASP_abn && !redE_abn) {
+                  const needSep = !hasNum(sepEprime);
+                  const needLat = !hasNum(latEprime);
+                  if (needSep || needLat) {
+                    eprimeNudge = precisionEprimePhrase({needSep, needLat});
+                  }
+                }
+
+                const txt = `Diastolic dysfunction present by Figure 2; LAP not confirmed. ${cta}${lapLine}${eprimeNudge}`.trim();
+                return { grade: "Abnormal (Ungraded)", reason: addSupport(txt) };
               }
 
-              const cta = priorityCTA();
-              return { grade: "Normal", reason: (cta ? `Insufficient evidence for elevated LAP with current inputs. ${cta} ${SUPPORT}` : `Insufficient evidence for elevated LAP with current inputs. ${SUPPORT}`) };
+              // NORMAL with targeted e′ precision note if they only used E/e′
+              const cta = primariesCTA("");
+              let precision = "";
+              if (haveAnyEe && !haveAnyEprime){
+                const needSep = !hasNum(sepEprime);
+                const needLat = !hasNum(latEprime);
+                precision = precisionEprimePhrase({needSep, needLat});
+              }
+              const base = `Insufficient evidence for elevated LAP with current inputs.${cta ? " " + cta : ""}${precision}`;
+              return { grade: "Normal", reason: addSupport(base) };
             }
 
+            // No primaries abnormal
             if (primaryCount === 0) {
               if (dysfunctionPresent) {
-                const cta = priorityCTA("To assess LAP and grade:");
-                return { grade: "Abnormal (Ungraded)", reason: (cta ? `Diastolic dysfunction present by Figure 2; primary LAP markers not increased. ${cta} ${SUPPORT}` : `Diastolic dysfunction present by Figure 2; primary LAP markers not increased. ${SUPPORT}`) };
+                const cta = primariesCTA("To assess LAP and grade:");
+                return { grade: "Abnormal (Ungraded)", reason: addSupport(`Diastolic dysfunction present by Figure 2; primary LAP markers not increased. ${cta}`.trim()) };
               }
-              const cta = priorityCTA("If concern persists:");
-              return { grade: "Normal", reason: (cta ? `Criteria for diastolic dysfunction not met. ${cta} ${SUPPORT}` : "Criteria for diastolic dysfunction not met.") };
+              const cta = primariesCTA("If concern persists:");
+              return { grade: "Normal", reason: addSupport(cta || "Criteria for diastolic dysfunction not met.") };
             }
 
-            const cta = priorityCTA("Add priority primaries:");
-            return { grade: "Indeterminate", reason: (cta ? `${cta} ${SUPPORT}` : `Unable to classify with current inputs. ${SUPPORT}`) };
+            // Fallback
+            const cta = primariesCTA("Add LAP primaries:");
+            return { grade: "Indeterminate", reason: addSupport(cta || "Unable to classify with current inputs.") };
           }
 
           function animateFlash(el){
