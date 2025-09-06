@@ -294,7 +294,10 @@
 
         /* === PHONE/NARROW BAND FIXES: keep 2-up, center the grid, prevent cutoffs === */
         @media (max-width:720px){
+          /* shrink panel padding a touch */
           #mr-embed .mr-panel{ padding:16px 14px; }
+
+          /* turn columns into fully-fluid halves and center the grid */
           .mr-grid{
             grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
             gap: 10px 10px;
@@ -303,6 +306,7 @@
           .mr-field{ width:100% !important; max-width:none !important; min-width:0 !important; }
           input[type="number"]{ min-width:0 !important; }
 
+          /* buttons stay side-by-side at 50/50 */
           .mr-actions-row{
             grid-template-columns: 1fr 1fr !important;
             column-gap:10px; row-gap:10px;
@@ -362,6 +366,7 @@
         @media (max-width:900px){
           .mr-out-row{ grid-template-columns: 150px minmax(140px, 1fr); }
         }
+        /* Under ~400px, stack label above value to avoid clipping */
         @media (max-width:400px){
           .mr-out-row{ grid-template-columns: 1fr; gap:8px; }
           .mr-out-label{ text-align:center; }
@@ -552,51 +557,47 @@
             }
           }
 
-          // ===== Grading logic (UNCHANGED math; improved messaging) =====
+          // ===== Grading logic (2025 ASE-aligned, concise messaging) =====
           function gradeDiastolic({
             sepEprime, latEprime, EoverA, avgEe, sepEe, latEe, TRv, PASP, LAVI, LAStrain, PVSD, IVRT
           } = {}) {
-            // util
             const hasNum = (v) => typeof v === 'number' && !Number.isNaN(v);
 
-            // --- Helpers: build trimmed supportive list based on what's missing ---
-            function englishJoin(list){
-              if (!list.length) return '';
-              if (list.length === 1) return list[0];
-              return list.slice(0,-1).join(', ') + ', and ' + list[list.length-1];
-            }
-            function buildSupportiveList(){
-              const s = [];
-              if (!hasNum(LAVI)) s.push('LAVI');
-              if (!hasNum(LAStrain)) s.push('LA strain');
-              if (!hasNum(PVSD)) s.push('pulmonary vein S/D');
-              if (!hasNum(IVRT)) s.push('IVRT');
-              return s;
-            }
+            // ---------- counts / presence ----------
+            const providedCount = [
+              sepEprime, latEprime, EoverA, avgEe, sepEe, latEe, TRv, PASP, LAVI, LAStrain, PVSD, IVRT
+            ].filter(hasNum).length;
 
-            // --- Presence of LAP primaries (entered at all), not necessarily abnormal ---
-            const haveAnyEePrimary = hasNum(avgEe) || hasNum(sepEe) || hasNum(latEe);
-            const haveAnyTRPASP   = hasNum(TRv) || hasNum(PASP);
+            const haveEprimeInput = hasNum(sepEprime) || hasNum(latEprime);
+            const haveEeInput     = hasNum(avgEe) || hasNum(sepEe) || hasNum(latEe);
+            const haveTRorPASP    = hasNum(TRv) || hasNum(PASP);
 
-            function missingLAPPrimariesList(){
+            function lapMissingList(){
               const miss = [];
-              if (!haveAnyEePrimary) miss.push("E/e′");
-              if (!haveAnyTRPASP)   miss.push("TR Vmax/PASP");
+              if (!haveEprimeInput) miss.push("individual e′ (septal or lateral)");
+              if (!haveEeInput)     miss.push("E/e′");
+              if (!haveTRorPASP)    miss.push("TR Vmax/PASP");
               return miss;
             }
-            function lapCTAText(){
-              const miss = missingLAPPrimariesList();
-              if (miss.length === 2) return "Start with LAP primaries: obtain E/e′ and TR Vmax/PASP.";
-              if (miss.length === 1) return `Add one more LAP primary: obtain ${miss[0]}.`;
-              return "";
+            function joinOxford(xs){
+              if (xs.length <= 1) return xs[0] || "";
+              if (xs.length === 2) return `${xs[0]} and ${xs[1]}`;
+              return `${xs.slice(0,-1).join(", ")}, and ${xs[xs.length-1]}`;
+            }
+            function lapCTA(){
+              const miss = lapMissingList();
+              if (!miss.length) return "";
+              if (!haveEprimeInput && !haveEeInput && !haveTRorPASP){
+                return `Start with LAP primaries: obtain ${joinOxford(miss)}.`;
+              }
+              return `Add one more LAP primary: obtain ${joinOxford(miss)}.`;
             }
 
-            // --- Abnormal cutoffs (your current thresholds kept exactly) ---
-            const avgEprime = (hasNum(sepEprime) && hasNum(latEprime)) ? (sepEprime + latEprime) / 2 : null;
+            // ---------- primaries (abnormal) ----------
             const redE_abn =
               (hasNum(sepEprime) && sepEprime <= 6) ||
               (hasNum(latEprime) && latEprime <= 7) ||
-              (hasNum(avgEprime) && avgEprime <= 6.5);
+              (hasNum(sepEprime) && hasNum(latEprime) && ((sepEprime + latEprime) / 2) <= 6.5);
 
             let incEe_abn = false;
             if (hasNum(avgEe) && avgEe >= 14) incEe_abn = true;
@@ -607,12 +608,31 @@
 
             const incTRorPASP_abn = (hasNum(TRv) && TRv >= 2.8) || (hasNum(PASP) && PASP >= 35);
 
+            const primaryCount = [redE_abn, incEe_abn, incTRorPASP_abn].filter(Boolean).length;
+
+            // ---------- supportive (only matters when 1–2 primaries abnormal) ----------
             const supportivePositive =
               (hasNum(PVSD) && PVSD <= 0.67) ||
               (hasNum(LAStrain) && LAStrain <= 18) ||
               (hasNum(LAVI) && LAVI > 34) ||
               (hasNum(IVRT) && IVRT <= 70);
 
+            function supportiveUnmetList() {
+              const list = [];
+              if (!hasNum(LAVI))     list.push("LAVI");
+              if (!hasNum(LAStrain)) list.push("LA strain");
+              if (!hasNum(PVSD))     list.push("pulmonary vein S/D");
+              if (!hasNum(IVRT))     list.push("IVRT");
+              return list;
+            }
+            function supportiveSentence(show){
+              if (!show) return "";
+              const missing = supportiveUnmetList();
+              if (!missing.length) return "";
+              return ` Supportive options: ${joinOxford(missing)}.`;
+            }
+
+            // ---------- Fig 2 presence (for messaging only) ----------
             const step2_EA_extreme = (hasNum(EoverA) && (EoverA <= 0.8 || EoverA >= 2));
             const step2_LARS = (hasNum(LAStrain) && LAStrain <= 18);
             const step2_LAVI = (hasNum(LAVI) && LAVI > 34);
@@ -625,158 +645,81 @@
               (haveAnyEprime && !redE_abn && step2Count >= 2) ||
               (!haveAnyEprime && step2Count >= 2);
 
-            // (Kept from your build) LAP "primaries" count the same three flags
-            const primaryCount = [redE_abn, incEe_abn, incTRorPASP_abn].filter(Boolean).length;
+            // ---------- E′ precision nudge (only when it could change grade) ----------
+            const ePrimeMissingSep = !hasNum(sepEprime);
+            const ePrimeMissingLat = !hasNum(latEprime);
+            const ePrimeMissingBoth = ePrimeMissingSep && ePrimeMissingLat;
 
-            function gradeFromEA() {
-              if (hasNum(EoverA)) {
-                if (EoverA >= 2) return { grade: "Grade III", reason: "Increased LAP with restrictive filling (E/A ≥ 2)." };
-                return { grade: "Grade II", reason: "Increased LAP without restrictive filling (E/A < 2)." };
-              }
-              return { grade: "Abnormal (Ungraded)", reason: "Increased LAP likely; add E/A to distinguish Grade II vs III." };
-            }
+            // Could e′ change grade right now?
+            const couldYieldGradeI =
+              ePrimeMissingBoth && hasNum(EoverA) && EoverA <= 0.8 && !incEe_abn && !incTRorPASP_abn;
 
-            // --- Targeted nudges ---
-            const needEANudge = !hasNum(EoverA) && (incEe_abn || incTRorPASP_abn);
-            const bothEprimeMissing = !hasNum(sepEprime) && !hasNum(latEprime);
-            const onlySepMissing = !hasNum(sepEprime) && hasNum(latEprime);
-            const onlyLatMissing = hasNum(sepEprime) && !hasNum(latEprime);
+            const couldPushTo3Primaries =
+              ePrimeMissingBoth && ( (incEe_abn && incTRorPASP_abn) ); // already 2 abnormal; reduced e′ would make 3
+
             function ePrimePrecisionText(){
-              if (bothEprimeMissing) return "For even greater precision, add individual septal/lateral e′ values.";
-              if (onlySepMissing)    return "For even greater precision, add septal e′ value.";
-              if (onlyLatMissing)    return "For even greater precision, add lateral e′ value.";
+              if (!(couldYieldGradeI || couldPushTo3Primaries)) return "";
+              if (ePrimeMissingBoth) return " For even greater precision, add individual septal/lateral e′ values.";
+              if (ePrimeMissingSep)  return " For even greater precision, add septal e′ value.";
+              if (ePrimeMissingLat)  return " For even greater precision, add lateral e′ value.";
               return "";
             }
 
-            // --- Build outputs (keep your decision paths; only messaging changes) ---
-            const providedCount = [
-              sepEprime, latEprime, EoverA, avgEe, sepEe, latEe, TRv, PASP, LAVI, LAStrain, PVSD, IVRT
-            ].filter(hasNum).length;
-
-            // Reason composer
-            function composeReason(base, { includeLapCTA=true, includeEANudge=false, includeEPrimePrecision=false, includeSupportive=true } = {}){
-              const parts = [base];
-
-              if (includeLapCTA){
-                const lapCTA = lapCTAText();
-                if (lapCTA) parts.push(lapCTA);
+            // ---------- Helper for final grading once LAP is increased ----------
+            function gradeFromEA() {
+              if (!hasNum(EoverA)) {
+                return { grade: "Abnormal (Ungraded)", reason: "Increased LAP likely; add E/A to distinguish Grade II vs III." };
               }
-
-              if (includeEANudge && needEANudge) parts.push("Add E/A to enable grading.");
-
-              if (includeEPrimePrecision){
-                const ept = ePrimePrecisionText();
-                if (ept) parts.push(ept);
+              if (EoverA >= 2) {
+                return { grade: "Grade III", reason: "Increased LAP with restrictive filling (E/A ≥ 2)." };
               }
-
-              if (includeSupportive){
-                const support = buildSupportiveList();
-                if (support.length){
-                  parts.push(`Supportive options: ${englishJoin(support)}.`);
-                }
-              }
-
-              return parts.join(' ');
+              return { grade: "Grade II", reason: "Increased LAP without restrictive filling (E/A < 2)." };
             }
 
-            // ===== Branches (unchanged logic) =====
+            // ===== Sparse data guard (keep concise, point to LAP primaries) =====
             if (providedCount < 2) {
-              return {
-                grade: "Indeterminate",
-                reason: composeReason("Too few inputs to analyze.", {
-                  includeLapCTA: true,
-                  includeEANudge: false,
-                  includeEPrimePrecision: true,  // can help early
-                  includeSupportive: true
-                })
-              };
+              const cta = lapCTA();
+              if (cta) return { grade: "Indeterminate", reason: cta };
+              return { grade: "Indeterminate", reason: "Too few inputs to analyze." };
             }
 
+            // ===== 3 primaries abnormal → LAP increased → grade by E/A =====
             if (primaryCount === 3) {
-              const g = gradeFromEA();
-              // Definitive grade → suppress supportive & extra nudges
-              return { grade: g.grade, reason: composeReason(g.reason, { includeLapCTA:false, includeSupportive:false }) };
+              return gradeFromEA();
             }
 
-            const noEvidenceElevatedLAP = !incEe_abn && !incTRorPASP_abn;
-            if (redE_abn && hasNum(EoverA) && EoverA <= 0.8 && noEvidenceElevatedLAP) {
-              // Grade I path; already uses individual e′, so e′ precision nudge is unnecessary
-              return {
-                grade: "Grade I",
-                reason: composeReason("Reduced e′ with E/A ≤ 0.8 and no evidence of elevated LAP.", {
-                  includeLapCTA: true,   // may still suggest getting LAP primaries for confirmation
-                  includeEANudge: false,
-                  includeEPrimePrecision: false,
-                  includeSupportive: true
-                })
-              };
+            // ===== Grade I gate: reduced e′ + E/A ≤0.8 + other two primaries normal =====
+            const otherTwoNormal = (!incEe_abn && !incTRorPASP_abn);
+            if (redE_abn && hasNum(EoverA) && EoverA <= 0.8 && otherTwoNormal) {
+              return { grade: "Grade I", reason: "Reduced e′ with E/A ≤ 0.8 and no evidence of elevated LAP." };
             }
 
+            // ===== 1–2 primaries abnormal =====
             if (primaryCount === 1 || primaryCount === 2) {
               if (supportivePositive) {
-                const g = gradeFromEA();
-                // Definitive grade reached → suppress supportive list
-                return { grade: g.grade, reason: composeReason(g.reason, { includeLapCTA:false, includeSupportive:false }) };
+                // LAP increased via supportive confirmation → grade by E/A
+                return gradeFromEA();
               }
-
-              if (dysfunctionPresent) {
-                // Abnormal but LAP not confirmed → do not show e′ precision (won’t resolve LAP here)
-                return {
-                  grade: "Abnormal (Ungraded)",
-                  reason: composeReason("Diastolic dysfunction present by Figure 2; LAP not confirmed.", {
-                    includeLapCTA: true,
-                    includeEANudge: !hasNum(EoverA),  // If E/A missing, remind
-                    includeEPrimePrecision: false,
-                    includeSupportive: true
-                  })
-                };
-              }
-
-              // Normal with primaries not confirming LAP → encourage E/A & e′ precision
+              // LAP not confirmed: supportive CAN change outcome; show only the missing supportive items.
+              const precision = ePrimePrecisionText(); // only appears if it could change grade
               return {
-                grade: "Normal",
-                reason: composeReason("Insufficient evidence for elevated LAP with current inputs.", {
-                  includeLapCTA: true,
-                  includeEANudge: true,
-                  includeEPrimePrecision: true,
-                  includeSupportive: true
-                })
+                grade: "Abnormal (Ungraded)",
+                reason:
+                  (dysfunctionPresent
+                    ? "Diastolic dysfunction present by Figure 2; LAP not confirmed."
+                    : "LAP not confirmed with current inputs.") +
+                  precision +
+                  supportiveSentence(true)
               };
             }
 
-            if (primaryCount === 0) {
-              if (dysfunctionPresent) {
-                return {
-                  grade: "Abnormal (Ungraded)",
-                  reason: composeReason("Diastolic dysfunction present by Figure 2; primary LAP markers not increased.", {
-                    includeLapCTA: true,
-                    includeEANudge: !hasNum(EoverA),
-                    includeEPrimePrecision: false,
-                    includeSupportive: true
-                  })
-                };
-              }
-              return {
-                grade: "Normal",
-                reason: composeReason("Criteria for diastolic dysfunction not met.", {
-                  includeLapCTA: true,
-                  includeEANudge: true,
-                  includeEPrimePrecision: true,
-                  includeSupportive: true
-                })
-              };
+            // ===== 0 primaries abnormal → Normal DF =====
+            let normalReason = "Criteria for diastolic dysfunction not met.";
+            // If E/A ≤0.8 and no e′ velocities present, adding e′ could reveal Grade I → offer concise nudge
+            if (couldYieldGradeI) {
+              normalReason += ePrimePrecisionText();
             }
-
-            // Fallback
-            return {
-              grade: "Indeterminate",
-              reason: composeReason("Unable to classify with current inputs.", {
-                includeLapCTA: true,
-                includeEANudge: true,
-                includeEPrimePrecision: true,
-                includeSupportive: true
-              })
-            };
+            return { grade: "Normal", reason: normalReason };
           }
 
           function animateFlash(el){
