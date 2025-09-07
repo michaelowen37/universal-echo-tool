@@ -584,6 +584,13 @@
               if (xs.length === 2) return `${xs[0]} or ${xs[1]}`;
               return `${xs.slice(0,-1).join(", ")}, or ${xs[xs.length-1]}`;
             }
+            // NEW: Oxford list with "and/or" before the last item (used only in Normal → "add LAP primary")
+            function joinAndOr(xs){
+              if (xs.length <= 1) return xs[0] || "";
+              if (xs.length === 2) return `${xs[0]} and/or ${xs[1]}`;
+              return `${xs.slice(0,-1).join(", ")}, and/or ${xs[xs.length-1]}`;
+            }
+
             function lapCTA(){
               const miss = lapMissingList();
               if (!miss.length) return "";
@@ -705,12 +712,10 @@
               }
               const precision = ePrimePrecisionText();
 
-              // Nudge E/A prep when TR and E/e' are both abnormal but E/A is missing
               const eaPrep = (incEe_abn && incTRorPASP_abn && !hasNum(EoverA))
                 ? " Add E/A to distinguish Grade II vs III once LAP is confirmed."
                 : "";
 
-              // Explicitly suggest remaining LAP primary as another way to confirm LAP
               const lapNudge = lapCTA();
 
               return {
@@ -734,7 +739,8 @@
               if (presentPrimariesCount >= 2 && missingPrimaries.length === 1) {
                 nextSteps = ` For even greater precision, add the remaining LAP primary: ${joinOxford(missingPrimaries)}.`;
               } else {
-                nextSteps = ` For even greater precision, add LAP primary: ${joinOxford(missingPrimaries)}.`;
+                // Use "and/or" when listing 2–3 missing primaries
+                nextSteps = ` For even greater precision, add LAP primary: ${joinAndOr(missingPrimaries)}.`;
               }
             }
 
