@@ -263,12 +263,17 @@
         input[type="number"]{
           width:100%;min-width:0;padding:8px 10px;background:var(--mr-in-empty);
           border:var(--mr-item-border) solid var(--mr-green);border-radius:var(--mr-radius-sm);
-          text-align:center;color:#111;outline:none;appearance:textfield;-moz-appearance:textfield;overflow:hidden;
-          transition:background-color .25s,color .25s,box-shadow .25s,border-color .2s,font-size .1s ease;
+          text-align:center;color:#111;outline:none;appearance:textfield;-moz-appearance:textfield;
+          overflow:hidden;                    /* prevent inner scrollbox */
+          scrollbar-width: none;              /* Firefox */
+          -ms-overflow-style: none;           /* IE/Edge legacy */
         }
+        input[type="number"]::-webkit-scrollbar{ width:0; height:0; }  /* WebKit */
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button{ -webkit-appearance: none; margin: 0; }
+
         input[type="number"].filled{background:var(--mr-in-filled);color:var(--mr-text)}
         input[type="number"]:focus{box-shadow:0 0 0 3px rgba(0,255,102,.18)}
-        input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 
         /* Buttons row */
         .mr-actions-row{
@@ -294,10 +299,7 @@
 
         /* === PHONE/NARROW BAND FIXES: keep 2-up, center the grid, prevent cutoffs === */
         @media (max-width:720px){
-          /* shrink panel padding a touch */
           #mr-embed .mr-panel{ padding:16px 14px; }
-
-          /* turn columns into fully-fluid halves and center the grid */
           .mr-grid{
             grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
             gap: 10px 10px;
@@ -305,8 +307,6 @@
           }
           .mr-field{ width:100% !important; max-width:none !important; min-width:0 !important; }
           input[type="number"]{ min-width:0 !important; }
-
-          /* buttons stay side-by-side at 50/50 */
           .mr-actions-row{
             grid-template-columns: 1fr 1fr !important;
             column-gap:10px; row-gap:10px;
@@ -359,14 +359,12 @@
           word-break:normal;
         }
 
-        /* Outputs shrink gracefully on narrower widths */
         @media (max-width:1100px){
           .mr-out-row{ grid-template-columns: 160px minmax(160px, 1fr); }
         }
         @media (max-width:900px){
           .mr-out-row{ grid-template-columns: 150px minmax(140px, 1fr); }
         }
-        /* Under ~400px, stack label above value to avoid clipping */
         @media (max-width:400px){
           .mr-out-row{ grid-template-columns: 1fr; gap:8px; }
           .mr-out-label{ text-align:center; }
@@ -563,14 +561,11 @@
           } = {}) {
             const hasNum = (v) => typeof v === 'number' && !Number.isNaN(v);
 
-            // ---------- counts / presence ----------
-            const providedCount = [
-              sepEprime, latEprime, EoverA, avgEe, sepEe, latEe, TRv, PASP, LAVI, LAStrain, PVSD, IVRT
-            ].filter(hasNum).length;
-
-            const haveEprimeInput = hasNum(sepEprime) || hasNum(latEprime);
-            const haveEeInput     = hasNum(avgEe) || hasNum(sepEe) || hasNum(latEe);
-            const haveTRorPASP    = hasNum(TRv) || hasNum(PASP);
+            // ---------- presence of LAP primaries ----------
+            const haveEprimeInput = hasNum(sepEprime) || hasNum(latEprime);          // individual e′
+            const haveEeInput     = hasNum(avgEe) || hasNum(sepEe) || hasNum(latEe); // E/e′
+            const haveTRorPASP    = hasNum(TRv) || hasNum(PASP);                     // TR Vmax / PASP
+            const presentPrimariesCount = [haveEprimeInput, haveEeInput, haveTRorPASP].filter(Boolean).length;
 
             function lapMissingList(){
               const miss = [];
@@ -584,13 +579,21 @@
               if (xs.length === 2) return `${xs[0]} and ${xs[1]}`;
               return `${xs.slice(0,-1).join(", ")}, and ${xs[xs.length-1]}`;
             }
+            function joinOr(xs){
+              if (xs.length <= 1) return xs[0] || "";
+              if (xs.length === 2) return `${xs[0]} or ${xs[1]}`;
+              return `${xs.slice(0,-1).join(", ")}, or ${xs[xs.length-1]}`;
+            }
             function lapCTA(){
               const miss = lapMissingList();
               if (!miss.length) return "";
-              if (!haveEprimeInput && !haveEeInput && !haveTRorPASP){
-                return `Start with LAP primaries: obtain ${joinOxford(miss)}.`;
+              if (presentPrimariesCount === 0){
+                return `Start with LAP primaries: ${joinOxford(miss)}.`;
+              } else if (presentPrimariesCount === 1){
+                return `Add at least one more LAP primary: ${joinOr(miss)}.`;
+              } else {
+                return `Add one more LAP primary: ${joinOxford(miss)}.`;
               }
-              return `Add one more LAP primary: obtain ${joinOxford(miss)}.`;
             }
 
             // ---------- primaries (abnormal) ----------
@@ -645,27 +648,24 @@
               (haveAnyEprime && !redE_abn && step2Count >= 2) ||
               (!haveAnyEprime && step2Count >= 2);
 
-            // ---------- E′ precision nudge (only when it could change grade) ----------
+            // ---------- e′ precision nudges (only when they could change grade) ----------
             const ePrimeMissingSep = !hasNum(sepEprime);
             const ePrimeMissingLat = !hasNum(latEprime);
-            const ePrimeMissingBoth = ePrimeMissingSep && ePrimeMissingLat;
+            const missingAnyEprime = ePrimeMissingSep || ePrimeMissingLat;
 
-            // Could e′ change grade right now?
             const couldYieldGradeI =
-              ePrimeMissingBoth && hasNum(EoverA) && EoverA <= 0.8 && !incEe_abn && !incTRorPASP_abn;
+              missingAnyEprime && hasNum(EoverA) && EoverA <= 0.8 && !incEe_abn && !incTRorPASP_abn;
 
-            const couldPushTo3Primaries =
-              ePrimeMissingBoth && ( (incEe_abn && incTRorPASP_abn) ); // already 2 abnormal; reduced e′ would make 3
+            const couldModifyRedE = !redE_abn && missingAnyEprime;
+            const couldPushTo3Primaries = (primaryCount === 2) && couldModifyRedE;
 
             function ePrimePrecisionText(){
               if (!(couldYieldGradeI || couldPushTo3Primaries)) return "";
-              if (ePrimeMissingBoth) return " For even greater precision, add individual septal/lateral e′ values.";
-              if (ePrimeMissingSep)  return " For even greater precision, add septal e′ value.";
-              if (ePrimeMissingLat)  return " For even greater precision, add lateral e′ value.";
-              return "";
+              if (ePrimeMissingSep && !ePrimeMissingLat)  return " For even greater precision, add septal e′ value.";
+              if (ePrimeMissingLat && !ePrimeMissingSep)  return " For even greater precision, add lateral e′ value.";
+              return " For even greater precision, add individual septal/lateral e′ values.";
             }
 
-            // ---------- Helper for final grading once LAP is increased ----------
             function gradeFromEA() {
               if (!hasNum(EoverA)) {
                 return { grade: "Abnormal (Ungraded)", reason: "Increased LAP likely; add E/A to distinguish Grade II vs III." };
@@ -676,7 +676,11 @@
               return { grade: "Grade II", reason: "Increased LAP without restrictive filling (E/A < 2)." };
             }
 
-            // ===== Sparse data guard (keep concise, point to LAP primaries) =====
+            // ===== Sparse data guard =====
+            const providedCount = [
+              sepEprime, latEprime, EoverA, avgEe, sepEe, latEe, TRv, PASP, LAVI, LAStrain, PVSD, IVRT
+            ].filter(hasNum).length;
+
             if (providedCount < 2) {
               const cta = lapCTA();
               if (cta) return { grade: "Indeterminate", reason: cta };
@@ -697,29 +701,56 @@
             // ===== 1–2 primaries abnormal =====
             if (primaryCount === 1 || primaryCount === 2) {
               if (supportivePositive) {
-                // LAP increased via supportive confirmation → grade by E/A
                 return gradeFromEA();
               }
-              // LAP not confirmed: supportive CAN change outcome; show only the missing supportive items.
-              const precision = ePrimePrecisionText(); // only appears if it could change grade
+              const precision = ePrimePrecisionText();
+
+              // Nudge E/A prep when TR and E/e' are both abnormal but E/A is missing
+              const eaPrep = (incEe_abn && incTRorPASP_abn && !hasNum(EoverA))
+                ? " Add E/A to distinguish Grade II vs III once LAP is confirmed."
+                : "";
+
+              // Explicitly suggest remaining LAP primary as another way to confirm LAP
+              const lapNudge = lapCTA();
+
               return {
                 grade: "Abnormal (Ungraded)",
                 reason:
                   (dysfunctionPresent
                     ? "Diastolic dysfunction present by Figure 2; LAP not confirmed."
                     : "LAP not confirmed with current inputs.") +
+                  (lapNudge ? " " + lapNudge : "") +
+                  eaPrep +
                   precision +
                   supportiveSentence(true)
               };
             }
 
-            // ===== 0 primaries abnormal → Normal DF =====
-            let normalReason = "Criteria for diastolic dysfunction not met.";
-            // If E/A ≤0.8 and no e′ velocities present, adding e′ could reveal Grade I → offer concise nudge
-            if (couldYieldGradeI) {
-              normalReason += ePrimePrecisionText();
+            // ===== 0 primaries abnormal → Normal DF (next steps) =====
+            const missingPrimaries = lapMissingList();
+            let nextSteps = "";
+
+            if (missingPrimaries.length) {
+              if (presentPrimariesCount >= 2 && missingPrimaries.length === 1) {
+                nextSteps = ` For even greater precision, add the remaining LAP primary: ${joinOxford(missingPrimaries)}.`;
+              } else {
+                nextSteps = ` For even greater precision, add LAP primary: ${joinOxford(missingPrimaries)}.`;
+              }
             }
-            return { grade: "Normal", reason: normalReason };
+
+            if (couldYieldGradeI) {
+              const ePrimePhrase =
+                (ePrimeMissingSep && !ePrimeMissingLat) ? " add septal e′ value."
+                : (ePrimeMissingLat && !ePrimeMissingSep) ? " add lateral e′ value."
+                : " add individual septal/lateral e′ values.";
+
+              const alreadyCoveredEprime = (missingPrimaries.length === 1 && missingPrimaries[0].includes("individual e′"));
+              if (!alreadyCoveredEprime) {
+                nextSteps += (nextSteps ? " And/or" : " For even greater precision,") + ePrimePhrase;
+              }
+            }
+
+            return { grade: "Normal", reason: "Criteria for diastolic dysfunction not met." + nextSteps };
           }
 
           function animateFlash(el){
