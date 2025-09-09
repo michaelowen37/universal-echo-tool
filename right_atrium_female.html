@@ -163,7 +163,7 @@
     </ul>
   </footer>
 
-  <!-- Page-scoped header/table lock + taller header + no-scrollbar second line -->
+  <!-- Page-scoped header/table lock + RA-only header controls -->
   <style>
     /* Chips: keep single-line */
     .navbar a.border, .navbar a.active.border{
@@ -180,10 +180,6 @@
       /* borders */
       --dg-outer:4px; --dg-line:2px; --dg-hsep:2px; --dg-hrim:4px;
 
-      /* header height & padding (taller like valve pages) */
-      --dg-hmin: 112px;      /* base min height for blue band */
-      --dg-hpad-y: 24px;     /* vertical padding */
-
       /* column widths */
       --c1:34%;
       --c2:16.5%;
@@ -193,6 +189,20 @@
 
       color:var(--dg-text); background:var(--dg-bg);
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+      /* =========================================================
+         RA BLUE-ROW TUNERS ——— EDIT THESE VALUES ONLY
+         These drive the blue header text size and (optionally) height.
+         ========================================================= */
+      --ra-head-fs-desktop: clamp(.86rem, 2.6vw, 1.12rem); /* <<< EDIT: desktop/tablet header text size */
+      --ra-head-fs-1000:   clamp(.72rem, 1.65vw, 1.00rem); /* <<< EDIT: ≤1000px header text */
+      --ra-head-fs-600:    clamp(.56rem, 1.90vw, .82rem);  /* <<< EDIT: ≤600px header text */
+      --ra-head-fs-420:    clamp(.52rem, 1.80vw, .78rem);  /* <<< EDIT: ≤420px header text */
+
+      --ra-hmin: 112px;     /* <<< EDIT: min blue-row height (desktop) */
+      --ra-hpad-y: 24px;    /* <<< EDIT: vertical padding (desktop) */
+      --ra-hmin-600: 96px;  /* <<< EDIT: ≤600px min height */
+      --ra-hmin-420: 88px;  /* <<< EDIT: ≤420px min height */
     }
     #dg-embed *{ box-sizing:border-box; }
 
@@ -211,7 +221,7 @@
       display:table-cell !important;
       vertical-align:middle !important;
       float:none !important;
-      text-align:center; /* centered like valves */
+      text-align:center;
     }
 
     .dg-headertable col.dg-col1-col{ width: var(--c1); }
@@ -222,22 +232,22 @@
 
     .dg-hcell{
       border-right:var(--dg-hsep) solid var(--dg-head);
-      padding: var(--dg-hpad-y) 14px;           /* taller padding */
-      min-height: var(--dg-hmin);               /* taller band */
+      padding: var(--ra-hpad-y) 14px;        /* default padding (can be overridden below) */
+      min-height: var(--ra-hmin);            /* default height (can be overridden below) */
       line-height:1.16;
       font-weight:700;
-      font-size: clamp(.86rem, 2.6vw, 1.12rem); /* a touch larger */
+      font-size: var(--ra-head-fs-desktop);  /* default header text size */
       color:var(--dg-text); background:transparent;
       white-space:nowrap; overflow:hidden;
     }
     .dg-hcell .dg-wrap{
-      display:block; overflow:visible;          /* never scrollbars in header */
+      display:block; overflow:visible;       /* never scrollbars in header */
       -ms-overflow-style: none; scrollbar-width: none;
     }
     .dg-hcell .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
     .dg-headertable th:last-child{ border-right:none; }
 
-    /* On very narrow screens, left-align header text (like native tricuspid) */
+    /* On very narrow screens, left-align header text if you prefer */
     @media (max-width:400px){
       .dg-headertable th{ text-align:left; }
     }
@@ -267,14 +277,14 @@
 
     /* ===== Value + unit inline by default ===== */
     #dg-embed .dg-wrap{
-      overflow: visible !important;             /* never auto/scroll */
-      -ms-overflow-style: none; scrollbar-width: none; /* hide UA scrollbars if any */
+      overflow: visible !important;
+      -ms-overflow-style: none; scrollbar-width: none;
     }
     #dg-embed .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
 
     #dg-embed .dg-range{ display:inline; }
     #dg-embed .dg-unit{
-      display:inline; white-space: nowrap;      /* keep token intact on one line */
+      display:inline; white-space: nowrap;
       -ms-overflow-style: none; scrollbar-width: none;
     }
     #dg-embed .dg-unit::-webkit-scrollbar{ width:0; height:0; }
@@ -283,22 +293,14 @@
     #dg-embed .dg-sep{ display:inline; padding:0 .15em; } /* dash */
     #dg-embed sup{ font-size:0.78em; line-height:0; }
 
-    /* ===== If a dash exists, drop the unit to a clean second line (no scrollbars) ===== */
+    /* If a dash exists, drop the unit to a clean second line (no scrollbars) */
     #dg-embed .dg-range:has(.dg-sep) + .dg-unit{
       display:block;
       margin-top:2px;
-      white-space:nowrap;                        /* unit stays on its own line */
+      white-space:nowrap;
       -ms-overflow-style: none; scrollbar-width: none;
     }
     #dg-embed .dg-range:has(.dg-sep) + .dg-unit::-webkit-scrollbar{ width:0; height:0; }
-
-    /* ===== Responsive tweaks (kept from RV) ===== */
-    @media (max-width:600px){
-      .dg-hcell{ font-size: clamp(.56rem, 1.9vw, .82rem); padding: 18px 10px; min-height: 96px; }
-    }
-    @media (max-width:420px){
-      .dg-hcell{ font-size: clamp(.52rem, 1.8vw, .78rem); padding: 14px 8px; min-height: 88px; }
-    }
 
     /* First-column text shrink on narrow screens */
     @media (max-width:500px){
@@ -320,10 +322,6 @@
         padding: 14px 8px;
         line-height: 1.16;
         letter-spacing: -0.006em;
-      }
-      .dg-hcell{
-        font-size: clamp(.72rem, 1.65vw, 1.0rem);
-        padding: 18px 10px;
       }
     }
     @media (max-width:600px){
@@ -406,6 +404,38 @@
       #dg-embed .dg-table td.dg-c5{
         font-size: clamp(.23rem, 1.25vw, .38rem);
         padding: 6px 2px;
+      }
+    }
+
+    /* =========================================================
+       RA-ONLY BLUE-ROW OVERRIDES (beats global !important rules)
+       Adjust text size & height by editing the variables above.
+       ========================================================= */
+    #dg-embed[aria-label*="Right Atrium"] .dg-headertable .dg-hcell,
+    #dg-embed[aria-label*="Right Atrium"] .dg-header .dg-hcell{
+      font-size: var(--ra-head-fs-desktop) !important;  /* ← EDIT via --ra-head-fs-desktop */
+      min-height: var(--ra-hmin) !important;            /* ← EDIT via --ra-hmin */
+      padding-top: var(--ra-hpad-y) !important;         /* ← EDIT via --ra-hpad-y */
+      padding-bottom: var(--ra-hpad-y) !important;      /* ← EDIT via --ra-hpad-y */
+    }
+    @media (max-width:1000px){
+      #dg-embed[aria-label*="Right Atrium"] .dg-headertable .dg-hcell,
+      #dg-embed[aria-label*="Right Atrium"] .dg-header .dg-hcell{
+        font-size: var(--ra-head-fs-1000) !important;   /* ← EDIT via --ra-head-fs-1000 */
+      }
+    }
+    @media (max-width:600px){
+      #dg-embed[aria-label*="Right Atrium"] .dg-headertable .dg-hcell,
+      #dg-embed[aria-label*="Right Atrium"] .dg-header .dg-hcell{
+        font-size: var(--ra-head-fs-600) !important;    /* ← EDIT via --ra-head-fs-600 */
+        min-height: var(--ra-hmin-600) !important;      /* ← EDIT via --ra-hmin-600 */
+      }
+    }
+    @media (max-width:420px){
+      #dg-embed[aria-label*="Right Atrium"] .dg-headertable .dg-hcell,
+      #dg-embed[aria-label*="Right Atrium"] .dg-header .dg-hcell{
+        font-size: var(--ra-head-fs-420) !important;    /* ← EDIT via --ra-head-fs-420 */
+        min-height: var(--ra-hmin-420) !important;      /* ← EDIT via --ra-hmin-420 */
       }
     }
   </style>

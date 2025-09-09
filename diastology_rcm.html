@@ -273,6 +273,48 @@
           #dg-embed-cp .dg-table td{ font-size: clamp(.64rem, 3.6vw, .86rem); }
           .frac .num, .frac .den{ font-size: clamp(.56rem, 3.2vw, .82rem); }
         }
+
+        <!-- DROP-IN: Special Population page — compact blue header (match AFib) -->
+<style>
+  /* Make the blue band shorter and the text smaller (across all widths) */
+  #dg-embed .dg-header.dg-singlecol .dg-hcell,
+  #dg-embed .dg-header .dg-hcell{
+    min-height: 88px !important;                 /* ← adjust up/down to taste */
+    padding-top: 14px !important;                /* ← tweak with min-height */
+    padding-bottom: 14px !important;
+    font-size: clamp(.64rem, 2.0vw, .92rem) !important;  /* ← header text size */
+    line-height: 1.12 !important;
+    font-weight: 600 !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* keep the subtle blue fill for single-column headers */
+  #dg-embed .dg-header.dg-singlecol .dg-hcell{
+    background: rgba(40,133,199,.18) !important;
+  }
+
+  /* Phone ramps (optional—match AFib behavior) */
+  @media (max-width:600px){
+    #dg-embed .dg-header.dg-singlecol .dg-hcell,
+    #dg-embed .dg-header .dg-hcell{
+      min-height: 80px !important;
+      padding-top: 12px !important;
+      padding-bottom: 12px !important;
+      font-size: clamp(.56rem, 2.4vw, .84rem) !important;
+    }
+  }
+  @media (max-width:420px){
+    #dg-embed .dg-header.dg-singlecol .dg-hcell,
+    #dg-embed .dg-header .dg-hcell{
+      min-height: 76px !important;
+      padding-top: 10px !important;
+      padding-bottom: 10px !important;
+      font-size: clamp(.52rem, 3.2vw, .78rem) !important;
+    }
+  }
+</style>
+
       </style>
 
       <br><br>

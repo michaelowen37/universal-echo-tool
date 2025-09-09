@@ -2,180 +2,186 @@
 <html>
 
 <head>
-  <!--   ****************************************************************************
-    The Title You Pick Here Shows When You Hover Over Browser Thumbnail
-  **************************************************************************** -->
   <title>Diastology</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="./style3.css">
-
-  <!-- Browser tab thumbnail image -->
   <link rel="icon" type="image/svg+xml" href="echocardio-heart.svg">
 </head>
 
 <body>
- 
   <nav class="zone nav-bar">
     <ul class="main-nav">
       <li><a class="top-nav" href="index.html">Home</a></li>
-      <!-- <li class="push"><a class="top-nav" href="about.html">About Us</a></li> -->
       <li class="push"><a class="top-nav" href="special_population_diastology.html">Back</a></li>
     </ul>
 
-    <!-- ****************************************************************************
-      This is the main title on the top of page
-    **************************************************************************** -->
-    <div class="container zone body">Diastology:</div> 
-    <div class="container" style="padding: 0px"><em>Atrial Fibrillation</em></div> 
+    <!-- Page title + subtitle -->
+    <div class="container zone body">Diastology:</div>
+    <div class="container" style="padding: 0px"><em>Atrial Fibrillation</em></div>
   </nav>
 
   <div class="zone navigation">
     <div class="final" style="padding: 0px 10% 0px 10%;">
-
       <br>
 
-      <!-- ========================== RESPONSIVE FIXED TABLE (1 column) ========================== -->
-      <div id="dg-embed">
-        <!-- HOW-TO (single column):
-             - Add class "dg-singlecol" to the .dg-header to enable a subtle blue fill on the top row.
-             - Green rows have NO shading in single-column charts (see CSS override below). -->
+      <!-- ========================== AFIB TABLE (single column) ========================== -->
+      <!-- NOTE: we keep id="dg-embed" to inherit your global table styles,
+           but add class="afib" so this page can override sizes safely. -->
+      <div id="dg-embed" class="afib" aria-label="Atrial Fibrillation — Diastology (single column)">
 
-        <!-- Blue header band (1 column, with subtle blue fill) -->
+        <!-- Blue header band (single column with subtle fill) -->
         <div class="dg-headerwrap">
           <div class="dg-header dg-singlecol" role="row">
             <div class="dg-hcell" role="columnheader">
-              Multiple Positives Indicate Elevated Filling Pressures:
+              <div class="dg-wrap">Multiple Positives Indicate Elevated Filling Pressures:</div>
             </div>
           </div>
         </div>
 
-        <!-- Green table (1 column, 5 rows; light/normal-weight text) -->
+        <!-- Green table (1 column) -->
         <div class="dg-tablewrap">
           <table class="dg-table" role="table" aria-label="Atrial Fibrillation — Diastology (single column)">
-            <colgroup>
-              <col class="dg-col1-col">
-            </colgroup>
+            <colgroup><col class="dg-col1-col"></colgroup>
             <tbody>
-              <tr>
-                <td class="dg-c1">IVRT &le; 65</td>
-              </tr>
-              <tr>
-                <td class="dg-c1">Pulmonary Venous D-wave Deceleration Time &le; 220 msec</td>
-              </tr>
-              <tr>
-                <td class="dg-c1">Mitral E-wave DcT < 160 msec (only valid with depressed LVEF)</td>
-              </tr>
-              <tr>
-                <td class="dg-c1">Mitral E-wave to Color VP ratio &ge; 1.4</td>
-              </tr>
-              <tr>
-                <td class="dg-c1">Septal E/e' &ge; 11</td>
-              </tr>
-              <tr>
-                <td class="dg-c1">Reduced Beat-to-beat Variations</td>
-              </tr>
+              <tr><td class="dg-c1"><div class="dg-wrap">IVRT &le; 65</div></td></tr>
+              <tr><td class="dg-c1"><div class="dg-wrap">Pulmonary Venous D-wave Deceleration Time &le; 220&nbsp;msec</div></td></tr>
+              <tr><td class="dg-c1"><div class="dg-wrap">Mitral E-wave DcT &lt; 160&nbsp;msec (only valid with depressed LVEF)</div></td></tr>
+              <tr><td class="dg-c1"><div class="dg-wrap">Mitral E-wave to Color VP ratio &ge; 1.4</div></td></tr>
+              <tr><td class="dg-c1"><div class="dg-wrap">Septal E/e' &ge; 11</div></td></tr>
+              <tr><td class="dg-c1"><div class="dg-wrap">Reduced Beat-to-beat Variations</div></td></tr>
             </tbody>
           </table>
         </div>
       </div>
-
-      <style>
-        /* -------- page-scoped styles only (style3.css untouched) -------- */
-
-        /* Theme variables / base typography for the chart */
-        #dg-embed{
-          --dg-accent:#00ff66;             /* green borders/lines */
-          --dg-head:rgb(40,133,199);       /* header blue */
-          --dg-bg:#000; --dg-text:#fff;
-          --dg-outer:4px; --dg-line:2px; --dg-hsep:2px; --dg-hrim:4px;
-          color:var(--dg-text); background:var(--dg-bg);
-          font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        }
-        #dg-embed *{ box-sizing:border-box; }
-
-        /* BLUE HEADER (1 column) */
-        .dg-headerwrap{
-          border:var(--dg-hrim) solid var(--dg-head);
-          border-radius:18px;
-          overflow:hidden;
-          background:var(--dg-bg);
-          margin-bottom:8px;
-        }
-        .dg-header{
-          display:grid;
-          grid-template-columns:repeat(1, minmax(0, 1fr)); /* one column */
-          width:100%;
-        }
-        .dg-hcell{
-          display:flex; align-items:center; justify-content:center;
-          padding:20px 12px;
-          min-height:110px;
-          text-align:center;
-          font-weight:600;
-          line-height:1.14;
-          font-size: clamp(.80rem, 2.6vw, 1.08rem);
-          overflow:hidden;                 /* prevent inner scrollbars */
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-          border-right:var(--dg-hsep) solid var(--dg-head);
-        }
-        .dg-hcell:last-child{ border-right:none; }
-        .dg-hcell::-webkit-scrollbar{ display:none; }
-
-        /* Single-column header fill (applies when .dg-header has .dg-singlecol) */
-        .dg-header.dg-singlecol .dg-hcell{
-          background: rgba(40, 133, 199, 0.18); /* subtle blue shading for the top row */
-        }
-
-        /* GREEN TABLE (1 column) */
-        .dg-tablewrap{
-          border:var(--dg-outer) solid var(--dg-accent);
-          border-radius:18px;
-          overflow:hidden;
-          background:var(--dg-bg);
-        }
-        .dg-table{
-          width:100%;
-          border-collapse:collapse;        /* solid grid lines */
-          table-layout:fixed;              /* stable columns */
-          text-align:center;
-        }
-        /* Light/normal-weight body text for green rows (no shading) */
-        .dg-table td{
-          border:var(--dg-line) solid var(--dg-accent);
-          padding:22px 10px;
-          line-height:1.2;
-          background:transparent !important;  /* no shading in green section (single column) */
-          text-align:center;
-
-          font-weight: 400;  /* lighter (normal) */
-          font-size: clamp(.84rem, 2.1vw, .96rem);
-
-          white-space: normal;
-          word-break: normal;
-          overflow-wrap: normal;
-          hyphens: none;
-          overflow: hidden;
-          text-overflow: clip;
-        }
-
-        /* Single column = full width */
-        .dg-table col{ width:100%; }
-      </style>
-      <!-- ======================== END RESPONSIVE FIXED TABLE ======================== -->
+      <!-- ======================== END AFIB TABLE ======================== -->
 
       <br><br>
-
     </div>
   </div>
 
   <footer class="zone foot bottom-section">
-    <ul class="foot-nav">
-      <!-- <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li> -->
-      <!-- <li><a href="terms-of-use.html" target="_blank">Terms of Use</a></li> -->
-    </ul>
+    <ul class="foot-nav"></ul>
   </footer>
-   
+
+  <!-- ================= PAGE-SCOPED STYLES (AFIB ONLY) ================= -->
+  <style>
+    /* Keep chips to a single line (matches your other pages) */
+    .navbar a.border, .navbar a.active.border{
+      white-space: nowrap !important;
+      overflow-wrap: normal !important;
+      word-break: normal !important;
+    }
+
+    /* Base theme for this page’s table */
+    #dg-embed.afib{
+      --dg-accent:#00ff66;
+      --dg-head:rgb(40,133,199);
+      --dg-bg:#000; --dg-text:#fff;
+      --dg-outer:4px; --dg-line:2px; --dg-hsep:2px; --dg-hrim:4px;
+      color:var(--dg-text); background:var(--dg-bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    #dg-embed.afib *{ box-sizing:border-box; }
+
+    /* Blue header frame */
+    #dg-embed.afib .dg-headerwrap{
+      border:var(--dg-hrim) solid var(--dg-head);
+      border-radius:18px; overflow:hidden; background:var(--dg-bg); margin-bottom:8px;
+    }
+    #dg-embed.afib .dg-header{ display:grid; grid-template-columns:1fr; width:100%; }
+    #dg-embed.afib .dg-header.dg-singlecol .dg-hcell{
+      background: rgba(40, 133, 199, 0.18); /* subtle fill, single band */
+    }
+
+    /* ===========================
+       AFIB HEADER TUNER — EDIT HERE
+       These 3 variables control the *base* (desktop/tablet) look.
+       Make small changes first, then refresh on phone/desktop.
+       =========================== */
+    #dg-embed.afib{
+      --AF_HEAD_FONT: clamp(.66rem, 2.0vw, .96rem);  /* text size in blue row */
+      --AF_HEAD_MINH: 88px;                          /* row minimum height */
+      --AF_HEAD_PADY: 20px;                          /* vertical padding (top/bottom) */
+    }
+    /* Optional: single place to tweak on narrow screens */
+    @media (max-width:1000px){
+      #dg-embed.afib{
+        --AF_HEAD_FONT: clamp(.60rem, 1.8vw, .88rem);
+        --AF_HEAD_MINH: 84px;
+        --AF_HEAD_PADY: 16px;
+      }
+    }
+    @media (max-width:600px){
+      #dg-embed.afib{
+        --AF_HEAD_FONT: clamp(.56rem, 2.4vw, .82rem);
+        --AF_HEAD_MINH: 80px;
+        --AF_HEAD_PADY: 14px;
+      }
+    }
+    @media (max-width:420px){
+      #dg-embed.afib{
+        --AF_HEAD_FONT: clamp(.52rem, 3.2vw, .78rem);
+        --AF_HEAD_MINH: 76px;
+        --AF_HEAD_PADY: 12px;
+      }
+    }
+
+    /* Apply the tuner values (with strong specificity + !important so globals can’t win) */
+    #dg-embed.afib .dg-header.dg-singlecol .dg-hcell{
+      display:flex; align-items:center; justify-content:center;
+      text-align:center !important;
+      border-right:var(--dg-hsep) solid var(--dg-head);
+      padding: var(--AF_HEAD_PADY) 12px !important;        /* uses your tuner */
+      min-height: var(--AF_HEAD_MINH) !important;          /* uses your tuner */
+      font-size: var(--AF_HEAD_FONT) !important;           /* uses your tuner */
+      line-height:1.14 !important;
+      font-weight:600; color:var(--dg-text); background:transparent;
+      overflow:hidden; -ms-overflow-style:none; scrollbar-width:none;
+    }
+    #dg-embed.afib .dg-header.dg-singlecol .dg-hcell:last-child{ border-right:none; }
+    #dg-embed.afib .dg-header.dg-singlecol .dg-hcell .dg-wrap{
+      display:block; width:100%;
+      white-space: normal !important;       /* allow wrapping */
+      overflow-wrap: anywhere !important;   /* safe breaks on narrow phones */
+      word-break: normal !important;
+      -webkit-line-clamp: unset !important;
+      -webkit-box-orient: initial !important;
+      overflow:visible !important;
+      -ms-overflow-style:none; scrollbar-width:none;
+    }
+    #dg-embed.afib .dg-header.dg-singlecol .dg-hcell .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+
+    /* Green table frame (single column) */
+    #dg-embed.afib .dg-tablewrap{
+      border:var(--dg-outer) solid var(--dg-accent);
+      border-radius:18px; overflow:hidden; background:var(--dg-bg);
+    }
+    #dg-embed.afib .dg-table{
+      width:100%; border-collapse:collapse; table-layout:fixed; text-align:center;
+    }
+    #dg-embed.afib .dg-table col{ width:100%; }
+
+    /* Body cells (lighter weight, readable size) */
+    #dg-embed.afib .dg-table td{
+      border:var(--dg-line) solid var(--dg-accent);
+      padding:22px 10px; line-height:1.2; background:transparent !important;
+      text-align:center; color:var(--dg-text);
+      font-weight:400; font-size:clamp(.84rem, 2.1vw, .96rem);
+      white-space: normal; word-break: normal; overflow-wrap: normal; hyphens: none;
+      overflow:hidden; text-overflow: clip;
+    }
+
+    /* Tiny phones: tighten body text/padding a bit */
+    @media (max-width:420px){
+      #dg-embed.afib .dg-table td{
+        font-size: clamp(.72rem, 3.2vw, .88rem);
+        padding: 16px 8px;
+        line-height: 1.16;
+      }
+    }
+  </style>
+  <!-- ================= END PAGE-SCOPED STYLES ================= -->
+
 </body>
 </html>
