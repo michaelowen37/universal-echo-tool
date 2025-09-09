@@ -809,6 +809,46 @@
   }
 }
 
+<!-- DROP-IN: RV (Male) — emphasize values, de-emphasize units -->
+<style>
+  /* Make the numeric values (first line) stand out */
+  #dg-embed[aria-label*="Right Ventricle"][aria-label*="Male"] .dg-table td .dg-range{
+    font-weight: 700 !important;                 /* ← tweak stronger/lighter */
+    letter-spacing: -0.006em !important;         /* subtle tightening */
+  }
+  /* Extra punch just on the number tokens (incl. ≤ ≥ < >) */
+  #dg-embed[aria-label*="Right Ventricle"][aria-label*="Male"] .dg-table td .dg-range .dg-nb{
+    font-weight: 800 !important;                 /* ← lower to 700 if too bold */
+  }
+  /* Make the dash between ranges less loud than the numbers */
+  #dg-embed[aria-label*="Right Ventricle"][aria-label*="Male"] .dg-table td .dg-range .dg-sep{
+    opacity: .82 !important;                     /* keeps focus on the numbers */
+    font-weight: 600 !important;
+  }
+
+  /* Units (second line): smaller + softer */
+  #dg-embed[aria-label*="Right Ventricle"][aria-label*="Male"] .dg-table td .dg-unit{
+    color: rgba(255,255,255,.72) !important;     /* ← raise/lower opacity to taste */
+    font-weight: 500 !important;                 /* lighter than the value line */
+    font-size: .84em !important;                 /* ← nudge up/down if needed */
+    line-height: 1.05 !important;
+    white-space: nowrap !important;              /* stay on their own line cleanly */
+  }
+
+  /* Responsive: keep the contrast at all widths */
+  @media (max-width: 600px){
+    #dg-embed[aria-label*="Right Ventricle"][aria-label*="Male"] .dg-table td .dg-unit{
+      font-size: .78em !important;               /* smaller units on phones */
+      color: rgba(255,255,255,.70) !important;   /* slightly softer */
+    }
+  }
+  @media (max-width: 420px){
+    #dg-embed[aria-label*="Right Ventricle"][aria-label*="Male"] .dg-table td .dg-unit{
+      font-size: .74em !important;
+      color: rgba(255,255,255,.68) !important;
+    }
+  }
+</style>
 
 
   </style>
