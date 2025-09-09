@@ -38,89 +38,223 @@
 
       <br>
 
-      <!-- ========================== DG TABLE (6 columns) ========================== -->
-      <div id="dg-embed" aria-label="Left Ventricle (Male) — 6-column table">
+      <!-- ========================== DG TABLE (5 columns) ========================== -->
+      <div id="dg-embed" aria-label="Left Ventricle (Male) — Normal vs Mild/Moderate/Severe">
 
-        <!-- Blue header band (6 columns) -->
+        <!-- Blue header band: REAL table with matching colgroup (mirrors RV) -->
         <div class="dg-headerwrap">
-          <!-- Inline, high-priority lock so it cannot wrap to two lines -->
-          <div
-            class="dg-header dg-6"
-            id="lv-head"
-            role="row"
-            style="
-              display:grid !important;
-              grid-template-columns:16.6667% 16.6667% 16.6667% 16.6667% 16.6667% 16.6667% !important;
-              width:100% !important;
-              gap:0 !important;
-            "
-          >
-            <div class="dg-hcell" role="columnheader"><div class="dg-wrap"></div></div>
-            <div class="dg-hcell" role="columnheader"><div class="dg-wrap">NORMAL</div></div>
-            <!-- allow break at the space -->
-            <div class="dg-hcell" role="columnheader"><div class="dg-wrap">LOW NORMAL</div></div>
-            <div class="dg-hcell" role="columnheader"><div class="dg-wrap">MILD</div></div>
-            <div class="dg-hcell" role="columnheader"><div class="dg-wrap">MODERATE</div></div>
-            <div class="dg-hcell" role="columnheader"><div class="dg-wrap">SEVERE</div></div>
-          </div>
+          <table class="dg-headertable" role="presentation" aria-hidden="true">
+            <colgroup>
+              <col class="dg-col1-col">
+              <col class="dg-col2-col">
+              <col class="dg-col3-col">
+              <col class="dg-col4-col">
+              <col class="dg-col5-col">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="dg-hcell"><div class="dg-wrap"></div></th>
+                <th class="dg-hcell"><div class="dg-wrap">NORMAL</div></th>
+                <th class="dg-hcell"><div class="dg-wrap">MILD</div></th>
+                <th class="dg-hcell"><div class="dg-wrap">MODERATE</div></th>
+                <th class="dg-hcell"><div class="dg-wrap">SEVERE</div></th>
+              </tr>
+            </thead>
+          </table>
         </div>
 
-        <!-- Green table (6 columns) -->
+        <!-- Green table (5 columns) -->
         <div class="dg-tablewrap">
           <table class="dg-table" role="table" aria-label="Left ventricle (male) measurements">
             <colgroup>
-              <col class="dg-col1-col" style="width:16.6667%">
-              <col class="dg-col2-col" style="width:16.6667%">
-              <col class="dg-col3-col" style="width:16.6667%">
-              <col class="dg-col4-col" style="width:16.6667%">
-              <col class="dg-col5-col" style="width:16.6667%">
-              <col class="dg-col6-col" style="width:16.6667%">
+              <col class="dg-col1-col">
+              <col class="dg-col2-col">
+              <col class="dg-col3-col">
+              <col class="dg-col4-col">
+              <col class="dg-col5-col">
             </colgroup>
             <tbody>
+              <!-- EF (leave % inline and unstyled) -->
               <tr>
                 <th scope="row" class="dg-col1"><div class="dg-wrap">Ejection Fraction</div></th>
-                <td class="dg-c2"><div class="dg-wrap">55 – 70%</div></td>
-                <td class="dg-c3"><div class="dg-wrap">50 – 55%</div></td>
-                <td class="dg-c4"><div class="dg-wrap">41 – 50%</div></td>
-                <td class="dg-c5"><div class="dg-wrap">30 – 40%</div></td>
-                <td class="dg-c6"><div class="dg-wrap">&lt; 30%</div></td>
+                <td class="dg-c2">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">52</span> <span class="dg-sep">–</span> <span class="dg-nb">72</span></span>
+                    <span class="dg-unit dg-unit--pct">%</span>
+                  </div>
+                </td>
+                <td class="dg-c3">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">41</span> <span class="dg-sep">–</span> <span class="dg-nb">51</span></span>
+                    <span class="dg-unit dg-unit--pct">%</span>
+                  </div>
+                </td>
+                <td class="dg-c4">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">30</span> <span class="dg-sep">–</span> <span class="dg-nb">40</span></span>
+                    <span class="dg-unit dg-unit--pct">%</span>
+                  </div>
+                </td>
+                <td class="dg-c5">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">&lt;&nbsp;30</span></span>
+                    <span class="dg-unit dg-unit--pct">%</span>
+                  </div>
+                </td>
               </tr>
 
+              <!-- Thickness (cm to second line) -->
               <tr>
-                <!-- Soft hyphen after “Myo” for very narrow screens -->
-                <th scope="row" class="dg-col1"><div class="dg-wrap">Myo&shy;cardium</div></th>
-                <td class="dg-c2"><div class="dg-wrap">0.6 – 1&nbsp;cm</div></td>
-                <td class="dg-c3"><div class="dg-wrap"></div></td>
-                <td class="dg-c4"><div class="dg-wrap">1.1 – 1.3&nbsp;cm</div></td>
-                <td class="dg-c5"><div class="dg-wrap">1.4 – 1.6&nbsp;cm</div></td>
-                <td class="dg-c6"><div class="dg-wrap">&ge; 1.7&nbsp;cm</div></td>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Thickness</div></th>
+                <td class="dg-c2">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">0.6</span> <span class="dg-sep">–</span> <span class="dg-nb">1</span></span>
+                    <span class="dg-unit dg-break">cm</span>
+                  </div>
+                </td>
+                <td class="dg-c3">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">1.1</span> <span class="dg-sep">–</span> <span class="dg-nb">1.3</span></span>
+                    <span class="dg-unit dg-break">cm</span>
+                  </div>
+                </td>
+                <td class="dg-c4">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">1.4</span> <span class="dg-sep">–</span> <span class="dg-nb">1.6</span></span>
+                    <span class="dg-unit dg-break">cm</span>
+                  </div>
+                </td>
+                <td class="dg-c5">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">&ge;&nbsp;1.7</span></span>
+                    <span class="dg-unit dg-break">cm</span>
+                  </div>
+                </td>
               </tr>
 
+              <!-- LVEDD (cm to second line) -->
               <tr>
                 <th scope="row" class="dg-col1"><div class="dg-wrap">LVEDD</div></th>
-                <td class="dg-c2"><div class="dg-wrap">4.2 – 5.8&nbsp;cm</div></td>
-                <td class="dg-c3"><div class="dg-wrap"></div></td>
-                <td class="dg-c4"><div class="dg-wrap"></div></td>
-                <td class="dg-c5"><div class="dg-wrap"></div></td>
-                <td class="dg-c6"><div class="dg-wrap"></div></td>
+                <td class="dg-c2">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">4.2</span> <span class="dg-sep">–</span> <span class="dg-nb">5.8</span></span>
+                    <span class="dg-unit dg-break">cm</span>
+                  </div>
+                </td>
+                <td class="dg-c3">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">5.9</span> <span class="dg-sep">–</span> <span class="dg-nb">6.3</span></span>
+                    <span class="dg-unit dg-break">cm</span>
+                  </div>
+                </td>
+                <td class="dg-c4">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">6.4</span> <span class="dg-sep">–</span> <span class="dg-nb">6.8</span></span>
+                    <span class="dg-unit dg-break">cm</span>
+                  </div>
+                </td>
+                <td class="dg-c5">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">&gt;&nbsp;6.8</span></span>
+                    <span class="dg-unit dg-break">cm</span>
+                  </div>
+                </td>
               </tr>
 
+              <!-- LVESD (cm to second line) -->
               <tr>
                 <th scope="row" class="dg-col1"><div class="dg-wrap">LVESD</div></th>
-                <td class="dg-c2"><div class="dg-wrap">2.5 – 4&nbsp;cm</div></td>
-                <td class="dg-c3"><div class="dg-wrap"></div></td>
-                <td class="dg-c4"><div class="dg-wrap"></div></td>
-                <td class="dg-c5"><div class="dg-wrap"></div></td>
-                <td class="dg-c6"><div class="dg-wrap"></div></td>
+                <td class="dg-c2">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">2.5</span> <span class="dg-sep">–</span> <span class="dg-nb">4.0</span></span>
+                    <span class="dg-unit dg-break">cm</span>
+                  </div>
+                </td>
+                <td class="dg-c3">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">4.1</span> <span class="dg-sep">–</span> <span class="dg-nb">4.3</span></span>
+                    <span class="dg-unit dg-break">cm</span>
+                  </div>
+                </td>
+                <td class="dg-c4">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">4.4</span> <span class="dg-sep">–</span> <span class="dg-nb">4.5</span></span>
+                    <span class="dg-unit dg-break">cm</span>
+                  </div>
+                </td>
+                <td class="dg-c5">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">&gt;&nbsp;4.5</span></span>
+                    <span class="dg-unit dg-break">cm</span>
+                  </div>
+                </td>
               </tr>
 
+              <!-- EDV (absolute; mL to second line) -->
               <tr>
-                <th scope="row" class="dg-col1"><div class="dg-wrap">Diastolic Volume</div></th>
-                <td class="dg-c2"><div class="dg-wrap">62 – 150&nbsp;ml</div></td>
-                <td class="dg-c3"><div class="dg-wrap"></div></td>
-                <td class="dg-c4"><div class="dg-wrap"></div></td>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">End-diastolic Volume</div></th>
+                <td class="dg-c2">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">62</span> <span class="dg-sep">–</span> <span class="dg-nb">150</span></span>
+                    <span class="dg-unit dg-break">mL</span>
+                  </div>
+                </td>
+                <td class="dg-c3">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">151</span> <span class="dg-sep">–</span> <span class="dg-nb">174</span></span>
+                    <span class="dg-unit dg-break">mL</span>
+                  </div>
+                </td>
+                <td class="dg-c4">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">175</span> <span class="dg-sep">–</span> <span class="dg-nb">200</span></span>
+                    <span class="dg-unit dg-break">mL</span>
+                  </div>
+                </td>
+                <td class="dg-c5">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">&gt;&nbsp;200</span></span>
+                    <span class="dg-unit dg-break">mL</span>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Indexed EDV (mL/m²) — units forced to 2nd line -->
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Indexed End-diastolic Volume</div></th>
+                <td class="dg-c2">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">34</span> <span class="dg-sep">–</span> <span class="dg-nb">74</span></span>
+                    <span class="dg-unit dg-idx">mL/m<sup>2</sup></span>
+                  </div>
+                </td>
+                <td class="dg-c3">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">78</span> <span class="dg-sep">–</span> <span class="dg-nb">89</span></span>
+                    <span class="dg-unit dg-idx">mL/m<sup>2</sup></span>
+                  </div>
+                </td>
+                <td class="dg-c4">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">90</span> <span class="dg-sep">–</span> <span class="dg-nb">100</span></span>
+                    <span class="dg-unit dg-idx">mL/m<sup>2</sup></span>
+                  </div>
+                </td>
+                <td class="dg-c5">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">&gt;&nbsp;100</span></span>
+                    <span class="dg-unit dg-idx">mL/m<sup>2</sup></span>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- GLS (leave % inline and unstyled) -->
+              <tr>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">GLS</div></th>
+                <td class="dg-c2"><div class="dg-wrap">(-22%) to (-18%)</div></td>
+                <td class="dg-c3"><div class="dg-wrap">(-17%) to (-16%)</div></td>
+                <td class="dg-c4"><div class="dg-wrap">(-15%) or more (+)</div></td>
                 <td class="dg-c5"><div class="dg-wrap"></div></td>
-                <td class="dg-c6"><div class="dg-wrap"></div></td>
               </tr>
             </tbody>
           </table>
@@ -139,200 +273,309 @@
     </ul>
   </footer>
 
-  <!-- Page-scoped styles (style3.css remains untouched) -->
+  <!-- Page-scoped styles (in-page override; keep style3.css as-is) -->
   <style>
-    /* Chips: lock to one line */
+    /* Chips: keep single-line */
     .navbar a.border, .navbar a.active.border{
       white-space: nowrap !important;
       overflow-wrap: normal !important;
       word-break: normal !important;
     }
 
-    /* ===== TABLE THEME ===== */
+    /* ===== Theme + shared column widths (match RV layout) ===== */
     #dg-embed{
       --dg-accent:#00ff66; --dg-head:rgb(40,133,199);
-      --dg-bg:#000; --dg-text:#fff; --dg-outer:4px; --dg-line:2px; --dg-hsep:2px; --dg-hrim:4px;
+      --dg-bg:#000; --dg-text:#fff;
+      --dg-outer:4px; --dg-line:2px; --dg-hsep:2px; --dg-hrim:4px;
+
+      --c1:34%;
+      --c2:16.5%;
+      --c3:16.5%;
+      --c4:16.5%;
+      --c5:16.5%;
+
       color:var(--dg-text); background:var(--dg-bg);
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
     #dg-embed *{ box-sizing:border-box; }
 
-    /* BLUE HEADER */
+    /* ===== BLUE HEADER (REAL TABLE, RV metrics) ===== */
     .dg-headerwrap{
       border:var(--dg-hrim) solid var(--dg-head);
-      border-radius:18px;
-      overflow:hidden;
-      background:var(--dg-bg);
-      margin-bottom:8px;
+      border-radius:18px; overflow:hidden; background:var(--dg-bg); margin-bottom:8px;
     }
-    #dg-embed .dg-header .dg-hcell{ float:none !important; }
-
-    /* Keep header labels one line by default (we’ll override only LOW NORMAL) */
-    #dg-embed .dg-header .dg-wrap{ white-space:nowrap !important; }
+    .dg-headertable{
+      display:table !important;
+      width:100%; table-layout:fixed; border-collapse:collapse; background:transparent;
+    }
+    .dg-headertable thead{ display:table-header-group !important; }
+    .dg-headertable tr{ display:table-row !important; }
+    .dg-headertable th{
+      display:table-cell !important;
+      vertical-align:middle !important;
+      float:none !important;
+      text-align:center !important;
+    }
+    .dg-headertable col.dg-col1-col{ width: var(--c1); }
+    .dg-headertable col.dg-col2-col{ width: var(--c2); }
+    .dg-headertable col.dg-col3-col{ width: var(--c3); }
+    .dg-headertable col.dg-col4-col{ width: var(--c4); }
+    .dg-headertable col.dg-col5-col{ width: var(--c5); }
 
     .dg-hcell{
-      display:flex; align-items:center; justify-content:center;
-      padding:18px 10px; min-height:78px;
-      text-align:center; font-weight:700; line-height:1.10;
-      font-size: clamp(.70rem, 2.0vw, 1.02rem);
-      overflow:hidden; -ms-overflow-style:none; scrollbar-width:none;
       border-right:var(--dg-hsep) solid var(--dg-head);
+      padding:20px 12px; min-height:88px; text-align:center !important;
+      font-weight:700; line-height:1.12; font-size: clamp(.82rem, 2.6vw, 1.08rem);
+      color:var(--dg-text); background:transparent;
+      white-space:nowrap; overflow:hidden;
     }
-    .dg-hcell:last-child{ border-right:none; }
+    .dg-headertable th:last-child{ border-right:none; }
 
-    /* GREEN TABLE */
-    .dg-tablewrap{
-      border:var(--dg-outer) solid var(--dg-accent);
-      border-radius:18px; overflow:hidden; background:var(--dg-bg);
-    }
-    .dg-table{
-      width:100%; border-collapse:collapse; table-layout:fixed; text-align:center;
-    }
+    /* ===== GREEN TABLE ===== */
+    .dg-tablewrap{ border:var(--dg-outer) solid var(--dg-accent); border-radius:18px; overflow:hidden; background:var(--dg-bg); }
+    .dg-table{ width:100%; border-collapse:collapse; table-layout:fixed; text-align:center; background:transparent; }
+    .dg-table col.dg-col1-col{ width: var(--c1); }
+    .dg-table col.dg-col2-col{ width: var(--c2); }
+    .dg-table col.dg-col3-col{ width: var(--c3); }
+    .dg-table col.dg-col4-col{ width: var(--c4); }
+    .dg-table col.dg-col5-col{ width: var(--c5); }
+
     .dg-table th, .dg-table td{
       border:var(--dg-line) solid var(--dg-accent);
       padding:22px 10px; line-height:1.2; background:transparent; text-align:center;
-      white-space: normal; word-break: normal; overflow-wrap: normal; hyphens: manual;
-      overflow:hidden; text-overflow:clip;
+      white-space: normal; word-break: normal; overflow-wrap: normal; hyphens: manual; overflow:visible;
+      color:var(--dg-text);
     }
+
+    /* First column: bold + soft blue tint */
     .dg-table th.dg-col1{
-      font-weight:800; font-size:clamp(.95rem, 2.1vw, 1.08rem);
+      font-weight:800; font-size:clamp(.95rem, 2.5vw, 1.08rem);
       background: rgba(40,133,199,0.22);
     }
-    .dg-wrap{
-      display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:4;
-      overflow:hidden; white-space:normal; scrollbar-width:none; -ms-overflow-style:none;
+
+    /* ===== Wrapping + no-scrollbar safety ===== */
+    #dg-embed .dg-table th .dg-wrap,
+    #dg-embed .dg-table td .dg-wrap{
+      overflow:visible !important;
+      -ms-overflow-style:none !important; scrollbar-width:none !important;
+      white-space:normal !important;
     }
-    .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+    #dg-embed .dg-table th .dg-wrap::-webkit-scrollbar,
+    #dg-embed .dg-table td .dg-wrap::-webkit-scrollbar{ width:0 !important; height:0 !important; }
+
+    /* ===== Base inline layout for values/units ===== */
+    #dg-embed .dg-range{ display:inline !important; }
+    #dg-embed .dg-unit{
+      display:inline !important;
+      white-space:nowrap !important;
+      -ms-overflow-style:none !important; scrollbar-width:none !important;
+    }
+    #dg-embed .dg-unit::-webkit-scrollbar{ width:0 !important; height:0 !important; }
     #dg-embed .dg-nb{ white-space:nowrap; display:inline; vertical-align:baseline; }
+    #dg-embed .dg-sep{ display:inline; padding:0 .15em; }
+    #dg-embed sup{ font-size:0.78em; line-height:0; }
 
-    /* First-column shrinking helpers */
-    @media (max-width:900px){
-      .dg-table th.dg-col1{
-        font-size: clamp(.62rem, 1.7vw, .78rem);
-        padding: 16px 8px; line-height: 1.12;
-      }
-    }
-    @media (max-width:430px){
-      .dg-table th.dg-col1{
-        font-size: .44rem; padding: 12px 6px; line-height: 1.10; letter-spacing: -0.012em;
-      }
-      .dg-table th.dg-col1 .dg-wrap{ -webkit-line-clamp: 5; }
-    }
-    @media (max-width:500px){
-      .dg-table th.dg-col1{
-        font-size: clamp(.48rem, 3.0vw, .64rem);
-        padding: 14px 6px; line-height: 1.12; letter-spacing: -0.005em;
-      }
-    }
-    @media (max-width:360px){
-      .dg-table th.dg-col1{
-        font-size: clamp(.44rem, 3.4vw, .60rem); padding: 12px 6px;
-      }
-    }
-    @media (max-width:488px){
-      .dg-table th.dg-col1 .dg-wrap{
-        -webkit-hyphens: manual !important; hyphens: manual !important;
-        white-space: normal !important; overflow-wrap: normal !important; word-break: normal !important;
-      }
+    /* ===== Force second line ONLY for cm, mL, mL/m² ===== */
+    #dg-embed .dg-unit.dg-break,
+    #dg-embed .dg-unit.dg-idx{
+      display:block !important;
+      margin-top:2px !important;
+      white-space:nowrap !important;
+      overflow:visible !important;
     }
 
-    /* General header squeezes (page-level; our ID rules later will override these) */
-    @media (max-width:1100px){
-      .dg-header .dg-hcell{ font-size: clamp(.64rem, 1.6vw, .9rem); padding: 16px 8px; }
+    /* ===== Unit contrast (size + softness) for non-% units only ===== */
+    #dg-embed[aria-label*="Left Ventricle"][aria-label*="Male"] .dg-table td .dg-unit:not(.dg-unit--pct){
+      color: rgba(255,255,255,.72) !important;
+      font-weight: 500 !important;
+      font-size: .86em !important;
+      line-height: 1.05 !important;
     }
-    @media (max-width:700px){
-      .dg-header .dg-hcell{ font-size: clamp(.58rem, 1.9vw, .84rem); padding: 14px 8px; }
-    }
-    @media (max-width:520px){
-      .dg-header .dg-hcell{ font-size: .40rem; padding-left: 5px; padding-right: 5px; }
-    }
-    @media (max-width:450px){ .dg-header .dg-hcell{ font-size: .38rem; } }
-    @media (max-width:400px){ .dg-header .dg-hcell{ font-size: .36rem; } }
-    @media (max-width:360px){ .dg-header .dg-hcell{ font-size: .34rem; } }
-
-    /* Data cells tweaks on narrow phones */
-    @media (max-width:430px){
-      .dg-table td{ font-size: clamp(.58rem, 3.0vw, .74rem); padding: 18px 6px; line-height: 1.18; }
-    }
-    @media (max-width:360px){
-      .dg-table td{ font-size: clamp(.54rem, 3.4vw, .70rem); padding: 16px 5px; }
-    }
-
-    /* Header wrap rules — only header cell #3 (“LOW NORMAL”) may wrap */
-    #dg-embed .dg-header .dg-wrap{ white-space: nowrap; }
-    #dg-embed .dg-header .dg-hcell:nth-child(3) .dg-wrap{
-      white-space: normal !important; word-break: keep-all !important; overflow-wrap: normal !important; hyphens: none !important;
-    }
-    #dg-embed .dg-header .dg-hcell:nth-child(5) .dg-wrap{ white-space: nowrap !important; }
-
-    /* =========================
-       LV PAGE ONLY — SUPER-SPECIFIC CRUSH @ ≤500px
-       Uses #lv-head (ID) + .dg-6 to beat any global !important rules.
-       ========================= */
-
-    /* ≤500px: make the blue row much smaller; only “LOW NORMAL” wraps */
-    @media (max-width:500px){
-      #dg-embed #lv-head.dg-6 .dg-hcell{
-        font-size:.34rem !important;
-        line-height:1.05 !important;
-        letter-spacing:-0.02em !important;
-        min-height:30px !important;
-        padding:2px 2px !important;
-        font-weight:600 !important; /* narrower than 700 */
-      }
-      /* LOW NORMAL can wrap (between words); all others forced to a single line */
-      #dg-embed #lv-head.dg-6 .dg-hcell:nth-child(3) .dg-wrap{
-        white-space:normal !important; word-break:keep-all !important; overflow-wrap:anywhere !important;
-      }
-      #dg-embed #lv-head.dg-6 .dg-hcell:not(:nth-child(3)) .dg-wrap{
-        white-space:nowrap !important;
+    @media (max-width:600px){
+      #dg-embed[aria-label*="Left Ventricle"][aria-label*="Male"] .dg-table td .dg-unit:not(.dg-unit--pct){
+        font-size: .78em !important; color: rgba(255,255,255,.70) !important;
       }
     }
-
-    /* ≤420px: crush a bit more so nothing clips around ~480px or below */
     @media (max-width:420px){
-      #dg-embed #lv-head.dg-6 .dg-hcell{
-        font-size:.34rem !important;
-        min-height:26px !important;
-        padding:2px !important;
-        line-height:1.04 !important;
+      #dg-embed[aria-label*="Left Ventricle"][aria-label*="Male"] .dg-table td .dg-unit:not(.dg-unit--pct){
+        font-size: .74em !important; color: rgba(255,255,255,.68) !important;
       }
     }
 
-    /* LV pages only: moderate blue-row height on phones */
-@media (max-width:500px){
-  #dg-embed #lv-head.dg-6 .dg-hcell{
-    font-size: .34rem !important;
-    line-height: 1.06 !important;
-    letter-spacing: -0.02em !important;
-    min-height: 40px !important;    /* was 30px */
-    padding: 4px 3px !important;     /* was 2px 2px */
-    font-weight: 600 !important;
-  }
-  /* only LOW NORMAL wraps */
-  #dg-embed #lv-head.dg-6 .dg-hcell:nth-child(3) .dg-wrap{
-    white-space: normal !important; word-break: keep-all !important; overflow-wrap: anywhere !important;
-  }
-  #dg-embed #lv-head.dg-6 .dg-hcell:not(:nth-child(3)) .dg-wrap{
-    white-space: nowrap !important;
-  }
+    /* ===== Phone squeezes (match RV) ===== */
+    @media (max-width:600px){
+      .dg-hcell{ font-size: clamp(.50rem, 1.9vw, .72rem); padding:14px 8px; }
+    }
+    @media (max-width:420px){
+      .dg-hcell{ font-size: clamp(.46rem, 1.8vw, .68rem); padding:12px 6px; }
+    }
+
+    @media (max-width:500px){
+      #dg-embed .dg-table th.dg-col1{
+        font-size: clamp(.56rem, 3.0vw, .74rem);
+        padding: 12px 6px;
+        line-height: 1.12;
+        letter-spacing: -0.01em;
+      }
+    }
+
+    /* Strong downshift for data columns (2–5) */
+    @media (max-width:1000px){
+      #dg-embed .dg-table td.dg-c2,
+      #dg-embed .dg-table td.dg-c3,
+      #dg-embed .dg-table td.dg-c4,
+      #dg-embed .dg-table td.dg-c5{
+        font-size: clamp(.54rem, 1.35vw, .74rem);
+        padding: 14px 8px;
+        line-height: 1.16;
+        letter-spacing: -0.006em;
+      }
+      #dg-embed .dg-headertable .dg-hcell{
+        font-size: clamp(.64rem, 1.65vw, .92rem);
+        padding: 14px 8px;
+      }
+    }
+    @media (max-width:600px){
+      #dg-embed{
+        --c1:26%;
+        --c2:18.5%;
+        --c3:18.5%;
+        --c4:18.5%;
+        --c5:18.5%;
+      }
+      #dg-embed .dg-table td.dg-c2,
+      #dg-embed .dg-table td.dg-c3,
+      #dg-embed .dg-table td.dg-c4,
+      #dg-embed .dg-table td.dg-c5{
+        font-size: clamp(.38rem, 1.65vw, .56rem);
+        padding: 10px 4px;
+        line-height: 1.14;
+        letter-spacing: -0.012em;
+      }
+      #dg-embed .dg-headertable .dg-hcell{
+        font-size: clamp(.48rem, 1.7vw, .70rem);
+        padding: 10px 6px;
+      }
+    }
+    @media (max-width:420px){
+      #dg-embed{
+        --c1:16%;
+        --c2:21%;
+        --c3:21%;
+        --c4:21%;
+        --c5:21%;
+      }
+      #dg-embed .dg-table td.dg-c2,
+      #dg-embed .dg-table td.dg-c3,
+      #dg-embed .dg-table td.dg-c4,
+      #dg-embed .dg-table td.dg-c5{
+        font-size: clamp(.28rem, 1.45vw, .46rem);
+        padding: 8px 3px;
+        line-height: 1.12;
+        letter-spacing: -0.014em;
+      }
+      #dg-embed .dg-headertable .dg-hcell{
+        font-size: clamp(.38rem, 1.5vw, .56rem);
+        padding: 8px 4px;
+        font-weight: 600;
+      }
+      #dg-embed .dg-table th.dg-col1{
+        font-size: clamp(.44rem, 2.6vw, .66rem);
+        padding: 8px 4px;
+        letter-spacing: -0.006em;
+      }
+      #dg-embed sup{ font-size: 0.78em; line-height: 0; }
+    }
+    @media (max-width:380px){
+      #dg-embed .dg-table td.dg-c2,
+      #dg-embed .dg-table td.dg-c3,
+      #dg-embed .dg-table td.dg-c4,
+      #dg-embed .dg-table td.dg-c5{
+        font-size: clamp(.26rem, 1.35vw, .42rem);
+        padding: 7px 2px;
+        line-height: 1.10;
+      }
+      #dg-embed .dg-headertable .dg-hcell{
+        font-size: clamp(.36rem, 1.4vw, .52rem);
+        padding: 7px 3px;
+      }
+    }
+    @media (max-width:360px){
+      #dg-embed{
+        --c1:15%;
+        --c2:21.25%;
+        --c3:21.25%;
+        --c4:21.25%;
+        --c5:21.25%;
+      }
+      #dg-embed .dg-table td.dg-c2,
+      #dg-embed .dg-table td.dg-c3,
+      #dg-embed .dg-table td.dg-c4,
+      #dg-embed .dg-table td.dg-c5{
+        font-size: clamp(.245rem, 1.3vw, .40rem);
+      }
+      #dg-embed .dg-headertable .dg-hcell{
+        font-size: clamp(.34rem, 1.3vw, .50rem);
+      }
+    }
+    @media (max-width:340px){
+      #dg-embed{
+        --c1:14%;
+        --c2:21.5%;
+        --c3:21.5%;
+        --c4:21.5%;
+        --c5:21.5%;
+      }
+      #dg-embed .dg-table td.dg-c2,
+      #dg-embed .dg-table td.dg-c3,
+      #dg-embed .dg-table td.dg-c4,
+      #dg-embed .dg-table td.dg-c5{
+        font-size: clamp(.23rem, 1.25vw, .38rem);
+        padding: 6px 2px;
+      }
+      #dg-embed .dg-headertable .dg-hcell{
+        font-size: clamp(.32rem, 1.25vw, .48rem);
+        padding: 6px 3px;
+      }
+    }
+
+    /* Force header centering in case a global rule fights it */
+    #dg-embed .dg-headertable .dg-hcell .dg-wrap{
+      display:block !important; white-space:nowrap !important; text-align:center !important;
+      overflow:visible !important;
+    }
+
+    /* LV (Male) — make the blue header ~2x taller (desktop), scale down on phones */
+#dg-embed[aria-label*="Left Ventricle"][aria-label*="Male"] .dg-headertable .dg-hcell,
+#dg-embed[aria-label*="Left Ventricle"][aria-label*="Male"] .dg-header .dg-hcell{
+  min-height: 176px !important;     /* was ~88px */
+  padding-top: 36px !important;     /* add breathing room */
+  padding-bottom: 36px !important;
 }
 
-@media (max-width:420px){
-  #dg-embed #lv-head.dg-6 .dg-hcell{
-    font-size: .34rem !important;
-    min-height: 36px !important;     /* was 26px */
-    padding: 4px 2px !important;
-    line-height: 1.05 !important;
+/* keep it roomy but not gigantic on smaller screens */
+@media (max-width: 1000px){
+  #dg-embed[aria-label*="Left Ventricle"][aria-label*="Male"] .dg-headertable .dg-hcell,
+  #dg-embed[aria-label*="Left Ventricle"][aria-label*="Male"] .dg-header .dg-hcell{
+    min-height: 160px !important;
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
   }
 }
-
-/* Optional: keep desktop/tablet from feeling *too* short */
-@media (min-width:501px){
-  #dg-embed #lv-head.dg-6 .dg-hcell{
-    min-height: 78px !important;     /* matches the old feel */
-    padding-top: 16px !important;
-    padding-bottom: 16px !important;
+@media (max-width: 600px){
+  #dg-embed[aria-label*="Left Ventricle"][aria-label*="Male"] .dg-headertable .dg-hcell,
+  #dg-embed[aria-label*="Left Ventricle"][aria-label*="Male"] .dg-header .dg-hcell{
+    min-height: 132px !important;
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+}
+@media (max-width: 420px){
+  #dg-embed[aria-label*="Left Ventricle"][aria-label*="Male"] .dg-headertable .dg-hcell,
+  #dg-embed[aria-label*="Left Ventricle"][aria-label*="Male"] .dg-header .dg-hcell{
+    min-height: 112px !important;
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
   }
 }
 

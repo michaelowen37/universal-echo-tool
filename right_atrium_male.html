@@ -194,15 +194,15 @@
          RA BLUE-ROW TUNERS ——— EDIT THESE VALUES ONLY
          These drive the blue header text size and (optionally) height.
          ========================================================= */
-      --ra-head-fs-desktop: clamp(.86rem, 2.6vw, 1.12rem); /* <<< EDIT: desktop/tablet header text size */
-      --ra-head-fs-1000:   clamp(.72rem, 1.65vw, 1.00rem); /* <<< EDIT: ≤1000px header text */
-      --ra-head-fs-600:    clamp(.56rem, 1.90vw, .82rem);  /* <<< EDIT: ≤600px header text */
-      --ra-head-fs-420:    clamp(.52rem, 1.80vw, .78rem);  /* <<< EDIT: ≤420px header text */
+      --ra-head-fs-desktop: clamp(.86rem, 2.6vw, 1.12rem); /* desktop/tablet header text size */
+      --ra-head-fs-1000:   clamp(.72rem, 1.65vw, 1.00rem); /* ≤1000px header text */
+      --ra-head-fs-600:    clamp(.56rem, 1.90vw, .82rem);  /* ≤600px header text */
+      --ra-head-fs-420:    clamp(.52rem, 1.80vw, .78rem);  /* ≤420px header text */
 
-      --ra-hmin: 112px;     /* <<< EDIT: min blue-row height (desktop) */
-      --ra-hpad-y: 24px;    /* <<< EDIT: vertical padding (desktop) */
-      --ra-hmin-600: 96px;  /* <<< EDIT: ≤600px min height */
-      --ra-hmin-420: 88px;  /* <<< EDIT: ≤420px min height */
+      --ra-hmin: 112px;     /* min blue-row height (desktop) */
+      --ra-hpad-y: 24px;    /* vertical padding (desktop) */
+      --ra-hmin-600: 96px;  /* ≤600px min height */
+      --ra-hmin-420: 88px;  /* ≤420px min height */
     }
     #dg-embed *{ box-sizing:border-box; }
 
@@ -284,7 +284,7 @@
 
     #dg-embed .dg-range{ display:inline; }
     #dg-embed .dg-unit{
-      display:inline; white-space: nowrap;
+      display:inline; white-space: nowrap; vertical-align: baseline;
       -ms-overflow-style: none; scrollbar-width: none;
     }
     #dg-embed .dg-unit::-webkit-scrollbar{ width:0; height:0; }
@@ -413,29 +413,66 @@
        ========================================================= */
     #dg-embed[aria-label*="Right Atrium"] .dg-headertable .dg-hcell,
     #dg-embed[aria-label*="Right Atrium"] .dg-header .dg-hcell{
-      font-size: var(--ra-head-fs-desktop) !important;  /* ← EDIT via --ra-head-fs-desktop */
-      min-height: var(--ra-hmin) !important;            /* ← EDIT via --ra-hmin */
-      padding-top: var(--ra-hpad-y) !important;         /* ← EDIT via --ra-hpad-y */
-      padding-bottom: var(--ra-hpad-y) !important;      /* ← EDIT via --ra-hpad-y */
+      font-size: var(--ra-head-fs-desktop) !important;
+      min-height: var(--ra-hmin) !important;
+      padding-top: var(--ra-hpad-y) !important;
+      padding-bottom: var(--ra-hpad-y) !important;
     }
     @media (max-width:1000px){
       #dg-embed[aria-label*="Right Atrium"] .dg-headertable .dg-hcell,
       #dg-embed[aria-label*="Right Atrium"] .dg-header .dg-hcell{
-        font-size: var(--ra-head-fs-1000) !important;   /* ← EDIT via --ra-head-fs-1000 */
+        font-size: var(--ra-head-fs-1000) !important;
       }
     }
     @media (max-width:600px){
       #dg-embed[aria-label*="Right Atrium"] .dg-headertable .dg-hcell,
       #dg-embed[aria-label*="Right Atrium"] .dg-header .dg-hcell{
-        font-size: var(--ra-head-fs-600) !important;    /* ← EDIT via --ra-head-fs-600 */
-        min-height: var(--ra-hmin-600) !important;      /* ← EDIT via --ra-hmin-600 */
+        font-size: var(--ra-head-fs-600) !important;
+        min-height: var(--ra-hmin-600) !important;
       }
     }
     @media (max-width:420px){
       #dg-embed[aria-label*="Right Atrium"] .dg-headertable .dg-hcell,
       #dg-embed[aria-label*="Right Atrium"] .dg-header .dg-hcell{
-        font-size: var(--ra-head-fs-420) !important;    /* ← EDIT via --ra-head-fs-420 */
-        min-height: var(--ra-hmin-420) !important;      /* ← EDIT via --ra-hmin-420 */
+        font-size: var(--ra-head-fs-420) !important;
+        min-height: var(--ra-hmin-420) !important;
+      }
+    }
+
+    /* =========================================================
+       RA-ONLY VALUE/UNIT CONTRAST (match RV: stronger values, softer units)
+       ========================================================= */
+    /* Make the numeric values (and operators) pop */
+    #dg-embed[aria-label*="Right Atrium"][aria-label*="Male"] .dg-table td .dg-range{
+      font-weight: 700 !important;
+      letter-spacing: -0.006em !important;
+    }
+    #dg-embed[aria-label*="Right Atrium"][aria-label*="Male"] .dg-table td .dg-range .dg-nb{
+      font-weight: 800 !important;
+    }
+    /* Dash separator a touch softer than numbers */
+    #dg-embed[aria-label*="Right Atrium"][aria-label*="Male"] .dg-table td .dg-range .dg-sep{
+      opacity: .82 !important;
+      font-weight: 600 !important;
+    }
+    /* Units: smaller + softer */
+    #dg-embed[aria-label*="Right Atrium"][aria-label*="Male"] .dg-table td .dg-unit{
+      color: rgba(255,255,255,.74) !important;
+      font-weight: 500 !important;
+      font-size: .86em !important;
+      line-height: 1.05 !important;
+      vertical-align: baseline !important;
+    }
+    @media (max-width: 600px){
+      #dg-embed[aria-label*="Right Atrium"][aria-label*="Male"] .dg-table td .dg-unit{
+        font-size: .80em !important;
+        color: rgba(255,255,255,.72) !important;
+      }
+    }
+    @media (max-width: 420px){
+      #dg-embed[aria-label*="Right Atrium"][aria-label*="Male"] .dg-table td .dg-unit{
+        font-size: .78em !important;
+        color: rgba(255,255,255,.70) !important;
       }
     }
   </style>
