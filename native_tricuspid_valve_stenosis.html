@@ -154,6 +154,18 @@
     @media (max-width:600px){ .final{ padding-left:6% !important; padding-right:6% !important; } }
     @media (max-width:400px){ .final{ padding-left:4% !important; padding-right:4% !important; } }
     @media (max-width:340px){ .final{ padding-left:3% !important; padding-right:3% !important; } }
+
+    /* Native Valve — single-column blue headers: restore normal height */
+#dg-embed[aria-label*="Native"][aria-label*="Valve"] .dg-header.dg-single .dg-hcell,
+#dg-embed[aria-label*="Native"][aria-label*="Valve"] .dg-header.dg-singlecol .dg-hcell{
+  min-height: 56px !important;
+  padding: 12px 8px !important;
+  /* (optional: to match prosthetic single-col text size exactly)
+  font-size: clamp(.78rem, 2.4vw, 1.02rem) !important;
+  line-height: 1.10 !important;
+  */
+}
+
   </style>
 
 </body>
