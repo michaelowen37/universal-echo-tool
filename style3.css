@@ -1716,3 +1716,51 @@ li {
 }
 
 
+/* === Parity fix: make c5 match c2–c4 on tiny screens === */
+@media (max-width:420px){
+  #dg-embed .dg-table td.dg-c2,
+  #dg-embed .dg-table td.dg-c3,
+  #dg-embed .dg-table td.dg-c4,
+  #dg-embed .dg-table td.dg-c5{
+    font-size: clamp(.28rem, 1.45vw, .46rem) !important;
+    line-height: 1.12 !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    letter-spacing: -0.014em !important;
+  }
+  /* ensure inner lines in c5 don't self-shrink */
+  #dg-embed .dg-table td.dg-c5 .dg-range,
+  #dg-embed .dg-table td.dg-c5 .dg-unit{
+    font-size: inherit !important;
+    line-height: inherit !important;
+    letter-spacing: inherit !important;
+  }
+}
+
+/* =========================
+   Units parity under tight widths
+   ========================= */
+
+/* ≤ 420px: make all units match their cell's font size (like col-5 already does) */
+@media (max-width:420px){
+  #dg-embed .dg-table td.dg-c2 .dg-unit,
+  #dg-embed .dg-table td.dg-c3 .dg-unit,
+  #dg-embed .dg-table td.dg-c4 .dg-unit,
+  #dg-embed .dg-table td.dg-c5 .dg-unit{
+    font-size: inherit !important;
+    line-height: inherit !important;
+    letter-spacing: inherit !important;
+  }
+}
+
+/* (optional) ≤ 600px too, if you want identical behavior there as well */
+@media (max-width:600px){
+  #dg-embed .dg-table td.dg-c2 .dg-unit,
+  #dg-embed .dg-table td.dg-c3 .dg-unit,
+  #dg-embed .dg-table td.dg-c4 .dg-unit,
+  #dg-embed .dg-table td.dg-c5 .dg-unit{
+    font-size: inherit !important;
+    line-height: inherit !important;
+    letter-spacing: inherit !important;
+  }
+}
