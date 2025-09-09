@@ -161,7 +161,7 @@
         /* Single column = full width */
         .dg-table col{ width:100%; }
 
-        <!-- DROP-IN: Special Population page — compact blue header (match AFib) -->
+        /*<!-- DROP-IN: Special Population page — compact blue header (match AFib) -->*/
 <style>
   /* Make the blue band shorter and the text smaller (across all widths) */
   #dg-embed .dg-header.dg-singlecol .dg-hcell,
@@ -216,6 +216,59 @@
       <!-- <li><a href="terms-of-use.html" target="_blank">Terms of Use</a></li> -->
     </ul>
   </footer>
-   
+   <!-- Special-pop diastology: make blue header match AFib -->
+<style>
+  /* ======= TUNER (EDIT ME) ======= */
+  #dg-embed{
+    --SP_HEAD_FONT: clamp(.66rem, 2.0vw, .96rem);  /* EDIT ME: header text size */
+    --SP_HEAD_MINH: 88px;                          /* EDIT ME: min row height   */
+    --SP_HEAD_PADY: 20px;                          /* EDIT ME: vertical padding */
+  }
+
+  /* Apply AFib-like header sizing + subtle fill */
+  #dg-embed .dg-header.dg-singlecol .dg-hcell{
+    display:flex !important; align-items:center !important; justify-content:center !important;
+    text-align:center !important;
+    padding: var(--SP_HEAD_PADY) 12px !important;
+    min-height: var(--SP_HEAD_MINH) !important;
+    font-size: var(--SP_HEAD_FONT) !important;
+    line-height: 1.14 !important;
+    font-weight: 600 !important;
+    border-right: var(--dg-hsep) solid var(--dg-head);
+    background: rgba(40,133,199,0.18) !important;  /* same subtle blue fill as AFib */
+
+    /* keep things wrap-friendly; no scrollbars */
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+    overflow:hidden !important;
+    -ms-overflow-style:none !important; scrollbar-width:none !important;
+  }
+  #dg-embed .dg-header.dg-singlecol .dg-hcell:last-child{ border-right:none !important; }
+
+  /* Narrow screens: mirror AFib ramps (adjust if you like) */
+  @media (max-width:1000px){
+    #dg-embed{
+      --SP_HEAD_FONT: clamp(.60rem, 1.8vw, .88rem);
+      --SP_HEAD_MINH: 84px;
+      --SP_HEAD_PADY: 16px;
+    }
+  }
+  @media (max-width:600px){
+    #dg-embed{
+      --SP_HEAD_FONT: clamp(.56rem, 2.4vw, .82rem);
+      --SP_HEAD_MINH: 80px;
+      --SP_HEAD_PADY: 14px;
+    }
+  }
+  @media (max-width:420px){
+    #dg-embed{
+      --SP_HEAD_FONT: clamp(.52rem, 3.2vw, .78rem);
+      --SP_HEAD_MINH: 76px;
+      --SP_HEAD_PADY: 12px;
+    }
+  }
+</style>
+
 </body>
 </html>
