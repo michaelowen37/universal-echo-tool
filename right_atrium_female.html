@@ -84,13 +84,21 @@
                 </td>
                 <td class="dg-c3">
                   <div class="dg-wrap">
-                    <span class="dg-range"><span class="dg-nb">&ge;&nbsp;19</span> &ndash; <span class="dg-nb">&le;&nbsp;22</span></span>
+                    <span class="dg-range">
+                      <span class="dg-nb">&ge;&nbsp;19</span>
+                      <span class="dg-sep">–</span>
+                      <span class="dg-nb">&le;&nbsp;22</span>
+                    </span>
                     <span class="dg-unit">cm<sup>2</sup></span>
                   </div>
                 </td>
                 <td class="dg-c4">
                   <div class="dg-wrap">
-                    <span class="dg-range"><span class="dg-nb">&gt;&nbsp;22</span> &ndash; <span class="dg-nb">&le;&nbsp;24</span></span>
+                    <span class="dg-range">
+                      <span class="dg-nb">&gt;&nbsp;22</span>
+                      <span class="dg-sep">–</span>
+                      <span class="dg-nb">&le;&nbsp;24</span>
+                    </span>
                     <span class="dg-unit">cm<sup>2</sup></span>
                   </div>
                 </td>
@@ -112,13 +120,21 @@
                 </td>
                 <td class="dg-c3">
                   <div class="dg-wrap">
-                    <span class="dg-range"><span class="dg-nb">&ge;&nbsp;33</span> &ndash; <span class="dg-nb">&le;&nbsp;38</span></span>
+                    <span class="dg-range">
+                      <span class="dg-nb">&ge;&nbsp;33</span>
+                      <span class="dg-sep">–</span>
+                      <span class="dg-nb">&le;&nbsp;38</span>
+                    </span>
                     <span class="dg-unit">mL/m<sup>2</sup></span>
                   </div>
                 </td>
                 <td class="dg-c4">
                   <div class="dg-wrap">
-                    <span class="dg-range"><span class="dg-nb">&gt;&nbsp;39</span> &ndash; <span class="dg-nb">&le;&nbsp;44</span></span>
+                    <span class="dg-range">
+                      <span class="dg-nb">&gt;&nbsp;39</span>
+                      <span class="dg-sep">–</span>
+                      <span class="dg-nb">&le;&nbsp;44</span>
+                    </span>
                     <span class="dg-unit">mL/m<sup>2</sup></span>
                   </div>
                 </td>
@@ -147,7 +163,7 @@
     </ul>
   </footer>
 
-  <!-- Page-scoped header/table lock + inline units (no scrollbars) -->
+  <!-- Page-scoped header/table lock + taller header + no-scrollbar second line -->
   <style>
     /* Chips: keep single-line */
     .navbar a.border, .navbar a.active.border{
@@ -160,8 +176,15 @@
     #dg-embed{
       --dg-accent:#00ff66; --dg-head:rgb(40,133,199);
       --dg-bg:#000; --dg-text:#fff;
+
+      /* borders */
       --dg-outer:4px; --dg-line:2px; --dg-hsep:2px; --dg-hrim:4px;
 
+      /* header height & padding (taller like valve pages) */
+      --dg-hmin: 112px;      /* base min height for blue band */
+      --dg-hpad-y: 24px;     /* vertical padding */
+
+      /* column widths */
       --c1:34%;
       --c2:16.5%;
       --c3:16.5%;
@@ -188,6 +211,7 @@
       display:table-cell !important;
       vertical-align:middle !important;
       float:none !important;
+      text-align:center; /* centered like valves */
     }
 
     .dg-headertable col.dg-col1-col{ width: var(--c1); }
@@ -198,12 +222,25 @@
 
     .dg-hcell{
       border-right:var(--dg-hsep) solid var(--dg-head);
-      padding:20px 12px; min-height:88px; text-align:center;
-      font-weight:700; line-height:1.12; font-size: clamp(.82rem, 2.6vw, 1.08rem);
+      padding: var(--dg-hpad-y) 14px;           /* taller padding */
+      min-height: var(--dg-hmin);               /* taller band */
+      line-height:1.16;
+      font-weight:700;
+      font-size: clamp(.86rem, 2.6vw, 1.12rem); /* a touch larger */
       color:var(--dg-text); background:transparent;
       white-space:nowrap; overflow:hidden;
     }
+    .dg-hcell .dg-wrap{
+      display:block; overflow:visible;          /* never scrollbars in header */
+      -ms-overflow-style: none; scrollbar-width: none;
+    }
+    .dg-hcell .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
     .dg-headertable th:last-child{ border-right:none; }
+
+    /* On very narrow screens, left-align header text (like native tricuspid) */
+    @media (max-width:400px){
+      .dg-headertable th{ text-align:left; }
+    }
 
     /* ===== GREEN TABLE ===== */
     .dg-tablewrap{ border:var(--dg-outer) solid var(--dg-accent); border-radius:18px; overflow:hidden; background:var(--dg-bg); }
@@ -228,19 +265,39 @@
       background: rgba(40,133,199,0.22);
     }
 
-    /* ===== INLINE value + unit (no scrollbars; wraps only when needed) ===== */
-    #dg-embed .dg-wrap{ overflow: visible !important; }
+    /* ===== Value + unit inline by default ===== */
+    #dg-embed .dg-wrap{
+      overflow: visible !important;             /* never auto/scroll */
+      -ms-overflow-style: none; scrollbar-width: none; /* hide UA scrollbars if any */
+    }
+    #dg-embed .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+
     #dg-embed .dg-range{ display:inline; }
-    #dg-embed .dg-unit{ display:inline; white-space: normal; } /* allow wrap if micro */
-    #dg-embed .dg-nb{ white-space:nowrap; display:inline; vertical-align:baseline; } /* keep operator+number together */
+    #dg-embed .dg-unit{
+      display:inline; white-space: nowrap;      /* keep token intact on one line */
+      -ms-overflow-style: none; scrollbar-width: none;
+    }
+    #dg-embed .dg-unit::-webkit-scrollbar{ width:0; height:0; }
+
+    #dg-embed .dg-nb{ white-space:nowrap; display:inline; vertical-align:baseline; }
+    #dg-embed .dg-sep{ display:inline; padding:0 .15em; } /* dash */
     #dg-embed sup{ font-size:0.78em; line-height:0; }
 
-    /* ===== Responsive tweaks (matches RV behavior) ===== */
+    /* ===== If a dash exists, drop the unit to a clean second line (no scrollbars) ===== */
+    #dg-embed .dg-range:has(.dg-sep) + .dg-unit{
+      display:block;
+      margin-top:2px;
+      white-space:nowrap;                        /* unit stays on its own line */
+      -ms-overflow-style: none; scrollbar-width: none;
+    }
+    #dg-embed .dg-range:has(.dg-sep) + .dg-unit::-webkit-scrollbar{ width:0; height:0; }
+
+    /* ===== Responsive tweaks (kept from RV) ===== */
     @media (max-width:600px){
-      .dg-hcell{ font-size: clamp(.50rem, 1.9vw, .72rem); padding:14px 8px; }
+      .dg-hcell{ font-size: clamp(.56rem, 1.9vw, .82rem); padding: 18px 10px; min-height: 96px; }
     }
     @media (max-width:420px){
-      .dg-hcell{ font-size: clamp(.46rem, 1.8vw, .68rem); padding:12px 6px; }
+      .dg-hcell{ font-size: clamp(.52rem, 1.8vw, .78rem); padding: 14px 8px; min-height: 88px; }
     }
 
     /* First-column text shrink on narrow screens */
@@ -265,8 +322,8 @@
         letter-spacing: -0.006em;
       }
       .dg-hcell{
-        font-size: clamp(.64rem, 1.65vw, .92rem);
-        padding: 14px 8px;
+        font-size: clamp(.72rem, 1.65vw, 1.0rem);
+        padding: 18px 10px;
       }
     }
     @media (max-width:600px){
@@ -285,10 +342,6 @@
         padding: 10px 4px;
         line-height: 1.14;
         letter-spacing: -0.012em;
-      }
-      .dg-hcell{
-        font-size: clamp(.48rem, 1.7vw, .70rem);
-        padding: 10px 6px;
       }
     }
     @media (max-width:420px){
@@ -313,11 +366,6 @@
         font-weight: 600;
         padding: 8px 4px;
       }
-      .dg-hcell{
-        font-size: clamp(.38rem, 1.5vw, .56rem);
-        padding: 8px 4px;
-        font-weight: 600;
-      }
     }
     @media (max-width:380px){
       #dg-embed .dg-table td.dg-c2,
@@ -327,10 +375,6 @@
         font-size: clamp(.26rem, 1.35vw, .42rem);
         padding: 7px 2px;
         line-height: 1.10;
-      }
-      .dg-hcell{
-        font-size: clamp(.36rem, 1.4vw, .52rem);
-        padding: 7px 3px;
       }
     }
     @media (max-width:360px){
