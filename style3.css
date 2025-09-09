@@ -1,7 +1,6 @@
 * {
     border: none;
     overflow-x: hidden;
-
 }
 
 html, body {
@@ -25,42 +24,21 @@ p {
     height: 100%;
     color: #647e85;
     overflow-y: hidden;
-
 }
 
-/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+/* Mobile text sizing */
 @media only screen and (max-width: 1000px) {
-    p {
-        font-size: 2.5vw;
-        
-    }
+    p { font-size: 2.5vw; }
 }
-
-/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
 @media only screen and (max-width: 800px) {
-    p {
-        font-size: 3vw;
-        
-    }
+    p { font-size: 3vw; }
 }
-
-/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
 @media only screen and (max-width: 600px) {
-    p {
-        font-size: 3.4vw;
-       
-    }
+    p { font-size: 3.4vw; }
 }
-
-/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
 @media only screen and (max-width: 400px) {
-    p {
-        font-size: 5vw;
-        
-    }
+    p { font-size: 5vw; }
 }
-
-
 
 /************************************************
 The nav and all div sections have a zone class
@@ -70,14 +48,12 @@ The nav and all div sections have a zone class
     color:#ffffff;
     font-size:3vw;
     /*transition: all 0.3s linear;*/
-
 }
-
 
 /***********************************************************************
  *  Nav Bar
-NAV bar uses flexbox
-*****************************************/
+ *  NAV bar uses flexbox
+ ***********************************************************************/
 
 .main-nav, .foot-nav {
     display: flex;
@@ -93,68 +69,36 @@ NAV bar uses flexbox
     width: 100%;
 }
 
-
-/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+/* Mobile nav text sizing */
 @media only screen and (max-width: 1000px) {
-    .main-nav, .foot-nav {
-        font-size: 1.8vw;
-        /*padding: 0;*/
-    }
+    .main-nav, .foot-nav { font-size: 1.8vw; }
 }
-
-/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
 @media only screen and (max-width: 800px) {
-    .main-nav, .foot-nav {
-        font-size: 2.2vw;
-        /*padding: 0;*/
-    }
+    .main-nav, .foot-nav { font-size: 2.2vw; }
 }
-
-/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
 @media only screen and (max-width: 600px) {
-     .foot-nav {
-        font-size: 3vw;
-        padding: 0;
-    }
+     .foot-nav { font-size: 3vw; padding: 0; }
 }
-
-/*This is how the CSS changes when screen width is below 330px - Mobile devices*/
 @media only screen and (max-width: 400px) {
-    .foot-nav {
-        font-size: 4vw;
-        padding: 0;
-    }
+    .foot-nav { font-size: 4vw; padding: 0; }
 }
 
 /*This pushes a selection to the far right within nav bar*/
-.push {
-    margin-left: auto;
-}
+.push { margin-left: auto; }
 
 /*Space between text in nav bar*/
-li {
-    padding: 2.5%;
+li { padding: 2.5%; }
 
-}
-
-/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+/* Mobile LI spacing */
 @media only screen and (max-width: 1000px) {
-    li {
-        padding: 4%;
-        
-    }
+    li { padding: 4%; }
 }
-
 
 /*Nav bar text*/
 a {
     color: #647e85;
     text-decoration: none;
     display: block;
-}
-
-a {
-    /*margin: 0 auto;*/
     font-family: sans-serif, Palatino;
     padding: 0;
     font-size: 2vw;
@@ -170,12 +114,9 @@ a.words {
     padding: 0 3%;
 }
 
-/*This is how the CSS changes when screen width is below 500px - Mobile devices*/
+/* Mobile a.words sizing */
 @media only screen and (max-width: 500px) {
-    a.words {
-        font-size: 5vw;
-        
-    }
+    a.words { font-size: 5vw; }
 }
 
 h4 {
@@ -184,44 +125,20 @@ h4 {
     font-size: 1.8vw;
 }
 
-/*This is how the CSS changes when screen width is below 500px - Mobile devices*/
+/* Mobile h4 sizing */
 @media only screen and (max-width: 1000px) {
-    h4 {
-        font-size: 2.5vw;
-        padding: 0 25%;
-        
-    }
+    h4 { font-size: 2.5vw; padding: 0 25%; }
 }
-
-/*This is how the CSS changes when screen width is below 500px - Mobile devices*/
 @media only screen and (max-width: 800px) {
-    h4 {
-        font-size: 2.9vw;
-        padding: 0 25%;
-        
-    }
+    h4 { font-size: 2.9vw; padding: 0 25%; }
 }
-
-/*This is how the CSS changes when screen width is below 500px - Mobile devices*/
 @media only screen and (max-width: 500px) {
-    h4 {
-        font-size: 3vw;
-        padding: 0 25%;
-        
-    }
+    h4 { font-size: 3vw; padding: 0 25%; }
 }
 
+.sticky { position: fixed; top: 0; width: 100%; }
 
-
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
-
-/*Navbar with brick and mortar vs online*/
-/* Style the navigation menu */
+/*Navbar chips bar*/
 .navbar {
   width: 100%;
   background-color: #000000;
@@ -231,73 +148,42 @@ h4 {
   height: 6vh;
 }
 
-/*This is how the CSS changes when screen width is below 500px - Mobile devices*/
+/* Mobile navbar height */
 @media only screen and (max-width: 500px) {
-.navbar {
-        height: 5vh;
-        
-    }
+  .navbar { height: 5vh; }
+  a.border { height: 4.5vh; }
 }
-
-/*This is how the CSS changes when screen width is below 500px - Mobile devices*/
-@media only screen and (max-width: 500px) {
-a.border {
-        height: 4.5vh;
-        
-    }
-}
-
 
 /* Navigation links */
 .navbar a {
   float: center;
-  /*padding: 10px 0;*/
   color: white;
   text-decoration: none;
   font-size: 18px;
-  width: 25%; /* Four equal-width links. If you have two links, use 50%, and 33.33% for three links, etc.. */
-  text-align: center; /* If you want the text to be centered */
+  width: 25%;
+  text-align: center;
 }
 
-/* Add a background color on mouse-over */
-/*.navbar a:hover {
-  background-color: #696969;
-}*/
+/* Active link */
+.navbar a.active { background-color: #4CAF50; }
 
-/* Style the current/active link */
-.navbar a.active {
-  background-color: #4CAF50;
-}
-
-/* Add responsiveness - on screens less than 500px, make the navigation links appear on top of each other, instead of next to each other */
+/* Stack nav links on tiny screens */
 @media screen and (max-width: 500px) {
   .navbar a {
     float: left;
-    /*display: block;*/
-    /*width: 30%;*/
     font-size: 1em;
     text-align: center;
-    /*padding-left: 0;*/
     margin: auto;
   }
 }
 
-a.nospace {
-    /*padding: 0.1px;*/
-}
-
-/*@media screen and (max-width: 500px) {
-    a.nospace {
-
-    }*/
-
+a.nospace { /* spacer hidden by chips kit */ }
 
 a.border {
     border: 2px solid green;
     display: flex;
     align-items: center;
     justify-content: center;
-    /*padding: 10px 0;*/
 }
 
 /*paypal donate button*/
@@ -316,12 +202,10 @@ form {
     padding-top: 5%;
 }
 
-
 /***********************************************************************
  *  Main body with text
  **********************************************************************/
 .container {
-    /*show heigh: auto*/
     height: 6vh; 
     display: flex;
     align-items: flex-end;
@@ -330,10 +214,7 @@ form {
     font-size: 5vw;
 }
 
-.text {
-    height: 100vh;
-}
-
+.text { height: 100vh; }
 
 /********************************************
 ******The selectable circles on main-nav page
@@ -342,86 +223,29 @@ form {
     background-color: #007a35;
     border: none;
     color: white;
-    /*padding: 10%;*/
     text-align: center;
     font-size: 1.5vw;
     cursor: pointer;
     border-radius: 12px;
-    -webkit-transition: all 0.2s linear; /* Safari */
+    -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
     width: 100%;
     font-family: palatino;
     height: 100%;
 }
 
-
-
-
-
-
-/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
-/*@media only screen and (max-width: 1000px) {
-    .box {
-        font-size: 1.8vw;
-        padding: 8px 25px;
-    }
-}*/
-
-/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
-/*@media only screen and (max-width: 800px) {
-    .box {
-        font-size: 3vw;
-        padding: 6px 25px;
-        width: 30%;
-       
-    }
-}*/
-
-/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
-/*@media only screen and (max-width: 600px) {
-    .box {
-        font-size: 3vw;
-        padding: 6px 25px;
-        width: 30%;
-       
-    }
-}*/
-
-/*This is how the CSS changes when screen width is below 350px - Mobile devices*/
-/*@media only screen and (max-width: 400px) {
-    .box {
-        font-size: 4vw;
-        padding: 8px 25px;
-        width: 50%;
-        
-    }
-}
-*/
-
-/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+/* Title size ramps */
 @media only screen and (max-width: 1000px) {
-    .container {
-        font-size: 6vw;
-    }
+    .container { font-size: 6vw; }
 }
-
-/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
 @media only screen and (max-width: 600px) {
-    .container {
-        font-size: 7vw;
-    }
+    .container { font-size: 7vw; }
 }
-
-/*This is how the CSS changes when screen width is below 350px - Mobile devices*/
 @media only screen and (max-width: 400px) {
-    .container {
-        font-size: 8vw;
-    }
+    .container { font-size: 8vw; }
 }
 
-.cover {
-    width: 30rem;
-}
+.cover { width: 30rem; }
 
 #signature {
     display: flex;
@@ -432,36 +256,18 @@ form {
     padding-top: 1%;
 }
 
-/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+/* signature ramps */
 @media only screen and (max-width: 1000px) {
-    #signature {
-        font-size: 2.2vw;
-        
-    }
+    #signature { font-size: 2.2vw; }
 }
-
-/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
 @media only screen and (max-width: 800px) {
-    #signature {
-        font-size: 2.7vw;
-        
-    }
+    #signature { font-size: 2.7vw; }
 }
-
-/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
 @media only screen and (max-width: 600px) {
-    #signature {
-        font-size: 3.1vw;
-       
-    }
+    #signature { font-size: 3.1vw; }
 }
-
-/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
 @media only screen and (max-width: 400px) {
-    #signature {
-        font-size: 4.7vw;
-        padding-top: 2%;
-    }
+    #signature { font-size: 4.7vw; padding-top: 2%; }
 }
 
 .links {
@@ -469,49 +275,27 @@ form {
     text-decoration: underline;
 }
 
-/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+/* links padding ramps */
 @media only screen and (max-width: 1000px) {
-    .links {
-        padding: 0.5% 10%;
-        
-    }
+    .links { padding: 0.5% 10%; }
 }
-
-/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
 @media only screen and (max-width: 800px) {
-    .links {
-        padding: 1% 10%;
-        
-    }
+    .links { padding: 1% 10%; }
 }
-
-/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
 @media only screen and (max-width: 600px) {
-    .links {
-        padding: 1.5% 10%;  
-    }
+    .links { padding: 1.5% 10%; }
 }
-
-/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
 @media only screen and (max-width: 400px) {
-    .links {
-        padding: 2% 10%;
-    }
+    .links { padding: 2% 10%; }
 }
 
-
-.link-title {
-    text-decoration: none;
-    padding: 3% 10%;
-    list-style-type: none;
-}
+.link-title { text-decoration: none; padding: 3% 10%; list-style-type: none; }
 
 /**************************************************
 *****Container that contains button on donate page
 ***************************************************/
 
 .container2 {
-    /*show heigh: auto*/
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -527,56 +311,28 @@ button {
     font-size: 1.5vw;
     cursor: pointer;
     border-radius: 12px;
-    -webkit-transition: all 0.2s linear; /* Safari */
+    -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
     width: 20%;
     font-family: palatino;
     height: 100% !important;
 }
 
-button:hover {
-    background-color: #099b48;
-}
+button:hover { background-color: #099b48; }
 
-/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+/* button ramps */
 @media only screen and (max-width: 1000px) {
-    button {
-        font-size: 1.8vw;
-        padding: 8px 25px;
-    }
+    button { font-size: 1.8vw; padding: 8px 25px; }
 }
-
-/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
 @media only screen and (max-width: 600px) {
-    button {
-        font-size: 3vw;
-        padding: 6px 25px;
-        width: 30%;
-    }
+    button { font-size: 3vw; padding: 6px 25px; width: 30%; }
 }
-
-/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
-@media only screen and (max-width: 600px) {
-    button {
-        font-size: 3vw;
-        padding: 6px 25px;
-        width: 30%;
-    }
-}
-
-/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
 @media only screen and (max-width: 400px) {
-    button {
-        font-size: 4vw;
-        padding: 8px 25px;
-        width: 50%;
-    }
+    button { font-size: 4vw; padding: 8px 25px; width: 50%; }
 }
 
 /***********************************************************************
- *  Grid Panel
- min-max: 350px is min (img changes when screen < 350px, 1fr is max 
- main-nav page
+ *  Grid Panel (main-nav page)
  **********************************************************************/
 .grid-wrapper {
     display: grid;
@@ -584,10 +340,10 @@ button:hover {
     grid-gap: 1%;
     padding: 3% 0 10% 0;
     min-height: 100%;
-
 }
 
-This is how the CSS changes when screen width is below 800px - Mobile devices
+/* Mobile grids (wrapper) */
+/* This is how the CSS changes when screen width is below 1000px - Mobile devices */
 @media only screen and (max-width: 1000px) {
     .grid-wrapper {
         grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
@@ -596,8 +352,7 @@ This is how the CSS changes when screen width is below 800px - Mobile devices
         padding: 3% 0 30% 0;
     }
 }
-
-This is how the CSS changes when screen width is below 800px - Mobile devices
+/* This is how the CSS changes when screen width is below 800px - Mobile devices */
 @media only screen and (max-width: 800px) {
     .grid-wrapper {
         grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
@@ -606,27 +361,22 @@ This is how the CSS changes when screen width is below 800px - Mobile devices
         padding: 3% 0 30% 0;
     }
 }
-
-This is how the CSS changes when screen width is below 600px - Mobile devices
+/* This is how the CSS changes when screen width is below 600px - Mobile devices */
 @media only screen and (max-width: 600px) {
     .grid-wrapper {
-        grid-template-columns: 2fr;
         grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
         grid-auto-rows: minmax(11vh, 11vh);
         padding: 3% 0 60% 0;
     }
 }
-
-This is how the CSS changes when screen width is below 400px - Mobile devices
+/* This is how the CSS changes when screen width is below 400px - Mobile devices */
 @media only screen and (max-width: 400px) {
     .grid-wrapper {
         grid-template-columns: 1fr;
         grid-auto-rows: minmax(8vh, 15vh);
         padding: 3% 0 80% 0;
-
     }
 }
-
 
 .grid-wrapper1 {
     display: grid;
@@ -634,12 +384,10 @@ This is how the CSS changes when screen width is below 400px - Mobile devices
     grid-gap: 0.1%;
     padding: 3% 0 10% 0;
     min-height: 100%;
-
     grid-auto-rows: minmax(30vh, 10vh);
-
 }
 
-/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
+/* Mobile grids (wrapper1) */
 @media only screen and (max-width: 1000px) {
     .grid-wrapper1 {
         grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
@@ -648,8 +396,6 @@ This is how the CSS changes when screen width is below 400px - Mobile devices
         padding: 3% 0 30% 0;
     }
 }
-
-/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
 @media only screen and (max-width: 800px) {
     .grid-wrapper1 {
         grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
@@ -658,8 +404,6 @@ This is how the CSS changes when screen width is below 400px - Mobile devices
         padding: 3% 0 30% 0;
     }
 }
-
-/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
 @media only screen and (max-width: 600px) {
     .grid-wrapper1 {
         grid-template-columns: 2fr;
@@ -667,14 +411,11 @@ This is how the CSS changes when screen width is below 400px - Mobile devices
         padding: 3% 0 60% 0;
     }
 }
-
-/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
 @media only screen and (max-width: 400px) {
     .grid-wrapper1 {
         grid-template-columns: 1fr;
         grid-auto-rows: minmax(7vh, 8vh);
         padding: 3% 0 80% 0;
-
     }
 }
 
@@ -685,201 +426,84 @@ This is how the CSS changes when screen width is below 400px - Mobile devices
     padding: 3% 2% 10% 2%;
     min-height: 100%;
     grid-auto-rows: minmax(20vh, 10vh);
-
 }
 
-/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
-@media only screen and (max-width: 1025px) {
-    .grid-wrapper2 {
-
-    }
-}
-
-/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
-@media only screen and (max-width: 800px) {
-    .grid-wrapper2 {
-       
-    }
-}
-
-/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
+/* Mobile grids (wrapper2) */
 @media only screen and (max-width: 600px) {
     .grid-wrapper2 {
         grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
         grid-auto-rows: minmax(10vh, 10vh);
     }
 }
-
-/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
 @media only screen and (max-width: 400px) {
     .grid-wrapper2 {
-        
         grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
         grid-auto-rows: minmax(10vh, 10vh);
-
     }
 }
 
-.toobig {
-    font-size: 5vw;
-}
-
+.toobig { font-size: 5vw; }
 
 /*****************************************************
 ***************Text inside of nav boxes****************
 *****************************************************/
-em {
-    font-size: 1.5vw;
-}
-
-/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+em { font-size: 1.5vw; }
 @media only screen and (max-width: 1000px) {
-    em {
-        font-size: 2.5vw;
-    }
+    em { font-size: 2.5vw; }
 }
 
-
-
-/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
 @media only screen and (max-width: 2000px) {
-    a.words {
-        font-size: 2.1vw;
-    }
+    a.words { font-size: 2.1vw; }
 }
-
-/*This is how the CSS changes when screen width is below 800px - Mobile devices*/
 @media only screen and (max-width: 800px) {
-    a.words {
-        font-size: 2.4vw;
-    }
+    a.words { font-size: 2.4vw; }
 }
-
-/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
 @media only screen and (max-width: 500px) {
-    a.words {
-        font-size: 3.5vw;
-    }
+    a.words { font-size: 3.5vw; }
 }
 
-/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
-/*@media only screen and (max-width: 400px) {
-    a.words {
-        font-size: 4vw;
-    }
-}*/
-
-/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
+/* top nav ramps */
 @media only screen and (max-width: 1400px) {
-    a.top-nav {
-        font-size: 2vw;
-    }
+    a.top-nav { font-size: 2vw; }
 }
-
-/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
 @media only screen and (max-width: 800px) {
-    a.top-nav {
-        font-size: 3vw;
-    }
+    a.top-nav { font-size: 3vw; }
 }
-
-/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
 @media only screen and (max-width: 600px) {
-    a.top-nav, a {
-        font-size: 4vw;
-    }
+    a.top-nav, a { font-size: 4vw; }
 }
 
-
-/*These boxes contain the images*/
-/*.box {
-    background-color: #007a35;
-    padding: 5% 0 0 0;
-    margin: 5%;
-    border-radius: 50px;
-    text-align: center;
-    font-size: 3vw;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.box:hover {
-    background-color: #099b48;
-}*/
-
-
-/*children of the box class (the images)*/
-/*.box > a {
-    width: 100%;
-}*/
-
-.grow { 
-transition: all .4s ease-in-out; 
-}
-
-.grow:hover { 
-transform: scale(1.1);
-}
-
-
-
-
+.grow { transition: all .4s ease-in-out; }
+.grow:hover { transform: scale(1.1); }
 
 /*Perfusion and segment images*/
 .img {
     display: flex;
     flex-wrap: wrap;
-   /* height: 100%;
-    width: 100vw;*/
     margin: 0 auto;
     padding: 0;
     align-items: center;
     justify-content: center;
 }
-
-.box:hover {
-    background-color: #099b48; 
-}
-
+.box:hover { background-color: #099b48; }
 
 /****************************************************************
 **************Echo segment/perfusion images**********************
 *****************************************************************/
-/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
 @media only screen and (max-width: 1400px) {
-    .height-limit {
-        max-height: 80vh;
-    }
+    .height-limit { max-height: 80vh; }
 }
-
-/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
 @media only screen and (max-width: 1000px) {
-    .height-limit {
-        max-height: 65vh;
-    }
+    .height-limit { max-height: 65vh; }
 }
-
-/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
 @media only screen and (max-width: 800px) {
-    .height-limit {
-        max-height: 60vh;
-    }
+    .height-limit { max-height: 60vh; }
 }
-
-/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
 @media only screen and (max-width: 600px) {
-    .height-limit {
-        max-height: 60vh;
-    }
+    .height-limit { max-height: 60vh; }
 }
-
-/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
 @media only screen and (max-width: 450px) {
-    .height-limit {
-        max-height: 30vh;
-    }
+    .height-limit { max-height: 30vh; }
 }
 
 /****************************************************************
@@ -888,47 +512,21 @@ transform: scale(1.1);
 img.height-limit2 {
     padding-top: 5vh;
     height: 100%;
-    
-
-   /* max-height: 100vh;*/
 }
-
-/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
 @media only screen and (max-width: 1400px) {
-    img.height-limit2 {
-        max-height: 100vh;
-    }
+    img.height-limit2 { max-height: 100vh; }
 }
-
-/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
 @media only screen and (max-width: 1000px) {
-    img.height-limit2 {
-        max-height: 100vh;
-    }
+    img.height-limit2 { max-height: 100vh; }
 }
-
-/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
 @media only screen and (max-width: 800px) {
-    img.height-limit2 {
-        max-height: 100vh;
-        padding: 0;
-    }
+    img.height-limit2 { max-height: 100vh; padding: 0; }
 }
-
-/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
 @media only screen and (max-width: 600px) {
-    img.height-limit2 {
-        max-height: 70vh;
-       
-    }
+    img.height-limit2 { max-height: 70vh; }
 }
-
-/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
 @media only screen and (max-width: 450px) {
-    img.height-limit2 {
-        max-height: 50vh;
-        
-    }
+    img.height-limit2 { max-height: 50vh; }
 }
 
 /***********************************************************************
@@ -951,35 +549,19 @@ footer {
     width: 100%;
 }
 
-/*This is how the CSS changes when screen width is below 1000px - Mobile devices*/
+/* footer ramps */
 @media only screen and (max-width: 1000px) {
-    .foot {
-        font-size: 2.1vw;
-        padding: 0;
-    }
+    .foot { font-size: 2.1vw; padding: 0; }
 }
-
-/*This is how the CSS changes when screen width is below 600px - Mobile devices*/
 @media only screen and (max-width: 600px) {
-    .foot {
-        font-size: 3vw;
-        padding: 0;
-    }
+    .foot { font-size: 3vw; padding: 0; }
 }
-
-/*This is how the CSS changes when screen width is below 300px - Mobile devices*/
 @media only screen and (max-width: 300px) {
-    .foot {
-        font-size: 4vw;
-        padding: 0;
-    }
+    .foot { font-size: 4vw; padding: 0; }
 }
 
-.bottom-section {
-    /*padding: 0 2%;*/
-}
+.bottom-section { /*padding: 0 2%;*/ }
 
-/*This is how the CSS changes when screen width is below 400px - Mobile devices*/
 @media only screen and (max-width: 400px) {
     .foot {
         font-size: 3vw;
@@ -989,68 +571,31 @@ footer {
     }
 }
 
-
-
-
 /***********************************************************************
- *  Navigation bar
+ *  Backgrounds
  **********************************************************************/
-.nav-bar, p {
-    background: #000000;
+.nav-bar, p { background: #000000; }
+.body { background: #000000; }
+.text {
+    background: #203a43;
+    background: -moz-linear-gradient(top, #203a43 20%, #0f2027 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(20%,#203a43), color-stop(100%,#0f2027));
+    background: -webkit-linear-gradient(top, #203a43 20%,#0f2027 100%);
+    background: -o-linear-gradient(top, #203a43 20%,#0f2027 100%);
+    background: -ms-linear-gradient(top, #203a43 20%,#0f2027 100%);
+    background: linear-gradient(top, #203a43 20%,#0f2027 100%);
 }
-
-/***********************************************************************
- *  First half of screen
- **********************************************************************/
-.body {
-    background: #000000;
-}
-
-/***********************************************************************
- *  Second half of screen
- **********************************************************************/
- .text {   
-    background: #203a43; /* Old browsers */
-    background: -moz-linear-gradient(top, #203a43 20%, #0f2027 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(20%,#203a43), color-stop(100%,#0f2027)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #203a43 20%,#0f2027 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #203a43 20%,#0f2027 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #203a43 20%,#0f2027 100%); /* IE10+ */
-    background: linear-gradient(top, #203a43 20%,#0f2027 100%); /* W3C */
-}
-
-/***********************************************************************
- *  Footer
- **********************************************************************/
-.bottom-section {
-    background: #000000;
-}
-
+.bottom-section { background: #000000; }
 
 /***********************************************************************
  *  Main-Nav with multiple boxes
  **********************************************************************/
-.navigation {
-    background: #000000;
-
-    
-}
-
-.image-screens {
-    background: #203a43; /* Old browsers */
-    height: 100vh;
-}
+.navigation { background: #000000; }
+.image-screens { background: #203a43; height: 100vh; }
 
 /*Space between text in nav bar*/
-li {
-    padding: 1% 3%;
-
-}
-
-.top {
-    padding: 4%;
-}
-
+li { padding: 1% 3%; }
+.top { padding: 4%; }
 
 /* ======================= DG TABLE KIT (shared) =======================
    Put this at the very bottom of style3.css. Order matters.
@@ -1071,7 +616,11 @@ li {
   border:var(--dg-hrim) solid var(--dg-head);
   border-radius:18px; overflow:hidden; background:var(--dg-bg); margin-bottom:8px;
 }
-.dg-header{ display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); width:100%; }
+
+/* Base header grid; tracks set below depending on single vs multi */
+.dg-header{ display:grid; width:100%; }
+
+/* Header cell visuals */
 .dg-hcell{
   display:flex; align-items:center; justify-content:center;
   padding:20px 12px; min-height:88px;
@@ -1080,7 +629,8 @@ li {
   overflow:hidden; border-right:var(--dg-hsep) solid var(--dg-head);
 }
 .dg-hcell:last-child{ border-right:none; }
-/* Keep column headers on one line under 440px */
+
+/* Keep multi-column header labels on one line under 440px */
 @media (max-width:440px){
   .dg-header .dg-hcell{ font-size: clamp(.72rem, 2.6vw, .96rem); padding: 18px 8px; }
   .dg-header .dg-wrap{ white-space: nowrap; }
@@ -1118,7 +668,7 @@ li {
 /* Non-breaking unit helper: <span class="dg-nb">cm²/m²</span> */
 .dg-nb{ white-space: nowrap; display:inline-block; }
 
-/* Column width bias on tiny screens */
+/* Column width bias on tiny screens (for 4-col tables) */
 .dg-table col{ width:25%; }
 @media (max-width:400px){
   .dg-table col.dg-col1-col{ width:31%; }
@@ -1154,7 +704,6 @@ li {
 }
 
 /* ================= NAV CHIPS KIT (shared) =================
-   Paste at the very bottom of style3.css. Order matters.
    Applies to the <div class="navbar">…</div> chips on all pages.
 ============================================================ */
 
@@ -1172,7 +721,6 @@ li {
   display: inline-flex !important;
   box-sizing: border-box !important;
 
-  /* default sizing (tablet/desktop): one-line, size to content */
   width: auto !important;
   min-width: 0 !important;
   max-width: none !important;
@@ -1186,18 +734,15 @@ li {
   align-items: center !important;
   justify-content: center !important;
 
-  /* Visuals */
   border: 2px solid green !important;
-  border-radius: 0 !important;                /* sharp corners */
+  border-radius: 0 !important;
   background: transparent !important;
   color: #fff !important;
 
-  /* Readability */
   font-size: clamp(.66rem, 2.4vw, 1rem) !important;
   line-height: 1.05 !important;
   padding: clamp(6px, 1.1vw, 12px) clamp(12px, 2.2vw, 20px) !important;
 
-  /* Keep them from stretching weirdly; seam handled below */
   flex: 0 0 auto !important;
   text-align:center !important;
 }
@@ -1206,38 +751,34 @@ li {
 /* Touching seam (shared border) */
 .navbar a.border + .navbar a.border{ margin-left:-2px !important; }
 
-/* ▼ Narrower below 700px (meet-in-the-middle), allow wrapping for long label */
+/* ▼ Narrower below 700px */
 @media (max-width:700px){
   .navbar a.border,
   .navbar a.active.border{
-    white-space: normal !important;           /* allow wrapping */
+    white-space: normal !important;
     overflow-wrap: anywhere !important;
     line-height: 1.12 !important;
-
-    /* narrower base width for two-chip layout */
     flex-basis: clamp(150px, 30vw, 230px) !important;
-
-    /* Slightly tighter padding so two chips stay tidy */
     padding: 6px 10px !important;
   }
 }
 
-/* ▼ Further shorten under 500px so borders don't look too long */
+/* ▼ Further shorten under 500px */
 @media (max-width:500px){
   .navbar a.border,
   .navbar a.active.border{
-    flex-basis: clamp(120px, 26vw, 180px) !important;  /* shorter width */
+    flex-basis: clamp(120px, 26vw, 180px) !important;
     padding-left: 8px !important;
     padding-right: 8px !important;
   }
 }
 
-/* Extra-small phones: slightly smaller text/padding */
+/* Extra-small phones */
 @media (max-width:420px){
   .navbar a.border,
   .navbar a.active.border{
     font-size: clamp(.58rem, 2vw, .88rem) !important;
-    padding: 5px 8px !important; /* keep narrow look consistent */
+    padding: 5px 8px !important;
   }
 }
 @media (max-width:340px){
@@ -1248,29 +789,7 @@ li {
   }
 }
 
-/* Mid-band widening: 700–999 px (roomier chips) */
-@media (min-width:700px) and (max-width:999px){
-  .navbar a.border,
-  .navbar a.active.border{
-    flex-basis: clamp(220px, 30vw, 320px) !important;
-    padding-left: clamp(16px, 1.8vw, 28px) !important;
-    padding-right: clamp(16px, 1.8vw, 28px) !important;
-    font-size: clamp(.85rem, 1.2vw, 1.02rem) !important;
-  }
-}
-
-/* Desktop widening: ≥1000px */
-@media (min-width:1000px){
-  .navbar a.border,
-  .navbar a.active.border{
-    flex-basis: clamp(320px, 22vw, 420px) !important;
-    padding-left: clamp(22px, 1.4vw, 34px) !important;
-    padding-right: clamp(22px, 1.4vw, 34px) !important;
-    font-size: clamp(.9rem, 1.05vw, 1.08rem) !important;
-  }
-}
-
-/* 700–999px: narrower chips (match NMR page feel) */
+/* Mid-band widening: 700–999 px */
 @media (min-width:700px) and (max-width:999px){
   .navbar a.border,
   .navbar a.active.border{
@@ -1281,7 +800,7 @@ li {
   }
 }
 
-/* ≥1000px: narrower desktop chips */
+/* Desktop widening: ≥1000px */
 @media (min-width:1000px){
   .navbar a.border,
   .navbar a.active.border{
@@ -1292,20 +811,19 @@ li {
   }
 }
 
-
-/* ===== Fix: prevent header clamp from clipping single words like "MODERATE" ===== */
+/* ===== Prevent header clamp from clipping single words like "MODERATE" ===== */
 #dg-embed .dg-header .dg-wrap{
-  display: inline;                 /* cancel the -webkit-box used for 3-line clamp */
+  display:inline;
   -webkit-line-clamp: unset;
   -webkit-box-orient: initial;
-  white-space: nowrap;             /* never break MODERATE */
+  white-space: nowrap;
 }
 
-/* Give headers a touch more room on small screens without breaking the word */
+/* Give headers a touch more room on small screens */
 @media (max-width:480px){
   #dg-embed .dg-header .dg-hcell{
     font-size: clamp(.68rem, 2.8vw, .94rem);
-    padding: 16px 8px;             /* slightly narrower padding */
+    padding: 16px 8px;
   }
 }
 @media (max-width:360px){
@@ -1314,17 +832,11 @@ li {
   }
 }
 
-
 /* Widen the table zone on phones (match stenosis page) */
 @media (max-width:600px){ .final{ padding-left:6% !important; padding-right:6% !important; } }
 @media (max-width:400px){ .final{ padding-left:4% !important; padding-right:4% !important; } }
 @media (max-width:340px){ .final{ padding-left:3% !important; padding-right:3% !important; } }
 @media (max-width:320px){ .final{ padding-left:2.5% !important; padding-right:2.5% !important; } }
-
-
-#dg-embed .dg-header .dg-wrap{
-  display:inline; white-space:nowrap; -webkit-line-clamp:unset; -webkit-box-orient:initial;
-}
 
 /* ===== Expand table cell text to 4 lines (rows auto-grow) ===== */
 #dg-embed .dg-table th .dg-wrap,
@@ -1335,14 +847,6 @@ li {
   overflow: hidden !important;
 }
 
-/* Keep header labels on one line (don’t clamp) */
-#dg-embed .dg-header .dg-wrap{
-  display: inline !important;
-  -webkit-line-clamp: unset !important;
-  -webkit-box-orient: initial !important;
-  white-space: nowrap !important;
-}
-
 /* Ensure soft hyphens &shy; still work in cells */
 #dg-embed .dg-table .dg-wrap{
   -webkit-hyphens: manual !important;
@@ -1351,165 +855,11 @@ li {
   overflow-wrap: normal !important;
 }
 
-/* ===== BLUE–GREEN LOCKSTEP: keep header columns aligned to table columns ===== */
-
-/* Default: 4 equal columns (matches table's default 25% each) */
-#dg-embed .dg-header{
-  grid-template-columns: 25% 25% 25% 25% !important;
-}
-
-/* When the table gives the first column extra room, do the same for the header */
-@media (max-width:400px){
-  /* Table colgroup uses: 31% | 23% | 23% | 23% */
-  #dg-embed .dg-header{ grid-template-columns: 31% 23% 23% 23% !important; }
-}
-@media (max-width:340px){
-  /* Table colgroup uses: 33.5% | 22.17% | 22.17% | 22.17% */
-  #dg-embed .dg-header{ grid-template-columns: 33.5% 22.17% 22.17% 22.17% !important; }
-}
-@media (max-width:320px){
-  /* Table colgroup uses: 36.5% | 21.17% | 21.17% | 21.17% */
-  #dg-embed .dg-header{ grid-template-columns: 36.5% 21.17% 21.17% 21.17% !important; }
-}
-
-/* Safety: ensure both wrappers stretch full width so percentages resolve identically */
-#dg-embed,
-#dg-embed .dg-headerwrap,
-#dg-embed .dg-tablewrap,
-#dg-embed .dg-table{
-  width:100% !important;
-  max-width:none !important;
-}
-
-/* Make sure there’s no stray right border on the last header cell (aligns with table) */
-#dg-embed .dg-header .dg-hcell:last-child{ border-right:none !important; }
-
-/* ===== Compact columns 2–4 on narrow phones (keeps ml/beat intact) ===== */
-@media (max-width:420px){
-  #dg-embed .dg-table td.dg-c2,
-  #dg-embed .dg-table td.dg-c3,
-  #dg-embed .dg-table td.dg-c4{
-    font-size: clamp(.60rem, 2.2vw, .84rem) !important;
-    line-height: 1.12 !important;
-    padding-top: 16px !important;
-    padding-bottom: 16px !important;
-  }
-}
-
-/* Optional: a tiny extra squeeze for ultra-small screens */
-@media (max-width:360px){
-  #dg-embed .dg-table td.dg-c2,
-  #dg-embed .dg-table td.dg-c3,
-  #dg-embed .dg-table td.dg-c4{
-    font-size: clamp(.58rem, 2.4vw, .80rem) !important;
-  }
-}
-/* Never break unit clusters anywhere inside tables */
-#dg-embed .dg-nb{ white-space: nowrap !important; display: inline-block; }
-
-/* ===== Header label fit (all tables) ===== */
-/* Keep top-row labels on one line */
-#dg-embed .dg-header .dg-wrap{
-  white-space: nowrap !important;
-}
-
-/* Squeeze header text progressively on smaller screens */
-@media (max-width:520px){
-  #dg-embed .dg-header .dg-hcell{
-    font-size: clamp(.60rem, 2.2vw, .88rem) !important;
-    padding-left: 8px !important;
-    padding-right: 8px !important;
-  }
-}
-@media (max-width:440px){
-  #dg-embed .dg-header .dg-hcell{
-    font-size: clamp(.56rem, 2.4vw, .84rem) !important;
-    padding-left: 6px !important;
-    padding-right: 6px !important;
-  }
-}
-@media (max-width:360px){
-  #dg-embed .dg-header .dg-hcell{
-    font-size: clamp(.52rem, 2.6vw, .80rem) !important;
-    padding-left: 4px !important;
-    padding-right: 4px !important;
-  }
-}
-
-/* ===================== GLOBAL FIX: single-column tables + unit scrollbars ===================== */
-
-/* 1) Single-column headers: center the text and disable header clamping */
-#dg-embed .dg-header.dg-1col { grid-template-columns: 100% !important; }
-
-#dg-embed .dg-header.dg-1col .dg-hcell {
-  justify-content: center !important;
-  text-align: center !important;
-  line-height: 1.16 !important;        /* prevent tall glyph clipping (n/t etc.) */
-  padding: 22px 12px !important;        /* a bit more vertical room */
-}
-
-/* Header text wrapper: no clamp, full width, no clipping */
-#dg-embed .dg-header.dg-1col .dg-hcell > .dg-wrap {
-  display: block !important;
-  -webkit-line-clamp: unset !important;
-  -webkit-box-orient: initial !important;
-  overflow: visible !important;
-  white-space: normal !important;
-  width: 100% !important;
-}
-
-/* 2) Units with superscripts (e.g., cm²): remove clamp to kill micro-scrollbars */
-#dg-embed .dg-table .dg-wrap:has(sup),
-#dg-embed .dg-table .dg-wrap:has(.dg-nb) {
-  display: block !important;
-  -webkit-line-clamp: unset !important;
-  -webkit-box-orient: initial !important;
-  overflow: visible !important;
-}
-
-/* Keep unit clusters together and baseline aligned */
-#dg-embed .dg-nb {
-  white-space: nowrap !important;
-  display: inline !important;
-  vertical-align: baseline !important;
-  line-height: inherit !important;
-}
+/* ===================== GLOBAL: single-column header + unit scrollbars ===================== */
 
 /* Hide any residual tiny scrollbars in clamped wrappers */
 #dg-embed .dg-wrap { scrollbar-width: none; -ms-overflow-style: none; }
 #dg-embed .dg-wrap::-webkit-scrollbar { width: 0; height: 0; }
-
-/* ===================== GLOBAL: single-column header + unit scrollbars ===================== */
-
-/* Treat .dg-singlecol and .dg-1col the same */
-#dg-embed .dg-header.dg-singlecol,
-#dg-embed .dg-header.dg-1col {
-  grid-template-columns: 100% !important;     /* header width matches table */
-}
-
-/* Make the single-column header cell fill the full width and center its text */
-#dg-embed .dg-header.dg-singlecol .dg-hcell,
-#dg-embed .dg-header.dg-1col .dg-hcell {
-  width: 100% !important;
-  justify-self: stretch !important;
-  justify-content: center !important;
-  text-align: center !important;
-  line-height: 1.16 !important;               /* prevents tall glyph clipping (n/t etc.) */
-  padding: 22px 12px !important;
-  background: rgba(40,133,199,0.18) !important; /* consistent blue fill across the full bar */
-  border-right: 0 !important;                 /* no right seam for a single column */
-}
-
-/* If a header uses a .dg-wrap, disable clamping there so it never becomes a scrollbox */
-#dg-embed .dg-header.dg-singlecol .dg-hcell > .dg-wrap,
-#dg-embed .dg-header.dg-1col      .dg-hcell > .dg-wrap {
-  display: block !important;
-  -webkit-line-clamp: unset !important;
-  -webkit-box-orient: initial !important;
-  overflow: visible !important;
-  white-space: normal !important;
-  width: 100% !important;
-}
 
 /* Kill tiny scrollbars for unit cells (cm², m², cm²/m², etc.) whether or not .dg-wrap exists */
 #dg-embed .dg-table td,
@@ -1528,24 +878,6 @@ li {
   line-height: inherit !important;
 }
 
-/* Single-column header: force 1 track + true centering + full-width blue fill */
-#dg-embed .dg-header.dg-singlecol{ 
-  grid-template-columns: 1fr !important;
-}
-#dg-embed .dg-header.dg-singlecol .dg-hcell{
-  justify-content: center !important;
-  text-align: center !important;
-  background: rgba(40,133,199,0.18); /* subtle blue fill */
-}
-
-/* (Optional but robust) If you wrap header text: center that block too */
-#dg-embed .dg-header.dg-singlecol .dg-hcell > .dg-wrap{
-  display: block;
-  margin: 0 auto;
-  text-align: center;
-  width: 100%;
-}
-
 /* --- Keep scrollbar space stable so nothing nudges left/right on click --- */
 @supports (scrollbar-gutter: stable) {
   html, body { scrollbar-gutter: stable both-edges; }
@@ -1553,62 +885,6 @@ li {
 @supports not (scrollbar-gutter: stable) {
   html { overflow-y: scroll; } /* fallback */
 }
-
-/* --- Global calculator button row (MR/TR/PI/LAVI) --- */
-/* Wide screens: two buttons sized to content, centered as a group, tiny gap */
-#mr-embed .mr-actions-row,
-#tr-embed .mr-actions-row,
-#pi-embed .mr-actions-row,
-#lavi-embed .mr-actions-row {
-  display: grid;
-  grid-template-columns: repeat(2, max-content); /* columns shrink to button width */
-  column-gap: 4px;            /* really close together */
-  row-gap: 0;
-  justify-content: center;    /* center the pair as a block */
-  justify-items: center;      /* center each button in its column */
-  align-items: center;
-  margin-top: 18px;
-}
-
-/* Buttons: narrower than inputs, no “nudge” on click */
-#mr-embed .mr-btn,
-#tr-embed .mr-btn,
-#pi-embed .mr-btn,
-#lavi-embed .mr-btn {
-  width: 150px;       /* tidy, uniform width (narrower than inputs) */
-  min-width: 120px;
-  padding: 12px 20px; /* tighter than inputs */
-  transform: none;    /* prevent any positional shift on :active */
-}
-#mr-embed .mr-btn:active,
-#tr-embed .mr-btn:active,
-#pi-embed .mr-btn:active,
-#lavi-embed .mr-btn:active {
-  transform: none;
-  filter: brightness(.96);
-}
-
-/* Mobile: keep your current single-column stacking */
-@media (max-width:720px){
-  #mr-embed .mr-actions-row,
-  #tr-embed .mr-actions-row,
-  #pi-embed .mr-actions-row,
-  #lavi-embed .mr-actions-row {
-    grid-template-columns: 1fr;
-    column-gap: 0;
-    row-gap: 10px;
-  }
-  #mr-embed .mr-btn,
-  #tr-embed .mr-btn,
-  #pi-embed .mr-btn,
-  #lavi-embed .mr-btn {
-    width: 65%;     /* comfortable on phones */
-  }
-}
-
-/* A little extra space between calculator and notes blocks */
-.calc-notes { margin-top: 22px; }
-
 
 /* Global page title size */
 .container.zone.body{
@@ -1620,7 +896,6 @@ li {
 @media (max-width: 600px){
   .box.zone.grow .words,
   .box.zone.grow a{
-    /* 1em at 600px → up to 1.6em at 320px, fluid */
     font-size: clamp(1em, calc(1em + 0.6em * (600px - 100vw) / 280), 1.6em);
     line-height: 1.15;
   }
@@ -1634,28 +909,22 @@ li {
   }
 }
 
-
-/* --- PHONE-ONLY: smaller tiles + larger labels (desktop unchanged) --- */
+/* PHONE-ONLY: smaller tiles + larger labels (desktop unchanged) */
 @media (max-width: 600px){
-  /* Make the button tiles shorter on small screens */
   .grid-wrapper,
   .grid-wrapper1,
   .grid-wrapper2{
-    /* ~60–96px tall depending on viewport; no desktop changes */
     grid-auto-rows: clamp(60px, 8vh, 96px) !important;
   }
 
-  /* Grow the label text on the tiles */
   .box.zone.grow .words,
   .box.zone.grow a{
-    /* Bigger than before between 600→320px, but won’t overflow */
     font-size: clamp(1.15rem, 4.8vw, 1.8rem) !important;
     line-height: 1.12;
-    padding: 0 4% !important;   /* tiny left/right breathing room */
-    white-space: normal;        /* allow wrapping if needed */
+    padding: 0 4% !important;
+    white-space: normal;
   }
 
-  /* Optional: stop hover zoom on touch to avoid any overlap feel */
   .grow:hover{ transform: none; }
 }
 
@@ -1682,8 +951,8 @@ li {
   #tr-embed .mr-btn,
   #pi-embed .mr-btn,
   #lavi-embed .mr-btn{
-    font-size: clamp(.78rem, 3.6vw, .9rem) !important; /* ~5–10% smaller */
-    line-height: 1.1; /* keeps text crisp */
+    font-size: clamp(.78rem, 3.6vw, .9rem) !important;
+    line-height: 1.1;
   }
 }
 
@@ -1700,12 +969,10 @@ li {
 @media (max-width: 600px){
   .box.zone.grow .words,
   .box.zone.grow a.words{
-    /* ~0.95rem at 600px → ~1.35rem at 320px (soft ramp) */
     font-size: clamp(0.95rem, calc(0.95rem + 0.35rem * (600px - 100vw) / 280), 1.35rem) !important;
     line-height: 1.12;
   }
 }
-
 
 /* Phones ≤600px: shrink the labels a bit */
 @media (max-width: 600px){
@@ -1714,7 +981,6 @@ li {
     line-height: 1.12;
   }
 }
-
 
 /* === Parity fix: make c5 match c2–c4 on tiny screens === */
 @media (max-width:420px){
@@ -1740,8 +1006,6 @@ li {
 /* =========================
    Units parity under tight widths
    ========================= */
-
-/* ≤ 420px: make all units match their cell's font size (like col-5 already does) */
 @media (max-width:420px){
   #dg-embed .dg-table td.dg-c2 .dg-unit,
   #dg-embed .dg-table td.dg-c3 .dg-unit,
@@ -1752,8 +1016,6 @@ li {
     letter-spacing: inherit !important;
   }
 }
-
-/* (optional) ≤ 600px too, if you want identical behavior there as well */
 @media (max-width:600px){
   #dg-embed .dg-table td.dg-c2 .dg-unit,
   #dg-embed .dg-table td.dg-c3 .dg-unit,
@@ -1764,3 +1026,209 @@ li {
     letter-spacing: inherit !important;
   }
 }
+
+/* ===============================
+   DG TABLES — GLOBAL DATA PARITY
+   =============================== */
+
+/* 0) Base: make ALL data cells share the same metrics */
+#dg-embed .dg-table td,
+#dg-embed .dg-table td.dg-c2,
+#dg-embed .dg-table td.dg-c3,
+#dg-embed .dg-table td.dg-c4,
+#dg-embed .dg-table td.dg-c5,
+#dg-embed .dg-table td:last-child{
+  --dg-data-size: clamp(.84rem, 2.1vw, .96rem);
+  --dg-data-pad-v: 22px;
+  --dg-data-pad-h: 10px;
+  --dg-data-lh: 1.2;
+  --dg-data-ls: 0;
+
+  font-weight: 600 !important;
+  font-size: var(--dg-data-size) !important;
+  line-height: var(--dg-data-lh) !important;
+  letter-spacing: var(--dg-data-ls) !important;
+  padding: var(--dg-data-pad-v) var(--dg-data-pad-h) !important;
+}
+
+/* 1) Tighten progressively — applies equally to ALL data columns */
+@media (max-width:1000px){
+  #dg-embed .dg-table td,
+  #dg-embed .dg-table td.dg-c2,
+  #dg-embed .dg-table td.dg-c3,
+  #dg-embed .dg-table td.dg-c4,
+  #dg-embed .dg-table td.dg-c5,
+  #dg-embed .dg-table td:last-child{
+    --dg-data-size: clamp(.54rem, 1.35vw, .74rem);
+    --dg-data-pad-v: 14px;
+    --dg-data-pad-h: 8px;
+    --dg-data-lh: 1.16;
+    --dg-data-ls: -0.006em;
+  }
+}
+@media (max-width:600px){
+  #dg-embed .dg-table td,
+  #dg-embed .dg-table td.dg-c2,
+  #dg-embed .dg-table td.dg-c3,
+  #dg-embed .dg-table td.dg-c4,
+  #dg-embed .dg-table td.dg-c5,
+  #dg-embed .dg-table td:last-child{
+    --dg-data-size: clamp(.38rem, 1.65vw, .56rem);
+    --dg-data-pad-v: 10px;
+    --dg-data-pad-h: 4px;
+    --dg-data-lh: 1.14;
+    --dg-data-ls: -0.012em;
+  }
+}
+@media (max-width:420px){
+  #dg-embed .dg-table td,
+  #dg-embed .dg-table td.dg-c2,
+  #dg-embed .dg-table td.dg-c3,
+  #dg-embed .dg-table td.dg-c4,
+  #dg-embed .dg-table td.dg-c5,
+  #dg-embed .dg-table td:last-child{
+    --dg-data-size: clamp(.28rem, 1.45vw, .46rem);
+    --dg-data-pad-v: 8px;
+    --dg-data-pad-h: 3px;
+    --dg-data-lh: 1.12;
+    --dg-data-ls: -0.014em;
+  }
+}
+
+/* 2) Make inner lines follow the cell size (units & values stay in sync) */
+#dg-embed .dg-table td .dg-range,
+#dg-embed .dg-table td .dg-unit{
+  font-size: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+}
+
+/* 3) Keep operator+number glued; dash may break */
+#dg-embed .dg-range .dg-nb{ white-space: nowrap !important; }
+
+/* 4) Nuke any sneaky last-column font overrides from older rules */
+#dg-embed .dg-table td:last-child *{
+  font-size: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+}
+
+/* =========================================================
+   HEADERS: SINGLE vs MULTI — LAYOUT + LOCKSTEP WIDTHS
+   ========================================================= */
+
+/* A) Single-band headers (e.g., LA): one centered full-width cell */
+#dg-embed .dg-header.dg-single{
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  grid-auto-flow: row !important;
+  width: 100% !important;
+}
+#dg-embed .dg-header.dg-single .dg-hcell{
+  grid-column: 1 / -1 !important;
+  border-right: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+
+  min-height: 96px !important;
+  padding: 20px 12px !important;
+  font-weight: 700 !important;
+  line-height: 1.14 !important;
+  font-size: clamp(.96rem, 2.2vw, 1.20rem) !important;
+}
+#dg-embed .dg-header.dg-single .dg-hcell .dg-wrap{
+  display: block !important;
+  width: 100% !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  -webkit-line-clamp: unset !important;
+  -webkit-box-orient: initial !important;
+}
+@media (max-width:600px){
+  #dg-embed .dg-header.dg-single .dg-hcell{
+    min-height: 88px !important;
+    font-size: clamp(.86rem, 2.8vw, 1.08rem) !important;
+    padding: 18px 10px !important;
+  }
+}
+@media (max-width:420px){
+  #dg-embed .dg-header.dg-single .dg-hcell{
+    min-height: 86px !important;
+    font-size: clamp(.82rem, 3.2vw, 1.06rem) !important;
+    padding: 16px 8px !important;
+  }
+}
+
+/* B) Multi-column headers (valve pages): equal tracks, one row */
+#dg-embed .dg-header:not(.dg-single){
+  display: grid !important;
+  grid-auto-flow: column !important;
+  grid-auto-columns: 1fr !important;   /* one equal-width track per header cell */
+  width: 100% !important;
+}
+
+/* Keep MILD/MODERATE/SEVERE on one line */
+#dg-embed .dg-header:not(.dg-single) .dg-wrap{ white-space: nowrap !important; }
+
+/* Match table col bias on tiny screens (4-column tables) */
+@media (max-width:400px){
+  #dg-embed .dg-header:not(.dg-single){
+    grid-template-columns: 31% 23% 23% 23% !important;
+    grid-auto-columns: unset !important;
+  }
+}
+@media (max-width:340px){
+  #dg-embed .dg-header:not(.dg-single){
+    grid-template-columns: 33.5% 22.17% 22.17% 22.17% !important;
+    grid-auto-columns: unset !important;
+  }
+}
+@media (max-width:320px){
+  #dg-embed .dg-header:not(.dg-single){
+    grid-template-columns: 36.5% 21.17% 21.17% 21.17% !important;
+    grid-auto-columns: unset !important;
+  }
+}
+
+/* Header height + font ramps (applies to both modes) */
+#dg-embed .dg-header .dg-hcell{
+  min-height: 96px !important;
+  padding: 20px 12px !important;
+  font-weight: 700 !important;
+  line-height: 1.14 !important;
+  font-size: clamp(.96rem, 2.2vw, 1.20rem) !important;
+}
+@media (max-width:1000px){
+  #dg-embed .dg-header .dg-hcell{
+    min-height: 92px !important;
+    font-size: clamp(.90rem, 2.1vw, 1.12rem) !important;
+    padding: 18px 10px !important;
+  }
+}
+@media (max-width:600px){
+  #dg-embed .dg-header .dg-hcell{
+    min-height: 88px !important;
+    font-size: clamp(.86rem, 2.6vw, 1.08rem) !important;
+  }
+}
+@media (max-width:420px){
+  #dg-embed .dg-header .dg-hcell{
+    min-height: 86px !important;
+    font-size: clamp(.82rem, 3.2vw, 1.06rem) !important;
+    padding: 16px 8px !important;
+  }
+}
+
+/* Width parity with the green table wrapper */
+#dg-embed,
+#dg-embed .dg-headerwrap,
+#dg-embed .dg-tablewrap,
+#dg-embed .dg-table{
+  width:100% !important;
+  max-width:none !important;
+}
+
+/* Make sure there’s no stray right border on the last header cell */
+#dg-embed .dg-header .dg-hcell:last-child{ border-right:none !important; }

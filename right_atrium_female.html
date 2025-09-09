@@ -35,28 +35,104 @@
 
   <div class="zone navigation">
     <div class="final" style="padding:0 10%">
+
       <br>
 
-      <!-- ========================== DG TABLE (2 columns, no blue header row) ========================== -->
-      <div id="dg-embed" aria-label="Right Atrium — Male reference values">
-        <div class="dg-tablewrap">
-          <table class="dg-table" role="table" aria-label="Right atrial reference values (male)">
+      <!-- ========================== DG TABLE (5 columns) ========================== -->
+      <div id="dg-embed" aria-label="Right Atrium (Male) — Normal vs Mild/Moderate/Severe">
+
+        <!-- Blue header band: REAL table with matching colgroup -->
+        <div class="dg-headerwrap">
+          <table class="dg-headertable" role="presentation" aria-hidden="true">
             <colgroup>
               <col class="dg-col1-col">
               <col class="dg-col2-col">
+              <col class="dg-col3-col">
+              <col class="dg-col4-col">
+              <col class="dg-col5-col">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="dg-hcell"><div class="dg-wrap"></div></th>
+                <th class="dg-hcell"><div class="dg-wrap">NORMAL</div></th>
+                <th class="dg-hcell"><div class="dg-wrap">MILD</div></th>
+                <th class="dg-hcell"><div class="dg-wrap">MODERATE</div></th>
+                <th class="dg-hcell"><div class="dg-wrap">SEVERE</div></th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+        <!-- Green table (5 columns) -->
+        <div class="dg-tablewrap">
+          <table class="dg-table" role="table" aria-label="Right atrial size thresholds (male)">
+            <colgroup>
+              <col class="dg-col1-col">
+              <col class="dg-col2-col">
+              <col class="dg-col3-col">
+              <col class="dg-col4-col">
+              <col class="dg-col5-col">
             </colgroup>
             <tbody>
               <tr>
-                <th scope="row" class="dg-col1"><div class="dg-wrap">Indexed Volume</div></th>
-                <td class="dg-c2"><div class="dg-wrap">15 – 27&nbsp;<span class="dg-nb">ml/m<sup>2</sup></span></div></td>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">RA Area</div></th>
+                <td class="dg-c2">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">&lt;&nbsp;19</span></span>
+                    <span class="dg-unit">cm<sup>2</sup></span>
+                  </div>
+                </td>
+                <td class="dg-c3">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">&ge;&nbsp;19</span> &ndash; <span class="dg-nb">&le;&nbsp;22</span></span>
+                    <span class="dg-unit">cm<sup>2</sup></span>
+                  </div>
+                </td>
+                <td class="dg-c4">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">&gt;&nbsp;22</span> &ndash; <span class="dg-nb">&le;&nbsp;24</span></span>
+                    <span class="dg-unit">cm<sup>2</sup></span>
+                  </div>
+                </td>
+                <td class="dg-c5">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">&gt;&nbsp;24</span></span>
+                    <span class="dg-unit">cm<sup>2</sup></span>
+                  </div>
+                </td>
               </tr>
+
               <tr>
-                <th scope="row" class="dg-col1"><div class="dg-wrap">Visual Size</div></th>
-                <td class="dg-c2"><div class="dg-wrap">Should be smaller than LA</div></td>
+                <th scope="row" class="dg-col1"><div class="dg-wrap">Indexed Volume</div></th>
+                <td class="dg-c2">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">&lt;&nbsp;33</span></span>
+                    <span class="dg-unit">mL/m<sup>2</sup></span>
+                  </div>
+                </td>
+                <td class="dg-c3">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">&ge;&nbsp;33</span> &ndash; <span class="dg-nb">&le;&nbsp;38</span></span>
+                    <span class="dg-unit">mL/m<sup>2</sup></span>
+                  </div>
+                </td>
+                <td class="dg-c4">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">&gt;&nbsp;39</span> &ndash; <span class="dg-nb">&le;&nbsp;44</span></span>
+                    <span class="dg-unit">mL/m<sup>2</sup></span>
+                  </div>
+                </td>
+                <td class="dg-c5">
+                  <div class="dg-wrap">
+                    <span class="dg-range"><span class="dg-nb">&gt;&nbsp;44</span></span>
+                    <span class="dg-unit">mL/m<sup>2</sup></span>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
+
       </div>
       <!-- ======================== END DG TABLE ======================== -->
 
@@ -71,190 +147,223 @@
     </ul>
   </footer>
 
+  <!-- Page-scoped header/table lock + inline units (no scrollbars) -->
   <style>
-    /* -------- page-scoped styles only (style3.css untouched) -------- */
-
-    /* NAV container & title stack safety */
-    .zone.nav-bar{ overflow: visible !important; height: auto !important; }
-
-    .title-stack{
-      display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-      gap:0; margin:0; padding:0; max-width:100%; overflow:visible !important;
-    }
-    .dg-title, .title-stack .container, .title-stack .zone{
-      display:block !important; position:static !important; float:none !important; clear:both !important;
-      margin:0 !important; padding:0 !important; height:auto !important; max-height:none !important; min-height:0 !important;
-      overflow:visible !important; white-space:normal; word-break:normal; overflow-wrap:normal; text-align:center;
-      line-height:1.08;
-    }
-    @media (min-width:700px){
-      .dg-title{ line-height:1.04 !important; }
-    }
-
-    /* ======================= CHIPS: centered, touching, responsive ======================= */
-    .navbar{
-      display:flex; justify-content:center; align-items:stretch; gap:0 !important;
-      height:auto !important; min-height:40px; padding:0; margin:0 auto; width:100%;
-      overflow:visible !important;
-    }
-    .navbar a.nospace{ display:none !important; }  /* hide spacers so chips can touch */
-
-    .navbar a.border,
-    .navbar a.active.border{
-      position: static !important;
-      float: none !important;
-      display: inline-flex !important;
-      box-sizing: border-box !important;
-
-      width: auto !important;       /* base: size-to-content */
-      min-width: 0 !important;
-      max-width: none !important;
-
-      height: auto !important;
-      margin: 0 !important;
-      overflow: visible !important;
+    /* Chips: keep single-line */
+    .navbar a.border, .navbar a.active.border{
       white-space: nowrap !important;
+      overflow-wrap: normal !important;
       word-break: normal !important;
-      text-overflow: clip !important;
-      align-items: center !important;
-      justify-content: center !important;
-
-      /* Visuals */
-      border: 2px solid green !important;
-      border-radius: 0 !important;                /* sharp corners */
-      background: transparent !important;
-      color: #fff !important;
-
-      /* Readability */
-      font-size: clamp(.66rem, 2.4vw, 1rem) !important;
-      line-height: 1.05 !important;
-      padding: clamp(6px, 1.1vw, 12px) clamp(12px, 2.2vw, 20px) !important;
-
-      flex: 0 0 auto !important; /* no stretching */
-      text-align:center !important;
-    }
-    .navbar a.active.border{ background-color:#4CAF50 !important; border-color:green !important; }
-
-    /* Touching seam (shared border) */
-    .navbar a.border + .navbar a.border{ margin-left:-2px !important; } /* 2px = border width */
-
-    /* ===== Under 700px: SIGNIFICANTLY shorter chips ===== */
-    @media (max-width:700px){
-      .navbar a.border,
-      .navbar a.active.border{
-        white-space: normal !important;           /* allow 2-line labels if needed */
-        overflow-wrap: anywhere !important;
-        line-height: 1.12 !important;
-
-        /* shorter lengths */
-        flex-basis: clamp(100px, 24vw, 160px) !important;
-
-        /* tighter padding + smaller type */
-        font-size: clamp(.58rem, 2.6vw, .9rem) !important;
-        padding: 6px 10px !important;
-      }
     }
 
-    /* Extra tightening for small phones */
-    @media (max-width:500px){
-      .navbar a.border,
-      .navbar a.active.border{
-        flex-basis: clamp(92px, 22vw, 140px) !important;
-        padding: 5px 8px !important;
-        min-height: 30px !important;
-      }
-    }
-    @media (max-width:430px){
-      .navbar a.border,
-      .navbar a.active.border{
-        flex-basis: clamp(86px, 21vw, 126px) !important;
-        padding: 4px 8px !important;
-        font-size: clamp(.54rem, 3.2vw, .82rem) !important;
-        min-height: 28px !important;
-      }
-    }
-
-    /* ===== 700–999px: NARROWED MORE ===== */
-    @media (min-width:700px) and (max-width:999px){
-      .navbar a.border,
-      .navbar a.active.border{
-        flex-basis: clamp(180px, 22vw, 260px) !important;  /* narrower than before */
-        padding-left: clamp(14px, 1.6vw, 24px) !important;
-        padding-right: clamp(14px, 1.6vw, 24px) !important;
-        font-size: clamp(.82rem, 1.1vw, 1rem) !important;
-      }
-    }
-
-    /* ===== ≥1000px: NARROWED MORE ===== */
-    @media (min-width:1000px){
-      .navbar a.border,
-      .navbar a.active.border{
-        flex-basis: clamp(220px, 16vw, 300px) !important;  /* narrower desktop range */
-        padding-left: clamp(18px, 1.2vw, 28px) !important;
-        padding-right: clamp(18px, 1.2vw, 28px) !important;
-        font-size: clamp(.86rem, 1.0vw, 1.06rem) !important;
-      }
-    }
-
-    /* ======================= TABLE THEME (no blue header row) ======================= */
+    /* ===== Theme + shared column widths (5 cols; wider first col) ===== */
     #dg-embed{
-      --dg-accent:#00ff66;          /* green borders/lines */
-      --dg-head:rgb(40,133,199);    /* used for first col tint */
+      --dg-accent:#00ff66; --dg-head:rgb(40,133,199);
       --dg-bg:#000; --dg-text:#fff;
-      --dg-outer:4px; --dg-line:2px;
+      --dg-outer:4px; --dg-line:2px; --dg-hsep:2px; --dg-hrim:4px;
+
+      --c1:34%;
+      --c2:16.5%;
+      --c3:16.5%;
+      --c4:16.5%;
+      --c5:16.5%;
+
       color:var(--dg-text); background:var(--dg-bg);
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
     #dg-embed *{ box-sizing:border-box; }
 
-    .dg-tablewrap{
-      border:var(--dg-outer) solid var(--dg-accent);
-      border-radius:18px;
-      overflow:hidden;
-      background:var(--dg-bg);
+    /* ===== BLUE HEADER (separate table) ===== */
+    .dg-headerwrap{
+      border:var(--dg-hrim) solid var(--dg-head);
+      border-radius:18px; overflow:hidden; background:var(--dg-bg); margin-bottom:8px;
     }
-    .dg-table{
-      width:100%;
-      border-collapse:collapse;
-      table-layout:fixed;
-      text-align:center;
+    .dg-headertable{
+      display:table !important;
+      width:100%; table-layout:fixed; border-collapse:collapse; background:transparent;
     }
+    .dg-headertable thead{ display:table-header-group !important; }
+    .dg-headertable tr{ display:table-row !important; }
+    .dg-headertable th{
+      display:table-cell !important;
+      vertical-align:middle !important;
+      float:none !important;
+    }
+
+    .dg-headertable col.dg-col1-col{ width: var(--c1); }
+    .dg-headertable col.dg-col2-col{ width: var(--c2); }
+    .dg-headertable col.dg-col3-col{ width: var(--c3); }
+    .dg-headertable col.dg-col4-col{ width: var(--c4); }
+    .dg-headertable col.dg-col5-col{ width: var(--c5); }
+
+    .dg-hcell{
+      border-right:var(--dg-hsep) solid var(--dg-head);
+      padding:20px 12px; min-height:88px; text-align:center;
+      font-weight:700; line-height:1.12; font-size: clamp(.82rem, 2.6vw, 1.08rem);
+      color:var(--dg-text); background:transparent;
+      white-space:nowrap; overflow:hidden;
+    }
+    .dg-headertable th:last-child{ border-right:none; }
+
+    /* ===== GREEN TABLE ===== */
+    .dg-tablewrap{ border:var(--dg-outer) solid var(--dg-accent); border-radius:18px; overflow:hidden; background:var(--dg-bg); }
+    .dg-table{ width:100%; border-collapse:collapse; table-layout:fixed; text-align:center; background:transparent; }
+
+    .dg-table col.dg-col1-col{ width: var(--c1); }
+    .dg-table col.dg-col2-col{ width: var(--c2); }
+    .dg-table col.dg-col3-col{ width: var(--c3); }
+    .dg-table col.dg-col4-col{ width: var(--c4); }
+    .dg-table col.dg-col5-col{ width: var(--c5); }
+
     .dg-table th, .dg-table td{
       border:var(--dg-line) solid var(--dg-accent);
-      padding:22px 10px;
-      line-height:1.2;
-      background:transparent;
-      text-align:center;
-      white-space:normal; word-break:normal; overflow-wrap:normal; hyphens:manual;
-      overflow:hidden; text-overflow:clip;
-      font-size: clamp(.86rem, 2.2vw, 1.0rem);
+      padding:22px 10px; line-height:1.2; background:transparent; text-align:center;
+      white-space: normal; word-break: normal; overflow-wrap: normal; hyphens: manual; overflow:visible;
+      color:var(--dg-text);
     }
 
-    /* First column: bold + subtle blue tint */
+    /* First column: bold + soft blue tint */
     .dg-table th.dg-col1{
-      font-weight:800;
-      background: rgba(40, 133, 199, 0.22);
-      font-size: clamp(.95rem, 2.5vw, 1.06rem);
+      font-weight:800; font-size:clamp(.95rem, 2.5vw, 1.08rem);
+      background: rgba(40,133,199,0.22);
     }
 
-    /* Slight width bias for values */
-    .dg-table col.dg-col1-col{ width:42%; }
-    .dg-table col.dg-col2-col{ width:58%; }
+    /* ===== INLINE value + unit (no scrollbars; wraps only when needed) ===== */
+    #dg-embed .dg-wrap{ overflow: visible !important; }
+    #dg-embed .dg-range{ display:inline; }
+    #dg-embed .dg-unit{ display:inline; white-space: normal; } /* allow wrap if micro */
+    #dg-embed .dg-nb{ white-space:nowrap; display:inline; vertical-align:baseline; } /* keep operator+number together */
+    #dg-embed sup{ font-size:0.78em; line-height:0; }
+
+    /* ===== Responsive tweaks (matches RV behavior) ===== */
+    @media (max-width:600px){
+      .dg-hcell{ font-size: clamp(.50rem, 1.9vw, .72rem); padding:14px 8px; }
+    }
     @media (max-width:420px){
-      .dg-table col.dg-col1-col{ width:46%; }
-      .dg-table col.dg-col2-col{ width:54%; }
+      .dg-hcell{ font-size: clamp(.46rem, 1.8vw, .68rem); padding:12px 6px; }
     }
 
-    /* Keep unit clusters like “ml/m²” on one line */
-    #dg-embed .dg-nb{ white-space:nowrap; display:inline; vertical-align:baseline; }
-
-    /* Gentle clamping just in case lines wrap */
-    .dg-wrap{
-      display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3;
-      overflow:hidden; white-space:normal;
-      scrollbar-width:none; -ms-overflow-style:none;
+    /* First-column text shrink on narrow screens */
+    @media (max-width:500px){
+      #dg-embed .dg-table th.dg-col1{
+        font-size: clamp(.56rem, 3.0vw, .74rem);
+        padding: 12px 6px;
+        line-height: 1.12;
+        letter-spacing: -0.01em;
+      }
     }
-    .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+
+    /* Strong downshift for data columns (2–5) to prevent spill */
+    @media (max-width:1000px){
+      #dg-embed .dg-table td.dg-c2,
+      #dg-embed .dg-table td.dg-c3,
+      #dg-embed .dg-table td.dg-c4,
+      #dg-embed .dg-table td.dg-c5{
+        font-size: clamp(.54rem, 1.35vw, .74rem);
+        padding: 14px 8px;
+        line-height: 1.16;
+        letter-spacing: -0.006em;
+      }
+      .dg-hcell{
+        font-size: clamp(.64rem, 1.65vw, .92rem);
+        padding: 14px 8px;
+      }
+    }
+    @media (max-width:600px){
+      #dg-embed{
+        --c1:26%;
+        --c2:18.5%;
+        --c3:18.5%;
+        --c4:18.5%;
+        --c5:18.5%;
+      }
+      #dg-embed .dg-table td.dg-c2,
+      #dg-embed .dg-table td.dg-c3,
+      #dg-embed .dg-table td.dg-c4,
+      #dg-embed .dg-table td.dg-c5{
+        font-size: clamp(.38rem, 1.65vw, .56rem);
+        padding: 10px 4px;
+        line-height: 1.14;
+        letter-spacing: -0.012em;
+      }
+      .dg-hcell{
+        font-size: clamp(.48rem, 1.7vw, .70rem);
+        padding: 10px 6px;
+      }
+    }
+    @media (max-width:420px){
+      #dg-embed{
+        --c1:16%;
+        --c2:21%;
+        --c3:21%;
+        --c4:21%;
+        --c5:21%;
+      }
+      #dg-embed .dg-table td.dg-c2,
+      #dg-embed .dg-table td.dg-c3,
+      #dg-embed .dg-table td.dg-c4,
+      #dg-embed .dg-table td.dg-c5{
+        font-size: clamp(.28rem, 1.45vw, .46rem);
+        padding: 8px 3px;
+        line-height: 1.12;
+        letter-spacing: -0.014em;
+      }
+      #dg-embed .dg-table th.dg-col1{
+        font-size: clamp(.36rem, 2.2vw, .54rem);
+        font-weight: 600;
+        padding: 8px 4px;
+      }
+      .dg-hcell{
+        font-size: clamp(.38rem, 1.5vw, .56rem);
+        padding: 8px 4px;
+        font-weight: 600;
+      }
+    }
+    @media (max-width:380px){
+      #dg-embed .dg-table td.dg-c2,
+      #dg-embed .dg-table td.dg-c3,
+      #dg-embed .dg-table td.dg-c4,
+      #dg-embed .dg-table td.dg-c5{
+        font-size: clamp(.26rem, 1.35vw, .42rem);
+        padding: 7px 2px;
+        line-height: 1.10;
+      }
+      .dg-hcell{
+        font-size: clamp(.36rem, 1.4vw, .52rem);
+        padding: 7px 3px;
+      }
+    }
+    @media (max-width:360px){
+      #dg-embed{
+        --c1:15%;
+        --c2:21.25%;
+        --c3:21.25%;
+        --c4:21.25%;
+        --c5:21.25%;
+      }
+      #dg-embed .dg-table td.dg-c2,
+      #dg-embed .dg-table td.dg-c3,
+      #dg-embed .dg-table td.dg-c4,
+      #dg-embed .dg-table td.dg-c5{
+        font-size: clamp(.245rem, 1.3vw, .40rem);
+      }
+    }
+    @media (max-width:340px){
+      #dg-embed{
+        --c1:14%;
+        --c2:21.5%;
+        --c3:21.5%;
+        --c4:21.5%;
+        --c5:21.5%;
+      }
+      #dg-embed .dg-table td.dg-c2,
+      #dg-embed .dg-table td.dg-c3,
+      #dg-embed .dg-table td.dg-c4,
+      #dg-embed .dg-table td.dg-c5{
+        font-size: clamp(.23rem, 1.25vw, .38rem);
+        padding: 6px 2px;
+      }
+    }
   </style>
 
 </body>
