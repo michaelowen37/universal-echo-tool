@@ -1232,3 +1232,191 @@ li { padding: 1% 3%; }
 
 /* Make sure there’s no stray right border on the last header cell */
 #dg-embed .dg-header .dg-hcell:last-child{ border-right:none !important; }
+
+/* =========================================================
+   GLOBAL FIXES — paste at the very bottom of style3.css
+   ========================================================= */
+
+/* 0) Treat .dg-singlecol like .dg-single (single-band centered header) */
+#dg-embed .dg-header.dg-singlecol{
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  grid-auto-flow: row !important;
+  width: 100% !important;
+}
+#dg-embed .dg-header.dg-singlecol .dg-hcell{
+  border-right: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* 1) Header alignment: keep CENTERED at ALL widths (overrides page-scoped left-shifts) */
+#dg-embed .dg-header .dg-hcell,
+#dg-embed .dg-headertable th{
+  text-align: center !important;
+  justify-content: center !important; /* for flex headers */
+}
+@media (max-width:400px){
+  #dg-embed .dg-header .dg-hcell,
+  #dg-embed .dg-headertable th{
+    text-align: center !important;
+    justify-content: center !important;
+  }
+}
+
+/* 2) Kill any tiny scrollbars in header cells (defensive) */
+#dg-embed .dg-header .dg-hcell .dg-wrap{
+  overflow: visible !important;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+#dg-embed .dg-header .dg-hcell .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+
+/* 3) SMALL-SCREEN LEGIBILITY BOOST (≤420px):
+      Make ALL green-table text notably larger, including the first column label. */
+@media (max-width:420px){
+  /* Data cells (all columns) */
+  #dg-embed .dg-table td,
+  #dg-embed .dg-table td.dg-c2,
+  #dg-embed .dg-table td.dg-c3,
+  #dg-embed .dg-table td.dg-c4,
+  #dg-embed .dg-table td.dg-c5,
+  #dg-embed .dg-table td:last-child{
+    --dg-data-size: clamp(.66rem, 3.6vw, .55rem) !important;  /* was ~.28–.46rem: too tiny */
+    --dg-data-pad-v: 10px !important;
+    --dg-data-pad-h: 4px !important;
+    --dg-data-lh: 1.16 !important;
+    --dg-data-ls: -0.006em !important;
+    font-size: var(--dg-data-size) !important;
+    line-height: var(--dg-data-lh) !important;
+    letter-spacing: var(--dg-data-ls) !important;
+    padding: var(--dg-data-pad-v) var(--dg-data-pad-h) !important;
+  }
+
+  /* First column label (so labels don’t look anemic vs data) */
+  #dg-embed .dg-table th.dg-col1{
+    font-size: clamp(.72rem, 3.8vw, 1.02rem) !important;
+    line-height: 1.14 !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    letter-spacing: -0.006em !important;
+  }
+
+  /* Keep values and units in sync inside cells when we scale */
+  #dg-embed .dg-table td .dg-range,
+  #dg-embed .dg-table td .dg-unit{
+    font-size: inherit !important;
+    line-height: inherit !important;
+    letter-spacing: inherit !important;
+  }
+}
+
+/* 4) (Optional but safe) If you use a range dash + second-line units, never scroll */
+#dg-embed .dg-wrap, #dg-embed .dg-range, #dg-embed .dg-unit{
+  overflow: visible !important;
+}
+#dg-embed .dg-wrap::-webkit-scrollbar,
+#dg-embed .dg-table td::-webkit-scrollbar,
+#dg-embed .dg-table th::-webkit-scrollbar{ width:0; height:0; }
+
+
+/* =========================================================
+   RV-PARITY PATCH (place at end of style3.css)
+   1) Blue header text size = match RV everywhere
+   2) Under 420px, first-column labels wrap cleanly (no spill)
+   ========================================================= */
+
+/* --- 1) BLUE HEADER TEXT SIZE: lock to RV baseline for both header types --- */
+/* Multi-column (table header) and single/grid header share the same sizing */
+#dg-embed .dg-headertable .dg-hcell,
+#dg-embed .dg-header .dg-hcell{
+  font-size: clamp(.82rem, 2.6vw, 1.08rem) !important;  /* RV baseline */
+  line-height: 1.12 !important;
+}
+
+/* RV-style ramps (do NOT change your header layout/min-height, just size) */
+@media (max-width:1000px){
+  #dg-embed .dg-headertable .dg-hcell,
+  #dg-embed .dg-header .dg-hcell{
+    font-size: clamp(.64rem, 1.65vw, .92rem) !important;
+  }
+}
+@media (max-width:600px){
+  #dg-embed .dg-headertable .dg-hcell,
+  #dg-embed .dg-header .dg-hcell{
+    font-size: clamp(.48rem, 1.7vw, .70rem) !important;
+  }
+}
+@media (max-width:420px){
+  #dg-embed .dg-headertable .dg-hcell,
+  #dg-embed .dg-header .dg-hcell{
+    font-size: clamp(.38rem, 1.5vw, .56rem) !important;
+  }
+}
+
+/* --- 2) FIRST-COLUMN LABELS (≤420px): shrink + free-wrap so they never spill --- */
+@media (max-width:420px){
+  /* Make the label text smaller and allow natural multi-line wrapping */
+  #dg-embed .dg-table th.dg-col1{
+    font-size: clamp(.36rem, 2.2vw, .54rem) !important;
+    line-height: 1.12 !important;
+    letter-spacing: -0.012em !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  /* Remove any clamps and force wrap inside the label wrapper */
+  #dg-embed .dg-table th.dg-col1 .dg-wrap{
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    -webkit-box-orient: initial !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    word-break: normal !important;
+    overflow-wrap: anywhere !important;  /* last-resort wraps for narrow phones */
+    hyphens: manual !important;          /* keeps your soft hyphens working */
+  }
+}
+
+/* Keep value/unit in data cells following the cell size (parity + no spill) */
+@media (max-width:420px){
+  #dg-embed .dg-table td .dg-range,
+  #dg-embed .dg-table td .dg-unit{
+    font-size: inherit !important;
+    line-height: inherit !important;
+    letter-spacing: inherit !important;
+  }
+}
+
+/* =========================================================
+   SINGLE-COLUMN BLUE HEADER EXCEPTION — bigger text only
+   (keeps multi-column headers on RV baseline)
+   Place after the RV-parity patch.
+   ========================================================= */
+#dg-embed .dg-header.dg-single .dg-hcell,
+#dg-embed .dg-header.dg-singlecol .dg-hcell{
+  font-size: clamp(.96rem, 2.6vw, 1.20rem) !important; /* bigger than RV baseline */
+  line-height: 1.14 !important;
+}
+
+/* Size ramps for single-column headers (still larger than multi-col at each step) */
+@media (max-width:1000px){
+  #dg-embed .dg-header.dg-single .dg-hcell,
+  #dg-embed .dg-header.dg-singlecol .dg-hcell{
+    font-size: clamp(.90rem, 2.1vw, 1.12rem) !important;
+  }
+}
+@media (max-width:600px){
+  #dg-embed .dg-header.dg-single .dg-hcell,
+  #dg-embed .dg-header.dg-singlecol .dg-hcell{
+    font-size: clamp(.86rem, 2.6vw, 1.08rem) !important;
+  }
+}
+@media (max-width:420px){
+  #dg-embed .dg-header.dg-single .dg-hcell,
+  #dg-embed .dg-header.dg-singlecol .dg-hcell{
+    font-size: clamp(.82rem, 3.2vw, 1.06rem) !important;
+  }
+}
