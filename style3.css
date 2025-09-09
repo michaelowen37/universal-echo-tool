@@ -1732,3 +1732,44 @@ li { padding: 1% 3%; }
     line-height: 1.06 !important;
   }
 }
+
+/* =========================
+   PROSTHETIC PAGES — match blue header height/sizing to others
+   Targets any #dg-embed whose aria-label contains “Prosthesis” or “Prosthetic”
+   ========================= */
+#dg-embed[aria-label*="Prosthesis"] .dg-headertable .dg-hcell,
+#dg-embed[aria-label*="Prosthesis"] .dg-header .dg-hcell,
+#dg-embed[aria-label*="Prosthetic"] .dg-headertable .dg-hcell,
+#dg-embed[aria-label*="Prosthetic"] .dg-header .dg-hcell{
+  min-height: 56px !important;
+  padding: 12px 8px !important;
+  font-size: clamp(.78rem, 2.4vw, 1.02rem) !important;
+  line-height: 1.10 !important;
+  font-weight: 600 !important;
+}
+
+/* ≤600px: tighter */
+@media (max-width:600px){
+  #dg-embed[aria-label*="Prosthesis"] .dg-headertable .dg-hcell,
+  #dg-embed[aria-label*="Prosthesis"] .dg-header .dg-hcell,
+  #dg-embed[aria-label*="Prosthetic"] .dg-headertable .dg-hcell,
+  #dg-embed[aria-label*="Prosthetic"] .dg-header .dg-hcell{
+    min-height: 48px !important;
+    padding: 10px 6px !important;
+    font-size: clamp(.60rem, 2.2vw, .88rem) !important;
+    line-height: 1.08 !important;
+  }
+}
+
+/* ≤420px: shortest + compact text */
+@media (max-width:420px){
+  #dg-embed[aria-label*="Prosthesis"] .dg-headertable .dg-hcell,
+  #dg-embed[aria-label*="Prosthesis"] .dg-header .dg-hcell,
+  #dg-embed[aria-label*="Prosthetic"] .dg-headertable .dg-hcell,
+  #dg-embed[aria-label*="Prosthetic"] .dg-header .dg-hcell{
+    min-height: 42px !important;
+    padding: 8px 4px !important;
+    font-size: clamp(.56rem, 2.1vw, .80rem) !important;
+    line-height: 1.06 !important;
+  }
+}
