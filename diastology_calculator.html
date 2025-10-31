@@ -387,315 +387,146 @@
       </style>
 
         <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const $ = (id) => document.getElementById(id);
-
-  // =========================
-  // FIELD REFERENCES
-  // =========================
+document.addEventListener('DOMContentLoaded', () => {
+  const $ = id => document.getElementById(id);
   const fields = {
-    eWave: $('eWave'),
-    aWave: $('aWave'),
-    sepEprime: $('sepEprime'),
-    latEprime: $('latEprime'),
-    trV: $('trV'),
-    pasp: $('pasp'),
-    ea: $('ea'),
-    avgEe: $('avgEe'),
-    sepEe: $('sepEe'),
-    latEe: $('latEe'),
-    lavi: $('lavi'),
-    laStrain: $('laStrain'),
-    pvsd: $('pvsd'),
-    ivrt: $('ivrt'),
+    eWave:$('eWave'),aWave:$('aWave'),sepEprime:$('sepEprime'),latEprime:$('latEprime'),
+    trV:$('trV'),pasp:$('pasp'),ea:$('ea'),avgEe:$('avgEe'),
+    sepEe:$('sepEe'),latEe:$('latEe'),
+    lavi:$('lavi'),laStrain:$('laStrain'),pvsd:$('pvsd'),ivrt:$('ivrt')
   };
+  const btnCalc=$('mr-calc'),btnReset=$('mr-reset'),gradeEl=$('grade'),reasonEl=$('reason');
 
-  const btnCalc = $('mr-calc');
-  const btnReset = $('mr-reset');
-  const gradeEl  = $('grade');
-  const reasonEl = $('reason');
+  const fmt=(n,d=1)=>typeof n==='number'&&isFinite(n)?n.toFixed(d).replace(/\.0+$/,'').replace(/(\.\d*?)0+$/,'$1'):'';
+  const has=v=>typeof v==='number'&&!isNaN(v);
+  const val=el=>{const r=(el?.value||'').trim();return r===''?NaN:parseFloat(r);};
 
-  // =========================
-  // STATE VARIABLES
-  // =========================
-  let userOverrideEA = false;
-  let userOverrideSepEe = false;
-  let userOverrideLatEe = false;
-  let userOverrideAvgEe = false;
-  let wasAutoEA = false;
-  let wasAutoSepEe = false;
-  let wasAutoLatEe = false;
-  let wasAutoAvgEe = false;
+  let userOverrideEA=false,userOverrideSepEe=false,userOverrideLatEe=false,userOverrideAvgEe=false;
+  let wasAutoEA=false,wasAutoSepEe=false,wasAutoLatEe=false,wasAutoAvgEe=false;
 
-  // =========================
-  // UTILITY FUNCTIONS
-  // =========================
-  const fmt = (n, d = 1) => {
-    if (typeof n !== 'number' || isNaN(n)) return '';
-    const s = n.toFixed(d);
-    return s.replace(/\.0+$/, '').replace(/(\.\d*?)0+$/, '$1');
-  };
-  const has = (v) => typeof v === 'number' && !isNaN(v);
-  const val = (el) => {
-    const raw = (el?.value || '').trim();
-    if (raw === '') return NaN;
-    const n = parseFloat(raw);
-    return isFinite(n) ? n : NaN;
-  };
+  function autoFillDerivatives(){
+    const E=val(fields.eWave),A=val(fields.aWave),sepEpr=val(fields.sepEprime),latEpr=val(fields.latEprime);
+    const sepManual=val(fields.sepEe),latManual=val(fields.latEe);
 
-  // =========================
-  // MANUAL OVERRIDE HANDLING
-  // =========================
-  function markManual(el, which) {
-    const set = () => {
-      if (el.dataset.autofill === '1') el.dataset.autofill = '0';
-      if (which === 'ea') userOverrideEA = true;
-      if (which === 'sep') userOverrideSepEe = true;
-      if (which === 'lat') userOverrideLatEe = true;
-      if (which === 'avg') userOverrideAvgEe = true;
-    };
-    ['pointerdown','focus','keydown'].forEach(ev => el.addEventListener(ev, set));
-    el.addEventListener('blur', () => {
-      if (!el.value.trim()) {
-        if (which === 'ea') userOverrideEA = false;
-        if (which === 'sep') userOverrideSepEe = false;
-        if (which === 'lat') userOverrideLatEe = false;
-        if (which === 'avg') userOverrideAvgEe = false;
-      }
-      autoFillDerivatives();
-    });
-  }
-  markManual(fields.ea, 'ea');
-  markManual(fields.sepEe, 'sep');
-  markManual(fields.latEe, 'lat');
-  markManual(fields.avgEe, 'avg');
-
-  // =========================
-  // AUTO-CALCULATION LOGIC
-  // =========================
-  function autoFillDerivatives() {
-    const E = val(fields.eWave);
-    const A = val(fields.aWave);
-    const sepEpr = val(fields.sepEprime);
-    const latEpr = val(fields.latEprime);
-    const sepManual = val(fields.sepEe);
-    const latManual = val(fields.latEe);
-
-    // E/A automatic
-    const eaAuto = has(E) && has(A) && A > 0 ? E / A : NaN;
-    if (!userOverrideEA) {
-      if (has(eaAuto)) {
-        fields.ea.value = fmt(eaAuto, 2);
-        fields.ea.classList.add('filled');
-        fields.ea.dataset.autofill = '1';
-        wasAutoEA = true;
-      } else if (wasAutoEA) {
-        fields.ea.value = '';
-        fields.ea.classList.remove('filled');
-        fields.ea.dataset.autofill = '0';
-        wasAutoEA = false;
-      }
+    const eaAuto=has(E)&&has(A)&&A>0?E/A:NaN;
+    if(!userOverrideEA){
+      if(has(eaAuto)){fields.ea.value=fmt(eaAuto,2);fields.ea.classList.add('filled');wasAutoEA=true;}
+      else if(wasAutoEA){fields.ea.value='';fields.ea.classList.remove('filled');wasAutoEA=false;}
     }
 
-    // Septal / Lateral E/e′
-    const sepAuto = has(E) && has(sepEpr) && sepEpr > 0 ? E / sepEpr : NaN;
-    const latAuto = has(E) && has(latEpr) && latEpr > 0 ? E / latEpr : NaN;
+    const sepAuto=has(E)&&has(sepEpr)&&sepEpr>0?E/sepEpr:NaN;
+    const latAuto=has(E)&&has(latEpr)&&latEpr>0?E/latEpr:NaN;
 
-    if (!userOverrideSepEe) {
-      if (has(sepAuto)) {
-        fields.sepEe.value = fmt(sepAuto, 1);
-        fields.sepEe.classList.add('filled');
-        fields.sepEe.dataset.autofill = '1';
-        wasAutoSepEe = true;
-      } else if (wasAutoSepEe) {
-        fields.sepEe.value = '';
-        fields.sepEe.classList.remove('filled');
-        fields.sepEe.dataset.autofill = '0';
-        wasAutoSepEe = false;
-      }
+    if(!userOverrideSepEe){
+      if(has(sepAuto)){fields.sepEe.value=fmt(sepAuto,1);fields.sepEe.classList.add('filled');wasAutoSepEe=true;}
+      else if(wasAutoSepEe){fields.sepEe.value='';fields.sepEe.classList.remove('filled');wasAutoSepEe=false;}
     }
-    if (!userOverrideLatEe) {
-      if (has(latAuto)) {
-        fields.latEe.value = fmt(latAuto, 1);
-        fields.latEe.classList.add('filled');
-        fields.latEe.dataset.autofill = '1';
-        wasAutoLatEe = true;
-      } else if (wasAutoLatEe) {
-        fields.latEe.value = '';
-        fields.latEe.classList.remove('filled');
-        fields.latEe.dataset.autofill = '0';
-        wasAutoLatEe = false;
-      }
+    if(!userOverrideLatEe){
+      if(has(latAuto)){fields.latEe.value=fmt(latAuto,1);fields.latEe.classList.add('filled');wasAutoLatEe=true;}
+      else if(wasAutoLatEe){fields.latEe.value='';fields.latEe.classList.remove('filled');wasAutoLatEe=false;}
     }
 
-    // Average E/e′
-    const sepEff = userOverrideSepEe ? sepManual : sepAuto;
-    const latEff = userOverrideLatEe ? latManual : latAuto;
-    let avg = NaN;
-    if (has(sepEff) && has(latEff)) avg = (sepEff + latEff) / 2;
-    else if (has(sepEff)) avg = sepEff;
-    else if (has(latEff)) avg = latEff;
+    const sepEff=userOverrideSepEe?sepManual:sepAuto;
+    const latEff=userOverrideLatEe?latManual:latAuto;
+    let avg=NaN;
+    if(has(sepEff)&&has(latEff))avg=(sepEff+latEff)/2;
+    else if(has(sepEff))avg=sepEff;
+    else if(has(latEff))avg=latEff;
 
-    if (!userOverrideAvgEe) {
-      if (has(avg)) {
-        fields.avgEe.value = fmt(avg, 1);
-        fields.avgEe.classList.add('filled');
-        fields.avgEe.dataset.autofill = '1';
-        wasAutoAvgEe = true;
-      } else if (wasAutoAvgEe) {
-        fields.avgEe.value = '';
-        fields.avgEe.classList.remove('filled');
-        fields.avgEe.dataset.autofill = '0';
-        wasAutoAvgEe = false;
-      }
+    if(!userOverrideAvgEe){
+      if(has(avg)){fields.avgEe.value=fmt(avg,1);fields.avgEe.classList.add('filled');wasAutoAvgEe=true;}
+      else if(wasAutoAvgEe){fields.avgEe.value='';fields.avgEe.classList.remove('filled');wasAutoAvgEe=false;}
     }
   }
 
-  // Bind recalculation
-  Object.values(fields).forEach(el => {
-    el.addEventListener('input', autoFillDerivatives);
-    el.addEventListener('keyup', autoFillDerivatives);
-    el.addEventListener('change', autoFillDerivatives);
-  });
+  Object.values(fields).forEach(f=>['input','change','keyup'].forEach(ev=>f.addEventListener(ev,autoFillDerivatives)));
+  document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.activeElement.tagName==='INPUT'){e.preventDefault();btnCalc.click();}});
 
-  // =========================
-  // ENTER KEY SUPPORT
-  // =========================
-  document.addEventListener('keydown', function (e) {
-    const active = document.activeElement;
-    const isField = active && active.tagName === 'INPUT';
-    // Avoid triggering when typing decimals or inside buttons
-    if (e.key === 'Enter' && isField) {
-      e.preventDefault();
-      btnCalc.click();
+  function animateFlash(el){el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');}
+
+  function gradeDiastolic(data){
+    const {sepEprime,latEprime,EoverA=data.ea?val(data.ea):NaN,avgEe,sepEe,latEe,TRv,PASP,LAVI,LAStrain,PVSD,IVRT}=data;
+    const hasNum=v=>typeof v==='number'&&!Number.isNaN(v);
+    const redE_abn=(hasNum(sepEprime)&&sepEprime<=6)||(hasNum(latEprime)&&latEprime<=7)||(hasNum(sepEprime)&&hasNum(latEprime)&&((sepEprime+latEprime)/2)<=6.5);
+    let incEe_abn=false;
+    if(hasNum(avgEe)&&avgEe>=14)incEe_abn=true;
+    else{
+      if((hasNum(latEe)&&latEe>=13)||(hasNum(sepEe)&&sepEe>=15))incEe_abn=true;
+      if(!incEe_abn&&hasNum(latEe)&&hasNum(sepEe)&&((latEe+sepEe)/2>=14))incEe_abn=true;
     }
-  });
+    const incTRorPASP_abn=(hasNum(TRv)&&TRv>=2.8)||(hasNum(PASP)&&PASP>=35);
+    const primaryCount=[redE_abn,incEe_abn,incTRorPASP_abn].filter(Boolean).length;
+    const supportivePositive=(hasNum(PVSD)&&PVSD<=0.67)||(hasNum(LAStrain)&&LAStrain<=18)||(hasNum(LAVI)&&LAVI>34)||(hasNum(IVRT)&&IVRT<=70);
 
-  // =========================
-  // FLASH ANIMATION
-  // =========================
-  function animateFlash(el) {
-    if (!el) return;
-    el.classList.remove('flash');
-    void el.offsetWidth;
-    el.classList.add('flash');
+    const joinOxford=xs=>xs.length<=1?(xs[0]||""):xs.length===2?`${xs[0]} and ${xs[1]}`:`${xs.slice(0,-1).join(", ")}, and ${xs.at(-1)}`;
+    const lapMissingList=()=>{const m=[];if(!hasNum(sepEprime)&&!hasNum(latEprime))m.push("individual e′ (septal or lateral)");
+      if(!hasNum(avgEe)&&!hasNum(sepEe)&&!hasNum(latEe))m.push("E/e′");
+      if(!hasNum(TRv)&&!hasNum(PASP))m.push("TR Vmax/PASP");
+      return m;};
+    const lapCTA=()=>{const m=lapMissingList(),count=3-m.length;
+      if(!m.length)return"";if(count===0)return`Start with LAP primaries: ${joinOxford(m)}.`;
+      if(count===1)return`Add at least one more LAP primary: ${joinOxford(m)}.`;
+      return`Add one more LAP primary: ${joinOxford(m)}.`;};
+
+    const gradeFromEA=()=>{if(!hasNum(EoverA))return{grade:"Abnormal (Ungraded)",reason:"Increased LAP likely; add E/A to distinguish Grade II vs III."};
+      if(EoverA>=2)return{grade:"Grade III",reason:"Increased LAP with restrictive filling (E/A ≥ 2)."};
+      return{grade:"Grade II",reason:"Increased LAP without restrictive filling (E/A < 2)."};};
+
+    const providedCount=[sepEprime,latEprime,EoverA,avgEe,sepEe,latEe,TRv,PASP,LAVI,LAStrain,PVSD,IVRT].filter(hasNum).length;
+    if(providedCount<2)return{grade:"Indeterminate",reason:lapCTA()||"Too few inputs to analyze."};
+    if(primaryCount===3)return gradeFromEA();
+    if(redE_abn&&hasNum(EoverA)&&EoverA<=0.8&&(!incEe_abn&&!incTRorPASP_abn))
+      return{grade:"Grade I",reason:"Reduced e′ with E/A ≤ 0.8 and no evidence of elevated LAP."};
+
+    let out={grade:"Abnormal (Ungraded)",reason:"LAP not confirmed with current inputs. "+lapCTA()};
+    if(primaryCount===1||primaryCount===2){if(supportivePositive)return gradeFromEA();}
+
+    const missPrim=lapMissingList();
+    const joinAndOr=xs=>xs.length<=1?(xs[0]||""):xs.length===2?`${xs[0]} and/or ${xs[1]}`:`${xs.slice(0,-1).join(", ")}, and/or ${xs.at(-1)}`;
+    if(primaryCount===0)
+      out={grade:"Normal",reason:"Criteria for diastolic dysfunction not met."+(missPrim.length?` For even greater precision, add LAP primary: ${joinAndOr(missPrim)}.`:"")};
+
+    // Precision suggestions (no redundancy + smaller italics)
+    if(out.grade==="Abnormal (Ungraded)"||out.reason.includes("LAP not confirmed")){
+      const baseReason=out.reason;
+      const mentioned=baseReason.match(/individual e′.*|E\/e′|TR Vmax\/PASP/gi)||[];
+      const miss=[];
+      if(!hasNum(avgEe)&&!hasNum(sepEe)&&!hasNum(latEe)&&!mentioned.some(t=>/E\/e′/i.test(t)))miss.push("E/e′");
+      if(!hasNum(TRv)&&!hasNum(PASP)&&!mentioned.some(t=>/TR Vmax\/PASP/i.test(t)))miss.push("TR Vmax/PASP");
+      if(!hasNum(sepEprime)&&!hasNum(latEprime)&&!mentioned.some(t=>/individual e′/i.test(t)))miss.push("individual e′ (septal or lateral)");
+      if(!hasNum(LAVI))miss.push("LAVI");
+      if(!hasNum(LAStrain))miss.push("LA strain");
+      if(!hasNum(PVSD))miss.push("pulmonary vein S/D");
+      if(!hasNum(IVRT))miss.push("IVRT");
+      if(miss.length){
+        const list=miss.length>2?`${miss.slice(0,-1).join(", ")}, or ${miss.at(-1)}`:miss.join(" or ");
+        out.reason+=`<br><em style="font-size:0.9em; font-weight:normal;">For greater precision, add ${list}.</em>`;
+      }
+    }
+    return out;
   }
 
-  // =========================
-  // GRADING LOGIC (unchanged)
-  // =========================
-  function gradeDiastolic({
-    sepEprime, latEprime, EoverA, avgEe, sepEe, latEe, TRv, PASP, LAVI, LAStrain, PVSD, IVRT
-  } = {}) {
-    const hasNum = (v) => typeof v === 'number' && !Number.isNaN(v);
-    const redE_abn =
-      (hasNum(sepEprime) && sepEprime <= 6) ||
-      (hasNum(latEprime) && latEprime <= 7) ||
-      (hasNum(sepEprime) && hasNum(latEprime) && ((sepEprime + latEprime) / 2) <= 6.5);
-
-    let incEe_abn = false;
-    if (hasNum(avgEe) && avgEe >= 14) incEe_abn = true;
-    else {
-      if ((hasNum(latEe) && latEe >= 13) || (hasNum(sepEe) && sepEe >= 15)) incEe_abn = true;
-      if (!incEe_abn && hasNum(latEe) && hasNum(sepEe) && ((latEe + sepEe) / 2 >= 14)) incEe_abn = true;
-    }
-
-    const incTRorPASP_abn = (hasNum(TRv) && TRv >= 2.8) || (hasNum(PASP) && PASP >= 35);
-    const primaryCount = [redE_abn, incEe_abn, incTRorPASP_abn].filter(Boolean).length;
-
-    const supportivePositive =
-      (hasNum(PVSD) && PVSD <= 0.67) ||
-      (hasNum(LAStrain) && LAStrain <= 18) ||
-      (hasNum(LAVI) && LAVI > 34) ||
-      (hasNum(IVRT) && IVRT <= 70);
-
-    const joinOxford = (xs) => xs.length <= 1 ? (xs[0] || "") :
-      xs.length === 2 ? `${xs[0]} and ${xs[1]}` :
-      `${xs.slice(0,-1).join(", ")}, and ${xs.at(-1)}`;
-
-    const lapMissingList = () => {
-      const miss = [];
-      if (!hasNum(sepEprime) && !hasNum(latEprime)) miss.push("individual e′ (septal or lateral)");
-      if (!hasNum(avgEe) && !hasNum(sepEe) && !hasNum(latEe)) miss.push("E/e′");
-      if (!hasNum(TRv) && !hasNum(PASP)) miss.push("TR Vmax/PASP");
-      return miss;
-    };
-
-    const lapCTA = () => {
-      const miss = lapMissingList();
-      const presentCount = 3 - miss.length;
-      if (!miss.length) return "";
-      if (presentCount === 0) return `Start with LAP primaries: ${joinOxford(miss)}.`;
-      if (presentCount === 1) return `Add at least one more LAP primary: ${joinOxford(miss)}.`;
-      return `Add one more LAP primary: ${joinOxford(miss)}.`;
-    };
-
-    const gradeFromEA = () => {
-      if (!hasNum(EoverA)) return { grade: "Abnormal (Ungraded)", reason: "Increased LAP likely; add E/A to distinguish Grade II vs III." };
-      if (EoverA >= 2) return { grade: "Grade III", reason: "Increased LAP with restrictive filling (E/A ≥ 2)." };
-      return { grade: "Grade II", reason: "Increased LAP without restrictive filling (E/A < 2)." };
-    };
-
-    const providedCount = [sepEprime, latEprime, EoverA, avgEe, sepEe, latEe, TRv, PASP, LAVI, LAStrain, PVSD, IVRT].filter(hasNum).length;
-    if (providedCount < 2) return { grade: "Indeterminate", reason: lapCTA() || "Too few inputs to analyze." };
-
-    if (primaryCount === 3) return gradeFromEA();
-
-    if (redE_abn && hasNum(EoverA) && EoverA <= 0.8 && (!incEe_abn && !incTRorPASP_abn))
-      return { grade: "Grade I", reason: "Reduced e′ with E/A ≤ 0.8 and no evidence of elevated LAP." };
-
-    if (primaryCount === 1 || primaryCount === 2) {
-      if (supportivePositive) return gradeFromEA();
-      return { grade: "Abnormal (Ungraded)", reason: "LAP not confirmed with current inputs. " + lapCTA() };
-    }
-
-    const missPrim = lapMissingList();
-    const joinAndOr = (xs) => xs.length <= 1 ? (xs[0] || "") :
-      xs.length === 2 ? `${xs[0]} and/or ${xs[1]}` :
-      `${xs.slice(0,-1).join(", ")}, and/or ${xs.at(-1)}`;
-    let next = missPrim.length ? ` For even greater precision, add LAP primary: ${joinAndOr(missPrim)}.` : "";
-
-    return { grade: "Normal", reason: "Criteria for diastolic dysfunction not met." + next };
-  }
-
-  // =========================
-  // CALCULATE & RESET
-  // =========================
-  function calculate() {
+  function calculate(){
     autoFillDerivatives();
-    const data = {
-      sepEprime: val(fields.sepEprime),
-      latEprime: val(fields.latEprime),
-      TRv: val(fields.trV),
-      PASP: val(fields.pasp),
-      EoverA: val(fields.ea),
-      avgEe: val(fields.avgEe),
-      sepEe: val(fields.sepEe),
-      latEe: val(fields.latEe),
-      LAVI: val(fields.lavi),
-      LAStrain: val(fields.laStrain),
-      PVSD: val(fields.pvsd),
-      IVRT: val(fields.ivrt),
-    };
-    const out = gradeDiastolic(data);
-    gradeEl.textContent = out.grade;
-    reasonEl.textContent = out.reason;
-    animateFlash(gradeEl);
-    animateFlash(reasonEl);
+    const d={sepEprime:val(fields.sepEprime),latEprime:val(fields.latEprime),
+      EoverA:val(fields.ea),avgEe:val(fields.avgEe),sepEe:val(fields.sepEe),
+      latEe:val(fields.latEe),TRv:val(fields.trV),PASP:val(fields.pasp),
+      LAVI:val(fields.lavi),LAStrain:val(fields.laStrain),
+      PVSD:val(fields.pvsd),IVRT:val(fields.ivrt)};
+    const out=gradeDiastolic(d);
+    gradeEl.textContent=out.grade;
+    reasonEl.innerHTML=out.reason; // allow italics + new line
+    animateFlash(gradeEl);animateFlash(reasonEl);
   }
 
-  function resetAll() {
-    Object.values(fields).forEach(f => { f.value=''; f.classList.remove('filled'); f.dataset.autofill='0'; });
-    userOverrideEA = userOverrideSepEe = userOverrideLatEe = userOverrideAvgEe = false;
-    wasAutoEA = wasAutoSepEe = wasAutoLatEe = wasAutoAvgEe = false;
-    gradeEl.textContent='--'; reasonEl.textContent='--';
-    animateFlash(gradeEl); animateFlash(reasonEl);
+  function resetAll(){
+    Object.values(fields).forEach(f=>{f.value='';f.classList.remove('filled');});
+    gradeEl.textContent='--';reasonEl.textContent='--';
+    animateFlash(gradeEl);animateFlash(reasonEl);
   }
 
-  btnCalc.addEventListener('click', e => { e.preventDefault(); calculate(); });
-  btnReset.addEventListener('click', e => { e.preventDefault(); resetAll(); });
-
-  autoFillDerivatives();
+  btnCalc.addEventListener('click',e=>{e.preventDefault();calculate();});
+  btnReset.addEventListener('click',e=>{e.preventDefault();resetAll();});
 });
 </script>
 
