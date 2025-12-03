@@ -535,6 +535,48 @@
     }
     #dg-embed .dg-table th .dg-wrap::-webkit-scrollbar,
     #dg-embed .dg-table td .dg-wrap::-webkit-scrollbar{ width:0; height:0; }
+
+    @media (min-width: 720px) {
+
+  /* Button-row: centered, tight cluster */
+  .mr-actions-row {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important; /* tweak as desired (6–12px is nice) */
+  }
+
+  /* Buttons: avoid floats, size to content, center text */
+  #mr-reset,
+  #mr-calc,
+  .mr-actions-row .mr-btn {
+    float: none !important;
+    margin: 0 !important;
+    display: inline-flex !important;       /* use inline-flex for perfect centering */
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 auto !important;             /* do not stretch in flex container */
+    width: auto !important;                /* override .mr-btn { width:75% } */
+    min-width: 120px !important;           /* prevents collapse; adjust as needed */
+    padding: 12px 28px !important;         /* restore comfortable internal padding */
+    box-sizing: border-box !important;
+    white-space: nowrap !important;        /* keep label on single line */
+    text-align: center !important;
+    overflow: visible !important;
+  }
+
+  /* Make sure the Calculate button has enough room for its label */
+  #mr-calc {
+    min-width: 140px !important;
+  }
+}
+  /* Make both buttons equal width based on the widest one */
+  .mr-actions-row .mr-btn,
+  #mr-reset,
+  #mr-calc {
+    width: 150px !important;   /* adjust to taste */
+  }
+
   </style>
 
 </body>
