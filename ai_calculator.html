@@ -208,123 +208,134 @@
         .mr-ref-title{ font-size: clamp(.9rem, 2.2vw, 1.05rem); color: #c9c9c9; font-style: italic; text-align: center; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
       </style>
 
-      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          const $ = (id) => document.getElementById(id);
+      
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const $ = (id) => document.getElementById(id);
 
-          // Grab elements (guarded)
-          const fields = {
-            lvotDiameter: $('lvotDiameter'),
-            lvotVti: $('lvotVti'),
-            mitralDiameter: $('mitralDiameter'),
-            mvVti: $('mvVti'),
-            aiJetVti: $('aiJetVti'),
-          };
-          const btnCalc = $('mr-calc');
-          const btnReset = $('mr-reset');
-          const rvEl = $('rv'), rfEl = $('rf'), eroaEl = $('eroa');
+    const fields = {
+      lvotDiameter: $('lvotDiameter'),
+      lvotVti: $('lvotVti'),
+      mitralDiameter: $('mitralDiameter'),
+      mvVti: $('mvVti'),
+      aiJetVti: $('aiJetVti')
+    };
 
-          // Helper: round to 1dp, but show integer if .0
-          function fmt1DecTrimZero(n) {
-            const r = Math.round(n * 10) / 10; // number rounded to 0.1
-            return Number.isInteger(r) ? String(r) : r.toFixed(1); // always return string
-          }
+    const btnCalc = $('mr-calc');
+    const btnReset = $('mr-reset');
+    const rvEl = $('rv');
+    const rfEl = $('rf');
+    const eroaEl = $('eroa');
 
-          // Attach behaviors to existing inputs only
-          Object.values(fields).filter(Boolean).forEach((inp) => {
-            inp.addEventListener('input', () => {
-              if ((inp.value || '').trim() !== '') {
-                inp.classList.add('filled');
-                inp.classList.remove('mr-missing');
-              } else {
-                inp.classList.remove('filled');
-              }
-            });
+    function fmt1DecTrimZero(n) {
+      const r = Math.round(n * 10) / 10;
+      return Number.isInteger(r) ? String(r) : r.toFixed(1);
+    }
 
-            // SAFE BLUR: keep string type; 1dp; drop ".0"
-            inp.addEventListener('blur', () => {
-              const raw = (inp.value || '').trim();
-              if (raw === '') return;
-              const v = Number(raw);
-              if (Number.isNaN(v)) return;
-              inp.value = fmt1DecTrimZero(v); // write back as STRING
-            });
+    Object.values(fields).forEach((inp) => {
+      inp.addEventListener('input', () => {
+        if ((inp.value || '').trim() !== '') {
+          inp.classList.add('filled');
+          inp.classList.remove('mr-missing');
+        } else {
+          inp.classList.remove('filled');
+        }
+      });
 
-            // Enter triggers Calculate
-            inp.addEventListener('keydown', (e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-                btnCalc && btnCalc.click();
-              }
-            });
-          });
+      inp.addEventListener('blur', () => {
+        const raw = (inp.value || '').trim();
+        if (raw === '') return;
 
-          function validate() {
-            let ok = true;
-            for (const [k, inp] of Object.entries(fields)) {
-              if (!inp) continue; // skip missing
-              const val = (inp.value || '').trim();
-              const zeroDiv = (k === 'aiJetVti' && Number(val) === 0); // avoid divide by 0 in EROA
-              if (!val || zeroDiv) {
-                inp.classList.add('mr-missing');
-                ok = false;
-              } else {
-                inp.classList.remove('mr-missing');
-              }
-            }
-            return ok;
-          }
+        const value = Number(raw);
+        if (Number.isNaN(value)) return;
 
-          function calculate() {
-            // parse safely (Number('') -> 0? we rely on validate() to avoid empties)
-            const lvotD = Number(fields.lvotDiameter?.value);
-            const lvotV = Number(fields.lvotVti?.value);
-            const mitralD = Number(fields.mitralDiameter?.value);
-            const mvV = Number(fields.mvVti?.value);
-            const aiJet = Number(fields.aiJetVti?.value);
+        inp.value = fmt1DecTrimZero(value);
+      });
 
-            // Flows (cm-based, 0.785 ~ pi/4)
-            const lvotFlow = 0.785 * lvotD * lvotD * lvotV;
-            const mvFlow   = 0.785 * mitralD * mitralD * mvV;
+      inp.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          btnCalc.click();
+        }
+      });
+    });
 
-            // === AI formulas (as provided) ===
-            // Regurgitant Volume = (LVOT flow) - (MV flow)
-            const regV = lvotFlow - mvFlow;
-            // Regurgitant Fraction = (RegV / LVOT flow) * 100
-            const regF = (regV / lvotFlow) * 100;
-            // EROA = RegV / AI jet VTI   (correcting typo: division, not subtraction)
-            const eroa = regV / aiJet;
+    function validate() {
+      let ok = true;
 
-            if (rvEl)   rvEl.textContent   = Math.round(regV).toString();
-            if (rfEl)   rfEl.textContent   = Math.round(regF).toString();
-            if (eroaEl) eroaEl.textContent = (Math.round(eroa * 100) / 100).toFixed(2);
-          }
+      Object.entries(fields).forEach(([key, inp]) => {
+        const raw = (inp.value || '').trim();
+        const value = Number(raw);
 
-          function resetAll() {
-            Object.values(fields).filter(Boolean).forEach((inp) => {
-              inp.value = '';
-              inp.classList.remove('filled', 'mr-missing');
-            });
-            if (rvEl)   rvEl.textContent = '--';
-            if (rfEl)   rfEl.textContent = '--';
-            if (eroaEl) eroaEl.textContent = '--';
-          }
+        const invalid = (
+          raw === '' ||
+          Number.isNaN(value) ||
+          value <= 0 ||
+          (key === 'aiJetVti' && value === 0)
+        );
 
-          // Button handlers (guarded)
-          if (btnCalc) {
-            btnCalc.addEventListener('click', (e) => {
-              e.preventDefault();
-              if (validate()) calculate();
-            });
-          }
-          if (btnReset) {
-            btnReset.addEventListener('click', (e) => {
-              e.preventDefault();
-              resetAll();
-            });
-          }
-        });
-      </script>
+        if (invalid) {
+          inp.classList.add('mr-missing');
+          ok = false;
+        } else {
+          inp.classList.remove('mr-missing');
+        }
+      });
+
+      return ok;
+    }
+
+    function calculate() {
+      const lvotD = Number(fields.lvotDiameter.value);
+      const lvotVti = Number(fields.lvotVti.value);
+      const mitralD = Number(fields.mitralDiameter.value);
+      const mvVti = Number(fields.mvVti.value);
+      const aiJetVti = Number(fields.aiJetVti.value);
+
+      // Cross-sectional areas
+      const lvotArea = Math.PI * Math.pow(lvotD / 2, 2);
+      const mitralArea = Math.PI * Math.pow(mitralD / 2, 2);
+
+      // Stroke volumes (mL/beat because cm² × cm = cm³)
+      const lvotSV = lvotArea * lvotVti;
+      const mitralSV = mitralArea * mvVti;
+
+      // Aortic regurgitation calculations
+      // Total LV stroke volume enters through the mitral valve.
+      // Forward stroke volume exits through the LVOT.
+      const regurgitantVolume = mitralSV - lvotSV;
+      const regurgitantFraction = (regurgitantVolume / mitralSV) * 100;
+      const eroa = regurgitantVolume / aiJetVti;
+
+      rvEl.textContent = fmt1DecTrimZero(Math.max(0, regurgitantVolume));
+      rfEl.textContent = fmt1DecTrimZero(Math.max(0, regurgitantFraction));
+      eroaEl.textContent = (Math.max(0, eroa)).toFixed(2);
+    }
+
+    function resetAll() {
+      Object.values(fields).forEach((inp) => {
+        inp.value = '';
+        inp.classList.remove('filled', 'mr-missing');
+      });
+
+      rvEl.textContent = '--';
+      rfEl.textContent = '--';
+      eroaEl.textContent = '--';
+    }
+
+    btnCalc.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (validate()) calculate();
+    });
+
+    btnReset.addEventListener('click', (e) => {
+      e.preventDefault();
+      resetAll();
+    });
+  });
+</script>
+
+
 <br><br>
       <!-- ===== Reference charts (Native + Prosthetic Aortic Regurgitation) ===== -->
 <div class="mr-ref" aria-label="Aortic Regurgitation reference tables">
