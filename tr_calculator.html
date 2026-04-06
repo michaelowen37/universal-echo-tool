@@ -52,13 +52,13 @@
                 </label>
 
                 <label class="mr-field">
-                  <span class="mr-label">LVOT Diameter</span>
-                  <input id="lvotDiameter" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                  <span class="mr-label">Tricuspid Annular Diameter</span>
+                  <input id="tvDiameter" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
                 </label>
 
                 <label class="mr-field">
-                  <span class="mr-label">LVOT VTI</span>
-                  <input id="lvotVti" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
+                  <span class="mr-label">TV VTI (PW annular)</span>
+                  <input id="tvVti" type="number" step="0.1" min="0" inputmode="decimal" placeholder="cm" />
                 </label>
 
                 <!-- Fifth input centered -->
@@ -201,102 +201,150 @@
         .mr-ref-title{ font-size: clamp(.9rem, 2.2vw, 1.05rem); color:#c9c9c9; font-style: italic; text-align:center; text-shadow:0 1px 2px rgba(0,0,0,.6); }
       </style>
 
-      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          const $ = (id) => document.getElementById(id);
+      
 
-          // Elements (match new formula)
-          const fields = {
-            rvotDiameter: $('rvotDiameter'),
-            rvotVti: $('rvotVti'),
-            lvotDiameter: $('lvotDiameter'),
-            lvotVti: $('lvotVti'),
-            trJetVti: $('trJetVti'),
-          };
-          const btnCalc = $('tr-calc');
-          const btnReset = $('tr-reset');
-          const rvEl = $('trRv'), eroaEl = $('trEroa');
 
-          // Helper: round to 1dp, but show integer if .0
-          function fmt1DecTrimZero(n) {
-            const r = Math.round(n * 10) / 10;
-            return Number.isInteger(r) ? String(r) : r.toFixed(1);
-          }
 
-          // Input behaviors
-          Object.values(fields).filter(Boolean).forEach((inp) => {
-            inp.addEventListener('input', () => {
-              if ((inp.value || '').trim() !== '') {
-                inp.classList.add('filled');
-                inp.classList.remove('mr-missing');
-              } else {
-                inp.classList.remove('filled');
-              }
-            });
-            inp.addEventListener('blur', () => {
-              const raw = (inp.value || '').trim();
-              if (raw === '') return;
-              const v = Number(raw);
-              if (Number.isNaN(v)) return;
-              inp.value = fmt1DecTrimZero(v);
-            });
-            inp.addEventListener('keydown', (e) => {
-              if (e.key === 'Enter') { e.preventDefault(); btnCalc && btnCalc.click(); }
-            });
-          });
 
-          function validate() {
-            let ok = true;
-            for (const [k, inp] of Object.entries(fields)) {
-              if (!inp) continue;
-              const val = (inp.value || '').trim();
-              const zeroDiv = (k === 'trJetVti' && Number(val) === 0); // avoid divide by 0 for EROA
-              if (!val || zeroDiv) { inp.classList.add('mr-missing'); ok = false; }
-              else { inp.classList.remove('mr-missing'); }
-            }
-            return ok;
-          }
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const $ = (id) => document.getElementById(id);
 
-          function calculate() {
-            const rvotD = Number(fields.rvotDiameter?.value);
-            const rvotV = Number(fields.rvotVti?.value);
-            const lvotD = Number(fields.lvotDiameter?.value);
-            const lvotV = Number(fields.lvotVti?.value);
-            const trJet = Number(fields.trJetVti?.value);
+    // Elements (corrected TR volumetric formula)
+    const fields = {
+      rvotDiameter: $('rvotDiameter'),
+      rvotVti: $('rvotVti'),
+      tvDiameter: $('tvDiameter'),
+      tvVti: $('tvVti'),
+      trJetVti: $('trJetVti'),
+    };
 
-            const rvotFlow = 0.785 * rvotD * rvotD * rvotV;  // 0.785 * RVOT Diameter^2 * RVOT VTI
-            const lvotFlow = 0.785 * lvotD * lvotD * lvotV;  // 0.785 * LVOT Diameter^2 * LVOT VTI
+    const btnCalc = $('tr-calc');
+    const btnReset = $('tr-reset');
+    const rvEl = $('trRv');
+    const eroaEl = $('trEroa');
 
-            const regV = rvotFlow - lvotFlow;                // Regurgitant Volume per beat
-            const eroa = regV / trJet;                       // EROA = RV / TR jet VTI
+    // Helper: round to 1 decimal, but trim trailing .0
+    function fmt1DecTrimZero(n) {
+      const r = Math.round(n * 10) / 10;
+      return Number.isInteger(r) ? String(r) : r.toFixed(1);
+    }
 
-            if (rvEl)   rvEl.textContent   = Math.round(regV).toString();
-            if (eroaEl) eroaEl.textContent = (Math.round(eroa * 100) / 100).toFixed(2);
-          }
+    // Input behaviors
+    Object.values(fields).filter(Boolean).forEach((inp) => {
+      inp.addEventListener('input', () => {
+        if ((inp.value || '').trim() !== '') {
+          inp.classList.add('filled');
+          inp.classList.remove('mr-missing');
+        } else {
+          inp.classList.remove('filled');
+        }
+      });
 
-          function resetAll() {
-            Object.values(fields).filter(Boolean).forEach((inp) => {
-              inp.value = '';
-              inp.classList.remove('filled', 'mr-missing');
-            });
-            if (rvEl)   rvEl.textContent = '--';
-            if (eroaEl) eroaEl.textContent = '--';
-          }
+      inp.addEventListener('blur', () => {
+        const raw = (inp.value || '').trim();
+        if (raw === '') return;
 
-          if (btnCalc) {
-            btnCalc.addEventListener('click', (e) => {
-              e.preventDefault();
-              if (validate()) calculate();
-            });
-          }
-          if (btnReset) {
-            btnReset.addEventListener('click', (e) => {
-              e.preventDefault();
-              resetAll();
-            });
-          }
-        });
-      </script>
+        const v = Number(raw);
+        if (Number.isNaN(v)) return;
+
+        inp.value = fmt1DecTrimZero(v);
+      });
+
+      inp.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          btnCalc && btnCalc.click();
+        }
+      });
+    });
+
+    function validate() {
+      let ok = true;
+
+      for (const [k, inp] of Object.entries(fields)) {
+        if (!inp) continue;
+
+        const val = (inp.value || '').trim();
+        const num = Number(val);
+
+        // prevent divide-by-zero and impossible zero-flow inputs
+        const invalid =
+          !val ||
+          Number.isNaN(num) ||
+          num <= 0;
+
+        if (invalid) {
+          inp.classList.add('mr-missing');
+          ok = false;
+        } else {
+          inp.classList.remove('mr-missing');
+        }
+      }
+
+      return ok;
+    }
+
+    function calculate() {
+      const rvotD = Number(fields.rvotDiameter.value);
+      const rvotV = Number(fields.rvotVti.value);
+      const tvD = Number(fields.tvDiameter.value);
+      const tvV = Number(fields.tvVti.value);
+      const trJet = Number(fields.trJetVti.value);
+
+      // Tricuspid inflow stroke volume = total RV stroke volume
+      const tvFlow = 0.785 * tvD * tvD * tvV;
+
+      // RVOT stroke volume = effective forward pulmonary flow
+      const rvotFlow = 0.785 * rvotD * rvotD * rvotV;
+
+      // TR Regurgitant Volume
+      let regV = tvFlow - rvotFlow;
+
+      // Prevent negative values from minor measurement mismatch
+      if (regV < 0) regV = 0;
+
+      // Effective Regurgitant Orifice Area
+      const eroa = regV / trJet;
+
+      if (rvEl) {
+        rvEl.textContent = Math.round(regV).toString();
+      }
+
+      if (eroaEl) {
+        eroaEl.textContent = (Math.round(eroa * 100) / 100).toFixed(2);
+      }
+    }
+
+    function resetAll() {
+      Object.values(fields).filter(Boolean).forEach((inp) => {
+        inp.value = '';
+        inp.classList.remove('filled', 'mr-missing');
+      });
+
+      if (rvEl) rvEl.textContent = '--';
+      if (eroaEl) eroaEl.textContent = '--';
+    }
+
+    if (btnCalc) {
+      btnCalc.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (validate()) calculate();
+      });
+    }
+
+    if (btnReset) {
+      btnReset.addEventListener('click', (e) => {
+        e.preventDefault();
+        resetAll();
+      });
+    }
+  });
+</script>
+
+
+
+
 
   <br><br>
 
